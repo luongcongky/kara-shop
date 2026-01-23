@@ -1,0 +1,22 @@
+{
+  "topbar": {
+    "discount": "Giảm giá 25% cho lần mua hàng đầu tiên.",
+    "careers": "Tuyển dụng",
+    "help": "Trợ giúp",
+    "buyer": "Bảo vệ người mua",
+    "download": "Tải ứng dụng di động",
+    "phone": "+0125 258 192 502"
+  },
+  "auth": {
+    "google": "Tiếp tục với Google",
+    "github": "Tiếp tục với Github",
+    "twitter": "Tiếp tục với Twitter"
+  },
+  "men": "Nam",
+  "women": "Nữ",
+  "kids": "Trẻ em",
+  "camera": "Máy ảnh",
+  "sale": "Khuyến mãi",
+  "blog": "Blog",
+  "contacts": "Liên hệ"
+}

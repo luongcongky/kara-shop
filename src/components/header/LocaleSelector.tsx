@@ -13,6 +13,7 @@ export const LocaleSelector = ({ isOpen }: Props) => {
   const locales = [
     ['en', 'English', '/assets/en-flag.svg'],
     ['de', 'German', '/assets/de-flag.svg'],
+    ['vi', 'Tiếng Việt', '/assets/vi-flag.svg'],
   ];
 
   return (
@@ -25,7 +26,7 @@ export const LocaleSelector = ({ isOpen }: Props) => {
       leaveFrom="opacity-100 translate-y-3"
       leaveTo="opacity-0 translate-y-1"
     >
-      <ul className="absolute right-0 flex w-[90px] flex-col overflow-hidden rounded-lg bg-black text-xs shadow-md shadow-neutral-400">
+      <ul className="absolute right-0 flex w-[110px] flex-col overflow-hidden rounded-lg bg-black text-xs shadow-md shadow-neutral-400">
         {locales.map(([locale, label, flagURL]) => (
           <li key={locale} className="transition-colors hover:bg-neutral-600">
             <button

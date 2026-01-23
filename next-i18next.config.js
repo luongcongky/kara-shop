@@ -5,7 +5,7 @@ module.exports = {
   debug: false,
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'de'],
+    locales: ['en', 'de', 'vi'],
   },
   localePath: path.resolve('./public/locales'),
   reloadOnPrerender: process.env.NODE_ENV === 'development',
