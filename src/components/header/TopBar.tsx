@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
 import type { IconType } from 'react-icons';
-import { FiChevronDown, FiGrid, FiPhone } from 'react-icons/fi';
+import { FiChevronDown, FiPhone } from 'react-icons/fi';
 import { useClickAway } from 'react-use';
 import { LocaleSelector } from './LocaleSelector';
 
@@ -35,14 +35,14 @@ export const TopBar = () => {
   useClickAway(ref, () => setIsLocaleSelectorOpen(false));
 
   const topbarItems: TopbarItemProps[] = [
-    { label: t('topbar.careers'), url: 'careers' },
+    // { label: t('topbar.careers'), url: 'careers' },
     { label: t('topbar.help'), url: 'help' },
-    { label: t('topbar.buyer'), url: 'buyer' },
-    {
-      label: t('topbar.download'),
-      url: 'https://play.google.com/store/apps',
-      Icon: FiGrid,
-    },
+    // { label: t('topbar.buyer'), url: 'buyer' },
+    // {
+    //   label: t('topbar.download'),
+    //   url: 'https://play.google.com/store/apps',
+    //   Icon: FiGrid,
+    // },
     { label: t('topbar.phone'), url: 'tel:+0125258192502', Icon: FiPhone },
   ];
 

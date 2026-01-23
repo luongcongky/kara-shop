@@ -13,7 +13,7 @@ import { BottomNavigation } from '@/components';
 import { useSession, signOut } from 'next-auth/react';
 
 export interface NavLink {
-  name: 'men' | 'women' | 'kids' | 'camera' | 'sale' | 'blog' | 'contacts';
+  name: 'men' | 'women' | 'kids' | 'camera' | 'lens' | 'sale' | 'blog' | 'contacts';
   href: string;
   collapsible?: boolean;
 }
@@ -22,7 +22,7 @@ export const navLinks: NavLink[] = [
   { name: 'men', href: '/products/men', collapsible: true },
   { name: 'women', href: '/products/women', collapsible: true },
   { name: 'camera', href: '/products/camera', collapsible: true },
-  { name: 'kids', href: '/products/kids' },
+  { name: 'lens', href: '/products/lens', collapsible: true },
   { name: 'sale', href: '/sale' },
   { name: 'blog', href: '/blog' },
   { name: 'contacts', href: '/contacts' },
