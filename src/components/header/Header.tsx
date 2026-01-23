@@ -13,7 +13,7 @@ import { BottomNavigation } from '@/components';
 import { useSession, signOut } from 'next-auth/react';
 
 export interface NavLink {
-  name: 'men' | 'women' | 'kids' | 'sale' | 'blog' | 'contacts';
+  name: 'men' | 'women' | 'kids' | 'camera' | 'sale' | 'blog' | 'contacts';
   href: string;
   collapsible?: boolean;
 }
