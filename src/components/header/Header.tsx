@@ -21,6 +21,7 @@ export interface NavLink {
 export const navLinks: NavLink[] = [
   { name: 'men', href: '/products/men', collapsible: true },
   { name: 'women', href: '/products/women', collapsible: true },
+  { name: 'camera', href: '/products/camera', collapsible: true },
   { name: 'kids', href: '/products/kids' },
   { name: 'sale', href: '/sale' },
   { name: 'blog', href: '/blog' },
