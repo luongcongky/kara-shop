@@ -13,14 +13,14 @@ import { BottomNavigation } from '@/components';
 import { useSession, signOut } from 'next-auth/react';
 
 export interface NavLink {
-  name: 'men' | 'women' | 'kids' | 'camera' | 'lens' | 'sale' | 'blog' | 'contacts';
+  name: 'clothes' | 'camera' | 'lens' | 'sale' | 'blog' | 'contacts';
   href: string;
   collapsible?: boolean;
 }
 
 export const navLinks: NavLink[] = [
-  { name: 'men', href: '/products/men', collapsible: true },
-  { name: 'women', href: '/products/women', collapsible: true },
+  { name: 'clothes', href: '/products/men', collapsible: true },
+  // { name: 'women', href: '/products/women', collapsible: true },
   { name: 'camera', href: '/products/camera', collapsible: true },
   { name: 'lens', href: '/products/lens', collapsible: true },
   { name: 'sale', href: '/sale' },
@@ -113,7 +113,7 @@ export const Header = ({ collections }: { collections: Collections }) => {
         <Transition show={Boolean(hoveredNavLink?.collapsible)}>
           {hoveredNavLink && (
             <MegaMenu
-              type={hoveredNavLink.name === 'men' ? 'MEN' : 'WOMEN'}
+              type={hoveredNavLink.name === 'clothes' ? 'MEN' : 'WOMEN'}
               collections={collections}
               onShowMenu={() => handleShowMenu(hoveredNavLink)}
               onCloseMenu={handleCloseMenu}

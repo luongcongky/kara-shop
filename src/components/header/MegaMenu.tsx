@@ -11,21 +11,7 @@ interface Props {
   onCloseMenu: () => void;
 }
 
-const newItems = [
-  { label: 'New Arrivals', href: '/' },
-  { label: 'Best Sellers', href: '/' },
-  { label: 'Only at Kara', href: '/' },
-  { label: 'Members Exclusives', href: '/' },
-  { label: 'Release Dates', href: '/' },
-];
 
-const trendingItems = [
-  { label: 'Fall Collection', href: '/' },
-  { label: 'Vintage 70s Collection', href: '/' },
-  { label: 'Pharrell Premium Basics', href: '/' },
-  { label: 'Tee Bundle:2 for $39 or 3 for $49', href: '/' },
-  { label: 'Breast Cancer Awareness Collection', href: '/' },
-];
 
 export const MegaMenu = ({
   type,
@@ -33,6 +19,14 @@ export const MegaMenu = ({
   onShowMenu,
   onCloseMenu,
 }: Props) => {
+  const mainCategories = collections?.filter(c => !c.parentId && c.slug !== 'new-and-trending-root');
+  const trendingCategories = collections?.filter(c => c.slug === 'new-and-trending-root');
+
+  // Removed debug logs
+  if (trendingCategories && trendingCategories.length > 0) {
+      // console.log('Found Trending Root:', trendingCategories[0]);
+  }
+
   const typeInLowerCase = type.toString().toLowerCase();
 
   return (
@@ -51,32 +45,23 @@ export const MegaMenu = ({
             >
               New & Trending
             </Link>
-            <ul className="pt-2">
-              {newItems.map(({ label, href }, index) => (
-                <li key={index}>
-                  <Link
-                    href={href}
-                    className="mb-1.5 text-xs font-normal text-neutral-700 hover:underline"
-                    onClick={onCloseMenu}
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <ul className="mb-2 pt-3">
-              {trendingItems.map(({ label, href }, index) => (
-                <li key={index}>
-                  <Link
-                    href={href}
-                    className="mb-1.5 text-xs font-normal text-neutral-700 hover:underline"
-                    onClick={onCloseMenu}
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            {trendingCategories?.map(collection => (
+              <ul key={collection.id} className="pt-2">
+                {collection.children
+                  .filter(subCollection => subCollection.types.includes(type))
+                  .map((subCollection, index) => (
+                    <li key={index}>
+                      <Link
+                        href={`/products/${typeInLowerCase}/${subCollection.slug}`}
+                        className="mb-1.5 text-xs font-normal text-neutral-700 hover:underline"
+                        onClick={onCloseMenu}
+                      >
+                        {subCollection.name}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            ))}
             <Link href="/" onClick={onCloseMenu}>
               <Image
                 priority
@@ -90,8 +75,8 @@ export const MegaMenu = ({
           </div>
         </div>
         <div className="flex flex-[3] border-l border-solid shadow-neutral-300">
-          {collections &&
-            collections.map(collection => (
+          {mainCategories &&
+            mainCategories.map(collection => (
               <div
                 key={collection.id}
                 className="ml-4 w-full max-w-[150px] py-8"

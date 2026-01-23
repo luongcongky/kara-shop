@@ -7,7 +7,11 @@ export const defaultCollectionSelect =
     name: true,
     slug: true,
     types: true,
+    parentId: true,
     children: {
+      where: {
+        useYn: true,
+      },
       select: {
         id: true,
         name: true,
@@ -23,7 +27,8 @@ export const collectionRouter = createTRPCRouter({
       await ctx.prisma.collection.findMany({
         select: defaultCollectionSelect,
         where: {
-          parent: null,
+          OR: [{ parentId: null }, { parentId: 0 }],
+          useYn: true,
         },
         orderBy: { id: 'asc' },
       })
