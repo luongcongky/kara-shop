@@ -12,7 +12,10 @@ const { i18n } = config;
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  i18n,
+  i18n: {
+    ...i18n,
+    localeDetection: false,
+  },
   images: {
     remotePatterns: [
       {
