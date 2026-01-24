@@ -2,7 +2,9 @@
   "hero": {
     "discount": "Verkauf 70%",
     "title": "Eine industrielle Version von Streetwear",
-    "description": "Jeder kann dich schlagen, aber niemand kann dein Outfit schlagen, solange du Dine-Outfits trägst.",
+    "description": [
+      "Jeder kann dich schlagen, aber niemand kann dein Outfit schlagen, solange du Dine-Outfits trägst."
+    ],
     "shop": "Beginn mit dem Einkauf"
   },
   "promotions": {
