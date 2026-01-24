@@ -9,8 +9,9 @@ export function getCloudinaryUrl(localPath: string): string {
   // Ensure path starts with /
   const key = localPath.startsWith('/') ? localPath : `/${localPath}`;
   
-  // @ts-ignore
-  const cloudinaryUrl = cloudinaryMap[key];
+  // Cast to unknown first to avoid "any" lint error if strict
+  const map = cloudinaryMap as unknown as Record<string, string>;
+  const cloudinaryUrl = map[key];
   
   return cloudinaryUrl || localPath;
 }

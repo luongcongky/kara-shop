@@ -56,14 +56,10 @@ export const CollectionsPage = ({
                                 {collection.children
                                   .filter((subCollection) =>
                                   subCollection.types.includes(
-                                    item.name === 'clothes'
-                                      ? CollectionType.CLOTHES
-                                      : item.name === 'camera'
+                                    item.name === 'camera'
                                       ? CollectionType.CAMERA
                                       : item.name === 'lens'
                                       ? CollectionType.LENS
-                                      : item.name === 'others'
-                                      ? CollectionType.OTHERS
                                       : CollectionType.CLOTHES
                                   )
                                   )
