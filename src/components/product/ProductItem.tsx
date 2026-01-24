@@ -42,7 +42,15 @@ export const ProductItem = ({
   images,
   collection,
 }: Product) => {
-  const [currentImage, setCurrentImage] = useState(images[0].imageURL);
+  const [currentImage, setCurrentImage] = useState(images[0]?.imageURL || '/camera-placeholder.png');
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+
+  const handleImageError = (imageURL: string) => {
+    setFailedImages(prev => new Set(prev).add(imageURL));
+    if (currentImage === imageURL) {
+      setCurrentImage('/camera-placeholder.png');
+    }
+  };
 
   const productLink = `/product/${id}/slug`;
 
@@ -53,9 +61,9 @@ export const ProductItem = ({
           {images.map(({ imageURL, imageBlur }) => (
             <Image
               key={imageURL}
-              src={imageURL}
+              src={failedImages.has(imageURL) ? '/camera-placeholder.png' : imageURL}
               alt={`${name} image`}
-              className={clsx('absolute h-full w-full duration-700 ', {
+              className={clsx('absolute h-full w-full object-cover duration-700 ', {
                 'opacity-100': currentImage === imageURL,
                 'opacity-0': currentImage !== imageURL,
               })}
@@ -63,6 +71,8 @@ export const ProductItem = ({
               height={350}
               placeholder="blur"
               blurDataURL={imageBlur}
+              unoptimized
+              onError={() => handleImageError(imageURL)}
             />
           ))}
         </Link>
@@ -76,13 +86,15 @@ export const ProductItem = ({
               onClick={() => setCurrentImage(imageURL)}
             >
               <Image
-                src={imageURL}
+                src={failedImages.has(imageURL) ? '/camera-placeholder.png' : imageURL}
                 alt={`${name} image ${index + 1}`}
                 className="object-cover"
                 width={40}
                 height={40}
                 placeholder="blur"
                 blurDataURL={imageBlur}
+                unoptimized
+                onError={() => handleImageError(imageURL)}
               />
             </button>
           ))}
@@ -95,7 +107,7 @@ export const ProductItem = ({
         </div>
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold text-black">
-            ${numberWithCommas(price.toFixed(2))}
+            {numberWithCommas(Math.floor(price))} VND
           </h3>
           <div className="flex items-center justify-center text-xs font-medium text-neutral-500">
             <BsStarFill size="11px" className="mr-1 text-yellow-400" />

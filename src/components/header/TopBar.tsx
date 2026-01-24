@@ -7,6 +7,7 @@ import type { IconType } from 'react-icons';
 import { FiChevronDown, FiPhone } from 'react-icons/fi';
 import { useClickAway } from 'react-use';
 import { LocaleSelector } from './LocaleSelector';
+import { getCloudinaryUrl } from '@/utils/cloudinary';
 
 interface TopbarItemProps {
   label: string;
@@ -62,7 +63,7 @@ export const TopBar = () => {
             <div className="relative mr-1.5 h-3.5 w-3.5 md:h-[17px] md:w-[17px]">
               <Image
                 priority
-                src={`/assets/${router.locale}-flag.svg`}
+                src={getCloudinaryUrl(`/assets/${router.locale}-flag.svg`)}
                 alt={`${router.locale} locale`}
                 fill
               />

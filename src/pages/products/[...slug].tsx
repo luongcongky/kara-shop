@@ -33,6 +33,7 @@ const Products: NextPageWithLayout = () => {
     rate,
     page = 1,
     price,
+    desc,
     sizes,
     colors,
   } = router.query as {
@@ -40,6 +41,7 @@ const Products: NextPageWithLayout = () => {
     rate: number | undefined;
     page: number | undefined;
     price: string | undefined;
+    desc: string | undefined;
     sizes: string | string[] | undefined;
     colors: string | string[] | undefined;
   };
@@ -48,6 +50,7 @@ const Products: NextPageWithLayout = () => {
     () => ({
       types: slug && (slug[0].toUpperCase() as CollectionType),
       slug: slug && slug[1],
+      desc,
       sizes: [sizes].flat(1).filter(Boolean) as ProductSize[],
       colors: [colors].flat(1).filter(Boolean) as ProductColor[],
       page: page && Number(page),
@@ -61,7 +64,7 @@ const Products: NextPageWithLayout = () => {
           : 1000000
         : undefined,
     }),
-    [colors, page, price, rate, sizes, slug]
+    [colors, page, price, rate, sizes, slug, desc]
   );
 
   const { data, isLoading, isPreviousData } =

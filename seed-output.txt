@@ -1,0 +1,44 @@
+﻿[dotenv@17.2.3] injecting env (9) from .env -- tip: ΓÜÖ∩╕Å  override existing env vars with { override: true }
+≡ƒÜÇ Bß║»t ─æß║ºu import dß╗» liß╗çu camera tß╗½ VJShop...
+Γ£à T├¼m thß║Ñy collection: Camera (ID: 86)
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Canon EOS R8 (Body Only) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║ónh Canon PowerShot V1 | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Fujifilm X-T5 + Lens XF 16-80mm F/4 (Silver) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Sony Alpha A6400 (Black) + Lens E 18-135mm F3.5-5.6 | Ch├¡nh h├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Canon EOS R6 Mark II (Body Only) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Fujifilm X-T5 (Body Only - Silver) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Canon EOS R50 + Lens RF-S 18-45mm F4.5-6.3 IS STM | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Fujifilm X-T50 + Lens XF 16-50mm F2.8-4.8 R LM WR (Black) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Fujifilm X-T30 II + Lens XC 15-45mm F3.5-5.6 OIS PZ (Black) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Fujifilm X-T5 + Lens XF 16-80mm F/4 (Black) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Fujifilm X-S20 + Lens XF 18-55mm F2.8-4 R LM OIS | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Fujifilm X100VI (Black) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Fujifilm X-T50 (Body Only - Black) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Sony Alpha A6700 (Body Only) | Ch├¡nh h├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Canon EOS R10 + Lens RF-S 18-45mm F4.5-6.3 IS STM | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Fujifilm X-T30 II (Body Only - Black) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Canon EOS R5 Mark II (Body Only) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Fujifilm X-S20 (Body Only) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Fujifilm X-T5 (Body Only - Black) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Canon EOS R8 + Lens RF 24-50mm F4.5-6.3 IS STM | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Canon EOS R10 (Body Only) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Fujifilm X100VI (Silver) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Fujifilm X-T50 + Lens XF 16-50mm F2.8-4.8 R LM WR (Silver) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Canon EOS R6 Mark II + Lens RF 24-105mm F4-7.1 IS STM | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Sony Alpha A7 IV (Body Only) | Ch├¡nh h├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Fujifilm X-T50 (Body Only - Silver) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Canon EOS R50 (Body Only) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Fujifilm X-M5 + Lens XC 15-45mm F3.5-5.6 OIS PZ (Black) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Sony Alpha ZV-E10 II (Body Only) | Ch├¡nh h├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Sony Alpha A7C II (Body Only) | Ch├¡nh h├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Fujifilm X-M5 (Body Only - Black) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Fujifilm X-T30 II + Lens XF 18-55mm F2.8-4 R LM OIS (Black) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Sony Alpha A7R V (Body Only) | Ch├¡nh h├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Sony Alpha A7C R (Body Only) | Ch├¡nh h├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Fujifilm X-M5 + Lens XC 15-45mm F3.5-5.6 OIS PZ (Silver) | Ch├¡nh H├úng
+ΓÅ¡∩╕Å  Bß╗Å qua (─æ├ú tß╗ôn tß║íi): M├íy ß║únh Sony Alpha A6400 (Body Only) | Ch├¡nh h├úng
+
+≡ƒôè Kß║┐t quß║ú:
+   Γ£à Th├ánh c├┤ng: 0 sß║ún phß║⌐m
+   Γ¥î Lß╗ùi: 0 sß║ún phß║⌐m
+   ≡ƒôª Tß╗òng cß╗Öng: 36 sß║ún phß║⌐m

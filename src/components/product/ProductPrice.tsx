@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import { Accordion } from '@/components/ui';
 import { useQuery } from '@/hooks';
 
@@ -7,6 +8,7 @@ const priceOptions = ['$', '$$', '$$$'];
 
 export const ProductPrice = () => {
   const router = useRouter();
+  const { t } = useTranslation('common');
   const { price = '' } = router.query;
   const { addQuery, removeQuery } = useQuery({ shallow: true, scroll: true });
 
@@ -17,13 +19,20 @@ export const ProductPrice = () => {
     <div className="rounded-lg bg-neutral-100">
       <Accordion open>
         <Accordion.Header className="flex w-full items-center justify-between px-2.5 py-2.5 text-sm font-semibold text-neutral-600">
-          PRODUCT PRICE
+          {t('filters.price')}
         </Accordion.Header>
         <Accordion.Body>
           <ul className="flex items-center justify-around gap-2 px-2.5 pb-2.5">
             {priceOptions.map(option => (
               <li key={option} className="flex">
                 <button
+                  title={
+                    option === '$'
+                      ? t('filters.price_low')
+                      : option === '$$'
+                      ? t('filters.price_medium')
+                      : t('filters.price_high')
+                  }
                   className={clsx(
                     'w-16 cursor-pointer rounded-full border border-solid py-1 text-center text-sm  tracking-wider',
                     {

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { capitalizeFirstLetter } from '@/utils';
 import { Collections } from '@/types';
 import { CollectionType } from '@prisma/client';
+import { getCloudinaryUrl, optimizeCloudinary } from '@/utils/cloudinary';
 
 interface Props {
   type: CollectionType;
@@ -19,8 +20,10 @@ export const MegaMenu = ({
   onShowMenu,
   onCloseMenu,
 }: Props) => {
-  const mainCategories = collections?.filter(c => !c.parentId && c.slug !== 'new-and-trending-root');
-  const trendingCategories = collections?.filter(c => c.slug === 'new-and-trending-root');
+  const mainCategories = collections?.filter(
+    (c) => !c.parentId && c.slug !== 'new-and-trending-root' && c.types.includes(type)
+  );
+  const trendingCategories = collections?.filter((c) => c.slug === 'new-and-trending-root');
 
   // Removed debug logs
   if (trendingCategories && trendingCategories.length > 0) {
@@ -45,11 +48,11 @@ export const MegaMenu = ({
             >
               New & Trending
             </Link>
-            {trendingCategories?.map(collection => (
+            {trendingCategories?.map((collection) => (
               <ul key={collection.id} className="pt-2">
                 {collection.children
-                  .filter(subCollection => subCollection.types.includes(type))
-                  .map((subCollection, index) => (
+                  // .filter((subCollection) => subCollection.types.includes(type)) // Removed to make New & Trending common
+                  .map((subCollection, index: number) => (
                     <li key={index}>
                       <Link
                         href={`/products/${typeInLowerCase}/${subCollection.slug}`}
@@ -65,7 +68,7 @@ export const MegaMenu = ({
             <Link href="/" onClick={onCloseMenu}>
               <Image
                 priority
-                src="/assets/offer.webp"
+                src={optimizeCloudinary(getCloudinaryUrl('/assets/offer.webp'), 300)}
                 alt="offer"
                 width={150}
                 height={100}
@@ -76,7 +79,7 @@ export const MegaMenu = ({
         </div>
         <div className="flex flex-[3] border-l border-solid shadow-neutral-300">
           {mainCategories &&
-            mainCategories.map(collection => (
+            mainCategories.map((collection) => (
               <div
                 key={collection.id}
                 className="ml-4 w-full max-w-[150px] py-8"
@@ -90,8 +93,8 @@ export const MegaMenu = ({
                 </Link>
                 <ul className="pt-2">
                   {collection.children
-                    .filter(subCollection => subCollection.types.includes(type))
-                    .map(subCollection => (
+                    .filter((subCollection) => subCollection.types.includes(type))
+                    .map((subCollection) => (
                       <li key={subCollection.id}>
                         <Link
                           href={`/products/${typeInLowerCase}/${subCollection.slug}`}

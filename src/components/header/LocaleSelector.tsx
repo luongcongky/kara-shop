@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Transition } from '@headlessui/react';
+import { getCloudinaryUrl } from '@/utils/cloudinary';
 
 interface Props {
   isOpen: boolean;
@@ -11,9 +12,9 @@ export const LocaleSelector = ({ isOpen }: Props) => {
   const { pathname, asPath, query } = router;
 
   const locales = [
-    ['en', 'English', '/assets/en-flag.svg'],
-    ['de', 'German', '/assets/de-flag.svg'],
-    ['vi', 'Tiếng Việt', '/assets/vi-flag.svg'],
+    ['en', 'English', getCloudinaryUrl('/assets/en-flag.svg')],
+    ['de', 'German', getCloudinaryUrl('/assets/de-flag.svg')],
+    ['vi', 'Tiếng Việt', getCloudinaryUrl('/assets/vi-flag.svg')],
   ];
 
   return (

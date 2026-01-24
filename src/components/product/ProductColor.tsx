@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import { Accordion } from '@/components/ui';
 import { useQuery } from '@/hooks/useQuery';
 
@@ -18,6 +19,7 @@ const colorOptions = [
 
 export const ProductColor = () => {
   const router = useRouter();
+  const { t } = useTranslation('common');
   const { colors: colorsParam = '' } = router.query;
   const { addQuery, removeQuery } = useQuery({ shallow: true, scroll: true });
 
@@ -36,7 +38,7 @@ export const ProductColor = () => {
     <div className="rounded-lg bg-neutral-100">
       <Accordion open>
         <Accordion.Header className="flex w-full items-center justify-between px-2.5 py-2.5 text-sm font-semibold text-neutral-600">
-          PRODUCT COLOR
+          {t('filters.color')}
         </Accordion.Header>
         <Accordion.Body>
           <ul className="flex flex-wrap gap-2 px-2.5 pb-2.5">

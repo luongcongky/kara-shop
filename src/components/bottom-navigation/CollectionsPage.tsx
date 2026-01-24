@@ -4,6 +4,7 @@ import { FiX } from 'react-icons/fi';
 import { Collections } from '@/types';
 import { NavLink } from '@/components';
 import { Accordion } from '@/components/ui';
+import { CollectionType } from '@prisma/client';
 
 interface Props {
   navLinks: NavLink[];
@@ -41,7 +42,7 @@ export const CollectionsPage = ({
                 <Accordion.Body className="px-2 text-sm">
                   <ul>
                     {collections &&
-                      collections.map(collection => (
+                      collections.map((collection) => (
                         <li
                           key={collection.id}
                           className="block border-b border-solid border-neutral-100"
@@ -53,12 +54,20 @@ export const CollectionsPage = ({
                             <Accordion.Body className="px-2 text-xs">
                               <ul>
                                 {collection.children
-                                  .filter(subCollection =>
-                                    subCollection.types.includes(
-                                      item.name === 'men' ? 'MEN' : 'WOMEN'
-                                    )
+                                  .filter((subCollection) =>
+                                  subCollection.types.includes(
+                                    item.name === 'clothes'
+                                      ? CollectionType.CLOTHES
+                                      : item.name === 'camera'
+                                      ? CollectionType.CAMERA
+                                      : item.name === 'lens'
+                                      ? CollectionType.LENS
+                                      : item.name === 'others'
+                                      ? CollectionType.OTHERS
+                                      : CollectionType.CLOTHES
                                   )
-                                  .map(subCollection => (
+                                  )
+                                  .map((subCollection) => (
                                     <li
                                       key={subCollection.id}
                                       className="block border-b border-solid border-neutral-100 py-2"

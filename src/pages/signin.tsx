@@ -8,6 +8,7 @@ import { BsGithub, BsTwitter } from 'react-icons/bs';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getCloudinaryUrl } from '@/utils/cloudinary';
 
 export const getStaticProps: GetStaticProps = async ({ locale = 'en' }) => {
   return {
@@ -32,7 +33,7 @@ const Signin: NextPageWithLayout = () => {
           onClick={() => signIn('google')}
         >
           <Image
-            src="/assets/google.svg"
+            src={getCloudinaryUrl('/assets/google.svg')}
             alt="continue with google"
             width="20"
             height="20"

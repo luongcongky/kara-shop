@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import { Accordion, Rating } from '@/components/ui';
 import { useQuery } from '@/hooks';
 
@@ -6,6 +7,7 @@ const rateOptions = ['4.5', '4', '3'];
 
 export const ProductRate = () => {
   const router = useRouter();
+  const { t } = useTranslation('common');
   const { rate = 0 } = router.query;
   const { addQuery, removeQuery } = useQuery({ shallow: true, scroll: true });
 
@@ -16,7 +18,7 @@ export const ProductRate = () => {
     <div className="rounded-lg bg-neutral-100">
       <Accordion open>
         <Accordion.Header className="flex w-full items-center justify-between px-2.5 py-2.5 text-sm font-semibold text-neutral-600">
-          PRODUCT RATE
+          {t('filters.rate')}
         </Accordion.Header>
         <Accordion.Body>
           <ul className="flex flex-col gap-3 px-2.5 pb-2.5">

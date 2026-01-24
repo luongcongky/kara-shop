@@ -4,5 +4,15 @@
   "collections": "Bộ sưu tập",
   "cart": "Giỏ hàng",
   "wishlist": "Yêu thích",
-  "profile": "Hồ sơ"
+  "profile": "Hồ sơ",
+  "filters": {
+    "size": "KÍCH THƯỚC",
+    "rate": "ĐÁNH GIÁ",
+    "price": "GIÁ SẢN PHẨM",
+    "color": "MÀU SẮC",
+    "price_low": "Giá dưới 30 triệu",
+    "price_medium": "Giá từ 30 triệu - 60 triệu",
+    "price_high": "Giá trên 60 triệu",
+    "desc": "MÔ TẢ SẢN PHẨM"
+  }
 }

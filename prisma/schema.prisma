@@ -108,6 +108,10 @@ model VerificationToken {
 enum CollectionType {
   MEN
   WOMEN
+  CAMERA
+  LENS
+  OTHERS
+  CLOTHES
 
   @@schema("ecommerce")
 }

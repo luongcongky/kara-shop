@@ -11,15 +11,16 @@ import { MegaMenu } from './MegaMenu';
 import { Collections } from '@/types';
 import { BottomNavigation } from '@/components';
 import { useSession, signOut } from 'next-auth/react';
+import { CollectionType } from '@prisma/client';
 
 export interface NavLink {
-  name: 'clothes' | 'camera' | 'lens' | 'sale' | 'blog' | 'contacts';
+  name: 'camera' | 'lens' | 'sale' | 'blog' | 'contacts';
   href: string;
   collapsible?: boolean;
 }
 
 export const navLinks: NavLink[] = [
-  { name: 'clothes', href: '/products/men', collapsible: true },
+  // { name: 'clothes', href: '/products/clothes', collapsible: true },
   // { name: 'women', href: '/products/women', collapsible: true },
   { name: 'camera', href: '/products/camera', collapsible: true },
   { name: 'lens', href: '/products/lens', collapsible: true },
@@ -113,7 +114,13 @@ export const Header = ({ collections }: { collections: Collections }) => {
         <Transition show={Boolean(hoveredNavLink?.collapsible)}>
           {hoveredNavLink && (
             <MegaMenu
-              type={hoveredNavLink.name === 'clothes' ? 'MEN' : 'WOMEN'}
+              type={
+                hoveredNavLink.name === 'camera'
+                  ? CollectionType.CAMERA
+                  : hoveredNavLink.name === 'lens'
+                  ? CollectionType.LENS
+                  : CollectionType.OTHERS
+              }
               collections={collections}
               onShowMenu={() => handleShowMenu(hoveredNavLink)}
               onCloseMenu={handleCloseMenu}

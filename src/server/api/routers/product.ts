@@ -34,20 +34,20 @@ export const productRouter = createTRPCRouter({
         slug: z.string().optional(),
         page: z.number().optional(),
         rate: z.number().optional(),
-        gte: z.number().optional(),
-        lte: z.number().optional(),
+        price: z.string().optional(), // Changed to string to accept $, $$, $$$
+        desc: z.string().optional(),
         sizes: z.nativeEnum(ProductSize).array().optional(),
         colors: z.nativeEnum(ProductColor).array().optional(),
       })
     )
     .query(async ({ input, ctx }) => {
       const {
-        types = 'MEN',
+        types = 'CLOTHES',
         slug,
         page = 1,
         rate = 0,
-        gte = 0,
-        lte = 1000000,
+        price,
+        desc,
         sizes = [],
         colors = [],
       } = input;
@@ -55,11 +55,30 @@ export const productRouter = createTRPCRouter({
       const take = 12;
       const skip = take * (page - 1);
 
+      // Price logic:
+      // $   : < 30,000,000
+      // $$  : 30,000,000 - 60,000,000
+      // $$$ : > 60,000,000
+      let gte = 0;
+      let lte = 1000000000; // Default max 1 billion
+
+      if (price === '$') {
+        lte = 30000000;
+      } else if (price === '$$') {
+        gte = 30000000;
+        lte = 60000000;
+      } else if (price === '$$$') {
+        gte = 60000000;
+      }
+
       const where: Prisma.ProductWhereInput = {
         types: { hasSome: [types] },
         published: true,
         rate: rate ? { gte: rate } : undefined,
         price: { gte, lte },
+        description: desc
+          ? { contains: desc, mode: 'insensitive' }
+          : undefined,
         sizes: sizes.length > 0 ? { hasSome: sizes } : undefined,
         colors: colors.length > 0 ? { hasSome: colors } : undefined,
       };

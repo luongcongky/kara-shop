@@ -4,5 +4,15 @@
   "collections": "Collections",
   "cart": "Cart",
   "wishlist": "Wishlist",
-  "profile": "Profile"
+  "profile": "Profile",
+  "filters": {
+    "size": "PRODUCT SIZE",
+    "rate": "PRODUCT RATE",
+    "price": "PRODUCT PRICE",
+    "color": "PRODUCT COLOR",
+    "price_low": "Under 30 million",
+    "price_medium": "30 million - 60 million",
+    "price_high": "Over 60 million",
+    "desc": "PRODUCT DESCRIPTION"
+  }
 }

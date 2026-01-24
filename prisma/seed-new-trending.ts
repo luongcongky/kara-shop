@@ -48,14 +48,14 @@ async function main() {
       name: 'New & Trending Root',
       parentId: null, // It is a root
       useYn: true,
-      types: [CollectionType.MEN, CollectionType.WOMEN],
+      types: [CollectionType.CLOTHES, CollectionType.CLOTHES],
     },
     create: {
       name: 'New & Trending Root',
       slug: 'new-and-trending-root',
       parentId: null,
       useYn: true,
-      types: [CollectionType.MEN, CollectionType.WOMEN],
+      types: [CollectionType.CLOTHES, CollectionType.CLOTHES],
     },
   });
 
@@ -80,14 +80,14 @@ async function main() {
       update: {
         parentId: trendingParent.id, // Link to the real ID
         useYn: true,
-        types: [CollectionType.MEN, CollectionType.WOMEN],
+        types: [CollectionType.CLOTHES, CollectionType.CLOTHES],
       },
       create: {
         name: item.name,
         slug: item.slug,
         parentId: trendingParent.id,
         useYn: true,
-        types: [CollectionType.MEN, CollectionType.WOMEN],
+        types: [CollectionType.CLOTHES, CollectionType.CLOTHES],
       },
     });
     console.log(` - Upserted child: ${child.name}`);

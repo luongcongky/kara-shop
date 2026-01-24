@@ -1,10 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslation } from 'next-i18next';
-import promobanner1 from '../../../public/assets/promo-banner-1.webp';
-import promobanner2 from '../../../public/assets/promo-banner-2.webp';
-import promobanner3 from '../../../public/assets/promo-banner-3.webp';
-import promobanner4 from '../../../public/assets/promo-banner-4.webp';
+import { getCloudinaryUrl } from '@/utils/cloudinary';
 
 export const Promotions = () => {
   const { t } = useTranslation('home');
@@ -20,16 +17,16 @@ export const Promotions = () => {
         </h2>
         <div className="grid w-full max-w-[1150px] gap-3 md:grid-cols-4">
           <Link href="/" className="col-span-2">
-            <Image src={promobanner1} alt="promo banner 1 image" />
+            <Image src={getCloudinaryUrl('/assets/promo-banner-1.webp')} alt="promo banner 1 image" width={560} height={250} />
           </Link>
           <Link href="/" className="row-span-2">
-            <Image src={promobanner2} alt="promo banner 2 image" />
+            <Image src={getCloudinaryUrl('/assets/promo-banner-2.webp')} alt="promo banner 2 image" width={270} height={250} />
           </Link>
           <Link href="/" className="row-span-2">
-            <Image src={promobanner3} alt="promo banner 3 image" />
+            <Image src={getCloudinaryUrl('/assets/promo-banner-3.webp')} alt="promo banner 3 image" width={270} height={250} />
           </Link>
           <Link href="/" className="col-span-2">
-            <Image src={promobanner4} alt="promo banner 4 image" />
+            <Image src={getCloudinaryUrl('/assets/promo-banner-4.webp')} alt="promo banner 4 image" width={560} height={250} />
           </Link>
         </div>
       </div>

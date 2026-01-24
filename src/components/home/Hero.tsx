@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FiShoppingCart } from 'react-icons/fi';
 import { useTranslation } from 'next-i18next';
+import { getCloudinaryUrl } from '@/utils/cloudinary';
 
 export const Hero = () => {
   const { t } = useTranslation('home');
@@ -49,7 +50,7 @@ export const Hero = () => {
               <Image
                 priority
                 key={index}
-                src={`/assets/${brand}.svg`}
+                src={getCloudinaryUrl(`/assets/${brand}.svg`)}
                 alt={`${brand} brand`}
                 width={100}
                 height={50}
@@ -61,7 +62,7 @@ export const Hero = () => {
         <div className="flex flex-1 items-end justify-start">
           <Image
             priority
-            src="/assets/hero.webp"
+            src={getCloudinaryUrl('/assets/hero.webp')}
             alt="hero"
             quality={100}
             width={550}

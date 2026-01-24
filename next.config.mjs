@@ -27,6 +27,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'pbs.twimg.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.vjshop.vn',
+      },
     ],
   },
   output: 'standalone',
