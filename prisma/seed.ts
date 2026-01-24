@@ -1,4 +1,7 @@
+import 'dotenv/config';
 import { PrismaClient, Collection, Product } from '@prisma/client';
+import { Pool } from 'pg';
+import { PrismaPg } from '@prisma/adapter-pg';
 import fs from 'fs';
 import path from 'path';
 
@@ -12,7 +15,30 @@ function loadDump() {
   return null;
 }
 
-const prisma = new PrismaClient();
+const isLocal = process.env.DB_PROVIDER === 'LOCAL';
+
+const connectionString = isLocal
+  ? process.env.DATABASE_URL_LOCAL
+  : (process.env.DIRECT_URL_SUPABASE || process.env.DIRECT_URL || process.env.DATABASE_URL);
+
+if (!connectionString) {
+  throw new Error('No valid database connection string found for current environment.');
+}
+
+const pool = new Pool({ connectionString });
+const adapter = new PrismaPg(pool);
+const prisma = new PrismaClient({ adapter });
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function parsePostgresArray(value: string | string[] | unknown): any {
+  if (Array.isArray(value)) return value;
+  if (typeof value === 'string' && value.startsWith('{') && value.endsWith('}')) {
+     const inner = value.substring(1, value.length - 1);
+     if (!inner) return [];
+     return inner.split(',').map(s => s.trim());
+  }
+  return value;
+}
 
 async function main() {
   console.log('🌱 Starting Master Database Seed...');
@@ -26,30 +52,59 @@ async function main() {
     // 1. Seed Collections
     console.log('\n--- 1. Seeding Collections from Dump ---');
     if (dumpData.collections && dumpData.collections.length > 0) {
+      // Pass 1: Upsert all without parentId to avoid FK errors
+      console.log('   Pass 1: Upserting collections (without parent links)...');
       for (const col of dumpData.collections) {
-        // We use upsert to ensure we preserve IDs and state
+        const types = parsePostgresArray(col.types);
+        
         await prisma.collection.upsert({
           where: { id: col.id },
           update: {
             name: col.name,
             slug: col.slug,
             useYn: col.useYn,
-            parentId: col.parentId,
-            types: col.types,
+            // parentId: col.parentId, // Skip in pass 1? No, if we update we can set it if it refers to existing. 
+            // Better to strictly set null here or only set if we know it exists? 
+            // Actually, for circular refs or complex order, safe to set null first.
+            // But if it already exists and has a parent, we don't want to break it? 
+            // Upsert: Create=Null, Update=Keep? 
+            // If we are seeding from scratch (or over old data), we might want to sync.
+            
+            // Safe strategy: 
+            // Create: parentId: null. 
+            // Update: parentId: col.parentId (if it works? No, if we update a record that now depends on a not-yet-seen record?)
+            
+            // Let's set parentId: null in Create. 
+            // In Update, we can try setting it, but if it fails? 
+            // Safer: Set parentId: null (or ignore) in Pass 1. 
+            // Pass 2: Set parentId.
+            
+            types: types,
             createdAt: new Date(col.createdAt),
-            updatedAt: new Date(col.updatedAt), // Preserve timestamps if possible
+            updatedAt: new Date(col.updatedAt),
           },
           create: {
             id: col.id,
             name: col.name,
             slug: col.slug,
             useYn: col.useYn,
-            parentId: col.parentId,
-            types: col.types,
+            parentId: null, // Temporary null
+            types: types,
             createdAt: new Date(col.createdAt),
             updatedAt: new Date(col.updatedAt),
           },
         });
+      }
+
+      // Pass 2: Link parents
+      console.log('   Pass 2: Linking parent collections...');
+      for (const col of dumpData.collections) {
+        if (col.parentId) {
+           await prisma.collection.update({
+             where: { id: col.id },
+             data: { parentId: col.parentId }
+           });
+        }
       }
       console.log(`✅ Seeded ${dumpData.collections.length} collections from dump.`);
       
@@ -66,6 +121,8 @@ async function main() {
         // Handle images separately
         const { images, ...productData } = prod;
         
+        const types = parsePostgresArray(productData.types);
+
         // Remove ID from creation data if we want auto-increment, BUT here we want to PRESERVE IDs.
         // Prisma allows setting ID on create.
         
@@ -78,7 +135,7 @@ async function main() {
             rate: productData.rate,
             published: productData.published,
             collectionId: productData.collectionId,
-            types: productData.types,
+            types: types,
             createdAt: new Date(productData.createdAt),
             updatedAt: new Date(productData.updatedAt),
           },
@@ -90,7 +147,7 @@ async function main() {
             rate: productData.rate,
             published: productData.published,
             collectionId: productData.collectionId,
-            types: productData.types,
+            types: types,
             createdAt: new Date(productData.createdAt),
             updatedAt: new Date(productData.updatedAt),
           }
