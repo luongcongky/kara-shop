@@ -42,28 +42,50 @@ export const CollectionsPage = ({
                 <Accordion.Body className="px-2 text-sm">
                   <ul>
                     {collections &&
-                      collections.map((collection) => (
-                        <li
-                          key={collection.id}
-                          className="block border-b border-solid border-neutral-100"
-                        >
-                          <Accordion>
-                            <Accordion.Header>
-                              {collection.name}
-                            </Accordion.Header>
-                            <Accordion.Body className="px-2 text-xs">
-                              <ul>
-                                {collection.children
-                                  .filter((subCollection) =>
-                                  subCollection.types.includes(
-                                    item.name === 'camera'
-                                      ? CollectionType.CAMERA
-                                      : item.name === 'lens'
-                                      ? CollectionType.LENS
-                                      : CollectionType.CLOTHES
-                                  )
-                                  )
-                                  .map((subCollection) => (
+
+
+                      collections.map((collection) => {
+                        // Determine target type based on navigation item
+                        let targetType: CollectionType | null = null;
+                        if (item.name === 'camera') targetType = CollectionType.CAMERA;
+                        else if (item.name === 'lens') targetType = CollectionType.LENS;
+
+                        // Identify if this is a legacy navigation item (not camera/lens)
+                        // If logic expands, add more types. 
+                        // Currently only Camera/Lens are collapsible.
+                        
+                        // Strict Parent Filter: 
+                        // Only show this collection if the PARENT itself matches the target type.
+                        if (targetType && !collection.types.includes(targetType)) {
+                          return null;
+                        }
+
+                        // Secondary Children Filter:
+                        // If parent matches (or no target type defined), filter its children.
+                        const filteredChildren = collection.children.filter((subCollection) => {
+                           if (!targetType) return true; // Show all if no target type
+                           const match = subCollection.types.includes(targetType);
+                           return match;
+                        });
+
+                        // If no children match, also hide (unless we want to show empty parents?)
+                        // Let's hide empty parents to be clean.
+                        if (filteredChildren.length === 0) {
+                             return null;
+                        }
+
+                        return (
+                          <li
+                            key={collection.id}
+                            className="block border-b border-solid border-neutral-100"
+                          >
+                            <Accordion>
+                              <Accordion.Header>
+                                {collection.name}
+                              </Accordion.Header>
+                              <Accordion.Body className="px-2 text-xs">
+                                <ul>
+                                  {filteredChildren.map((subCollection) => (
                                     <li
                                       key={subCollection.id}
                                       className="block border-b border-solid border-neutral-100 py-2"
@@ -76,17 +98,18 @@ export const CollectionsPage = ({
                                       </Link>
                                     </li>
                                   ))}
-                              </ul>
-                            </Accordion.Body>
-                          </Accordion>
-                        </li>
-                      ))}
+                                </ul>
+                              </Accordion.Body>
+                            </Accordion>
+                          </li>
+                        );
+                      })}
                   </ul>
                 </Accordion.Body>
               </Accordion>
             ) : (
               <Link
-                href={item.name}
+                href={item.href}
                 className="block py-4"
                 onClick={onPageClose}
               >
