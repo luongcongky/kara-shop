@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useTranslation } from 'next-i18next';
-import { Transition } from '@headlessui/react';
+import { Transition, Menu } from '@headlessui/react';
 import { IconType } from 'react-icons';
 import { FiUser, FiHeart, FiShoppingBag } from 'react-icons/fi';
 import { Search } from './Search';
@@ -93,21 +93,62 @@ export const Header = ({ collections }: { collections: Collections }) => {
               </Link>
             ))}
             {session && (
-              <button
-                className="ml-5 hidden rounded-full border border-solid border-violet-700 p-[2px] md:block"
-                onClick={() => signOut()}
-              >
-                {session.user?.image && (
-                  <Image
-                    src={session.user.image}
-                    alt="user profile image"
-                    width={30}
-                    height={30}
-                    className="overflow-hidden rounded-full"
-                    quality={100}
-                  />
-                )}
-              </button>
+              <Menu as="div" className="relative ml-5 hidden md:block">
+                <Menu.Button className="flex rounded-full border border-solid border-violet-700 p-[2px]">
+                  {session.user?.image ? (
+                    <Image
+                      src={session.user.image}
+                      alt="user profile image"
+                      width={30}
+                      height={30}
+                      className="overflow-hidden rounded-full"
+                      quality={100}
+                    />
+                  ) : (
+                    <div className="flex h-[30px] w-[30px] items-center justify-center rounded-full bg-violet-100 text-violet-700">
+                      <FiUser />
+                    </div>
+                  )}
+                </Menu.Button>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-75"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
+                >
+                  <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                    <div className="py-1">
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link
+                            href="/profile"
+                            className={`${
+                              active ? 'bg-gray-100' : ''
+                            } block px-4 py-2 text-sm text-gray-700`}
+                          >
+                            My Profile
+                          </Link>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            onClick={() => signOut()}
+                            className={`${
+                              active ? 'bg-gray-100' : ''
+                            } block w-full px-4 py-2 text-left text-sm text-gray-700`}
+                          >
+                            Sign out
+                          </button>
+                        )}
+                      </Menu.Item>
+                    </div>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
             )}
           </ul>
         </div>
