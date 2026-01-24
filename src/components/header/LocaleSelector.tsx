@@ -13,7 +13,7 @@ export const LocaleSelector = ({ isOpen }: Props) => {
 
   const locales = [
     ['en', 'English', getCloudinaryUrl('/assets/en-flag.svg')],
-    ['de', 'German', getCloudinaryUrl('/assets/de-flag.svg')],
+
     ['vi', 'Tiếng Việt', getCloudinaryUrl('/assets/vi-flag.svg')],
   ];
 

@@ -4,12 +4,12 @@ const config: DefaultSeoProps = {
   defaultTitle: 'KARA Shop',
   titleTemplate: '%s | KARA Shop',
   description:
-    'Ecommerce built with T3 Stack : NextJS, TypeScript, tRPC, Prisma, NextAuth and styled with Tailwind CSS',
-  canonical: 'https://karashop.vercel.app',
+    'KARA Shop - Chuyên cung cấp máy ảnh và ống kính chính hãng, giá tốt nhất thị trường',
+  canonical: 'https://kara-shop-tungjournalist.vercel.app/',
   openGraph: {
     type: 'website',
     locale: 'en_IE',
-    url: 'https://karashop.vercel.app',
+    url: 'https://kara-shop-tungjournalist.vercel.app/',
     siteName: 'KARA Shop',
   },
   twitter: {
