@@ -1,0 +1,2331 @@
+{
+  "generatedAt": "2026-01-24T04:13:56.214Z",
+  "collections": [
+    {
+      "id": 1,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "shoes",
+      "name": "Shoes",
+      "parentId": null,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 2,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "clothing",
+      "name": "Clothing",
+      "parentId": null,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 3,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "accessories",
+      "name": "Accessories",
+      "parentId": null,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 4,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "sport",
+      "name": "Shop By Sport",
+      "parentId": null,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 5,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "collection",
+      "name": "Shop By Collection",
+      "parentId": null,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 6,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "sneakers",
+      "name": "Sneakers",
+      "parentId": 1,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 7,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "running-shoes",
+      "name": "Running",
+      "parentId": 1,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 8,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "sandals-slides",
+      "name": "Sandals & Slides",
+      "parentId": 1,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 9,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "outdoor-hiking",
+      "name": "Outdoor & Hiking",
+      "parentId": 1,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 10,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "shoes-under-hundred",
+      "name": "Shoes $100 & Under",
+      "parentId": 1,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 11,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "soccer-shoes",
+      "name": "Soccer",
+      "parentId": 1,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 12,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "basketball-shoes",
+      "name": "Basketball",
+      "parentId": 1,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 13,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "golf-shoes",
+      "name": "Golf",
+      "parentId": 1,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 14,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "workout-gym-shoes",
+      "name": "Workout & Gym",
+      "parentId": 1,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 15,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "football-shoes",
+      "name": "Football",
+      "parentId": 1,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 16,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "mountain-biking",
+      "name": "Mountain Biking",
+      "parentId": 1,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 17,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "baseball-shoes",
+      "name": "Baseball",
+      "parentId": 1,
+      "types": "{CLOTHES}",
+      "useYn": false
+    },
+    {
+      "id": 22,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "tshirts-tops",
+      "name": "T-Shirts & Tops",
+      "parentId": 2,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 23,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "shorts",
+      "name": "Shorts",
+      "parentId": 2,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 24,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "pants",
+      "name": "Pants",
+      "parentId": 2,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 25,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "hoodies-sweatshirts",
+      "name": "Hoodies & Sweatshirts",
+      "parentId": 2,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 26,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "tracksuits",
+      "name": "Tracksuits",
+      "parentId": 2,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 27,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "swim-cloths",
+      "name": "Swim",
+      "parentId": 2,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 28,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "jerseys",
+      "name": "Jerseys",
+      "parentId": 2,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 29,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "jackets",
+      "name": "Jackets",
+      "parentId": 2,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 30,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "matching-sets",
+      "name": "Matching Sets",
+      "parentId": 2,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 31,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "socks",
+      "name": "Socks",
+      "parentId": 2,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 32,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "underwear",
+      "name": "Underwear",
+      "parentId": 2,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 33,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "big-tall",
+      "name": "Big & Tall",
+      "parentId": 2,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 39,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "bags-backpacks",
+      "name": "Bags & Backpacks",
+      "parentId": 3,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 40,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "balls",
+      "name": "Balls",
+      "parentId": 3,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 41,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "gloves",
+      "name": "Gloves",
+      "parentId": 3,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 42,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "hats-beanies",
+      "name": "Hats & Beanies",
+      "parentId": 3,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 44,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "headphones",
+      "name": "Headphones",
+      "parentId": 3,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 45,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "water-bottles",
+      "name": "Water Bottles",
+      "parentId": 3,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 46,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "backpacks-under-fify",
+      "name": "Backpacks Under $50",
+      "parentId": 3,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 47,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "baseball",
+      "name": "Baseball",
+      "parentId": 4,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 48,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "basketball",
+      "name": "Basketball",
+      "parentId": 4,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 49,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "cycling",
+      "name": "Cycling",
+      "parentId": 4,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 51,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "golf",
+      "name": "Golf",
+      "parentId": 4,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 52,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "hiking-outdoor",
+      "name": "Hiking & Outdoor",
+      "parentId": 4,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 53,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "hockey",
+      "name": "Hockey",
+      "parentId": 4,
+      "types": "{CLOTHES}",
+      "useYn": false
+    },
+    {
+      "id": 54,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "running",
+      "name": "Running",
+      "parentId": 4,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 55,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "soccer",
+      "name": "Soccer",
+      "parentId": 4,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 57,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "swim",
+      "name": "Swim",
+      "parentId": 4,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 58,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "tennis",
+      "name": "Tennis",
+      "parentId": 4,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 60,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "workout-gym",
+      "name": "Workout & Gym",
+      "parentId": 4,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 61,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "yoga",
+      "name": "Yoga",
+      "parentId": 4,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 62,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "adicolor-clothing",
+      "name": "adicolor Clothing",
+      "parentId": 5,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 63,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "adilette",
+      "name": "adilette",
+      "parentId": 5,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 64,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "fifa-world-cup",
+      "name": "FIFA World Cup",
+      "parentId": 5,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 65,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "five-ten",
+      "name": "Five Ten",
+      "parentId": 5,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 66,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "forum",
+      "name": "Forum",
+      "parentId": 5,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 67,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "ivy-park",
+      "name": "IVY PARK",
+      "parentId": 5,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 68,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "nizza",
+      "name": "Nizza",
+      "parentId": 5,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 69,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "originalz",
+      "name": "Originalz",
+      "parentId": 5,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 70,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "oz",
+      "name": "OZ",
+      "parentId": 5,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 72,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "sportswear",
+      "name": "Sportswear",
+      "parentId": 5,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 73,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "terrex",
+      "name": "TERREX",
+      "parentId": 5,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 74,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "ultraboost",
+      "name": "Ultraboost",
+      "parentId": 5,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 75,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "y-3",
+      "name": "Y-3",
+      "parentId": 5,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 76,
+      "createdAt": "2026-01-22T06:32:52.535Z",
+      "updatedAt": "2026-01-22T06:32:52.535Z",
+      "slug": "yezzy",
+      "name": "YEZZY",
+      "parentId": 5,
+      "types": "{CLOTHES}",
+      "useYn": true
+    },
+    {
+      "id": 78,
+      "createdAt": "2026-01-22T20:12:52.945Z",
+      "updatedAt": "2026-01-22T20:12:52.945Z",
+      "slug": "new-arrivals",
+      "name": "Top \"Đồ cũ chất\"",
+      "parentId": 999999,
+      "types": "{CAMERA}",
+      "useYn": true
+    },
+    {
+      "id": 79,
+      "createdAt": "2026-01-22T20:12:52.946Z",
+      "updatedAt": "2026-01-22T20:12:52.946Z",
+      "slug": "best-sellers",
+      "name": "Top \"Phụ Kiện\"",
+      "parentId": 999999,
+      "types": "{CAMERA}",
+      "useYn": true
+    },
+    {
+      "id": 80,
+      "createdAt": "2026-01-22T20:12:52.947Z",
+      "updatedAt": "2026-01-22T20:12:52.947Z",
+      "slug": "only-at-kara",
+      "name": "Top \"Thiết Bị Làm Video\"",
+      "parentId": 999999,
+      "types": "{CAMERA}",
+      "useYn": true
+    },
+    {
+      "id": 81,
+      "createdAt": "2026-01-22T20:12:52.948Z",
+      "updatedAt": "2026-01-22T20:12:52.948Z",
+      "slug": "members-exclusives",
+      "name": "Top \"Camera Hành Động\"",
+      "parentId": 999999,
+      "types": "{CAMERA}",
+      "useYn": true
+    },
+    {
+      "id": 83,
+      "createdAt": "2026-01-22T20:12:52.949Z",
+      "updatedAt": "2026-01-22T20:12:52.949Z",
+      "slug": "fall-collection",
+      "name": "Top \"Drone\"",
+      "parentId": 999999,
+      "types": "{CAMERA}",
+      "useYn": true
+    },
+    {
+      "id": 85,
+      "createdAt": "2026-01-22T20:12:52.951Z",
+      "updatedAt": "2026-01-22T20:12:52.951Z",
+      "slug": "pharrell-basics",
+      "name": "Top \"Máy Ảnh & Ống kính\"",
+      "parentId": 999999,
+      "types": "{CAMERA}",
+      "useYn": true
+    },
+    {
+      "id": 87,
+      "createdAt": "2026-01-22T23:52:31.449Z",
+      "updatedAt": "2026-01-22T23:52:31.449Z",
+      "slug": "may-anh-mirrorless",
+      "name": "Máy Ảnh Mirrorless",
+      "parentId": 200,
+      "types": "{CAMERA}",
+      "useYn": true
+    },
+    {
+      "id": 88,
+      "createdAt": "2026-01-22T23:52:31.454Z",
+      "updatedAt": "2026-01-22T23:52:31.454Z",
+      "slug": "may-anh-compact",
+      "name": "Máy Ảnh Compact",
+      "parentId": 200,
+      "types": "{CAMERA}",
+      "useYn": true
+    },
+    {
+      "id": 89,
+      "createdAt": "2026-01-22T23:52:31.455Z",
+      "updatedAt": "2026-01-22T23:52:31.455Z",
+      "slug": "may-anh-instax",
+      "name": "Máy Ảnh Instax",
+      "parentId": 200,
+      "types": "{CAMERA}",
+      "useYn": true
+    },
+    {
+      "id": 90,
+      "createdAt": "2026-01-22T23:52:31.457Z",
+      "updatedAt": "2026-01-22T23:52:31.457Z",
+      "slug": "may-anh-medium-format",
+      "name": "Máy Ảnh Medium Format",
+      "parentId": 200,
+      "types": "{CAMERA}",
+      "useYn": true
+    },
+    {
+      "id": 91,
+      "createdAt": "2026-01-22T23:52:31.459Z",
+      "updatedAt": "2026-01-22T23:52:31.459Z",
+      "slug": "may-anh-film",
+      "name": "Máy Ảnh Film",
+      "parentId": 200,
+      "types": "{CAMERA}",
+      "useYn": true
+    },
+    {
+      "id": 92,
+      "createdAt": "2026-01-22T23:52:31.461Z",
+      "updatedAt": "2026-01-22T23:52:31.461Z",
+      "slug": "ong-kinh-dslr",
+      "name": "Ống Kính DSLR",
+      "parentId": 300,
+      "types": "{LENS}",
+      "useYn": true
+    },
+    {
+      "id": 93,
+      "createdAt": "2026-01-22T23:52:31.462Z",
+      "updatedAt": "2026-01-22T23:52:31.462Z",
+      "slug": "ong-kinh-mirrorless",
+      "name": "Ống Kính Mirrorless",
+      "parentId": 300,
+      "types": "{LENS}",
+      "useYn": true
+    },
+    {
+      "id": 94,
+      "createdAt": "2026-01-22T23:52:31.465Z",
+      "updatedAt": "2026-01-22T23:52:31.465Z",
+      "slug": "ong-kinh-cinema",
+      "name": "Ống Kính Cinema",
+      "parentId": 300,
+      "types": "{LENS}",
+      "useYn": true
+    },
+    {
+      "id": 95,
+      "createdAt": "2026-01-22T23:52:31.467Z",
+      "updatedAt": "2026-01-22T23:52:31.467Z",
+      "slug": "ong-kinh-medium-format",
+      "name": "Ống Kính Medium Format",
+      "parentId": 300,
+      "types": "{LENS}",
+      "useYn": true
+    },
+    {
+      "id": 96,
+      "createdAt": "2026-01-22T23:52:31.467Z",
+      "updatedAt": "2026-01-22T23:52:31.467Z",
+      "slug": "may-anh-canon",
+      "name": "Máy Ảnh Canon",
+      "parentId": 201,
+      "types": "{CAMERA}",
+      "useYn": true
+    },
+    {
+      "id": 97,
+      "createdAt": "2026-01-22T23:52:31.467Z",
+      "updatedAt": "2026-01-22T23:52:31.467Z",
+      "slug": "may-anh-fujifilm",
+      "name": "Máy Ảnh Fujifilm",
+      "parentId": 201,
+      "types": "{CAMERA}",
+      "useYn": true
+    },
+    {
+      "id": 200,
+      "createdAt": "2026-01-22T23:52:31.269Z",
+      "updatedAt": "2026-01-22T23:52:31.269Z",
+      "slug": "camera-chuyen-dung",
+      "name": "Chuyên Dụng",
+      "parentId": null,
+      "types": "{CAMERA}",
+      "useYn": true
+    },
+    {
+      "id": 201,
+      "createdAt": "2026-01-22T23:52:31.269Z",
+      "updatedAt": "2026-01-22T23:52:31.269Z",
+      "slug": "camera-thuong-hieu",
+      "name": "Thương Hiệu",
+      "parentId": null,
+      "types": "{CAMERA}",
+      "useYn": true
+    },
+    {
+      "id": 300,
+      "createdAt": "2026-01-22T23:52:31.444Z",
+      "updatedAt": "2026-01-22T23:52:31.444Z",
+      "slug": "ong-kinh",
+      "name": "Ống Kính",
+      "parentId": null,
+      "types": "{LENS}",
+      "useYn": true
+    },
+    {
+      "id": 999999,
+      "createdAt": "2026-01-22T20:12:52.943Z",
+      "updatedAt": "2026-01-22T20:12:52.943Z",
+      "slug": "new-and-trending-root",
+      "name": "New & Trending Root",
+      "parentId": null,
+      "types": "{CLOTHES,CLOTHES}",
+      "useYn": true
+    }
+  ],
+  "products": [
+    {
+      "id": 24,
+      "createdAt": "2026-01-22T06:32:52.540Z",
+      "updatedAt": "2026-01-22T06:32:52.540Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 29,
+      "price": 35,
+      "rate": 4.2,
+      "colors": "{BLACK}",
+      "name": "Black shirt with white border",
+      "sizes": "{S,M,L,XL,XXL,XXXL}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142692/kara-shop/assets/products/product-1.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142692/kara-shop/assets/products/clothes/clothes/product-1.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142702/kara-shop/assets/products/product-2.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142702/kara-shop/assets/products/clothes/clothes/product-2.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142714/kara-shop/assets/products/product-3.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142714/kara-shop/assets/products/clothes/clothes/product-3.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143024/kara-shop/assets/products/product-4.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143024/kara-shop/assets/products/clothes/clothes/product-4.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 25,
+      "createdAt": "2026-01-22T06:32:52.543Z",
+      "updatedAt": "2026-01-22T06:32:52.543Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 29,
+      "price": 87.95,
+      "rate": 4.5,
+      "colors": "{GREEN,PINK}",
+      "name": "Funnel collar puffer jacket",
+      "sizes": "{S,M,L,XL}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143025/kara-shop/assets/products/product-5.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143025/kara-shop/assets/products/clothes/clothes/product-5.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143026/kara-shop/assets/products/product-6.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143026/kara-shop/assets/products/clothes/clothes/product-6.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143027/kara-shop/assets/products/product-7.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143027/kara-shop/assets/products/clothes/clothes/product-7.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143028/kara-shop/assets/products/product-8.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143028/kara-shop/assets/products/clothes/clothes/product-8.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143028/kara-shop/assets/products/product-9.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143028/kara-shop/assets/products/clothes/clothes/product-9.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 26,
+      "createdAt": "2026-01-22T06:32:52.544Z",
+      "updatedAt": "2026-01-22T06:32:52.544Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 24,
+      "price": 42.5,
+      "rate": 3.9,
+      "colors": "{BLUE}",
+      "name": "Boy’s Jeans Simple",
+      "sizes": "{S,M,L}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142693/kara-shop/assets/products/product-10.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142693/kara-shop/assets/products/clothes/clothes/product-10.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142694/kara-shop/assets/products/product-11.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142694/kara-shop/assets/products/clothes/clothes/product-11.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 27,
+      "createdAt": "2026-01-22T06:32:52.545Z",
+      "updatedAt": "2026-01-22T06:32:52.545Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 22,
+      "price": 50.95,
+      "rate": 4.1,
+      "colors": "{RED}",
+      "name": "Brown and White Striped T-shirt",
+      "sizes": "{L,XL,XXL}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142695/kara-shop/assets/products/product-12.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142695/kara-shop/assets/products/clothes/clothes/product-12.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142696/kara-shop/assets/products/product-13.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142696/kara-shop/assets/products/clothes/clothes/product-13.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142697/kara-shop/assets/products/product-14.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142697/kara-shop/assets/products/clothes/clothes/product-14.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142697/kara-shop/assets/products/product-15.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142697/kara-shop/assets/products/clothes/clothes/product-15.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 28,
+      "createdAt": "2026-01-22T06:32:52.547Z",
+      "updatedAt": "2026-01-22T06:32:52.547Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 10,
+      "price": 74.3,
+      "rate": 3.8,
+      "colors": "{BLACK}",
+      "name": "Black Shoes Fashionable",
+      "sizes": "{L,XL,XXL}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142698/kara-shop/assets/products/product-16.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142698/kara-shop/assets/products/clothes/clothes/product-16.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142699/kara-shop/assets/products/product-17.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142699/kara-shop/assets/products/clothes/clothes/product-17.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142700/kara-shop/assets/products/product-18.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142700/kara-shop/assets/products/clothes/clothes/product-18.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 29,
+      "createdAt": "2026-01-22T06:32:52.548Z",
+      "updatedAt": "2026-01-22T06:32:52.548Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 10,
+      "price": 95.5,
+      "rate": 4.7,
+      "colors": "{ORANGE}",
+      "name": "Brown Cowboy Boots",
+      "sizes": "{L,XL,XXL}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142701/kara-shop/assets/products/product-19.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142701/kara-shop/assets/products/clothes/clothes/product-19.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142703/kara-shop/assets/products/product-20.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142703/kara-shop/assets/products/clothes/clothes/product-20.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142704/kara-shop/assets/products/product-21.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142704/kara-shop/assets/products/clothes/clothes/product-21.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142705/kara-shop/assets/products/product-22.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142705/kara-shop/assets/products/clothes/clothes/product-22.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 30,
+      "createdAt": "2026-01-22T06:32:52.550Z",
+      "updatedAt": "2026-01-22T06:32:52.550Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 22,
+      "price": 9.9,
+      "rate": 2.9,
+      "colors": "{ORANGE}",
+      "name": "Cotton T-shirt",
+      "sizes": "{S,M,L}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142706/kara-shop/assets/products/product-23.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142706/kara-shop/assets/products/clothes/clothes/product-23.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142707/kara-shop/assets/products/product-24.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142707/kara-shop/assets/products/clothes/clothes/product-24.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 31,
+      "createdAt": "2026-01-22T06:32:52.552Z",
+      "updatedAt": "2026-01-22T06:32:52.552Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 22,
+      "price": 15,
+      "rate": 3.5,
+      "colors": "{GRAY}",
+      "name": "Denim shirt",
+      "sizes": "{L,XL,XXL,XXXL}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142712/kara-shop/assets/products/product-28.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142712/kara-shop/assets/products/clothes/clothes/product-28.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142708/kara-shop/assets/products/product-25.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142708/kara-shop/assets/products/clothes/clothes/product-25.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142709/kara-shop/assets/products/product-26.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142709/kara-shop/assets/products/clothes/clothes/product-26.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142710/kara-shop/assets/products/product-27.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142710/kara-shop/assets/products/clothes/clothes/product-27.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 32,
+      "createdAt": "2026-01-22T06:32:52.553Z",
+      "updatedAt": "2026-01-22T06:32:52.553Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 22,
+      "price": 25,
+      "rate": 3.8,
+      "colors": "{BLUE}",
+      "name": "Girl’s Plaid shirt",
+      "sizes": "{S,M,L,XL}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142713/kara-shop/assets/products/product-29.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142713/kara-shop/assets/products/clothes/clothes/product-29.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142715/kara-shop/assets/products/product-30.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142715/kara-shop/assets/products/clothes/clothes/product-30.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142716/kara-shop/assets/products/product-31.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142716/kara-shop/assets/products/clothes/clothes/product-31.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 33,
+      "createdAt": "2026-01-22T06:32:52.555Z",
+      "updatedAt": "2026-01-22T06:32:52.555Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 22,
+      "price": 18,
+      "rate": 4.1,
+      "colors": "{PINK}",
+      "name": "Girls’ gathered-sleeve top",
+      "sizes": "{S,M,L,XL}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142717/kara-shop/assets/products/product-32.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142717/kara-shop/assets/products/clothes/clothes/product-32.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142718/kara-shop/assets/products/product-33.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769142718/kara-shop/assets/products/clothes/clothes/product-33.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143045/kara-shop/assets/products/product-34.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143045/kara-shop/assets/products/clothes/clothes/product-34.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 34,
+      "createdAt": "2026-01-22T06:32:52.556Z",
+      "updatedAt": "2026-01-22T06:32:52.556Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 22,
+      "price": 35,
+      "rate": 3.9,
+      "colors": "{BLUE}",
+      "name": "Girls’ mixed-stripe shirt",
+      "sizes": "{S,M,L,XL}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143045/kara-shop/assets/products/product-35.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143045/kara-shop/assets/products/clothes/clothes/product-35.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143047/kara-shop/assets/products/product-36.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143047/kara-shop/assets/products/clothes/clothes/product-36.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 35,
+      "createdAt": "2026-01-22T06:32:52.557Z",
+      "updatedAt": "2026-01-22T06:32:52.557Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 7,
+      "price": 22,
+      "rate": 4.2,
+      "colors": "{BLUE}",
+      "name": "Girls’ slide sneakers",
+      "sizes": "{S,M,L,XL}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143048/kara-shop/assets/products/product-37.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143048/kara-shop/assets/products/clothes/clothes/product-37.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143049/kara-shop/assets/products/product-38.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143049/kara-shop/assets/products/clothes/clothes/product-38.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 36,
+      "createdAt": "2026-01-22T06:32:52.558Z",
+      "updatedAt": "2026-01-22T06:32:52.558Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 7,
+      "price": 27,
+      "rate": 4.1,
+      "colors": "{YELLOW}",
+      "name": "Girls’ slide sneakers in emojis",
+      "sizes": "{S,M,L,XL}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143049/kara-shop/assets/products/product-39.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143049/kara-shop/assets/products/clothes/clothes/product-39.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143050/kara-shop/assets/products/product-40.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143050/kara-shop/assets/products/clothes/clothes/product-40.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 37,
+      "createdAt": "2026-01-22T06:32:52.559Z",
+      "updatedAt": "2026-01-22T06:32:52.559Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 24,
+      "price": 34,
+      "rate": 4.6,
+      "colors": "{BLUE}",
+      "name": "Girls’ star-print jeans",
+      "sizes": "{S,M,L,XL}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143051/kara-shop/assets/products/product-41.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143051/kara-shop/assets/products/clothes/clothes/product-41.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143052/kara-shop/assets/products/product-42.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143052/kara-shop/assets/products/clothes/clothes/product-42.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 38,
+      "createdAt": "2026-01-22T06:32:52.560Z",
+      "updatedAt": "2026-01-22T06:32:52.560Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 29,
+      "price": 67,
+      "rate": 4.1,
+      "colors": "{GRAY}",
+      "name": "Gray jacket",
+      "sizes": "{L,XL,XXL}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143053/kara-shop/assets/products/product-43.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143053/kara-shop/assets/products/clothes/clothes/product-43.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143054/kara-shop/assets/products/product-44.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143054/kara-shop/assets/products/clothes/clothes/product-44.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143055/kara-shop/assets/products/product-45.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143055/kara-shop/assets/products/clothes/clothes/product-45.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143056/kara-shop/assets/products/product-46.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143056/kara-shop/assets/products/clothes/clothes/product-46.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 39,
+      "createdAt": "2026-01-22T06:32:52.561Z",
+      "updatedAt": "2026-01-22T06:32:52.561Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 22,
+      "price": 22,
+      "rate": 4.4,
+      "colors": "{GREEN}",
+      "name": "Green shirt",
+      "sizes": "{S,M,L,XL}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143057/kara-shop/assets/products/product-47.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143057/kara-shop/assets/products/clothes/clothes/product-47.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143058/kara-shop/assets/products/product-48.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143058/kara-shop/assets/products/clothes/clothes/product-48.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143059/kara-shop/assets/products/product-49.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143059/kara-shop/assets/products/clothes/clothes/product-49.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143060/kara-shop/assets/products/product-50.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143060/kara-shop/assets/products/clothes/clothes/product-50.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 40,
+      "createdAt": "2026-01-22T06:32:52.562Z",
+      "updatedAt": "2026-01-22T06:32:52.562Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 25,
+      "price": 42,
+      "rate": 4.7,
+      "colors": "{BLUE}",
+      "name": "Green striped jackets",
+      "sizes": "{S,M,L}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143061/kara-shop/assets/products/product-51.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143061/kara-shop/assets/products/clothes/clothes/product-51.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143062/kara-shop/assets/products/product-52.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143062/kara-shop/assets/products/clothes/clothes/product-52.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143063/kara-shop/assets/products/product-53.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143063/kara-shop/assets/products/clothes/clothes/product-53.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 41,
+      "createdAt": "2026-01-22T06:32:52.563Z",
+      "updatedAt": "2026-01-22T06:32:52.563Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 29,
+      "price": 65,
+      "rate": 4.1,
+      "colors": "{BLUE}",
+      "name": "Gril’s Fashion coats",
+      "sizes": "{S,M,L}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143064/kara-shop/assets/products/product-54.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143064/kara-shop/assets/products/clothes/clothes/product-54.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143065/kara-shop/assets/products/product-55.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143065/kara-shop/assets/products/clothes/clothes/product-55.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 42,
+      "createdAt": "2026-01-22T06:32:52.563Z",
+      "updatedAt": "2026-01-22T06:32:52.563Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 22,
+      "price": 39,
+      "rate": 4,
+      "colors": "{BLUE,PINK,YELLOW}",
+      "name": "Gril’s Short T-shirt",
+      "sizes": "{S,M,L}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143067/kara-shop/assets/products/product-57.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143067/kara-shop/assets/products/clothes/clothes/product-57.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143068/kara-shop/assets/products/product-58.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143068/kara-shop/assets/products/clothes/clothes/product-58.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143069/kara-shop/assets/products/product-59.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143069/kara-shop/assets/products/clothes/clothes/product-59.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143066/kara-shop/assets/products/product-56.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143066/kara-shop/assets/products/clothes/clothes/product-56.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 43,
+      "createdAt": "2026-01-22T06:32:52.565Z",
+      "updatedAt": "2026-01-22T06:32:52.565Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 42,
+      "price": 20,
+      "rate": 3.9,
+      "colors": "{GRAY}",
+      "name": "Guide Pack Cap",
+      "sizes": "{S,M,L,XL}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143070/kara-shop/assets/products/product-60.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143070/kara-shop/assets/products/clothes/clothes/product-60.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143071/kara-shop/assets/products/product-61.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143071/kara-shop/assets/products/clothes/clothes/product-61.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 44,
+      "createdAt": "2026-01-22T06:32:52.566Z",
+      "updatedAt": "2026-01-22T06:32:52.566Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 7,
+      "price": 135,
+      "rate": 4.3,
+      "colors": "{GRAY}",
+      "name": "High sport shoes",
+      "sizes": "{S,M,L,XL,XXL}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143072/kara-shop/assets/products/product-62.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143072/kara-shop/assets/products/clothes/clothes/product-62.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143073/kara-shop/assets/products/product-63.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143073/kara-shop/assets/products/clothes/clothes/product-63.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143074/kara-shop/assets/products/product-64.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143074/kara-shop/assets/products/clothes/clothes/product-64.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 45,
+      "createdAt": "2026-01-22T06:32:52.567Z",
+      "updatedAt": "2026-01-22T06:32:52.567Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 22,
+      "price": 30,
+      "rate": 4.1,
+      "colors": "{GRAY}",
+      "name": "Horizontal Striped T-shirt",
+      "sizes": "{S,M,L}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143075/kara-shop/assets/products/product-65.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143075/kara-shop/assets/products/clothes/clothes/product-65.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143076/kara-shop/assets/products/product-66.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143076/kara-shop/assets/products/clothes/clothes/product-66.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143077/kara-shop/assets/products/product-67.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143077/kara-shop/assets/products/clothes/clothes/product-67.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 46,
+      "createdAt": "2026-01-22T06:32:52.569Z",
+      "updatedAt": "2026-01-22T06:32:52.569Z",
+      "description": "Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Abercrombie & Fitch. Perfect for pairing with denim and white kicks for a stylish sporty vibe. Will fit a UK 8-10, model shown is a UK 8 and 5.",
+      "published": true,
+      "collectionId": 29,
+      "price": 45,
+      "rate": 4.2,
+      "colors": "{RED,PINK,GRAY}",
+      "name": "Jacket Collar",
+      "sizes": "{S,M,L,XL}",
+      "types": "{CLOTHES}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143078/kara-shop/assets/products/product-68.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143078/kara-shop/assets/products/clothes/clothes/product-68.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143079/kara-shop/assets/products/product-69.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143079/kara-shop/assets/products/clothes/clothes/product-69.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143080/kara-shop/assets/products/product-70.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143080/kara-shop/assets/products/clothes/clothes/product-70.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143081/kara-shop/assets/products/product-71.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143081/kara-shop/assets/products/clothes/clothes/product-71.jpg"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143082/kara-shop/assets/products/product-72.jpg",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769143082/kara-shop/assets/products/clothes/clothes/product-72.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": 47,
+      "createdAt": "2026-01-22T21:06:37.051Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Canon EOS R8 (Body Only) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 27490000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Canon EOS R8 (Body Only) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 48,
+      "createdAt": "2026-01-22T21:06:37.063Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy Ảnh Canon PowerShot V1 | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 21490000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy Ảnh Canon PowerShot V1 | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 49,
+      "createdAt": "2026-01-22T21:06:37.068Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Fujifilm X-T5 + Lens XF 16-80mm F/4 (Silver) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 48490000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Fujifilm X-T5 + Lens XF 16-80mm F/4 (Silver) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 50,
+      "createdAt": "2026-01-22T21:06:37.072Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Sony Alpha A6400 (Black) + Lens E 18-135mm F3.5-5.6 | Chính hãng",
+      "published": true,
+      "collectionId": 87,
+      "price": 25517454,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Sony Alpha A6400 (Black) + Lens E 18-135mm F3.5-5.6 | Chính hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 51,
+      "createdAt": "2026-01-22T21:06:37.075Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Canon EOS R6 Mark II (Body Only) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 51990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Canon EOS R6 Mark II (Body Only) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 52,
+      "createdAt": "2026-01-22T21:06:37.080Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Fujifilm X-T5 (Body Only - Silver) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 38990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Fujifilm X-T5 (Body Only - Silver) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 53,
+      "createdAt": "2026-01-22T21:06:37.084Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Canon EOS R50 + Lens RF-S 18-45mm F4.5-6.3 IS STM | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 16990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Canon EOS R50 + Lens RF-S 18-45mm F4.5-6.3 IS STM | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 54,
+      "createdAt": "2026-01-22T21:06:37.089Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Fujifilm X-T50 + Lens XF 16-50mm F2.8-4.8 R LM WR (Black) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 35990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Fujifilm X-T50 + Lens XF 16-50mm F2.8-4.8 R LM WR (Black) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 55,
+      "createdAt": "2026-01-22T21:06:37.093Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Fujifilm X-T30 II + Lens XC 15-45mm F3.5-5.6 OIS PZ (Black) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 20990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Fujifilm X-T30 II + Lens XC 15-45mm F3.5-5.6 OIS PZ (Black) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 56,
+      "createdAt": "2026-01-22T21:06:37.097Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Fujifilm X-T5 + Lens XF 16-80mm F/4 (Black) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 48490000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Fujifilm X-T5 + Lens XF 16-80mm F/4 (Black) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 57,
+      "createdAt": "2026-01-22T21:06:37.102Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Fujifilm X-S20 + Lens XF 18-55mm F2.8-4 R LM OIS | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 30990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Fujifilm X-S20 + Lens XF 18-55mm F2.8-4 R LM OIS | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 58,
+      "createdAt": "2026-01-22T21:06:37.106Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Fujifilm X100VI (Black) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 44990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Fujifilm X100VI (Black) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 59,
+      "createdAt": "2026-01-22T21:06:37.111Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Fujifilm X-T50 (Body Only - Black) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 28990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Fujifilm X-T50 (Body Only - Black) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 60,
+      "createdAt": "2026-01-22T21:06:37.117Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Sony Alpha A6700 (Body Only) | Chính hãng",
+      "published": true,
+      "collectionId": 87,
+      "price": 33990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Sony Alpha A6700 (Body Only) | Chính hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 61,
+      "createdAt": "2026-01-22T21:06:37.121Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Canon EOS R10 + Lens RF-S 18-45mm F4.5-6.3 IS STM | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 22490000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Canon EOS R10 + Lens RF-S 18-45mm F4.5-6.3 IS STM | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 62,
+      "createdAt": "2026-01-22T21:06:37.125Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Fujifilm X-T30 II (Body Only - Black) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 17990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Fujifilm X-T30 II (Body Only - Black) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 63,
+      "createdAt": "2026-01-22T21:06:37.128Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Canon EOS R5 Mark II (Body Only) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 99990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Canon EOS R5 Mark II (Body Only) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 64,
+      "createdAt": "2026-01-22T21:06:37.133Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Fujifilm X-S20 (Body Only) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 25490000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Fujifilm X-S20 (Body Only) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 65,
+      "createdAt": "2026-01-22T21:06:37.137Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Fujifilm X-T5 (Body Only - Black) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 38990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Fujifilm X-T5 (Body Only - Black) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 66,
+      "createdAt": "2026-01-22T21:06:37.141Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Canon EOS R8 + Lens RF 24-50mm F4.5-6.3 IS STM | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 39990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Canon EOS R8 + Lens RF 24-50mm F4.5-6.3 IS STM | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 67,
+      "createdAt": "2026-01-22T21:06:37.147Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Canon EOS R10 (Body Only) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 19990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Canon EOS R10 (Body Only) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 68,
+      "createdAt": "2026-01-22T21:06:37.151Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Fujifilm X100VI (Silver) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 44990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Fujifilm X100VI (Silver) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 69,
+      "createdAt": "2026-01-22T21:06:37.156Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Fujifilm X-T50 + Lens XF 16-50mm F2.8-4.8 R LM WR (Silver) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 35990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Fujifilm X-T50 + Lens XF 16-50mm F2.8-4.8 R LM WR (Silver) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 70,
+      "createdAt": "2026-01-22T21:06:37.160Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Canon EOS R6 Mark II + Lens RF 24-105mm F4-7.1 IS STM | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 61990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Canon EOS R6 Mark II + Lens RF 24-105mm F4-7.1 IS STM | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 71,
+      "createdAt": "2026-01-22T21:06:37.164Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Sony Alpha A7 IV (Body Only) | Chính hãng",
+      "published": true,
+      "collectionId": 87,
+      "price": 51990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Sony Alpha A7 IV (Body Only) | Chính hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 72,
+      "createdAt": "2026-01-22T21:06:37.168Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Fujifilm X-T50 (Body Only - Silver) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 28990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Fujifilm X-T50 (Body Only - Silver) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 73,
+      "createdAt": "2026-01-22T21:06:37.173Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Canon EOS R50 (Body Only) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 14490000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Canon EOS R50 (Body Only) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 74,
+      "createdAt": "2026-01-22T21:06:37.179Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Fujifilm X-M5 + Lens XC 15-45mm F3.5-5.6 OIS PZ (Black) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 20990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Fujifilm X-M5 + Lens XC 15-45mm F3.5-5.6 OIS PZ (Black) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 75,
+      "createdAt": "2026-01-22T21:06:37.183Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Sony Alpha ZV-E10 II (Body Only) | Chính hãng",
+      "published": true,
+      "collectionId": 87,
+      "price": 20990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Sony Alpha ZV-E10 II (Body Only) | Chính hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 76,
+      "createdAt": "2026-01-22T21:06:37.188Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Sony Alpha A7C II (Body Only) | Chính hãng",
+      "published": true,
+      "collectionId": 87,
+      "price": 48990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Sony Alpha A7C II (Body Only) | Chính hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 77,
+      "createdAt": "2026-01-22T21:06:37.194Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Fujifilm X-M5 (Body Only - Black) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 17990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Fujifilm X-M5 (Body Only - Black) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 78,
+      "createdAt": "2026-01-22T21:06:37.197Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Fujifilm X-T30 II + Lens XF 18-55mm F2.8-4 R LM OIS (Black) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 25990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Fujifilm X-T30 II + Lens XF 18-55mm F2.8-4 R LM OIS (Black) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 79,
+      "createdAt": "2026-01-22T21:06:37.199Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Sony Alpha A7R V (Body Only) | Chính hãng",
+      "published": true,
+      "collectionId": 87,
+      "price": 89990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Sony Alpha A7R V (Body Only) | Chính hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 80,
+      "createdAt": "2026-01-22T21:06:37.203Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Sony Alpha A7C R (Body Only) | Chính hãng",
+      "published": true,
+      "collectionId": 87,
+      "price": 64990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Sony Alpha A7C R (Body Only) | Chính hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 81,
+      "createdAt": "2026-01-22T21:06:37.207Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Fujifilm X-M5 + Lens XC 15-45mm F3.5-5.6 OIS PZ (Silver) | Chính Hãng",
+      "published": true,
+      "collectionId": 200,
+      "price": 20990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Fujifilm X-M5 + Lens XC 15-45mm F3.5-5.6 OIS PZ (Silver) | Chính Hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": 82,
+      "createdAt": "2026-01-22T21:06:37.210Z",
+      "updatedAt": "2026-01-23T18:23:43.042Z",
+      "description": "Máy ảnh Sony Alpha A6400 (Body Only) | Chính hãng",
+      "published": true,
+      "collectionId": 87,
+      "price": 20990000,
+      "rate": 4.5,
+      "colors": null,
+      "name": "Máy ảnh Sony Alpha A6400 (Body Only) | Chính hãng",
+      "sizes": null,
+      "types": "{CAMERA}",
+      "images": {
+        "create": [
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+          }
+        ]
+      }
+    }
+  ]
+}
