@@ -1,8 +1,11 @@
 {
   "hero": {
     "discount": "Giảm giá 70%",
-    "title": "Phong cách đường phố kết hợp công nghiệp",
-    "description": "Ai cũng có thể đánh bại bạn nhưng không ai có thể đánh bại trang phục của bạn miễn là bạn mặc trang phục Dine.",
+    "title": "Máy <1>XỊN</1> - Giá <2>GỐC</2>",
+    "description": [
+      "Là đại lý cấp 1 không qua trung gian, KARA cam kết mang lại giá trị thật cho cộng đồng nhiếp ảnh.",
+      "Sản phẩm chính hãng, nguyên seal, bảo hành toàn cầu với mức giá không thể đối đầu."
+    ],
     "shop": "Bắt đầu mua sắm"
   },
   "promotions": {

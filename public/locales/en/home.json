@@ -1,8 +1,11 @@
 {
   "hero": {
     "discount": "Sale 70%",
-    "title": "An Industrial Take on Streetwear",
-    "description": "Anyone can beat you but no one can beat your outfit as long as you wear Dine outfits.",
+    "title": "Camera <1>REAL</1> - Price <2>ORIGINAL</2>",
+    "description": [
+      "As a tier 1 dealer without intermediaries, KARA is committed to bringing true value to the photography community.",
+      "Genuine products, sealed, global warranty with unbeatable prices."
+    ],
     "shop": "Start Shopping"
   },
   "promotions": {
