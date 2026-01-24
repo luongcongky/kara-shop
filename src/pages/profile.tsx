@@ -1,5 +1,7 @@
 import type { NextPageWithLayout } from './_app';
 import { PrimaryLayout } from '@/layouts';
+import type { GetStaticProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useSession } from 'next-auth/react';
 import { useTranslation } from 'next-i18next';
 import { useState, useEffect } from 'react';
@@ -7,15 +9,25 @@ import Image from 'next/image';
 import { api } from '@/utils/api';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import Script from 'next/script';
 
 declare global {
   interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     cloudinary: any;
   }
 }
 
+export const getStaticProps: GetStaticProps = async ({ locale = 'en' }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common', 'header', 'footer', 'profile'])),
+    },
+  };
+};
+
 const Profile: NextPageWithLayout = () => {
-  const { t } = useTranslation('header'); // Reuse header translations or create new
+  const { t } = useTranslation('profile');
   const { data: session, status, update } = useSession(); // update function to refresh session
   const router = useRouter();
 
@@ -27,10 +39,10 @@ const Profile: NextPageWithLayout = () => {
     onSuccess: async () => {
       // Reload session to reflect changes
       await update();
-      alert('Profile updated successfully!');
+      alert(t('success'));
     },
     onError: (error) => {
-      alert(`Error updating profile: ${error.message}`);
+      alert(`${t('error')}: ${error.message}`);
     }
   });
 
@@ -59,6 +71,7 @@ const Profile: NextPageWithLayout = () => {
           folder: 'avatars',
           singleUploadAutoClose: false, // Prevent auto close after upload
         },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (error: any, result: any) => {
           if (result && result.event) {
             console.log('Cloudinary Event:', result.event, result.info);
@@ -103,11 +116,12 @@ const Profile: NextPageWithLayout = () => {
 
   return (
     <>
+    <Script src="https://widget.cloudinary.com/v2.0/global/all.js" strategy="afterInteractive" />
     <Head>
-        <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+        <title>{t('meta_title')}</title>
     </Head>
     <div className="container mx-auto mt-10 max-w-2xl px-4 py-8">
-      <h1 className="mb-6 text-2xl font-bold">My Profile</h1>
+      <h1 className="mb-6 text-2xl font-bold">{t('title')}</h1>
       
       <div className="bg-white p-6 shadow rounded-lg">
         {/* Avatar Section */}
@@ -117,7 +131,7 @@ const Profile: NextPageWithLayout = () => {
                     <Image src={image} alt="Profile" fill className="object-cover" />
                 ) : (
                     <div className="flex h-full w-full items-center justify-center bg-gray-100 text-gray-400">
-                        No Image
+                        {t('no_image')}
                     </div>
                 )}
             </div>
@@ -126,13 +140,13 @@ const Profile: NextPageWithLayout = () => {
                 disabled={isUploading}
                 className="rounded bg-violet-600 px-4 py-2 text-sm text-white hover:bg-violet-700 disabled:opacity-50"
             >
-                {isUploading ? 'Uploading...' : 'Change Avatar'}
+                {isUploading ? t('uploading') : t('change_avatar')}
             </button>
         </div>
 
         {/* Name Section */}
         <div className="mb-6">
-            <label className="mb-2 block text-sm font-medium text-gray-700">Display Name</label>
+            <label className="mb-2 block text-sm font-medium text-gray-700">{t('display_name')}</label>
             <input 
                 type="text" 
                 value={name} 
@@ -143,7 +157,7 @@ const Profile: NextPageWithLayout = () => {
 
         {/* Email Section (Read-only) */}
         <div className="mb-8">
-            <label className="mb-2 block text-sm font-medium text-gray-700">Email</label>
+            <label className="mb-2 block text-sm font-medium text-gray-700">{t('email')}</label>
             <input 
                 type="text" 
                 value={session?.user?.email || ''} 
@@ -158,7 +172,7 @@ const Profile: NextPageWithLayout = () => {
             disabled={updateProfile.isLoading}
             className="w-full rounded bg-black py-3 font-medium text-white hover:bg-zinc-800 disabled:opacity-50"
         >
-            {updateProfile.isLoading ? 'Saving...' : 'Save Changes'}
+            {updateProfile.isLoading ? t('saving') : t('save_changes')}
         </button>
       </div>
     </div>

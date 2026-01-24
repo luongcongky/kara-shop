@@ -1,0 +1,14 @@
+{
+  "title": "My Profile",
+  "meta_title": "My Profile | KARA Shop",
+  "meta_description": "Manage your profile information",
+  "no_image": "No Image",
+  "change_avatar": "Change Avatar",
+  "uploading": "Uploading...",
+  "display_name": "Display Name",
+  "email": "Email",
+  "save_changes": "Save Changes",
+  "saving": "Saving...",
+  "success": "Profile updated successfully!",
+  "error": "Error updating profile"
+}
