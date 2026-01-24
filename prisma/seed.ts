@@ -15,11 +15,7 @@ function loadDump() {
   return null;
 }
 
-const isLocal = process.env.DB_PROVIDER === 'LOCAL';
-
-const connectionString = isLocal
-  ? process.env.DATABASE_URL_LOCAL
-  : (process.env.DIRECT_URL_SUPABASE || process.env.DIRECT_URL || process.env.DATABASE_URL);
+const connectionString = process.env.DATABASE_URL;
 
 if (!connectionString) {
   throw new Error('No valid database connection string found for current environment.');
