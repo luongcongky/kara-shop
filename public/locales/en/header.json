@@ -8,7 +8,21 @@
     "phone": "+0125 258 192 502"
   },
   "auth": {
-    "google": "Continue with Google"
+    "google": "Continue with Google",
+    "signin": "Sign in",
+    "signup": "Sign up",
+    "email": "Email",
+    "password": "Password",
+    "signin_with_email": "Sign In with Email",
+    "or_continue_with": "Or continue with",
+    "dont_have_account": "Don't have an account?",
+    "already_have_account": "Already have an account?",
+    "create_account": "Create Account",
+    "name": "Name",
+    "invalid_credentials": "Invalid email or password",
+    "user_exists": "User already exists",
+    "creating_account": "Creating account...",
+    "terms_privacy": "By signing in, you agree to our <1>Terms of Service</1> and <3>Privacy Policy</3>."
   },
   "clothes": "Clothes",
   "kids": "Kids",

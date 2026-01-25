@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { createTRPCRouter, protectedProcedure } from '../trpc';
+import { createTRPCRouter, protectedProcedure, publicProcedure } from '../trpc';
+import { hash } from 'bcryptjs';
 import { v2 as cloudinary } from 'cloudinary';
 import { env } from '@/env/server.mjs';
 
@@ -11,6 +12,31 @@ cloudinary.config({
 });
 
 export const userRouter = createTRPCRouter({
+  register: publicProcedure
+    .input(
+      z.object({
+        name: z.string().min(1),
+        email: z.string().email(),
+        password: z.string().min(6),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { name, email, password } = input;
+      const exists = await ctx.prisma.user.findUnique({
+        where: { email },
+      });
+      if (exists) {
+        throw new Error('User already exists');
+      }
+      const hashedPassword = await hash(password, 10);
+      return await ctx.prisma.user.create({
+        data: {
+          name,
+          email,
+          password: hashedPassword,
+        },
+      });
+    }),
   updateProfile: protectedProcedure
     .input(
       z.object({

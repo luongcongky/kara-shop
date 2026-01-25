@@ -84,14 +84,16 @@ export const Header = ({ collections }: { collections: Collections }) => {
           </ul>
           <ul className="ml-auto items-center md:flex">
             <Search onSearch={value => console.log(value)} />
-            {sideNavLinks.map(([url, Icon]) => (
-              <Link key={url} href={url} className="ml-5 hidden md:block">
-                <Icon
-                  className="text-neutral-700 transition-colors hover:text-violet-700"
-                  size="20px"
-                />
-              </Link>
-            ))}
+            {sideNavLinks
+              .filter(([url]) => !session || url !== '/signin')
+              .map(([url, Icon]) => (
+                <Link key={url} href={url} className="ml-5 hidden md:block">
+                  <Icon
+                    className="text-neutral-700 transition-colors hover:text-violet-700"
+                    size="20px"
+                  />
+                </Link>
+              ))}
             {session && (
               <Menu as="div" className="relative ml-5 hidden md:block">
                 <Menu.Button className="flex rounded-full border border-solid border-violet-700 p-[2px]">

@@ -8,7 +8,21 @@
     "phone": "+0125 258 192 502"
   },
   "auth": {
-    "google": "Tiếp tục với Google"
+    "google": "Tiếp tục với Google",
+    "signin": "Đăng nhập",
+    "signup": "Đăng ký",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "signin_with_email": "Đăng nhập bằng Email",
+    "or_continue_with": "Hoặc tiếp tục với",
+    "dont_have_account": "Chưa có tài khoản?",
+    "already_have_account": "Đã có tài khoản?",
+    "create_account": "Tạo tài khoản",
+    "name": "Tên",
+    "invalid_credentials": "Email hoặc mật khẩu không đúng",
+    "user_exists": "Tài khoản đã tồn tại",
+    "creating_account": "Đang tạo tài khoản...",
+    "terms_privacy": "Khi đăng nhập, bạn đồng ý với <1>Điều khoản dịch vụ</1> và <3>Chính sách bảo mật</3> của chúng tôi."
   },
   "clothes": "Quần áo",
   "kids": "Trẻ em",
