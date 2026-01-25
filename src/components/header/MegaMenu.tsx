@@ -1,9 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import { capitalizeFirstLetter } from '@/utils';
 import { Collections } from '@/types';
 import { CollectionType } from '@prisma/client';
-import { getCloudinaryUrl, optimizeCloudinary } from '@/utils/cloudinary';
+
 
 interface Props {
   type: CollectionType;
@@ -65,16 +63,7 @@ export const MegaMenu = ({
                   ))}
               </ul>
             ))}
-            <Link href="/" onClick={onCloseMenu}>
-              <Image
-                priority
-                src={optimizeCloudinary(getCloudinaryUrl('/assets/offer.webp'), 300)}
-                alt="offer"
-                width={150}
-                height={100}
-                quality={100}
-              />
-            </Link>
+
           </div>
         </div>
         <div className="flex flex-[3] border-l border-solid shadow-neutral-300">
@@ -110,35 +99,7 @@ export const MegaMenu = ({
             ))}
         </div>
       </div>
-      <div className="border-t border-solid shadow-neutral-300">
-        <div className="mx-auto flex max-w-7xl">
-          <div className="flex flex-1 items-center">
-            <Link
-              href="/"
-              className="ml-4 w-full max-w-[150px] py-3 text-xs font-bold text-neutral-800 hover:underline"
-              onClick={onCloseMenu}
-            >
-              Sale
-            </Link>
-          </div>
-          <div className="flex flex-[3] items-center">
-            {['shoes', 'clothing', 'accessories', 'sport', ''].map(
-              (item, index) => (
-                <Link
-                  key={index}
-                  href={`/products/${typeInLowerCase}/${item}`}
-                  className="ml-4 w-full max-w-[150px] py-3 text-xs font-bold text-neutral-800 hover:underline"
-                  onClick={onCloseMenu}
-                >
-                  {`All ${capitalizeFirstLetter(
-                    typeInLowerCase
-                  )}'s ${capitalizeFirstLetter(item)}`}
-                </Link>
-              )
-            )}
-          </div>
-        </div>
-      </div>
+
     </div>
   );
 };
