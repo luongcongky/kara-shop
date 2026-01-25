@@ -45,6 +45,16 @@ async function main() {
     console.log(`\n📦 Found recent database dump (generated at ${dumpData.generatedAt}).`);
     console.log('   Using dump data to seed database...');
 
+    // Cleanup Step: Ensure perfect sync by removing existing data before seeding
+    console.log('\n🗑️  Cleaning up existing database for a fresh sync...');
+    await prisma.productImage.deleteMany();
+    await prisma.productAttribute.deleteMany();
+    await prisma.productReview.deleteMany();
+    await prisma.productInclusion.deleteMany();
+    await prisma.product.deleteMany();
+    await prisma.collection.deleteMany();
+    console.log('✅ Cleanup completed.');
+
     // 1. Seed Collections
     console.log('\n--- 1. Seeding Collections from Dump ---');
     if (dumpData.collections && dumpData.collections.length > 0) {
@@ -151,11 +161,7 @@ async function main() {
 
         // Seed Images for this product
         if (images && images.create && images.create.length > 0) {
-           // First allow delete existing images to avoid duplication if running multiple times? 
-           // Or just trust the dump. 
-           // Simplest: Delete all images for this product and re-add from dump
            await prisma.productImage.deleteMany({ where: { productId: productData.id } });
-           
            for (const img of images.create) {
              await prisma.productImage.create({
                data: {
@@ -166,8 +172,54 @@ async function main() {
              });
            }
         }
+
+        // 3. Seed Attributes, Reviews, Inclusions from absolute dump persistence
+        if (prod.attributes && prod.attributes.length > 0) {
+            await prisma.productAttribute.deleteMany({ where: { productId: productData.id } });
+            for (const attr of prod.attributes) {
+                await prisma.productAttribute.create({
+                    data: {
+                        attributeName: attr.attributeName,
+                        attributeValue: attr.attributeValue,
+                        productId: productData.id,
+                        createdAt: new Date(attr.createdAt),
+                        updatedAt: new Date(attr.updatedAt),
+                    }
+                });
+            }
+        }
+
+        if (prod.reviews && prod.reviews.length > 0) {
+            await prisma.productReview.deleteMany({ where: { productId: productData.id } });
+            for (const rev of prod.reviews) {
+                await prisma.productReview.create({
+                    data: {
+                        userName: rev.userName,
+                        rating: rev.rating,
+                        comment: rev.comment,
+                        productId: productData.id,
+                        createdAt: new Date(rev.createdAt),
+                        updatedAt: new Date(rev.updatedAt),
+                    }
+                });
+            }
+        }
+
+        if (prod.inclusions && prod.inclusions.length > 0) {
+            await prisma.productInclusion.deleteMany({ where: { productId: productData.id } });
+            for (const inc of prod.inclusions) {
+                await prisma.productInclusion.create({
+                    data: {
+                        itemName: inc.itemName,
+                        productId: productData.id,
+                        createdAt: new Date(inc.createdAt),
+                        updatedAt: new Date(inc.updatedAt),
+                    }
+                });
+            }
+        }
       }
-      console.log(`✅ Seeded ${dumpData.products.length} products from dump.`);
+      console.log(`✅ Seeded ${dumpData.products.length} products (with nested details) from dump.`);
       
       // Reset sequence for Product
       const maxId = Math.max(...dumpData.products.map((p: Product) => p.id));
