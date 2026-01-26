@@ -65,14 +65,14 @@ export const ProductItem = ({
 
   return (
     <div className="group rounded-2xl bg-white p-2">
-      <div className="relative h-[400px] overflow-hidden rounded-2xl transition sm:h-[330px]">
+      <div className="relative h-[400px] overflow-hidden rounded-2xl bg-neutral-50 p-3 transition sm:h-[330px]">
         <Link href={productLink} className="relative block h-full w-full">
           {images.map(({ imageURL, imageBlur }) => (
             <Image
               key={imageURL}
               src={failedImages.has(imageURL) ? '/camera-placeholder.png' : imageURL}
               alt={`${name} image`}
-              className={clsx('absolute h-full w-full object-cover duration-700 ', {
+              className={clsx('absolute h-full w-full object-contain duration-700 ', {
                 'opacity-100': currentImage === imageURL,
                 'opacity-0': currentImage !== imageURL,
               })}
