@@ -8,39 +8,38 @@ datasource db {
 }
 
 model Collection {
-  id        Int              @id @default(autoincrement())
-  createdAt DateTime         @default(now())
-  updatedAt DateTime         @updatedAt
-  name      String           @db.VarChar(255)
-  slug      String           @unique
-  useYn     Boolean          @default(true)
+  id        Int                 @id @default(autoincrement())
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+  name      String              @db.VarChar(255)
+  slug      String              @unique
+  useYn     Boolean             @default(true)
   types     CollectionType[]
   parentId  Int?
-  parent    Collection?      @relation(name: "ParentChild", fields: [parentId], references: [id])
-  children  Collection[]     @relation(name: "ParentChild")
-  products  Product[]
+  parent    Collection?         @relation(name: "ParentChild", fields: [parentId], references: [id])
+  children  Collection[]        @relation(name: "ParentChild")
+  products  ProductCollection[]
 
   @@schema("ecommerce")
 }
 
 model Product {
-  id           Int                @id @default(autoincrement())
-  createdAt    DateTime           @default(now())
-  updatedAt    DateTime           @updatedAt
-  name         String             @db.VarChar(255)
-  description  String
-  price        Float
-  rate         Float
-  published    Boolean            @default(false)
-  images       ProductImage[]
-  colors       ProductColor[]
-  sizes        ProductSize[]
-  types        CollectionType[]
-  collection   Collection         @relation(fields: [collectionId], references: [id])
-  collectionId Int
-  attributes   ProductAttribute[]
-  reviews      ProductReview[]
-  inclusions   ProductInclusion[]
+  id          Int                 @id @default(autoincrement())
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+  name        String              @db.VarChar(255)
+  description String
+  price       Float
+  rate        Float
+  published   Boolean             @default(false)
+  images      ProductImage[]
+  colors      ProductColor[]
+  sizes       ProductSize[]
+  types       CollectionType[]
+  collections ProductCollection[]
+  attributes  ProductAttribute[]
+  reviews     ProductReview[]
+  inclusions  ProductInclusion[]
 
   @@schema("ecommerce")
 }
@@ -179,5 +178,15 @@ model ProductInclusion {
   product   Product  @relation(fields: [productId], references: [id])
   productId Int
 
+  @@schema("ecommerce")
+}
+
+model ProductCollection {
+  productId    Int
+  collectionId Int
+  product      Product    @relation(fields: [productId], references: [id])
+  collection   Collection @relation(fields: [collectionId], references: [id])
+
+  @@id([productId, collectionId])
   @@schema("ecommerce")
 }

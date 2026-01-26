@@ -21,7 +21,6 @@ export const getServerSideProps: GetServerSideProps = async ({ locale = 'en', qu
 const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [activeTab, setActiveTab] = useState<'description' | 'specs'>('description');
-  const [isWarrantyExpanded, setIsWarrantyExpanded] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const { data: product, isLoading } = api.product.getById.useQuery({ id });

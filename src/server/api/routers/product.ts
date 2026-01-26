@@ -21,8 +21,12 @@ const defaultProductSelect = Prisma.validator<Prisma.ProductSelect>()({
     },
   },
   types: true,
-  collection: {
-    select: defaultCollectionSelect,
+  collections: {
+    select: {
+      collection: {
+        select: defaultCollectionSelect,
+      },
+    },
   },
 });
 
@@ -93,7 +97,11 @@ export const productRouter = createTRPCRouter({
           },
         });
 
-        where.collection = isParent ? { parentId: isParent.id } : { slug };
+        where.collections = {
+          some: isParent
+            ? { collection: { parentId: isParent.id } }
+            : { collection: { slug } },
+        };
       }
 
       const [products, totalCount] = await ctx.prisma.$transaction([
@@ -122,7 +130,11 @@ export const productRouter = createTRPCRouter({
           images: true,
           attributes: true,
           inclusions: true,
-          collection: true,
+          collections: {
+            include: {
+              collection: true,
+            },
+          },
           reviews: {
             orderBy: { createdAt: 'desc' },
           },

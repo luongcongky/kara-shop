@@ -1,60 +1,12 @@
 {
-  "generatedAt": "2026-01-25T14:39:11.338Z",
+  "generatedAt": "2026-01-26T16:50:36.543Z",
   "collections": [
-    {
-      "id": 79,
-      "createdAt": "2026-01-22T20:12:52.946Z",
-      "updatedAt": "2026-01-25T01:54:29.922Z",
-      "name": "Top \"Phụ Kiện\"",
-      "slug": "best-sellers",
-      "useYn": true,
-      "types": [
-        "CAMERA"
-      ],
-      "parentId": 999999
-    },
-    {
-      "id": 80,
-      "createdAt": "2026-01-22T20:12:52.947Z",
-      "updatedAt": "2026-01-25T01:54:29.923Z",
-      "name": "Top \"Thiết Bị Làm Video\"",
-      "slug": "only-at-kara",
-      "useYn": true,
-      "types": [
-        "CAMERA"
-      ],
-      "parentId": 999999
-    },
-    {
-      "id": 81,
-      "createdAt": "2026-01-22T20:12:52.948Z",
-      "updatedAt": "2026-01-25T01:54:29.924Z",
-      "name": "Top \"Camera Hành Động\"",
-      "slug": "members-exclusives",
-      "useYn": true,
-      "types": [
-        "CAMERA"
-      ],
-      "parentId": 999999
-    },
-    {
-      "id": 83,
-      "createdAt": "2026-01-22T20:12:52.949Z",
-      "updatedAt": "2026-01-25T01:54:29.925Z",
-      "name": "Top \"Drone\"",
-      "slug": "fall-collection",
-      "useYn": true,
-      "types": [
-        "CAMERA"
-      ],
-      "parentId": 999999
-    },
     {
       "id": 85,
       "createdAt": "2026-01-22T20:12:52.951Z",
       "updatedAt": "2026-01-25T01:54:29.926Z",
-      "name": "Top \"Máy Ảnh & Ống kính\"",
-      "slug": "pharrell-basics",
+      "name": "Hàng mới về",
+      "slug": "top-arrivals",
       "useYn": true,
       "types": [
         "CAMERA"
@@ -71,7 +23,7 @@
       "types": [
         "CAMERA"
       ],
-      "parentId": 200
+      "parentId": 201
     },
     {
       "id": 88,
@@ -83,7 +35,7 @@
       "types": [
         "CAMERA"
       ],
-      "parentId": 200
+      "parentId": 201
     },
     {
       "id": 89,
@@ -95,7 +47,7 @@
       "types": [
         "CAMERA"
       ],
-      "parentId": 200
+      "parentId": 201
     },
     {
       "id": 90,
@@ -107,31 +59,7 @@
       "types": [
         "CAMERA"
       ],
-      "parentId": 200
-    },
-    {
-      "id": 200,
-      "createdAt": "2026-01-22T23:52:31.269Z",
-      "updatedAt": "2026-01-22T23:52:31.269Z",
-      "name": "Chuyên Dụng",
-      "slug": "camera-chuyen-dung",
-      "useYn": true,
-      "types": [
-        "CAMERA"
-      ],
-      "parentId": null
-    },
-    {
-      "id": 201,
-      "createdAt": "2026-01-22T23:52:31.269Z",
-      "updatedAt": "2026-01-22T23:52:31.269Z",
-      "name": "Thương Hiệu",
-      "slug": "camera-thuong-hieu",
-      "useYn": true,
-      "types": [
-        "CAMERA"
-      ],
-      "parentId": null
+      "parentId": 201
     },
     {
       "id": 300,
@@ -144,30 +72,6 @@
         "LENS"
       ],
       "parentId": null
-    },
-    {
-      "id": 78,
-      "createdAt": "2026-01-22T20:12:52.945Z",
-      "updatedAt": "2026-01-25T01:54:29.921Z",
-      "name": "Top \"Đồ cũ chất\"",
-      "slug": "new-arrivals",
-      "useYn": true,
-      "types": [
-        "CAMERA"
-      ],
-      "parentId": 999999
-    },
-    {
-      "id": 91,
-      "createdAt": "2026-01-22T23:52:31.459Z",
-      "updatedAt": "2026-01-25T01:54:29.931Z",
-      "name": "Máy Ảnh Film",
-      "slug": "may-anh-film",
-      "useYn": true,
-      "types": [
-        "CAMERA"
-      ],
-      "parentId": 200
     },
     {
       "id": 92,
@@ -218,30 +122,6 @@
       "parentId": 300
     },
     {
-      "id": 96,
-      "createdAt": "2026-01-22T23:52:31.467Z",
-      "updatedAt": "2026-01-25T01:54:29.936Z",
-      "name": "Máy Ảnh Canon",
-      "slug": "may-anh-canon",
-      "useYn": true,
-      "types": [
-        "CAMERA"
-      ],
-      "parentId": 201
-    },
-    {
-      "id": 97,
-      "createdAt": "2026-01-22T23:52:31.467Z",
-      "updatedAt": "2026-01-25T01:54:29.937Z",
-      "name": "Máy Ảnh Fujifilm",
-      "slug": "may-anh-fujifilm",
-      "useYn": true,
-      "types": [
-        "CAMERA"
-      ],
-      "parentId": 201
-    },
-    {
       "id": 999999,
       "createdAt": "2026-01-22T20:12:52.943Z",
       "updatedAt": "2026-01-22T20:12:52.943Z",
@@ -253,116 +133,213 @@
         "LENS"
       ],
       "parentId": null
+    },
+    {
+      "id": 200,
+      "createdAt": "2026-01-22T23:52:31.269Z",
+      "updatedAt": "2026-01-22T23:52:31.269Z",
+      "name": "Thương Hiệu",
+      "slug": "camera-thuong-hieu",
+      "useYn": true,
+      "types": [
+        "CAMERA"
+      ],
+      "parentId": null
+    },
+    {
+      "id": 201,
+      "createdAt": "2026-01-22T23:52:31.269Z",
+      "updatedAt": "2026-01-22T23:52:31.269Z",
+      "name": "Chuyên Dụng",
+      "slug": "camera-chuyen-dung",
+      "useYn": true,
+      "types": [
+        "CAMERA"
+      ],
+      "parentId": null
+    },
+    {
+      "id": 91,
+      "createdAt": "2026-01-22T23:52:31.459Z",
+      "updatedAt": "2026-01-25T01:54:29.931Z",
+      "name": "Máy Ảnh Film",
+      "slug": "may-anh-film",
+      "useYn": false,
+      "types": [
+        "CAMERA"
+      ],
+      "parentId": 201
+    },
+    {
+      "id": 96,
+      "createdAt": "2026-01-22T23:52:31.467Z",
+      "updatedAt": "2026-01-25T01:54:29.936Z",
+      "name": "Máy Ảnh Sony",
+      "slug": "may-anh-sony",
+      "useYn": true,
+      "types": [
+        "CAMERA"
+      ],
+      "parentId": 200
     }
   ],
   "products": [
     {
-      "id": 47,
-      "createdAt": "2026-01-22T21:06:37.051Z",
-      "updatedAt": "2026-01-23T18:23:43.042Z",
-      "name": "Máy ảnh Canon EOS R8 (Body Only) | Chính Hãng",
-      "description": "Máy ảnh Canon EOS R8 (Body Only) | Chính Hãng",
-      "price": 27490000,
-      "rate": 4.5,
+      "id": 83,
+      "createdAt": "2026-01-26T11:04:44.447Z",
+      "updatedAt": "2026-01-26T11:04:44.447Z",
+      "name": "Sony ZV-E10 | Máy ảnh Vlog chuyên dụng (Body Only)",
+      "description": "Máy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\nMáy ảnh mirrorless ngàm E chuyên dụng cho vlogging với cảm biến APS-C 24.2MP, quay video 4K UHD, màn hình cảm ứng xoay lật, và hệ thống lấy nét tự động Hybrid 425 điểm. Thiết kế gọn nhẹ, linh hoạt cho sáng tạo nội dung.\\n",
+      "price": 14190000,
+      "rate": 4.8,
       "published": true,
       "colors": [],
       "sizes": [],
       "types": [
         "CAMERA"
       ],
-      "collectionId": 200,
       "images": {
         "create": [
           {
-            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
-            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431614/zv-e10_8_kt0shu.webp",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431614/zv-e10_8_kt0shu.webp"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431615/zv-e10_9_qxsydc.webp",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431615/zv-e10_9_qxsydc.webp"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431611/zv-e10_6_oajm9s.webp",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431611/zv-e10_6_oajm9s.webp"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431612/zv-e10_7_q0oevk.webp",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431612/zv-e10_7_q0oevk.webp"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431609/zv-e10_4_njiddr.webp",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431609/zv-e10_4_njiddr.webp"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431610/zv-e10_5_mhhes0.webp",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431610/zv-e10_5_mhhes0.webp"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431618/zv-e10_1_tptpiw.webp",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431618/zv-e10_1_tptpiw.webp"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431616/zv-e10_10_olimnf.webp",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431616/zv-e10_10_olimnf.webp"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431608/zv-e10_2_y5vit6.webp",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431608/zv-e10_2_y5vit6.webp"
+          },
+          {
+            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431608/zv-e10_3_vq2hsy.webp",
+            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431608/zv-e10_3_vq2hsy.webp"
           }
         ]
       },
-      "attributes": [],
-      "reviews": [],
-      "inclusions": []
-    },
-    {
-      "id": 48,
-      "createdAt": "2026-01-22T21:06:37.063Z",
-      "updatedAt": "2026-01-23T18:23:43.042Z",
-      "name": "Máy Ảnh Canon PowerShot V1 | Chính Hãng",
-      "description": "Máy Ảnh Canon PowerShot V1 | Chính Hãng",
-      "price": 21490000,
-      "rate": 4.5,
-      "published": true,
-      "colors": [],
-      "sizes": [],
-      "types": [
-        "CAMERA"
+      "attributes": [
+        {
+          "id": 1,
+          "createdAt": "2026-01-26T11:04:44.447Z",
+          "updatedAt": "2026-01-26T11:04:44.447Z",
+          "attributeName": "Cảm biến",
+          "attributeValue": "APS-C Exmor CMOS 24.2MP",
+          "productId": 83
+        },
+        {
+          "id": 2,
+          "createdAt": "2026-01-26T11:04:44.447Z",
+          "updatedAt": "2026-01-26T11:04:44.447Z",
+          "attributeName": "Video",
+          "attributeValue": "4K UHD up to 30p, Full HD 120p",
+          "productId": 83
+        },
+        {
+          "id": 3,
+          "createdAt": "2026-01-26T11:04:44.447Z",
+          "updatedAt": "2026-01-26T11:04:44.447Z",
+          "attributeName": "Lấy nét",
+          "attributeValue": "425-point Fast Hybrid AF, Real-time Eye AF",
+          "productId": 83
+        },
+        {
+          "id": 4,
+          "createdAt": "2026-01-26T11:04:44.447Z",
+          "updatedAt": "2026-01-26T11:04:44.447Z",
+          "attributeName": "Màn hình",
+          "attributeValue": "3.0-inch vari-angle touchscreen LCD",
+          "productId": 83
+        },
+        {
+          "id": 5,
+          "createdAt": "2026-01-26T11:04:44.447Z",
+          "updatedAt": "2026-01-26T11:04:44.447Z",
+          "attributeName": "Audio",
+          "attributeValue": "Built-in 3-capsule mic, 3.5mm mic/headphone ports",
+          "productId": 83
+        },
+        {
+          "id": 6,
+          "createdAt": "2026-01-26T11:04:44.447Z",
+          "updatedAt": "2026-01-26T11:04:44.447Z",
+          "attributeName": "Trọng lượng",
+          "attributeValue": "343g (bao gồm pin và thẻ nhớ)",
+          "productId": 83
+        }
       ],
-      "collectionId": 200,
-      "images": {
-        "create": [
-          {
-            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
-            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
-          }
-        ]
-      },
-      "attributes": [],
       "reviews": [],
-      "inclusions": []
-    },
-    {
-      "id": 49,
-      "createdAt": "2026-01-22T21:06:37.068Z",
-      "updatedAt": "2026-01-23T18:23:43.042Z",
-      "name": "Máy ảnh Fujifilm X-T5 + Lens XF 16-80mm F/4 (Silver) | Chính Hãng",
-      "description": "Máy ảnh Fujifilm X-T5 + Lens XF 16-80mm F/4 (Silver) | Chính Hãng",
-      "price": 48490000,
-      "rate": 4.5,
-      "published": true,
-      "colors": [],
-      "sizes": [],
-      "types": [
-        "CAMERA"
+      "inclusions": [
+        {
+          "id": 1,
+          "createdAt": "2026-01-26T11:04:44.447Z",
+          "updatedAt": "2026-01-26T11:04:44.447Z",
+          "itemName": "Thân máy Sony ZV-E10",
+          "productId": 83
+        },
+        {
+          "id": 2,
+          "createdAt": "2026-01-26T11:04:44.447Z",
+          "updatedAt": "2026-01-26T11:04:44.447Z",
+          "itemName": "Pin sạc NP-FW50",
+          "productId": 83
+        },
+        {
+          "id": 3,
+          "createdAt": "2026-01-26T11:04:44.447Z",
+          "updatedAt": "2026-01-26T11:04:44.447Z",
+          "itemName": "Sách hướng dẫn",
+          "productId": 83
+        },
+        {
+          "id": 4,
+          "createdAt": "2026-01-26T11:04:44.447Z",
+          "updatedAt": "2026-01-26T11:04:44.447Z",
+          "itemName": "Dây đeo vai",
+          "productId": 83
+        },
+        {
+          "id": 5,
+          "createdAt": "2026-01-26T11:04:44.447Z",
+          "updatedAt": "2026-01-26T11:04:44.447Z",
+          "itemName": "Đầu bọc mic chống gió",
+          "productId": 83
+        }
       ],
-      "collectionId": 200,
-      "images": {
-        "create": [
-          {
-            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
-            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
-          }
-        ]
-      },
-      "attributes": [],
-      "reviews": [],
-      "inclusions": []
-    },
-    {
-      "id": 50,
-      "createdAt": "2026-01-22T21:06:37.072Z",
-      "updatedAt": "2026-01-23T18:23:43.042Z",
-      "name": "Sony Alpha A6400 (Black) + Lens E 18-135mm F3.5-5.6 | Chính hãng",
-      "description": "Máy ảnh Sony Alpha A6400 (Black) + Lens E 18-135mm F3.5-5.6 | Chính hãng",
-      "price": 25517454,
-      "rate": 4.5,
-      "published": true,
-      "colors": [],
-      "sizes": [],
-      "types": [
-        "CAMERA"
-      ],
-      "collectionId": 87,
-      "images": {
-        "create": [
-          {
-            "imageURL": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png",
-            "imageBlur": "https://res.cloudinary.com/dibypjlfc/image/upload/v1769221642/camera_sample_ulxm5p.png"
-          }
-        ]
-      },
-      "attributes": [],
-      "reviews": [],
-      "inclusions": []
+      "collections": [
+        {
+          "productId": 83,
+          "collectionId": 87
+        },
+        {
+          "productId": 83,
+          "collectionId": 96
+        }
+      ]
     }
   ]
 }

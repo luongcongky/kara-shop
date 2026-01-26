@@ -11,11 +11,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     colors: ['BLACK'],
-    collection: {
-      connect: {
-        id: 29,
-      },
-    },
+    collections: { create: { collectionId: 29 } },
     images: {
       createMany: {
         data: [
@@ -52,11 +48,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['GREEN', 'PINK'],
-    collection: {
-      connect: {
-        id: 29,
-      },
-    },
+    collections: { create: { collectionId: 29 } },
     images: {
       createMany: {
         data: [
@@ -98,11 +90,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['S', 'M', 'L'],
     colors: ['BLUE'],
-    collection: {
-      connect: {
-        id: 24,
-      },
-    },
+    collections: { create: { collectionId: 24 } },
     images: {
       createMany: {
         data: [
@@ -129,11 +117,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['L', 'XL', 'XXL'],
     colors: ['RED'],
-    collection: {
-      connect: {
-        id: 22,
-      },
-    },
+    collections: { create: { collectionId: 22 } },
     images: {
       createMany: {
         data: [
@@ -170,11 +154,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['L', 'XL', 'XXL'],
     colors: ['BLACK'],
-    collection: {
-      connect: {
-        id: 10,
-      },
-    },
+    collections: { create: { collectionId: 10 } },
     images: {
       createMany: {
         data: [
@@ -206,11 +186,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['L', 'XL', 'XXL'],
     colors: ['ORANGE'],
-    collection: {
-      connect: {
-        id: 10,
-      },
-    },
+    collections: { create: { collectionId: 10 } },
     images: {
       createMany: {
         data: [
@@ -247,11 +223,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['S', 'M', 'L'],
     colors: ['ORANGE'],
-    collection: {
-      connect: {
-        id: 22,
-      },
-    },
+    collections: { create: { collectionId: 22 } },
     images: {
       createMany: {
         data: [
@@ -278,11 +250,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['L', 'XL', 'XXL', 'XXXL'],
     colors: ['GRAY'],
-    collection: {
-      connect: {
-        id: 22,
-      },
-    },
+    collections: { create: { collectionId: 22 } },
     images: {
       createMany: {
         data: [
@@ -319,11 +287,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['BLUE'],
-    collection: {
-      connect: {
-        id: 22,
-      },
-    },
+    collections: { create: { collectionId: 22 } },
     images: {
       createMany: {
         data: [
@@ -355,11 +319,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['PINK'],
-    collection: {
-      connect: {
-        id: 22,
-      },
-    },
+    collections: { create: { collectionId: 22 } },
     images: {
       createMany: {
         data: [
@@ -391,11 +351,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['BLUE'],
-    collection: {
-      connect: {
-        id: 22,
-      },
-    },
+    collections: { create: { collectionId: 22 } },
     images: {
       createMany: {
         data: [
@@ -422,11 +378,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['BLUE'],
-    collection: {
-      connect: {
-        id: 7,
-      },
-    },
+    collections: { create: { collectionId: 7 } },
     images: {
       createMany: {
         data: [
@@ -453,11 +405,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['YELLOW'],
-    collection: {
-      connect: {
-        id: 7,
-      },
-    },
+    collections: { create: { collectionId: 7 } },
     images: {
       createMany: {
         data: [
@@ -484,11 +432,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['BLUE'],
-    collection: {
-      connect: {
-        id: 24,
-      },
-    },
+    collections: { create: { collectionId: 24 } },
     images: {
       createMany: {
         data: [
@@ -515,11 +459,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['L', 'XL', 'XXL'],
     colors: ['GRAY'],
-    collection: {
-      connect: {
-        id: 29,
-      },
-    },
+    collections: { create: { collectionId: 29 } },
     images: {
       createMany: {
         data: [
@@ -556,11 +496,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['GREEN'],
-    collection: {
-      connect: {
-        id: 22,
-      },
-    },
+    collections: { create: { collectionId: 22 } },
     images: {
       createMany: {
         data: [
@@ -597,11 +533,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['S', 'M', 'L'],
     colors: ['BLUE'],
-    collection: {
-      connect: {
-        id: 25,
-      },
-    },
+    collections: { create: { collectionId: 25 } },
     images: {
       createMany: {
         data: [
@@ -633,11 +565,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['S', 'M', 'L'],
     colors: ['BLUE'],
-    collection: {
-      connect: {
-        id: 29,
-      },
-    },
+    collections: { create: { collectionId: 29 } },
     images: {
       createMany: {
         data: [
@@ -664,11 +592,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['S', 'M', 'L'],
     colors: ['BLUE', 'PINK', 'YELLOW'],
-    collection: {
-      connect: {
-        id: 22,
-      },
-    },
+    collections: { create: { collectionId: 22 } },
     images: {
       createMany: {
         data: [
@@ -705,11 +629,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['GRAY'],
-    collection: {
-      connect: {
-        id: 42,
-      },
-    },
+    collections: { create: { collectionId: 42 } },
     images: {
       createMany: {
         data: [
@@ -736,11 +656,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['GRAY'],
-    collection: {
-      connect: {
-        id: 7,
-      },
-    },
+    collections: { create: { collectionId: 7 } },
     images: {
       createMany: {
         data: [
@@ -772,11 +688,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['S', 'M', 'L'],
     colors: ['GRAY'],
-    collection: {
-      connect: {
-        id: 22,
-      },
-    },
+    collections: { create: { collectionId: 22 } },
     images: {
       createMany: {
         data: [
@@ -808,11 +720,7 @@ export const products: Prisma.ProductCreateInput[] = [
     types: ['CLOTHES'],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['RED', 'PINK', 'GRAY'],
-    collection: {
-      connect: {
-        id: 29,
-      },
-    },
+    collections: { create: { collectionId: 29 } },
     images: {
       createMany: {
         data: [
@@ -846,3 +754,4 @@ export const products: Prisma.ProductCreateInput[] = [
     },
   },
 ];
+

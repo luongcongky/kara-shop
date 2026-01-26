@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { BsStarFill } from 'react-icons/bs';
 import { Product } from '@/types';
 import { numberWithCommas } from '@/utils';
@@ -40,10 +40,19 @@ export const ProductItem = ({
   price,
   rate,
   images,
-  collection,
-}: Product) => {
+  collections,
+  currentSlug,
+}: Product & { currentSlug?: string }) => {
   const [currentImage, setCurrentImage] = useState(images[0]?.imageURL || '/camera-placeholder.png');
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+
+  const displayName = useMemo(() => {
+    if (currentSlug) {
+      const currentCollection = collections.find(c => c.collection.slug === currentSlug);
+      if (currentCollection) return currentCollection.collection.name;
+    }
+    return collections[0]?.collection.name;
+  }, [collections, currentSlug]);
 
   const handleImageError = (imageURL: string) => {
     setFailedImages(prev => new Set(prev).add(imageURL));
@@ -107,7 +116,7 @@ export const ProductItem = ({
         <div>
           <h2 className="text-base font-medium">{name}</h2>
           <h3 className="text-xs font-normal capitalize text-neutral-400">
-            {collection.name}
+            {displayName}
           </h3>
         </div>
         <div className="flex items-center justify-between">

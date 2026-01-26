@@ -51,6 +51,7 @@ async function main() {
     await prisma.productAttribute.deleteMany();
     await prisma.productReview.deleteMany();
     await prisma.productInclusion.deleteMany();
+    await prisma.productCollection.deleteMany(); // Added cleanup for junction table
     await prisma.product.deleteMany();
     await prisma.collection.deleteMany();
     console.log('✅ Cleanup completed.');
@@ -58,7 +59,6 @@ async function main() {
     // 1. Seed Collections
     console.log('\n--- 1. Seeding Collections from Dump ---');
     if (dumpData.collections && dumpData.collections.length > 0) {
-      // Pass 1: Upsert all without parentId to avoid FK errors
       console.log('   Pass 1: Upserting collections (without parent links)...');
       for (const col of dumpData.collections) {
         const types = parsePostgresArray(col.types);
@@ -69,22 +69,6 @@ async function main() {
             name: col.name,
             slug: col.slug,
             useYn: col.useYn,
-            // parentId: col.parentId, // Skip in pass 1? No, if we update we can set it if it refers to existing. 
-            // Better to strictly set null here or only set if we know it exists? 
-            // Actually, for circular refs or complex order, safe to set null first.
-            // But if it already exists and has a parent, we don't want to break it? 
-            // Upsert: Create=Null, Update=Keep? 
-            // If we are seeding from scratch (or over old data), we might want to sync.
-            
-            // Safe strategy: 
-            // Create: parentId: null. 
-            // Update: parentId: col.parentId (if it works? No, if we update a record that now depends on a not-yet-seen record?)
-            
-            // Let's set parentId: null in Create. 
-            // In Update, we can try setting it, but if it fails? 
-            // Safer: Set parentId: null (or ignore) in Pass 1. 
-            // Pass 2: Set parentId.
-            
             types: types,
             createdAt: new Date(col.createdAt),
             updatedAt: new Date(col.updatedAt),
@@ -94,7 +78,7 @@ async function main() {
             name: col.name,
             slug: col.slug,
             useYn: col.useYn,
-            parentId: null, // Temporary null
+            parentId: null,
             types: types,
             createdAt: new Date(col.createdAt),
             updatedAt: new Date(col.updatedAt),
@@ -129,9 +113,6 @@ async function main() {
         
         const types = parsePostgresArray(productData.types);
 
-        // Remove ID from creation data if we want auto-increment, BUT here we want to PRESERVE IDs.
-        // Prisma allows setting ID on create.
-        
         await prisma.product.upsert({
           where: { id: productData.id },
           update: {
@@ -140,7 +121,12 @@ async function main() {
             price: productData.price,
             rate: productData.rate,
             published: productData.published,
-            collectionId: productData.collectionId,
+            collections: prod.collections && prod.collections.length > 0 ? {
+              deleteMany: {},
+              create: prod.collections.map((c: any) => ({
+                collectionId: c.collectionId,
+              })),
+            } : undefined,
             types: types,
             createdAt: new Date(productData.createdAt),
             updatedAt: new Date(productData.updatedAt),
@@ -152,7 +138,11 @@ async function main() {
             price: productData.price,
             rate: productData.rate,
             published: productData.published,
-            collectionId: productData.collectionId,
+            collections: prod.collections && prod.collections.length > 0 ? {
+              create: prod.collections.map((c: any) => ({
+                collectionId: c.collectionId,
+              })),
+            } : undefined,
             types: types,
             createdAt: new Date(productData.createdAt),
             updatedAt: new Date(productData.updatedAt),
@@ -230,9 +220,6 @@ async function main() {
   } else {
     console.warn('⚠️  No dump file found. Please run "npm run dump-db" first to capture current database state.');
     console.log('   Using fallback static seed (WARNING: May be outdated)...');
-    
-    // ... (Keep existing logic or throw error if user insists on new data)
-    // For now, let's just log this.
   }
 
   console.log('\n🏁 Master Seed Completed!');

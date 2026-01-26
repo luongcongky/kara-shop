@@ -26,6 +26,7 @@ async function main() {
         attributes: true,
         reviews: true,
         inclusions: true,
+        collections: true,
       }
     });
 

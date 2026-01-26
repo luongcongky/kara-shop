@@ -88,7 +88,7 @@ const Products: NextPageWithLayout = () => {
           <Navigation />
         </div>
         <div className="flex-[5]">
-          <ProductsList products={data?.products} isLoading={isLoading} />
+          <ProductsList products={data?.products} isLoading={isLoading} currentSlug={slug && slug[1]} />
           <div className="flex justify-center py-5">
             <Pagination
               totalCount={data?.totalCount}
