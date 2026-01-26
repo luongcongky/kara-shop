@@ -5,7 +5,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { PrimaryLayout } from '@/layouts';
 import Image from 'next/image';
 import { useState, useRef } from 'react';
-import { FiShoppingCart, FiPhone, FiCheckCircle, FiStar, FiChevronLeft, FiChevronRight, FiPlus, FiMinus } from 'react-icons/fi';
+import { FiShoppingCart, FiPhone, FiCheckCircle, FiStar, FiChevronLeft, FiChevronRight, FiCheck } from 'react-icons/fi';
 import clsx from 'clsx';
 import { api } from '@/utils/api';
 
@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale = 'en', qu
 
 const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
   const [selectedImage, setSelectedImage] = useState(0);
-  const [isSpecsExpanded, setIsSpecsExpanded] = useState(false);
+  const [activeTab, setActiveTab] = useState<'description' | 'specs'>('description');
   const [isWarrantyExpanded, setIsWarrantyExpanded] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -69,52 +69,43 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        {/* Unified 2nd Grid for Detail Content */}
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 items-start relative">
+        {/* Main Product Section */}
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
             
-            {/* Left Column: Gallery & Description (Balanced to 6/12) */}
-            <div className="lg:col-span-6 flex flex-col gap-16">
-                {/* Gallery Rail */}
-                <div className="flex flex-col gap-6">
-                    <div className="relative w-full overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm" style={{ aspectRatio: '1 / 1' }}>
-                        <div 
-                            className="flex h-full w-full transition-transform duration-500 ease-in-out"
-                            style={{ transform: `translateX(-${selectedImage * 100}%)` }}
-                        >
-                            {images.map((img, idx) => (
-                                <div key={idx} className="relative h-full w-full flex-shrink-0">
-                                    <Image src={img.imageURL} alt={`${product.name} ${idx}`} fill className="object-contain p-8" priority={idx === 0} unoptimized />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Thumbnails row */}
-                    <div className="relative flex items-center group px-1">
-                        <button onClick={() => scrollThumbnails('left')} className="absolute -left-2 z-10 hidden h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white shadow-sm transition-all hover:bg-gray-50 group-hover:flex">
-                            <FiChevronLeft className="text-lg text-gray-600" />
-                        </button>
-                        <div ref={scrollContainerRef} className="no-scrollbar flex flex-nowrap gap-3 overflow-x-auto scroll-smooth py-1">
-                            {images.map((img, idx) => (
-                                <button key={idx} onClick={() => setSelectedImage(idx)} className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-xl border-2 bg-white transition-all duration-200 ${selectedImage === idx ? 'border-orange-500 ring-4 ring-orange-100' : 'border-gray-100 hover:border-gray-300'}`}>
-                                    <Image src={img.imageURL} alt={`thumb ${idx}`} fill className="object-contain p-2" unoptimized />
-                                </button>
-                            ))}
-                        </div>
-                        <button onClick={() => scrollThumbnails('right')} className="absolute -right-2 z-10 hidden h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white shadow-sm transition-all hover:bg-gray-50 group-hover:flex">
-                            <FiChevronRight className="text-lg text-gray-600" />
-                        </button>
+            {/* Gallery Section */}
+            <div className="lg:col-span-6 flex flex-col gap-6">
+                <div className="relative w-full overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm" style={{ aspectRatio: '1 / 1' }}>
+                    <div 
+                        className="flex h-full w-full transition-transform duration-500 ease-in-out"
+                        style={{ transform: `translateX(-${selectedImage * 100}%)` }}
+                    >
+                        {images.map((img, idx) => (
+                            <div key={idx} className="relative h-full w-full flex-shrink-0">
+                                <Image src={img.imageURL} alt={`${product.name} ${idx}`} fill className="object-contain p-8" priority={idx === 0} unoptimized />
+                            </div>
+                        ))}
                     </div>
                 </div>
 
-                {/* Long Description */}
-                <div className="rounded-3xl border border-gray-100 bg-white p-10 shadow-sm">
-                    <h2 className="mb-8 text-2xl font-bold text-zinc-900 border-b pb-5 tracking-tight px-2">Chi tiết sản phẩm</h2>
-                    <div className="prose prose-lg prose-blue max-w-none text-gray-700 leading-relaxed px-2" dangerouslySetInnerHTML={{ __html: product.description }} />
+                {/* Thumbnails row */}
+                <div className="relative flex items-center group px-1">
+                    <button onClick={() => scrollThumbnails('left')} className="absolute -left-2 z-10 hidden h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white shadow-sm transition-all hover:bg-gray-50 group-hover:flex">
+                        <FiChevronLeft className="text-lg text-gray-600" />
+                    </button>
+                    <div ref={scrollContainerRef} className="no-scrollbar flex flex-nowrap gap-3 overflow-x-auto scroll-smooth py-1">
+                        {images.map((img, idx) => (
+                            <button key={idx} onClick={() => setSelectedImage(idx)} className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-xl border-2 bg-white transition-all duration-200 ${selectedImage === idx ? 'border-orange-500 ring-4 ring-orange-100' : 'border-gray-100 hover:border-gray-300'}`}>
+                                <Image src={img.imageURL} alt={`thumb ${idx}`} fill className="object-contain p-2" unoptimized />
+                            </button>
+                        ))}
+                    </div>
+                    <button onClick={() => scrollThumbnails('right')} className="absolute -right-2 z-10 hidden h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white shadow-sm transition-all hover:bg-gray-50 group-hover:flex">
+                        <FiChevronRight className="text-lg text-gray-600" />
+                    </button>
                 </div>
             </div>
 
-            {/* Right Column: Info, Warranty, and Sticky Specs (Balanced to 6/12) */}
+            {/* Product Global Info */}
             <div className="lg:col-span-6 flex flex-col gap-8">
                 {/* Info Card */}
                 <div className="rounded-3xl bg-white border border-gray-100 p-8 shadow-sm">
@@ -141,32 +132,23 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
                 </div>
 
                 {/* Warranty & Accessories Card */}
-                <div className={clsx(
-                    "rounded-3xl border px-8 py-5 shadow-sm transition-all duration-500",
-                    isWarrantyExpanded ? "bg-white border-blue-200 ring-4 ring-blue-50/50" : "bg-[#f0f7ff] border-blue-100"
-                )}>
-                    <div className="flex items-center justify-between gap-4 border-b border-blue-100/50 pb-3 mb-4">
-                        <div className="flex items-center gap-3">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-600">
-                                <FiCheckCircle className="text-xl" />
-                            </div>
-                            <span className="text-sm font-bold text-blue-900 uppercase tracking-wider">Bảo hành chính hãng 24 tháng</span>
-                        </div>
-                        <button 
-                            onClick={() => setIsWarrantyExpanded(!isWarrantyExpanded)}
-                            className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-white hover:bg-red-600 transition-all shadow-md transform hover:scale-110 active:scale-90"
-                            title={isWarrantyExpanded ? "Collapse" : "Extend"}
-                        >
-                            {isWarrantyExpanded ? <FiMinus className="text-lg" /> : <FiPlus className="text-lg" />}
-                        </button>
+                <div className="rounded-3xl border border-blue-100 bg-[#f0f7ff] px-8 py-6 shadow-sm">
+                    <div className="flex items-center gap-4 border-b border-blue-100/50 pb-4 mb-5">
+                         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-600 shadow-sm">
+                             <FiCheckCircle className="text-2xl" />
+                         </div>
+                         <div>
+                             <span className="block text-xs font-black text-blue-500 uppercase tracking-widest mb-0.5">Cam kết</span>
+                             <span className="text-base font-bold text-blue-900 leading-none">Bảo hành chính hãng 24 tháng</span>
+                         </div>
                     </div>
-                    {isWarrantyExpanded && accessories.length > 0 && (
-                        <div className="mt-2 animate-in fade-in slide-in-from-top-4 duration-500">
-                            <h4 className="text-sm font-bold text-gray-700 mb-4 tracking-tight">🎁 Trong hộp gồm:</h4>
-                            <ul className="grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2">
+                    {accessories.length > 0 && (
+                        <div>
+                            <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-widest mb-4">🎁 Trong hộp gồm:</h4>
+                            <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                                  {accessories.map((item, i) => (
-                                     <li key={i} className="flex items-start gap-3 text-sm font-medium text-gray-600">
-                                         <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
+                                     <li key={i} className="flex items-center gap-2 text-sm font-bold text-gray-600">
+                                         <FiCheck className="text-blue-500 shrink-0" />
                                          {item}
                                      </li>
                                  ))}
@@ -174,37 +156,57 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
                         </div>
                     )}
                 </div>
+            </div>
+        </div>
 
-                {/* Technical Specs Card (Sticky Behavior) */}
-                <div className="sticky top-24 mt-8">
-                    <div className={clsx(
-                        "rounded-3xl px-8 py-5 shadow-sm transition-all duration-700 border",
-                        isSpecsExpanded ? "bg-white border-zinc-200 ring-4 ring-zinc-50/50" : "bg-white border-gray-100"
-                    )}>
-                        <div className="mb-4 flex items-center justify-between border-b border-gray-100 pb-3">
-                            <h3 className="text-lg font-bold text-zinc-900 uppercase tracking-tight">Thông số kỹ thuật</h3>
-                            <button 
-                                onClick={() => setIsSpecsExpanded(!isSpecsExpanded)}
-                                className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-white hover:bg-red-600 transition-all shadow-md transform hover:scale-110 active:scale-90"
-                                title={isSpecsExpanded ? "Collapse" : "Extend"}
-                            >
-                                {isSpecsExpanded ? <FiMinus className="text-lg" /> : <FiPlus className="text-lg" />}
-                            </button>
-                        </div>
-                        <dl className="space-y-5 flex flex-col">
-                            {isSpecsExpanded && specs.map((spec, i) => (
-                                <div key={i} className="flex flex-col border-b border-gray-100 pb-4 last:border-0 last:pb-0">
-                                    <dt className="text-[11px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-3">{spec.label}</dt>
-                                    <dd className="text-sm font-semibold text-zinc-800 leading-snug">{spec.value}</dd>
+        {/* Tabbed Content Section */}
+        <div className="mt-16">
+            {/* Tabs Navigation */}
+            <div className="flex gap-8 border-b border-gray-100 px-4">
+                <button 
+                    onClick={() => setActiveTab('description')}
+                    className={clsx(
+                        "pb-4 text-sm font-bold uppercase tracking-widest transition-all relative",
+                        activeTab === 'description' ? "text-red-600" : "text-gray-400 hover:text-gray-600"
+                    )}
+                >
+                    Chi tiết sản phẩm
+                    {activeTab === 'description' && <div className="absolute bottom-0 left-0 h-1 w-full bg-red-600 rounded-t-full shadow-[0_-2px_8px_rgba(220,38,38,0.3)]" />}
+                </button>
+                <button 
+                    onClick={() => setActiveTab('specs')}
+                    className={clsx(
+                        "pb-4 text-sm font-bold uppercase tracking-widest transition-all relative",
+                        activeTab === 'specs' ? "text-red-600" : "text-gray-400 hover:text-gray-600"
+                    )}
+                >
+                    Thông số kỹ thuật
+                    {activeTab === 'specs' && <div className="absolute bottom-0 left-0 h-1 w-full bg-red-600 rounded-t-full shadow-[0_-2px_8px_rgba(220,38,38,0.3)]" />}
+                </button>
+            </div>
+
+            {/* Tab Pane */}
+            <div className="mt-8">
+                {activeTab === 'description' ? (
+                    <div className="rounded-3xl border border-gray-50 bg-white p-8 md:p-12 shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        <div className="prose prose-lg prose-blue max-w-none text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: product.description }} />
+                    </div>
+                ) : (
+                    <div className="rounded-3xl border border-gray-50 bg-white p-8 md:p-12 shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+                            {specs.map((spec, i) => (
+                                <div key={i} className="flex flex-col border-b border-gray-100 pb-5 last:border-0 md:last:border-b last:pb-0">
+                                    <dt className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 leading-none">{spec.label}</dt>
+                                    <dd className="text-base font-bold text-zinc-800 leading-tight">{spec.value}</dd>
                                 </div>
                             ))}
                         </dl>
                     </div>
-                </div>
+                )}
             </div>
         </div>
 
-        {/* Reviews Section at the very bottom */}
+        {/* Reviews Section */}
         <div className="mt-20 rounded-3xl border border-gray-100 bg-white p-10 shadow-sm">
              <h2 className="mb-10 text-3xl font-bold text-zinc-900 border-b pb-6 tracking-tight">Kinh nghiệm từ khách hàng</h2>
              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
