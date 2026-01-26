@@ -19,7 +19,7 @@ export const Skeleton = () => {
             .map((_, index) => (
               <div
                 key={index}
-                className={`h-[40px] w-[40px] rounded-full bg-neutral-200 ${shimmer}`}
+                className={`h-[40px] w-[40px] rounded-full bg-neutral-200 border-2 border-neutral-100 ${shimmer}`}
               ></div>
             ))}
         </div>
@@ -78,11 +78,16 @@ export const ProductItem = ({
         </Link>
       </div>
       <div className="mb-1 mt-2 space-y-4 px-1">
-        <div className="flex gap-2">
+        <div className="no-scrollbar flex gap-2 overflow-x-auto pb-1">
           {images.map(({ imageURL, imageBlur }, index) => (
             <button
               key={index}
-              className="h-[40px] w-[40px] overflow-hidden rounded-full"
+              className={clsx(
+                'h-[40px] w-[40px] shrink-0 overflow-hidden rounded-full border-2 transition-all duration-200',
+                currentImage === imageURL
+                  ? 'border-orange-500 scale-105 z-10'
+                  : 'border-neutral-100 hover:border-neutral-300'
+              )}
               onClick={() => setCurrentImage(imageURL)}
             >
               <Image
@@ -115,6 +120,23 @@ export const ProductItem = ({
           </div>
         </div>
       </div>
+      
+      {/* Marketing Stickers */}
+      {rate >= 4.5 && (
+        <div className="absolute left-4 top-4 z-10">
+          <span className="flex items-center gap-1 rounded-full bg-orange-500 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white shadow-lg">
+            <BsStarFill size="10px" className="text-white" />
+            Top Rated
+          </span>
+        </div>
+      )}
+      {price > 30000000 && (
+        <div className="absolute right-4 top-4 z-10">
+          <span className="rounded-full bg-zinc-900 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white shadow-lg border border-zinc-700">
+             Dealer Price
+          </span>
+        </div>
+      )}
     </div>
   );
 };

@@ -10,6 +10,18 @@
   },
   "promotions": {
     "promotions": "Promotions",
-    "title": "Our Promotions Events"
+    "title": "Special Offers from KARA"
+  },
+  "flashSale": {
+    "title": "Flash Sale",
+    "endsIn": "Ends in:",
+    "onlyLeft": "Only {{count}} slots left at Dealer Price",
+    "journalistPrivilege": "Journalist Privilege"
+  },
+  "common": {
+    "shopNow": "Shop Now",
+    "newArrival": "New Arrival",
+    "bestSeller": "Best Seller",
+    "dealerPrice": "Dealer Price"
   }
 }

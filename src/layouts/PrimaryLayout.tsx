@@ -2,6 +2,7 @@ import React from 'react';
 import { api } from '@/utils/api';
 import { NextSeo, type NextSeoProps } from 'next-seo';
 import { Header, Footer } from '@/components';
+import { ExitIntentPopup } from '@/components/ui/ExitIntentPopup';
 
 interface PrimaryLayoutProps extends React.PropsWithChildren {
   seo: NextSeoProps;
@@ -18,6 +19,7 @@ export const PrimaryLayout = ({ seo, children }: PrimaryLayoutProps) => {
         {children}
       </div>
       <Footer />
+      <ExitIntentPopup />
     </>
   );
 };

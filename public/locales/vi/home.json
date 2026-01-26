@@ -10,6 +10,18 @@
   },
   "promotions": {
     "promotions": "Khuyến mãi",
-    "title": "Các sự kiện khuyến mãi của chúng tôi"
+    "title": "Ưu đãi đặc biệt từ KARA"
+  },
+  "flashSale": {
+    "title": "Deal Chớp Nhoáng",
+    "endsIn": "Kết thúc sau:",
+    "onlyLeft": "Chỉ còn {{count}} suất giá Đại lý",
+    "journalistPrivilege": "Đặc quyền Nhà báo"
+  },
+  "common": {
+    "shopNow": "Mua ngay",
+    "newArrival": "Hàng mới về",
+    "bestSeller": "Bán chạy nhất",
+    "dealerPrice": "Giá Đại lý"
   }
 }

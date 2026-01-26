@@ -2,7 +2,7 @@ import type { GetStaticProps } from 'next';
 import type { ReactElement } from 'react';
 import type { NextPageWithLayout } from './_app';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Hero, Promotions } from '@/components';
+import { HeroCarousel, FlashSale, Promotions } from '@/components';
 import { PrimaryLayout } from '@/layouts';
 
 export const getStaticProps: GetStaticProps = async ({ locale = 'en' }) => {
@@ -16,7 +16,8 @@ export const getStaticProps: GetStaticProps = async ({ locale = 'en' }) => {
 const Home: NextPageWithLayout = () => {
   return (
     <>
-      <Hero />
+      <HeroCarousel />
+      <FlashSale />
       <Promotions />
     </>
   );
