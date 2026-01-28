@@ -13,6 +13,7 @@ const defaultProductSelect = Prisma.validator<Prisma.ProductSelect>()({
   name: true,
   description: true,
   price: true,
+  originalPrice: true,
   rate: true,
   images: {
     select: {

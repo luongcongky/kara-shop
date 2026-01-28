@@ -753,5 +753,188 @@ export const products: Prisma.ProductCreateInput[] = [
       },
     },
   },
+  {
+    name: 'Sony ZV-E10 | Máy ảnh Vlog chuyên dụng (Body Only)',
+    description: `Nâng tầm nội dung vlog của bạn với <strong>Sony ZV-E10</strong>, chiếc máy ảnh mirrorless được thiết kế tinh chỉnh dành riêng cho những nhà sáng tạo nội dung hiện đại. Kết hợp cảm biến APS-C lớn với tính linh hoạt của hệ thống ngàm E, ZV-E10 mang lại hình ảnh chất lượng cao, độ sắc nét vượt trội và khả năng kiểm soát sáng tạo tối đa.<h3>Các tính năng nổi bật:</h3><ul><li><strong>Cảm biến APS-C Exmor CMOS 24.2MP:</strong> Mang lại hình ảnh chi tiết và dải tương phản động rộng ngay cả trong điều kiện ánh sáng yếu.</li><li><strong>Lấy nét tự động cực nhanh:</strong> Hệ thống Fast Hybrid AF với 425 điểm lấy nét theo pha, cùng tính năng Real-time Eye AF giúp chủ thể luôn sắc nét trong mọi tình huống.</li><li><strong>Chụp ảnh và quay video 4K UHD:</strong> Hỗ trợ quay video 100Mbps chất lượng cao, cho ra những thước phim chuyên nghiệp nhất.</li><li><strong>Âm thanh chất lượng cao:</strong> Tích hợp micro 3 đầu nang hướng định (directional 3-capsule mic) kèm mút chống gió, cho âm thanh trong trẻo ngay cả khi quay ngoài trời.</li></ul><div class="my-8"><img src="https://res.cloudinary.com/dibypjlfc/image/upload/v1769431608/zv-e10_2_y5vit6.webp" alt="Sony ZV-E10 Lifestyle" class="rounded-2xl shadow-lg w-full object-cover h-96" /><p class="text-center text-sm italic text-gray-500 mt-2">Thiết kế nhỏ gọn, tối ưu cho khả năng linh động khi di chuyển.</p></div><h3>Trải nghiệm sáng tạo không giới hạn</h3><p>Dù bạn là một vlogger du lịch, Beauty Guru hay Reviewer công nghệ, Sony ZV-E10 đều đáp ứng hoàn hảo nhu cầu của bạn. Tính năng "Product Showcase Settings" cho phép máy ảnh chuyển tiếp lấy nét mượt mà giữa khuôn mặt bạn và vật thể được đưa ra trước ống kính, cực kỳ hữu dụng cho các video giới thiệu sản phẩm.</p><div class="my-10 aspect-video overflow-hidden rounded-3xl border border-gray-100 shadow-xl bg-black"><iframe class="w-full h-full" src="https://www.youtube.com/embed/P_P_K2pLpAc" title="Sony ZV-E10 Official Introduction" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p>Với màn hình LCD xoay lật đa góc, bạn có thể dễ dàng kiểm soát khung hình khi tự quay. Sony ZV-E10 không chỉ là một chiếc máy ảnh, đó là "cộng sự" đắc lực giúp bạn đưa kênh của mình lên một tầm cao mới.</p>`,
+    price: 14190000,
+    originalPrice: 15990000,
+    rate: 4.8,
+    published: true,
+    types: ['CAMERA'],
+    collections: {
+      create: [
+        { collectionId: 87 },
+        { collectionId: 96 }
+      ]
+    },
+    images: {
+      createMany: {
+        data: [
+          { imageURL: "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431614/zv-e10_8_kt0shu.webp", imageBlur: "" },
+          { imageURL: "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431615/zv-e10_9_qxsydc.webp", imageBlur: "" },
+          { imageURL: "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431611/zv-e10_6_oajm9s.webp", imageBlur: "" },
+          { imageURL: "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431612/zv-e10_7_q0oevk.webp", imageBlur: "" },
+          { imageURL: "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431609/zv-e10_4_njiddr.webp", imageBlur: "" },
+          { imageURL: "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431610/zv-e10_5_mhhes0.webp", imageBlur: "" },
+          { imageURL: "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431618/zv-e10_1_tptpiw.webp", imageBlur: "" },
+          { imageURL: "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431616/zv-e10_10_olimnf.webp", imageBlur: "" },
+          { imageURL: "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431608/zv-e10_2_y5vit6.webp", imageBlur: "" },
+          { imageURL: "https://res.cloudinary.com/dibypjlfc/image/upload/v1769431608/zv-e10_3_vq2hsy.webp", imageBlur: "" }
+        ]
+      }
+    },
+    attributes: {
+      createMany: {
+        data: [
+          { groupName: "Hình ảnh", attributeName: "Ngàm ống kính", attributeValue: "Sony E" },
+          { groupName: "Hình ảnh", attributeName: "Loại cảm biến", attributeValue: "APS-C" },
+          { groupName: "Hình ảnh", attributeName: "Độ phân giải cảm biến", attributeValue: "Thực tế: 27 Megapixel\nHiệu quả: 26 Megapixel" },
+          { groupName: "Hình ảnh", attributeName: "Tỷ lệ Crop", attributeValue: "1.5x" },
+          { groupName: "Hình ảnh", attributeName: "Chế độ chống rung ảnh", attributeValue: "Kỹ thuật số (Chỉ video)" },
+          { groupName: "Hình ảnh", attributeName: "Kích thước ảnh", attributeValue: "3:2\n26 MP (6192 x 4128)\n13 MP (4384 x 2920)\n6.4 MP (3104 x 2064)" },
+          { groupName: "Hình ảnh", attributeName: "Tỉ lệ ảnh", attributeValue: "3:2" },
+          { groupName: "Hình ảnh", attributeName: "Định dạng ảnh", attributeValue: "HEIF, JPEG, RAW" },
+          { groupName: "Hình ảnh", attributeName: "Độ sâu màu", attributeValue: "14-Bit" },
+          { groupName: "Hình ảnh", attributeName: "Độ nhạy sáng ISO", attributeValue: "Ảnh\n100 đến 32.000 ở chế độ thủ công (Mở rộng: 50 đến 102.400)\n100 đến 6400 ở chế độ tự động\n\nVideo\n100 đến 32.000 ở chế độ thủ công\n100 đến 6400 ở chế độ tự động" },
+          { groupName: "Ánh sáng & Màn trập", attributeName: "Loại màn trập", attributeValue: "Màn trập lăn điện tử" },
+          { groupName: "Ánh sáng & Màn trập", attributeName: "Tốc độ màn trập", attributeValue: "1/8000 đến 30 giây (Ảnh), 1/8000 đến 1 giây (Movie)" },
+          { groupName: "Ánh sáng & Màn trập", attributeName: "Phương pháp đo sáng", attributeValue: "Average, Center-Weighted, Highlight Weighted, Multi, Spot" },
+          { groupName: "Ánh sáng & Màn trập", attributeName: "Chế độ phơi sáng", attributeValue: "Aperture Priority, Auto, Manual, Program, Shutter Priority" },
+          { groupName: "Ánh sáng & Màn trập", attributeName: "Bù phơi sáng", attributeValue: "-5 đến +5 EV (bước 1/3, 1/2 EV)" },
+          { groupName: "Ánh sáng & Màn trập", attributeName: "Phạm vi đo sáng", attributeValue: "-3 đến 20 EV" },
+          { groupName: "Ánh sáng & Màn trập", attributeName: "Cân bằng trắng", attributeValue: "Auto, Daylight, Shade, Cloudy, Incandescent, Fluorescent, Flash, Under Water, Color Temp" },
+          { groupName: "Ánh sáng & Màn trập", attributeName: "Chụp liên tiếp", attributeValue: "Lên đến 11 khung hình/giây" },
+          { groupName: "Ánh sáng & Màn trập", attributeName: "Hẹn giờ chụp", attributeValue: "2/5/10 giây" },
+          { groupName: "Quay phim", attributeName: "Chế độ quay video", attributeValue: "4K (XAVC HS/S) up to 60p, FHD up to 120p, 10-Bit 4:2:2" },
+          { groupName: "Quay phim", attributeName: "Đầu ra video", attributeValue: "HDMI (3840 x 2160, 1920 x 1080p)" },
+          { groupName: "Quay phim", attributeName: "Giới hạn ghi âm", attributeValue: "Không có" },
+          { groupName: "Âm thanh", attributeName: "Loại micrô tích hợp", attributeValue: "Stereo (Vị trí: Mặt trên)" },
+          { groupName: "Âm thanh", attributeName: "Định dạng âm thanh", attributeValue: "LPCM 2-Channel (16/24-Bit 48 kHz)" },
+          { groupName: "Lấy nét", attributeName: "Loại lấy nét", attributeValue: "Lấy nét tự động và thủ công" },
+          { groupName: "Lấy nét", attributeName: "Chế độ lấy nét", attributeValue: "AF-A, AF-C, DMF, AF-S" },
+          { groupName: "Lấy nét", attributeName: "Điểm lấy nét tự động", attributeValue: "759 điểm lấy nét theo pha" },
+          { groupName: "Lấy nét", attributeName: "Độ nhạy lấy nét tự động", attributeValue: "-3 đến +20 EV" },
+          { groupName: "Màn hình", attributeName: "Kích thước màn hình", attributeValue: "3.0 inch" },
+          { groupName: "Màn hình", attributeName: "Độ phân giải màn hình", attributeValue: "1,036,800 điểm" },
+          { groupName: "Màn hình", attributeName: "Đặc tính màn hình", attributeValue: "LCD cảm ứng xoay lật" },
+          { groupName: "Lưu trữ & Kết nối", attributeName: "Khe cắm thẻ nhớ", attributeValue: "1 khe: SD/SDHC/SDXC/MS Duo (UHS-I)" },
+          { groupName: "Lưu trữ & Kết nối", attributeName: "Kết nối không dây", attributeValue: "Wi-Fi 5 (802.11ac), Bluetooth 4.2" },
+          { groupName: "Lưu trữ & Kết nối", attributeName: "Video I/O", attributeValue: "1x Micro-HDMI Output" },
+          { groupName: "Lưu trữ & Kết nối", attributeName: "Audio I/O", attributeValue: "1x 3.5 mm TRS Headphone, 1x 3.5 mm TRS Microphone" },
+          { groupName: "Lưu trữ & Kết nối", attributeName: "Power I/O", attributeValue: "1x USB-C Input" },
+          { groupName: "Lưu trữ & Kết nối", attributeName: "Other I/O ", attributeValue: "1x USB-C (USB 3.2 Gen 1) Data Share with Power" },
+          { groupName: "Đèn Flash", attributeName: "Đèn Flash trong", attributeValue: "Không có" },
+          { groupName: "Đèn Flash", attributeName: "Chế độ Flash", attributeValue: "Auto, Fill Flash, Off, Rear Sync, Slow Sync" },
+          { groupName: "Đèn Flash", attributeName: "Tốc độ đồng bộ đèn", attributeValue: "1/30 giây" },
+          { groupName: "Đèn Flash", attributeName: "Bù Flash", attributeValue: "-3 đến +3 EV" },
+          { groupName: "Đèn Flash", attributeName: "Hệ thống Flash chuyên dụng", attributeValue: "TTL" },
+          { groupName: "Đèn Flash", attributeName: "Kết nối Flash rời", attributeValue: "Intelligent Hot Shoe" },
+          { groupName: "Nguồn/Pin", attributeName: "Loại pin", attributeValue: "NP-FW50 Lithium-Ion" },
+          { groupName: "Nguồn/Pin", attributeName: "Thời lượng pin", attributeValue: "Khoảng 610 bức ảnh" },
+          { groupName: "Vật lý", attributeName: "Kích thước (W x H x D)", attributeValue: "114.3 x 67.5 x 54.2 mm" },
+          { groupName: "Vật lý", attributeName: "Trọng lượng", attributeValue: "292 g (Body), 377 g (Pin & Thẻ nhớ)" },
+          { groupName: "Ống kính đính kèm (Kit)", attributeName: "Ống kính đi kèm", attributeValue: "16-50mm (Tương đương 24-75mm)" },
+          { groupName: "Ống kính đính kèm (Kit)", attributeName: "Khẩu độ ống kính", attributeValue: "F3.5 - 5.6 (Min F22 - 36)" },
+          { groupName: "Ống kính đính kèm (Kit)", attributeName: "Góc nhìn ống kính", attributeValue: "83° đến 32°" },
+          { groupName: "Ống kính đính kèm (Kit)", attributeName: "Khoảng cách lấy nét tối thiểu", attributeValue: "0,25m" },
+          { groupName: "Ống kính đính kèm (Kit)", attributeName: "Cấu tạo thấu kính", attributeValue: "9 thấu kính / 8 nhóm, 7 lá khẩu" },
+          { groupName: "Ống kính đính kèm (Kit)", attributeName: "Chống rung ống kính", attributeValue: "Có" }
+        ]
+      }
+    },
+    inclusions: {
+      createMany: {
+        data: [
+          { itemName: "Thân máy Sony ZV-E10" },
+          { itemName: "Pin sạc NP-FW50" },
+          { itemName: "Sách hướng dẫn" },
+          { itemName: "Dây đeo vai" },
+          { itemName: "Đầu bọc mic chống gió" }
+        ]
+      }
+    }
+  },
+  {
+    name: 'Sony Alpha A7 Mark V (A7M5) Body',
+    description: `Sony Alpha A7 Mark V (A7M5) thiết lập một tiêu chuẩn mới cho dòng máy ảnh full-frame đa năng, kết hợp hoàn hảo giữa độ phân giải cao, tốc độ xử lý AI vượt trội và khả năng quay phim chuyên nghiệp. Với cảm biến Exmor RS™ 33.0MP xếp chồng một phần và bộ xử lý BIONZ XR2 tiên tiến, A7M5 là sự lựa chọn tối ưu cho cả nhiếp ảnh gia và nhà làm phim chuyên nghiệp.<h3>Tính năng vượt trội:</h3><ul><li><strong>Cảm biến Exmor RS™ 33.0MP:</strong> Mang lại chất lượng hình ảnh tuyệt vời với dải tương phản động rộng 16 stops và khả năng đọc dữ liệu cực nhanh.</li><li><strong>Hệ thống AI xử lý chuyên dụng:</strong> Cải thiện khả năng nhận diện chủ thể Real-time Recognition AF (người, động vật, chim, côn trùng, xe cộ) với độ chính xác kinh ngạc.</li><li><strong>Quay video 4K 120p:</strong> Hỗ trợ quay video 10bit 4:2:2 All-Intra, quay 4K 60p không crop và lấy mẫu 7K từ toàn cảm biến.</li><li><strong>Chống rung 7.5 stops:</strong> Hệ thống ổn định hình ảnh 5 trục trong thân máy (IBIS) giúp bạn tự tin tác nghiệp trong điều kiện thiếu sáng mà không cần tripod.</li></ul><div class="my-8 bg-black p-4 rounded-2xl"><h4 class="text-white text-center mb-4">Sức mạnh từ Trí tuệ nhân tạo</h4><p class="text-gray-300 text-sm">Bộ xử lý AI mới không chỉ lấy nét nhanh mà còn hiểu được cấu trúc cơ thể người, giúp duy trì lấy nét ngay cả khi chủ thể quay mặt đi hoặc bị che khuất một phần.</p></div><h3>Đẳng cấp chuyên nghiệp trong tầm tay</h3><p>Hệ thống kính ngắm OLED 9.44 triệu điểm ảnh mang lại trải nghiệm quan sát chân thực, cùng màn hình LCD xoay lật đa hướng 3.2 inch linh hoạt cho mọi góc máy độc đáo. Sony A7M5 không chỉ là một chiếc máy ảnh, nó là một công cụ sáng tạo không giới hạn.</p>`,
+    price: 68990000,
+    originalPrice: 72000000,
+    rate: 5.0,
+    published: true,
+    types: ['CAMERA'],
+    collections: {
+      create: [
+        { collectionId: 87 },
+        { collectionId: 96 }
+      ]
+    },
+    images: { createMany: { data: [] } },
+    attributes: {
+      createMany: {
+        data: [
+          // Thông số vật lý
+          { attributeName: "Loại pin", attributeValue: "NP-FZ100 Lithium-Ion" },
+          { attributeName: "Thời lượng pin", attributeValue: "Khoảng 750 lần chụp" },
+          { attributeName: "Chất liệu thân máy", attributeValue: "Hợp kim magiê" },
+          { attributeName: "Kích thước (W x H x D)", attributeValue: "130,3 x 96,4 x 72,3 mm" },
+          { attributeName: "Trọng lượng", attributeValue: "610 g (Chỉ thân máy), 695 g (Có pin, thẻ nhớ)" },
+          { attributeName: "Nhiệt độ hoạt động", attributeValue: "0 đến 40°C (32 đến 104°F)" },
+          
+          // Hình ảnh
+          { attributeName: "Ngàm ống kính", attributeValue: "Sony E" },
+          { attributeName: "Loại cảm biến", attributeValue: "CMOS xếp chồng một phần 35,9 x 23,9 mm (Full-Frame)" },
+          { attributeName: "Độ phân giải cảm biến", attributeValue: "Thực tế: 35,7 Megapixel, Hiệu dụng: 33 Megapixel (7008 x 4672)" },
+          { attributeName: "Chế độ chống rung ảnh", attributeValue: "Chuyển đổi cảm biến, 5 trục" },
+          { attributeName: "Tỉ lệ ảnh", attributeValue: "1:1, 3:2, 4:3, 16:9" },
+          { attributeName: "Định dạng ảnh", attributeValue: "HEIF, JPEG, RAW" },
+          { attributeName: "Độ sâu màu", attributeValue: "14-Bit" },
+
+          // Lưu trữ và kết nối
+          { attributeName: "Khe cắm thẻ nhớ", attributeValue: "Khe 1: CFexpress Type A/SDXC (UHS-II); Khe 2: SD/SDHC/SDXC (UHS-II)" },
+          { attributeName: "Kết nối không dây", attributeValue: "Wi-Fi 6 (802.11ax) / Bluetooth 6.0" },
+          { attributeName: "GPS", attributeValue: "Có" },
+          { attributeName: "Bộ nhớ trong", attributeValue: "KHÔNG" },
+          { attributeName: "Video I/O", attributeValue: "1x HDMI Output" },
+          { attributeName: "Audio I/O", attributeValue: "1x 3.5 mm Headphone Output; 1x 3.5 mm Microphone Input" },
+          { attributeName: "Power/Other I/O", attributeValue: "1x USB-C Input; 1x USB-C (USB 3.2 Gen 2) Data" },
+
+          // Đèn Flash
+          { attributeName: "Đèn Flash trong", attributeValue: "Không có" },
+          { attributeName: "Tốc độ đồng bộ đèn", attributeValue: "1/250 giây" },
+          { attributeName: "Hệ thống Flash", attributeValue: "TTL, Shoe Mount kết nối Flash rời" },
+
+          // Lấy nét
+          { attributeName: "Cơ chế lấy nét", attributeValue: "Lấy nét tự động và thủ công" },
+          { attributeName: "Chế độ lấy nét", attributeValue: "Continuous-Servo AF, Manual Focus, Subject Tracking (AI-based)" },
+          { attributeName: "Điểm lấy nét", attributeValue: "759 điểm (lấy nét theo pha), 425 điểm (tương phản)" },
+          { attributeName: "Độ nhạy AF", attributeValue: "-4 đến +20 EV" },
+
+          // Màn hình & Kính ngắm
+          { attributeName: "Màn hình", attributeValue: "3.2 inch LCD, 2.095.104 điểm ảnh, Cảm ứng nghiêng 4 trục" },
+          { attributeName: "Kính ngắm", attributeValue: "Electronic (OLED) 0.5 inch, 3.686.400 điểm ảnh, 0.78x" },
+
+          // Quay video
+          { attributeName: "Chế độ quay video", attributeValue: "4K 120p, 4K 60p (no crop), 10-bit 4:2:2 All-Intra" },
+          { attributeName: "Định dạng âm thanh", attributeValue: "4-Channel 24-Bit 48 kHz LPCM Audio" },
+
+          // Ánh sáng & Màn trập
+          { attributeName: "ISO", attributeValue: "100 - 51,200 (mở rộng lên 204,800)" },
+          { attributeName: "Tốc độ màn trập", attributeValue: "Điện tử: 1/16000s; Cơ học: 1/8000s" },
+          { attributeName: "Chụp liên tiếp", attributeValue: "Lên đến 30 fps (raw up to 95 frames)" }
+        ]
+      }
+    },
+    inclusions: {
+      createMany: {
+        data: [
+          { itemName: "Thân máy Sony Alpha A7 Mark V" },
+          { itemName: "Pin sạc Lithium-Ion (NP-FZ100)" },
+          { itemName: "Bộ sạc AC & Cáp USB-C" },
+          { itemName: "Dây đeo vai Sony Alpha" },
+          { itemName: "Nắp thân máy & Nắp khe cắm phụ kiện" }
+        ]
+      }
+    }
+  }
 ];
 

@@ -38,6 +38,7 @@ export const ProductItem = ({
   id,
   name,
   price,
+  originalPrice,
   rate,
   images,
   collections,
@@ -64,7 +65,7 @@ export const ProductItem = ({
   const productLink = `/product/${id}/slug`;
 
   return (
-    <div className="group rounded-2xl bg-white p-2">
+    <div className="group relative rounded-2xl bg-white p-2">
       <div className="relative h-[400px] overflow-hidden rounded-2xl bg-neutral-50 p-3 transition sm:h-[330px]">
         <Link href={productLink} className="relative block h-full w-full">
           {images.map(({ imageURL, imageBlur }) => (
@@ -85,8 +86,15 @@ export const ProductItem = ({
             />
           ))}
         </Link>
+        {originalPrice && originalPrice > price && (
+          <div className="absolute left-3 top-3 z-20 rounded-lg bg-red-600 px-2 py-1 text-xs font-black text-white shadow-lg">
+             -{Math.round(((originalPrice - price) / originalPrice) * 100)}%
+          </div>
+        )}
       </div>
-      <div className="mb-1 mt-2 space-y-4 px-1">
+
+      <div className="flex flex-col gap-3 px-1 py-4">
+        {/* Thumbnail Selector */}
         <div className="no-scrollbar flex gap-2 overflow-x-auto pb-1">
           {images.map(({ imageURL, imageBlur }, index) => (
             <button
@@ -113,39 +121,31 @@ export const ProductItem = ({
             </button>
           ))}
         </div>
+
         <div>
           <h2 className="text-base font-medium">{name}</h2>
           <h3 className="text-xs font-normal capitalize text-neutral-400">
             {displayName}
           </h3>
         </div>
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-black">
-            {numberWithCommas(Math.floor(price))} VND
-          </h3>
-          <div className="flex items-center justify-center text-xs font-medium text-neutral-500">
-            <BsStarFill size="11px" className="mr-1 text-yellow-400" />
-            <h4>{rate} (69 Reviews)</h4>
+
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center justify-between">
+            <span className="text-lg font-black text-red-600">
+              {numberWithCommas(Math.floor(price))}đ
+            </span>
+            <div className="flex items-center gap-1">
+              <BsStarFill className="mb-0.5 text-xs text-yellow-400" />
+              <span className="text-sm font-semibold text-neutral-500">{rate}</span>
+            </div>
           </div>
+          {originalPrice && originalPrice > price && (
+            <span className="text-sm text-neutral-400 line-through">
+               {numberWithCommas(Math.floor(originalPrice))}đ
+            </span>
+          )}
         </div>
       </div>
-      
-      {/* Marketing Stickers */}
-      {rate >= 4.5 && (
-        <div className="absolute left-4 top-4 z-10">
-          <span className="flex items-center gap-1 rounded-full bg-orange-500 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white shadow-lg">
-            <BsStarFill size="10px" className="text-white" />
-            Top Rated
-          </span>
-        </div>
-      )}
-      {price > 30000000 && (
-        <div className="absolute right-4 top-4 z-10">
-          <span className="rounded-full bg-zinc-900 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white shadow-lg border border-zinc-700">
-             Dealer Price
-          </span>
-        </div>
-      )}
     </div>
   );
 };

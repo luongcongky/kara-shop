@@ -8,6 +8,7 @@ import path from 'path';
 // Helper to load JSON dump
 function loadDump() {
   const dumpPath = path.join(process.cwd(), 'prisma', 'data', 'latest-db-dump.json');
+  console.log('   📂 Loading dump from:', dumpPath);
   if (fs.existsSync(dumpPath)) {
     const data = fs.readFileSync(dumpPath, 'utf8');
     return JSON.parse(data);
@@ -108,6 +109,7 @@ async function main() {
     console.log('\n--- 2. Seeding Products from Dump ---');
     if (dumpData.products && dumpData.products.length > 0) {
       for (const prod of dumpData.products) {
+        console.log(`   📦 Processing Product [${prod.id}]: ${prod.name}`);
         // Handle images separately
         const { images, ...productData } = prod;
         
@@ -119,6 +121,7 @@ async function main() {
             name: productData.name,
             description: productData.description,
             price: productData.price,
+            originalPrice: productData.originalPrice,
             rate: productData.rate,
             published: productData.published,
             collections: prod.collections && prod.collections.length > 0 ? {
@@ -137,6 +140,7 @@ async function main() {
             description: productData.description,
             price: productData.price,
             rate: productData.rate,
+            originalPrice: productData.originalPrice,
             published: productData.published,
             collections: prod.collections && prod.collections.length > 0 ? {
               create: prod.collections.map((c: any) => ({
@@ -166,14 +170,21 @@ async function main() {
         // 3. Seed Attributes, Reviews, Inclusions from absolute dump persistence
         if (prod.attributes && prod.attributes.length > 0) {
             await prisma.productAttribute.deleteMany({ where: { productId: productData.id } });
+            if (productData.id === 83) {
+                console.log(`   🔎 Debugging ID 83 attributes: Found ${prod.attributes.length} attributes.`);
+            }
             for (const attr of prod.attributes) {
+                if (productData.id === 83) {
+                    console.log(`      - Seeding ID 83: ${attr.attributeName} -> Group: [${attr.groupName}]`);
+                }
                 await prisma.productAttribute.create({
                     data: {
+                        groupName: attr.groupName,
                         attributeName: attr.attributeName,
                         attributeValue: attr.attributeValue,
                         productId: productData.id,
-                        createdAt: new Date(attr.createdAt),
-                        updatedAt: new Date(attr.updatedAt),
+                        createdAt: attr.createdAt ? new Date(attr.createdAt) : new Date(),
+                        updatedAt: attr.updatedAt ? new Date(attr.updatedAt) : new Date(),
                     }
                 });
             }

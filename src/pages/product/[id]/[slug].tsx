@@ -20,7 +20,8 @@ export const getServerSideProps: GetServerSideProps = async ({ locale = 'en', qu
 
 const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
   const [selectedImage, setSelectedImage] = useState(0);
-  const [activeTab, setActiveTab] = useState<'description' | 'specs'>('description');
+  const [activeTab, setActiveTab] = useState<'info' | 'specs'>('info');
+  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const { data: product, isLoading } = api.product.getById.useQuery({ id });
@@ -38,12 +39,43 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
   if (!product) return <div className="text-center py-20 font-bold text-xl">Sản phẩm không tồn tại (ID: {id})</div>;
 
   const images = product.images || [];
-  const specs = product.attributes?.map((a) => ({ 
-    label: a.attributeName, 
-    value: a.attributeValue 
-  })) || [];
+  const groupedSpecs = product.attributes?.reduce((acc, curr) => {
+    const gName = (curr.groupName || "").trim();
+    const groupName = gName || "Thông số đặc thù";
+    
+    if (!acc[groupName]) acc[groupName] = [];
+    acc[groupName].push({ 
+        label: curr.attributeName, 
+        value: curr.attributeValue,
+    });
+    return acc;
+  }, {} as Record<string, { label: string; value: string }[]>) || {};
+
+  // Sort groups: Specific ones first, then others
+  const groupOrder = ["Hình ảnh", "Quay phim", "Âm thanh", "Lấy nét", "Ánh sáng & Màn trập", "Màn hình", "Lưu trữ & Kết nối", "Đèn Flash", "Nguồn/Pin", "Vật lý"];
+  const sortedGroupEntries = Object.entries(groupedSpecs).sort(([a], [b]) => {
+    const indexA = groupOrder.indexOf(a);
+    const indexB = groupOrder.indexOf(b);
+    if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+    if (indexA !== -1) return -1;
+    if (indexB !== -1) return 1;
+    return a.localeCompare(b);
+  });
+
   const accessories = product.inclusions?.map((i) => i.itemName) || [];
   const reviews = product.reviews || [];
+
+  const toggleGroup = (group: string) => {
+    setExpandedGroups(prev => {
+        const isCurrentlyExpanded = prev[group] !== false;
+        return {
+            ...prev,
+            [group]: !isCurrentlyExpanded
+        };
+    });
+  };
+
+  const isGroupExpanded = (group: string) => expandedGroups[group] !== false; // Default to true if not set
 
   const scrollThumbnails = (direction: 'left' | 'right') => {
     let nextIndex = selectedImage;
@@ -104,9 +136,8 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
                 </div>
             </div>
 
-            {/* Product Global Info */}
+            {/* Product Info Section */}
             <div className="lg:col-span-6 flex flex-col gap-8">
-                {/* Info Card */}
                 <div className="rounded-3xl bg-white border border-gray-100 p-8 shadow-sm">
                     <h1 className="text-2xl font-bold leading-tight text-zinc-900 tracking-tight">{product.name}</h1>
                     <div className="mt-4 flex items-center gap-4">
@@ -115,11 +146,26 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
                          </div>
                          <span className="text-sm font-medium text-gray-400">({reviews.length} reviews)</span>
                     </div>
-                    <div className="mt-6 flex items-baseline gap-1">
-                        <span className="text-3xl font-bold text-red-600 tracking-tight">{formatCurrency(product.price).replace('₫', '')}</span>
-                        <span className="text-2xl font-bold text-red-600 underline">đ</span>
+                    <div className="mt-6 flex flex-col gap-2">
+                        {product.originalPrice && product.originalPrice > product.price && (
+                            <div className="flex items-center gap-3">
+                                <span className="text-lg text-gray-400 line-through decoration-red-500/50">
+                                    {formatCurrency(product.originalPrice)}
+                                </span>
+                                <span className="rounded-full bg-red-100 px-3 py-1 text-xs font-bold text-red-600">
+                                    Tiết kiệm {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
+                                </span>
+                            </div>
+                        )}
+                        <div className="flex items-baseline gap-1">
+                            <span className="text-4xl font-black text-red-600 tracking-tight">
+                                {formatCurrency(product.price).replace('₫', '')}
+                            </span>
+                            <span className="text-2xl font-black text-red-600 underline">đ</span>
+                        </div>
                     </div>
-                    {/* Buttons in a single row */}
+
+                    {/* Order Buttons */}
                     <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <button className="flex w-full items-center justify-center gap-3 rounded-xl bg-[#d92d20] px-4 py-4 font-bold tracking-wide text-white transition-all hover:bg-red-700 hover:shadow-lg active:scale-95 uppercase text-sm">
                             <FiShoppingCart className="text-xl" /> MUA NGAY
@@ -130,7 +176,7 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
                     </div>
                 </div>
 
-                {/* Warranty & Accessories Card */}
+                {/* Warranty & Inclusions */}
                 <div className="rounded-3xl border border-blue-100 bg-[#f0f7ff] px-8 py-6 shadow-sm">
                     <div className="flex items-center gap-4 border-b border-blue-100/50 pb-4 mb-5">
                          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-600 shadow-sm">
@@ -144,7 +190,7 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
                     {accessories.length > 0 && (
                         <div>
                             <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-widest mb-4">🎁 Trong hộp gồm:</h4>
-                            <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                            <ul className="grid grid-cols-1 gap-3">
                                  {accessories.map((item, i) => (
                                      <li key={i} className="flex items-center gap-2 text-sm font-bold text-gray-600">
                                          <FiCheck className="text-blue-500 shrink-0" />
@@ -161,45 +207,81 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
         {/* Tabbed Content Section */}
         <div className="mt-16">
             {/* Tabs Navigation */}
-            <div className="flex gap-8 border-b border-gray-100 px-4">
+            <div className="flex border-b border-gray-200 mb-8 space-x-8">
                 <button 
-                    onClick={() => setActiveTab('description')}
+                    onClick={() => setActiveTab('info')}
                     className={clsx(
-                        "pb-4 text-sm font-bold uppercase tracking-widest transition-all relative",
-                        activeTab === 'description' ? "text-red-600" : "text-gray-400 hover:text-gray-600"
+                        "pb-4 text-lg font-bold transition-all relative",
+                        activeTab === 'info' ? "text-red-600" : "text-gray-400 hover:text-gray-600"
                     )}
                 >
-                    Chi tiết sản phẩm
-                    {activeTab === 'description' && <div className="absolute bottom-0 left-0 h-1 w-full bg-red-600 rounded-t-full shadow-[0_-2px_8px_rgba(220,38,38,0.3)]" />}
+                    Thông tin sản phẩm
+                    {activeTab === 'info' && <span className="absolute bottom-0 left-0 w-full h-1 bg-red-600 rounded-t-full" />}
                 </button>
                 <button 
                     onClick={() => setActiveTab('specs')}
                     className={clsx(
-                        "pb-4 text-sm font-bold uppercase tracking-widest transition-all relative",
+                        "pb-4 text-lg font-bold transition-all relative",
                         activeTab === 'specs' ? "text-red-600" : "text-gray-400 hover:text-gray-600"
                     )}
                 >
                     Thông số kỹ thuật
-                    {activeTab === 'specs' && <div className="absolute bottom-0 left-0 h-1 w-full bg-red-600 rounded-t-full shadow-[0_-2px_8px_rgba(220,38,38,0.3)]" />}
+                    {activeTab === 'specs' && <span className="absolute bottom-0 left-0 w-full h-1 bg-red-600 rounded-t-full" />}
                 </button>
             </div>
 
-            {/* Tab Pane */}
-            <div className="mt-8">
-                {activeTab === 'description' ? (
-                    <div className="rounded-3xl border border-gray-50 bg-white p-8 md:p-12 shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-500">
+            {/* Tab Content */}
+            <div className="bg-white rounded-3xl border border-gray-100 p-8 md:p-12 shadow-sm min-h-[400px]">
+                {activeTab === 'info' ? (
+                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                         <div className="prose prose-lg prose-blue max-w-none text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: product.description }} />
                     </div>
                 ) : (
-                    <div className="rounded-3xl border border-gray-50 bg-white p-8 md:p-12 shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-500">
-                        <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-                            {specs.map((spec, i) => (
-                                <div key={i} className="flex flex-col border-b border-gray-100 pb-5 last:border-0 md:last:border-b last:pb-0">
-                                    <dt className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 leading-none">{spec.label}</dt>
-                                    <dd className="text-base font-bold text-zinc-800 leading-tight">{spec.value}</dd>
-                                </div>
-                            ))}
-                        </dl>
+                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        <div className="flex flex-col gap-8">
+                            {sortedGroupEntries.map(([group, attributes], idx) => {
+                                const expanded = isGroupExpanded(group);
+                                return (
+                                    <div key={idx} className="group/section overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition-all hover:shadow-md">
+                                        {/* Category Header */}
+                                        <button 
+                                            onClick={() => toggleGroup(group)}
+                                            className="flex w-full items-center justify-between px-8 py-5 text-left transition-colors hover:bg-zinc-50"
+                                        >
+                                            <div className="flex items-center gap-4">
+                                                <div className="h-6 w-1 rounded-full bg-red-600" />
+                                                <h4 className="text-lg font-black text-zinc-900 tracking-tight uppercase">{group}</h4>
+                                            </div>
+                                            <div className={clsx(
+                                                "transform transition-transform duration-300",
+                                                expanded ? "rotate-180" : "rotate-0"
+                                            )}>
+                                                <FiChevronRight className="text-xl text-zinc-400 rotate-90" />
+                                            </div>
+                                        </button>
+                                        
+                                        {/* Attributes List */}
+                                        <div className={clsx(
+                                            "overflow-hidden transition-all duration-300 ease-in-out",
+                                            expanded ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+                                        )}>
+                                            <div className="divide-y divide-gray-100 border-t border-gray-50">
+                                                {attributes.map((attr, i) => (
+                                                    <div key={i} className="grid grid-cols-1 md:grid-cols-12 group/row">
+                                                        <dt className="md:col-span-4 bg-zinc-50/50 px-8 py-5 border-r border-gray-50 text-[15px] font-bold text-zinc-600 flex items-center transition-colors group-hover/row:text-zinc-700">
+                                                            {attr.label}
+                                                        </dt>
+                                                        <dd className="md:col-span-8 px-8 py-5 text-[15px] font-semibold text-zinc-900 leading-relaxed whitespace-pre-line bg-white">
+                                                            {attr.value}
+                                                        </dd>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </div>
                 )}
             </div>
