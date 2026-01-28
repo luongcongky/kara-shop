@@ -15,13 +15,13 @@
   "flashSale": {
     "title": "Deal Chớp Nhoáng",
     "endsIn": "Kết thúc sau:",
-    "onlyLeft": "Chỉ còn {{count}} suất giá Đại lý",
-    "journalistPrivilege": "Đặc quyền Nhà báo"
+    "onlyLeft": "Chỉ còn {{count}} suất giá Đại lý"
   },
   "common": {
     "shopNow": "Mua ngay",
     "newArrival": "Hàng mới về",
     "bestSeller": "Bán chạy nhất",
-    "dealerPrice": "Giá Đại lý"
+    "dealerPrice": "Giá Đại lý",
+    "journalistPrivilege": "Đặc quyền Nhà báo"
   }
 }

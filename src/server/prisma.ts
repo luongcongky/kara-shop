@@ -43,3 +43,5 @@ if (env.NODE_ENV === 'development') {
 }
 
 if (env.NODE_ENV !== 'production') global.prisma = prisma;
+
+// Force reload after schema update

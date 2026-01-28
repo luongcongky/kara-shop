@@ -41,6 +41,45 @@ model Product {
   images        ProductImage[]
   inclusions    ProductInclusion[]
   reviews       ProductReview[]
+  banners       Banner[]
+  flashSales    FlashSale[]
+
+  @@schema("ecommerce")
+}
+
+model FlashSale {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  productId  Int
+  product    Product  @relation(fields: [productId], references: [id])
+  salePrice  Float
+  totalSlots Int
+  soldSlots  Int      @default(0)
+  endTime    DateTime
+  active     Boolean  @default(true)
+  badge      String?
+
+  @@schema("ecommerce")
+}
+
+model Banner {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  title       String
+  subtitle    String?
+  discount    String?
+  imageUrl    String
+  linkUrl     String?
+  bgColor     String   @default("bg-white")
+  textColor   String   @default("text-black")
+  buttonColor String   @default("bg-orange-500")
+  type        String   @default("HERO") // HERO, PROMOTION, etc.
+  order       Int      @default(0)
+  active      Boolean  @default(true)
+  productId   Int?
+  product     Product? @relation(fields: [productId], references: [id])
 
   @@schema("ecommerce")
 }

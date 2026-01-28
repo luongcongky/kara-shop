@@ -5,39 +5,7 @@ import Countdown from 'react-countdown';
 import { useTranslation } from 'next-i18next';
 import { getCloudinaryUrl } from '@/utils/cloudinary';
 import { numberWithCommas } from '@/utils';
-
-const FLASH_SALE_PRODUCTS = [
-  {
-    id: 50,
-    name: 'Sony Alpha A6400',
-    price: 25517454,
-    salePrice: 20990000,
-    image: '/camera_sample_ulxm5p.png',
-    totalSlots: 5,
-    soldSlots: 2,
-    badge: 'journalistPrivilege'
-  },
-  {
-    id: 47,
-    name: 'Canon EOS R8',
-    price: 27490000,
-    salePrice: 24500000,
-    image: '/camera_sample_ulxm5p.png',
-    totalSlots: 3,
-    soldSlots: 0,
-    badge: 'dealerPrice'
-  },
-  {
-    id: 49,
-    name: 'Fujifilm X-T5',
-    price: 48490000,
-    salePrice: 42990000,
-    image: '/camera_sample_ulxm5p.png',
-    totalSlots: 10,
-    soldSlots: 7,
-    badge: 'bestSeller'
-  }
-];
+import { api } from '@/utils/api';
 
 interface CountdownProps {
   hours: number;
@@ -69,7 +37,28 @@ const CountdownRenderer = ({ hours, minutes, seconds, completed }: CountdownProp
 
 export const FlashSale = () => {
   const { t } = useTranslation('home');
-  const targetDate = React.useMemo(() => new Date(Date.now() + 1000 * 60 * 60 * 24), []);
+  const { data: flashSales, isLoading } = api.flashSale.getActive.useQuery();
+
+  const targetDate = React.useMemo(() => {
+    if (flashSales && flashSales.length > 0 && flashSales[0]?.endTime) {
+      return new Date(flashSales[0].endTime);
+    }
+    return new Date(Date.now() + 1000 * 60 * 60 * 24);
+  }, [flashSales]);
+
+  if (isLoading) {
+    return (
+      <section className="bg-zinc-50 py-16">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="grid h-96 place-items-center rounded-3xl bg-white border border-zinc-100">
+             <div className="h-10 w-10 animate-spin rounded-full border-4 border-orange-500 border-t-transparent shadow-lg" />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (!flashSales || flashSales.length === 0) return null;
 
   return (
     <section className="bg-zinc-50 py-16">
@@ -100,20 +89,22 @@ export const FlashSale = () => {
 
         {/* Grid */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          {FLASH_SALE_PRODUCTS.map((product) => (
-            <div key={product.id} className="group relative overflow-hidden rounded-3xl bg-white p-6 transition-all hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] hover:-translate-y-1 border border-zinc-100">
+          {flashSales.map((fs) => (
+            <div key={fs.id} className="group relative overflow-hidden rounded-3xl bg-white p-6 transition-all hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] hover:-translate-y-1 border border-zinc-100">
               {/* Badge */}
-              <div className="absolute left-0 top-6 z-10">
-                <div className="bg-gradient-to-r from-zinc-900 to-zinc-800 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-white rounded-r-full shadow-lg border-l-4 border-orange-500">
-                  {t(`common.${product.badge}`)}
+              {fs.badge && (
+                <div className="absolute left-0 top-6 z-10">
+                  <div className="bg-gradient-to-r from-zinc-900 to-zinc-800 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-white rounded-r-full shadow-lg border-l-4 border-orange-500">
+                    {t(`common.${fs.badge}`)}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Image */}
               <div className="relative mb-6 flex h-48 w-full items-center justify-center overflow-hidden rounded-2xl bg-zinc-50 p-4 transition-transform group-hover:scale-105 duration-500">
                 <Image
-                  src={getCloudinaryUrl(product.image)}
-                  alt={product.name}
+                  src={fs.product.images[0]?.imageURL ? (fs.product.images[0].imageURL.startsWith('http') ? fs.product.images[0].imageURL : getCloudinaryUrl(fs.product.images[0].imageURL)) : '/placeholder.png'}
+                  alt={fs.product.name}
                   width={200}
                   height={200}
                   className="object-contain drop-shadow-xl"
@@ -122,7 +113,7 @@ export const FlashSale = () => {
                 {/* Discount Ribbon */}
                 <div className="absolute right-0 top-0 h-16 w-16 overflow-hidden">
                   <div className="absolute right-[-17px] top-[14px] w-[70px] rotate-45 bg-orange-500 py-1 text-center text-[10px] font-black text-white shadow-md uppercase">
-                    -{Math.round(((product.price - product.salePrice) / product.price) * 100)}%
+                    -{Math.round(((fs.product.price - fs.salePrice) / fs.product.price) * 100)}%
                   </div>
                 </div>
               </div>
@@ -130,30 +121,30 @@ export const FlashSale = () => {
               {/* Info */}
               <div className="space-y-4">
                 <h3 className="line-clamp-1 text-lg font-bold text-zinc-900 transition-colors group-hover:text-orange-600">
-                  {product.name}
+                  {fs.product.name}
                 </h3>
                 
                 <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-black text-zinc-900">{numberWithCommas(product.salePrice)} đ</span>
-                  <span className="text-xs font-bold text-zinc-400 line-through decoration-orange-500/50">{numberWithCommas(product.price)} đ</span>
+                  <span className="text-2xl font-black text-zinc-900">{numberWithCommas(fs.salePrice)} đ</span>
+                  <span className="text-xs font-bold text-zinc-400 line-through decoration-orange-500/50">{numberWithCommas(fs.product.price)} đ</span>
                 </div>
 
                 {/* Progress Bar */}
                 <div className="space-y-2">
                   <div className="flex justify-between text-[10px] font-black uppercase text-zinc-500">
-                    <span>{t('flashSale.onlyLeft', { count: product.totalSlots - product.soldSlots })}</span>
+                    <span>{t('flashSale.onlyLeft', { count: fs.totalSlots - fs.soldSlots })}</span>
                     <span className="text-orange-600 italic">Hurry Up!</span>
                   </div>
                   <div className="h-2.5 w-full overflow-hidden rounded-full bg-zinc-100 border border-zinc-50">
                     <div 
                       className="h-full bg-gradient-to-r from-orange-400 to-orange-600 shadow-[0_0_10px_rgba(249,115,22,0.4)]"
-                      style={{ width: `${(product.soldSlots / product.totalSlots) * 100}%` }}
+                      style={{ width: `${(fs.soldSlots / fs.totalSlots) * 100}%` }}
                     />
                   </div>
                 </div>
 
                 <Link
-                  href={`/product/${product.id}/slug`}
+                  href={`/product/${fs.productId}/slug`}
                   className="mt-4 flex w-full items-center justify-center rounded-xl bg-zinc-900 py-4 text-xs font-black uppercase tracking-widest text-white transition-all hover:bg-orange-500 hover:shadow-lg hover:shadow-orange-500/30"
                 >
                   {t('common.shopNow')}

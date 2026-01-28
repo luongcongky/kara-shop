@@ -5,25 +5,29 @@ import { useTranslation } from 'next-i18next';
 import { getCloudinaryUrl } from '@/utils/cloudinary';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
+import { api } from '@/utils/api';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 
-const FEATURED_PRODUCTS = [
+// Keep FEATURED_PRODUCTS as fallback
+const FALLBACK_PRODUCTS = [
   {
-    id: 50,
+    id: 1,
+    productId: 50,
     name: 'Sony Alpha A6400',
     subtitle: 'Mirrorless Camera with E 18-135mm Lens',
     discount: 'Giảm giá 15%',
-    image: '/camera_sample_ulxm5p.png', // Using the cloudinary path from dump
+    image: '/camera_sample_ulxm5p.png',
     color: 'bg-zinc-900',
     textColor: 'text-white',
     buttonColor: 'bg-orange-500',
   },
   {
-    id: 47,
+    id: 2,
+    productId: 47,
     name: 'Canon EOS R8',
     subtitle: 'The Lightest Full-Frame Camera',
     discount: 'Đặc quyền Nhà báo',
@@ -33,7 +37,8 @@ const FEATURED_PRODUCTS = [
     buttonColor: 'bg-blue-600',
   },
   {
-    id: 49,
+    id: 3,
+    productId: 49,
     name: 'Fujifilm X-T5',
     subtitle: 'Photography First. Retro Style.',
     discount: 'Hàng mới về',
@@ -46,47 +51,100 @@ const FEATURED_PRODUCTS = [
 
 export const HeroCarousel = () => {
   const { t } = useTranslation('home');
+  const { data: banners, isLoading } = api.banner.getAll.useQuery({ type: 'HERO' });
+
+  if (isLoading) {
+    return (
+      <div className="flex h-[600px] w-full items-center justify-center bg-zinc-50">
+        <div className="h-12 w-12 animate-spin rounded-full border-4 border-orange-500 border-t-transparent"></div>
+      </div>
+    );
+  }
+
+  const products = banners && banners.length > 0 
+    ? banners.map(b => ({
+        id: b.id, // Use Banner ID instead of Product ID to ensure uniqueness
+        productId: b.productId ?? 0,
+        name: b.title,
+        subtitle: b.subtitle ?? '',
+        discount: b.discount ?? '',
+        image: b.imageUrl,
+        color: b.bgColor,
+        textColor: b.textColor,
+        buttonColor: b.buttonColor,
+      })) 
+    : FALLBACK_PRODUCTS;
 
   return (
     <section className="relative h-[600px] w-full overflow-hidden bg-white">
       <Swiper
         modules={[Autoplay, Pagination, EffectFade]}
         effect="fade"
+        fadeEffect={{ crossFade: true }}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         pagination={{ clickable: true, bulletActiveClass: 'swiper-pagination-bullet-active !bg-orange-500' }}
         loop={true}
         className="h-full w-full"
       >
-        {FEATURED_PRODUCTS.map((product) => (
+        {products.map((product) => (
           <SwiperSlide key={product.id}>
-            <div className={`flex h-full w-full flex-col md:flex-row ${product.color}`}>
-              <div className="flex flex-1 flex-col items-center justify-center px-8 text-center md:items-start md:px-20 md:text-left">
-                <span className={`mb-4 inline-block rounded-full px-4 py-1 text-xs font-bold uppercase tracking-wider ${product.textColor} border border-current opacity-70`}>
-                  {product.discount}
-                </span>
-                <h2 className={`mb-2 text-4xl font-black tracking-tight md:text-6xl ${product.textColor}`}>
-                  {product.name}
-                </h2>
-                <p className={`mb-8 text-lg font-medium opacity-80 md:text-xl ${product.textColor}`}>
-                  {product.subtitle}
-                </p>
-                <Link
-                  href={`/product/${product.id}/slug`}
-                  className={`${product.buttonColor} flex items-center rounded-sm px-10 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:scale-105 hover:brightness-110 active:scale-95`}
-                >
-                  <FiShoppingCart className="mr-3 text-lg" />
-                  {t('common.shopNow')}
-                </Link>
-              </div>
-              <div className="relative flex flex-1 items-center justify-center p-8 md:p-0">
-                <div className="relative h-[80%] w-[80%] transition-transform duration-700 hover:scale-110">
-                   <Image
-                    src={product.image.startsWith('http') ? product.image : getCloudinaryUrl(product.image)}
-                    alt={product.name}
-                    fill
-                    className="object-contain drop-shadow-2xl"
-                    priority
-                  />
+            <div className={`relative h-full w-full overflow-hidden ${product.color}`}>
+              {/* Decorative background element for premium feel */}
+              <div className="absolute -right-20 -top-20 h-96 w-96 rounded-full bg-white/5 blur-3xl" />
+              <div className="absolute -left-20 -bottom-20 h-96 w-96 rounded-full bg-black/5 blur-3xl" />
+
+              <div className="mx-auto flex h-full max-w-7xl flex-col items-center px-4 md:flex-row md:px-12 lg:px-20">
+                <div className="z-10 flex flex-1 flex-col items-center justify-center text-center md:items-start md:text-left">
+                  <span 
+                    className={`mb-6 inline-block rounded-full px-5 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] ${product.textColor} border-2 border-current/20 backdrop-blur-sm shadow-xl`}
+                    data-aos="fade-up"
+                  >
+                    {product.discount}
+                  </span>
+                  <h2 
+                    className={`mb-4 text-4xl font-black leading-[0.95] tracking-tighter md:text-6xl lg:text-6xl ${product.textColor}`}
+                    data-aos="fade-up"
+                    data-aos-delay="100"
+                  >
+                    {product.name}
+                  </h2>
+                  <p 
+                    className={`mb-10 max-w-lg text-lg font-medium opacity-70 md:text-xl lg:text-2xl ${product.textColor}`}
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                  >
+                    {product.subtitle}
+                  </p>
+                  <Link
+                    href={`/product/${product.productId}/slug`}
+                    className={`${product.buttonColor} group relative flex items-center overflow-hidden rounded-full px-12 py-5 text-xs font-black uppercase tracking-[0.2em] text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] active:scale-95`}
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                  >
+                    <div className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0" />
+                    <FiShoppingCart className="mr-3 text-xl transition-transform duration-300 group-hover:rotate-12" />
+                    <span className="relative">{t('common.shopNow')}</span>
+                  </Link>
+                </div>
+
+                <div className="relative flex flex-1 items-center justify-center p-8 md:p-12 lg:p-16">
+                  {/* Image Glow Effect */}
+                  <div className={`absolute h-[60%] w-[60%] rounded-full opacity-20 blur-[100px] ${product.textColor === 'text-white' ? 'bg-white' : 'bg-orange-500'}`} />
+                  
+                  <div 
+                    className="relative flex h-full w-full items-center justify-center transition-all duration-1000"
+                    data-aos="zoom-in-up"
+                    data-aos-duration="1200"
+                  >
+                     <Image
+                      src={product.image.startsWith('http') ? product.image : getCloudinaryUrl(product.image)}
+                      alt={product.name}
+                      width={800}
+                      height={800}
+                      className="z-20 h-auto w-full max-w-[550px] object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] transition-transform duration-700 hover:scale-105"
+                      priority
+                    />
+                  </div>
                 </div>
               </div>
             </div>

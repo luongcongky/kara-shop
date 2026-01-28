@@ -45,6 +45,7 @@ async function main() {
   if (dumpData) {
     console.log(`\n📦 Found recent database dump (generated at ${dumpData.generatedAt}).`);
     console.log('   Using dump data to seed database...');
+    console.log('   Dump has banners:', dumpData.banners ? dumpData.banners.length : 0);
 
     // Cleanup Step: Ensure perfect sync by removing existing data before seeding
     console.log('\n🗑️  Cleaning up existing database for a fresh sync...');
@@ -52,7 +53,9 @@ async function main() {
     await prisma.productAttribute.deleteMany();
     await prisma.productReview.deleteMany();
     await prisma.productInclusion.deleteMany();
-    await prisma.productCollection.deleteMany(); // Added cleanup for junction table
+    await prisma.productCollection.deleteMany();
+    await prisma.banner.deleteMany();
+    await prisma.flashSale.deleteMany(); // Added cleanup for flash sales
     await prisma.product.deleteMany();
     await prisma.collection.deleteMany();
     console.log('✅ Cleanup completed.');
@@ -221,11 +224,201 @@ async function main() {
         }
       }
       console.log(`✅ Seeded ${dumpData.products.length} products (with nested details) from dump.`);
-      
-      // Reset sequence for Product
-      const maxId = Math.max(...dumpData.products.map((p: Product) => p.id));
+      const maxId = Math.max(...dumpData.products.map((p: any) => p.id));
       await prisma.$executeRawUnsafe(`ALTER SEQUENCE "ecommerce"."Product_id_seq" RESTART WITH ${maxId + 1}`);
       console.log(`   Reset Product sequence to ${maxId + 1}`);
+    }
+
+    // 4. Seed Banners
+    console.log('\n--- 4. Seeding Banners ---');
+    if (dumpData.banners && dumpData.banners.length > 0) {
+      for (const banner of dumpData.banners) {
+        await prisma.banner.upsert({
+          where: { id: banner.id },
+          update: {
+            title: banner.title,
+            subtitle: banner.subtitle,
+            discount: banner.discount,
+            imageUrl: banner.imageUrl,
+            linkUrl: banner.linkUrl,
+            bgColor: banner.bgColor,
+            textColor: banner.textColor,
+            buttonColor: banner.buttonColor,
+            type: banner.type,
+            order: banner.order,
+            active: banner.active,
+            productId: banner.productId,
+            createdAt: banner.createdAt ? new Date(banner.createdAt) : new Date(),
+            updatedAt: banner.updatedAt ? new Date(banner.updatedAt) : new Date(),
+          },
+          create: {
+            id: banner.id,
+            title: banner.title,
+            subtitle: banner.subtitle,
+            discount: banner.discount,
+            imageUrl: banner.imageUrl,
+            linkUrl: banner.linkUrl,
+            bgColor: banner.bgColor,
+            textColor: banner.textColor,
+            buttonColor: banner.buttonColor,
+            type: banner.type,
+            order: banner.order,
+            active: banner.active,
+            productId: banner.productId,
+            createdAt: banner.createdAt ? new Date(banner.createdAt) : new Date(),
+            updatedAt: banner.updatedAt ? new Date(banner.updatedAt) : new Date(),
+          },
+        });
+      }
+      console.log(`✅ Seeded ${dumpData.banners.length} banners.`);
+      
+      const maxId = Math.max(...dumpData.banners.map((b: any) => b.id));
+      await prisma.$executeRawUnsafe(`ALTER SEQUENCE "ecommerce"."Banner_id_seq" RESTART WITH ${maxId + 1}`);
+      console.log(`   Reset Banner sequence to ${maxId + 1}`);
+    } else {
+      // Fallback: Create initial banners if no dump data exists
+      console.log('   Creating initial fallback banners...');
+      const fallbackBanners = [
+        {
+          id: 1,
+          title: 'Sony Alpha A6400',
+          subtitle: 'Mirrorless Camera with E 18-135mm Lens',
+          discount: 'Giảm giá 15%',
+          imageUrl: '/camera_sample_ulxm5p.png',
+          bgColor: 'bg-zinc-900',
+          textColor: 'text-white',
+          buttonColor: 'bg-orange-500',
+          type: 'HERO',
+          order: 1,
+          productId: 83,
+        },
+        {
+          id: 2,
+          title: 'Canon EOS R8',
+          subtitle: 'The Lightest Full-Frame Camera',
+          discount: 'Đặc quyền Nhà báo',
+          imageUrl: '/camera_sample_ulxm5p.png',
+          bgColor: 'bg-white',
+          textColor: 'text-black',
+          buttonColor: 'bg-blue-600',
+          type: 'HERO',
+          order: 2,
+          productId: 83,
+        },
+        {
+          id: 3,
+          title: 'Fujifilm X-T5',
+          subtitle: 'Photography First. Retro Style.',
+          discount: 'Hàng mới về',
+          imageUrl: '/camera_sample_ulxm5p.png',
+          bgColor: 'bg-zinc-100',
+          textColor: 'text-black',
+          buttonColor: 'bg-zinc-800',
+          type: 'HERO',
+          order: 3,
+          productId: 83,
+        },
+        // Promotion Banners
+        {
+          id: 4,
+          title: 'Premium Sony Collection',
+          subtitle: 'New arrivals',
+          discount: 'Get it now',
+          imageUrl: '/assets/promo-banner-1.webp',
+          bgColor: 'bg-zinc-900',
+          textColor: 'text-white',
+          buttonColor: 'bg-orange-500',
+          type: 'PROMOTION',
+          order: 1,
+          productId: 83,
+        },
+        {
+          id: 5,
+          title: 'Studio Gear Specials',
+          subtitle: 'Limited time',
+          discount: 'Shop now',
+          imageUrl: '/assets/promo-banner-4.webp',
+          bgColor: 'bg-zinc-100',
+          textColor: 'text-black',
+          buttonColor: 'bg-zinc-900',
+          type: 'PROMOTION',
+          order: 2,
+          productId: 83,
+        },
+        {
+          id: 6,
+          title: 'Explore More',
+          subtitle: 'Lens',
+          discount: 'View',
+          imageUrl: '/assets/promo-banner-2.webp',
+          bgColor: 'bg-zinc-50',
+          textColor: 'text-black',
+          buttonColor: 'bg-zinc-800',
+          type: 'PROMOTION',
+          order: 3,
+          productId: 83,
+        },
+        {
+          id: 7,
+          title: 'Flash Deals',
+          subtitle: 'Daily',
+          discount: 'Discover',
+          imageUrl: '/assets/promo-banner-3.webp',
+          bgColor: 'bg-zinc-50',
+          textColor: 'text-black',
+          buttonColor: 'bg-zinc-800',
+          type: 'PROMOTION',
+          order: 4,
+          productId: 83,
+        }
+      ];
+
+      for (const b of fallbackBanners) {
+        await prisma.banner.upsert({
+          where: { id: b.id },
+          update: b,
+          create: b,
+        });
+      }
+      console.log(`✅ Seeded ${fallbackBanners.length} fallback banners.`);
+    }
+
+    // 5. Seed Flash Sales
+    console.log('\n--- 5. Seeding Flash Sales ---');
+    const flashSales = [
+      {
+        id: 1,
+        productId: 83,
+        salePrice: 12900000,
+        totalSlots: 5,
+        soldSlots: 2,
+        endTime: new Date(Date.now() + 1000 * 60 * 60 * 24), // 24 hours from now
+        badge: 'journalistPrivilege',
+      },
+      {
+        id: 2,
+        productId: 84,
+        salePrice: 65000000,
+        totalSlots: 3,
+        soldSlots: 0,
+        endTime: new Date(Date.now() + 1000 * 60 * 60 * 24),
+        badge: 'dealerPrice',
+      },
+    ];
+
+    for (const fs of flashSales) {
+      await prisma.flashSale.upsert({
+        where: { id: fs.id },
+        update: fs,
+        create: fs,
+      });
+    }
+    console.log(`✅ Seeded ${flashSales.length} flash sales.`);
+    
+    if (flashSales.length > 0) {
+      const maxId = Math.max(...flashSales.map((fs: any) => fs.id));
+      await prisma.$executeRawUnsafe(`ALTER SEQUENCE "ecommerce"."FlashSale_id_seq" RESTART WITH ${maxId + 1}`);
+      console.log(`   Reset FlashSale sequence to ${maxId + 1}`);
     }
 
   } else {

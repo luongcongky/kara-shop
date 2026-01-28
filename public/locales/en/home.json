@@ -15,13 +15,13 @@
   "flashSale": {
     "title": "Flash Sale",
     "endsIn": "Ends in:",
-    "onlyLeft": "Only {{count}} slots left at Dealer Price",
-    "journalistPrivilege": "Journalist Privilege"
+    "onlyLeft": "Only {{count}} slots left at Dealer Price"
   },
   "common": {
     "shopNow": "Shop Now",
     "newArrival": "New Arrival",
     "bestSeller": "Best Seller",
-    "dealerPrice": "Dealer Price"
+    "dealerPrice": "Dealer Price",
+    "journalistPrivilege": "Journalist Privilege"
   }
 }
