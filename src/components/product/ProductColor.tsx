@@ -5,16 +5,9 @@ import { Accordion } from '@/components/ui';
 import { useQuery } from '@/hooks/useQuery';
 
 const colorOptions = [
-  { label: 'BLACK', value: 'bg-black' },
-  { label: 'WHITE', value: 'bg-white' },
-  { label: 'GRAY', value: 'bg-neutral-600' },
-  { label: 'RED', value: 'bg-red-700' },
-  { label: 'ORANGE', value: 'bg-orange-600' },
-  { label: 'YELLOW', value: 'bg-yellow-500' },
-  { label: 'GREEN', value: 'bg-green-700' },
-  { label: 'PINK', value: 'bg-pink-700' },
-  { label: 'BLUE', value: 'bg-blue-600' },
-  { label: 'PURPLE', value: 'bg-purple-700' },
+  { label: 'BLACK', value: 'bg-black', name: 'Đen' },
+  { label: 'WHITE', value: 'bg-white', name: 'Trắng' },
+  { label: 'GRAY', value: 'bg-neutral-600', name: 'Xám' },
 ];
 
 export const ProductColor = () => {
@@ -69,6 +62,7 @@ export const ProductColor = () => {
                       </div>
                     )}
                   </span>
+                  <span className="text-xs text-neutral-500">{colorOptions.find(o => o.label === label)?.name}</span>
                 </label>
               </li>
             ))}

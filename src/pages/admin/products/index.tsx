@@ -1,0 +1,162 @@
+import type { NextPageWithLayout } from '../../_app';
+import { PrimaryLayout } from '@/layouts';
+import type { GetStaticProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { api } from '@/utils/api';
+import Link from 'next/link';
+import { FiEdit, FiTrash2, FiPlus } from 'react-icons/fi';
+
+import { isAdmin } from '@/utils/session';
+
+export const getStaticProps: GetStaticProps = async ({ locale = 'en' }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common', 'header', 'footer'])),
+    },
+  };
+};
+
+const ProductManagement: NextPageWithLayout = () => {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  const utils = api.useContext();
+
+  const { data: products, isLoading } = api.product.adminAll.useQuery(undefined, {
+    enabled: isAdmin(session),
+  });
+
+  const deleteProduct = api.product.delete.useMutation({
+    onSuccess: () => {
+      alert('Đã xóa sản phẩm thành công');
+      void utils.product.adminAll.invalidate();
+    },
+    onError: (error) => {
+      alert('Lỗi: ' + error.message);
+    },
+  });
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      void router.push('/signin');
+    } else if (status === 'authenticated' && !isAdmin(session)) {
+      void router.push('/');
+    }
+  }, [session, status, router]);
+
+  const handleDelete = (id: number, name: string) => {
+    if (confirm(`Bạn có chắc chắn muốn xóa sản phẩm "${name}"?`)) {
+      deleteProduct.mutate({ id });
+    }
+  };
+
+  if (status === 'loading' || isLoading) {
+    return <div className="flex h-screen items-center justify-center">Đang tải...</div>;
+  }
+
+  if (!isAdmin(session)) {
+    return null;
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <div className="mb-8 flex items-center justify-between">
+        <h1 className="text-3xl font-bold">Quản lý sản phẩm</h1>
+        <Link
+          href="/admin/products/new"
+          className="flex items-center gap-2 rounded-lg bg-violet-600 px-4 py-2 font-medium text-white transition-colors hover:bg-violet-700"
+        >
+          <FiPlus /> Thêm sản phẩm
+        </Link>
+      </div>
+
+      <div className="overflow-x-auto rounded-lg bg-white shadow-md">
+        <table className="w-full text-left text-sm">
+          <thead className="bg-gray-50 text-xs uppercase text-gray-700">
+            <tr>
+              <th className="px-6 py-3">ID</th>
+              <th className="px-6 py-3">Tên sản phẩm</th>
+              <th className="px-6 py-3">Giá</th>
+              <th className="px-6 py-3">Giá gốc</th>
+              <th className="px-6 py-3">Đánh giá</th>
+              <th className="px-6 py-3">Trạng thái</th>
+              <th className="px-6 py-3 text-right">Hành động</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {products?.map((product) => (
+              <tr key={product.id} className="hover:bg-gray-50">
+                <td className="px-6 py-4 font-medium text-gray-900">{product.id}</td>
+                <td className="px-6 py-4">{product.name}</td>
+                <td className="px-6 py-4">
+                  {new Intl.NumberFormat('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND',
+                  }).format(product.price)}
+                </td>
+                <td className="px-6 py-4">
+                  {product.originalPrice ? new Intl.NumberFormat('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND',
+                  }).format(product.originalPrice) : '-'}
+                </td>
+                <td className="px-6 py-4">{product.rate} ⭐</td>
+                <td className="px-6 py-4">
+                  {product.published ? (
+                    <span className="rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
+                      Published
+                    </span>
+                  ) : (
+                    <span className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">
+                      Rỗng
+                    </span>
+                  )}
+                </td>
+                <td className="px-6 py-4 text-right">
+                  <div className="flex justify-end gap-3">
+                    <Link
+                      href={`/admin/products/${product.id}`}
+                      className="text-blue-600 hover:text-blue-800"
+                    >
+                      <FiEdit size={18} />
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(product.id, product.name)}
+                      className="text-red-600 hover:text-red-800"
+                    >
+                      <FiTrash2 size={18} />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+            {products?.length === 0 && (
+              <tr>
+                <td colSpan={7} className="px-6 py-10 text-center text-gray-500">
+                  Chưa có sản phẩm nào.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+ProductManagement.getLayout = function getLayout(page: React.ReactElement) {
+  return (
+    <PrimaryLayout
+      seo={{
+        title: 'Quản lý sản phẩm | Admin',
+        description: 'Quản lý danh sách sản phẩm',
+      }}
+    >
+      {page}
+    </PrimaryLayout>
+  );
+};
+
+export default ProductManagement;

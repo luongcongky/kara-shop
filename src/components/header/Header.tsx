@@ -39,6 +39,7 @@ export const Header = ({ collections }: { collections: Collections }) => {
   const { t } = useTranslation('header');
 
   const { data: session } = useSession();
+  console.log('Session Data:', session);
 
   const [hoveredNavLink, setHoveredNavLink] = useState<NavLink | null>();
 
@@ -135,6 +136,20 @@ export const Header = ({ collections }: { collections: Collections }) => {
                           </Link>
                         )}
                       </Menu.Item>
+                      {session.user?.role === 'ADMIN' && (
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              href="/admin/products"
+                              className={`${
+                                active ? 'bg-gray-100' : ''
+                              } block px-4 py-2 text-sm text-gray-700`}
+                            >
+                              Quản lý sản phẩm
+                            </Link>
+                          )}
+                        </Menu.Item>
+                      )}
                       <Menu.Item>
                         {({ active }) => (
                           <button

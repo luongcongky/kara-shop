@@ -62,13 +62,13 @@ const Profile: NextPageWithLayout = () => {
       window.cloudinary.openUploadWidget(
         {
           cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-          uploadPreset: 'kara-shop-avatar', 
+          uploadPreset: 'kara-shop', 
           sources: ['local', 'url', 'camera'],
           multiple: false,
           cropping: true,
           croppingAspectRatio: 1,
           showSkipCropButton: false, 
-          folder: 'avatars',
+          folder: 'kara-shop/assets/avatars',
           singleUploadAutoClose: false, // Prevent auto close after upload
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

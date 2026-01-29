@@ -33,7 +33,6 @@ model Product {
   rate          Float
   colors        ProductColor[]
   name          String              @db.VarChar(255)
-  sizes         ProductSize[]
   types         CollectionType[]
   originalPrice Float?
   attributes    ProductAttribute[]
@@ -135,6 +134,7 @@ model User {
   password      String?
   accounts      Account[]
   sessions      Session[]
+  role          Role      @default(USER)
 
   @@schema("ecommerce")
 }
@@ -196,23 +196,9 @@ model ProductCollection {
 }
 
 enum CollectionType {
-  MEN
-  WOMEN
-  CLOTHES
   CAMERA
   LENS
   OTHERS
-
-  @@schema("ecommerce")
-}
-
-enum ProductSize {
-  S
-  M
-  L
-  XL
-  XXL
-  XXXL
 
   @@schema("ecommerce")
 }
@@ -221,13 +207,13 @@ enum ProductColor {
   BLACK
   WHITE
   GRAY
-  RED
-  ORANGE
-  YELLOW
-  GREEN
-  PINK
-  BLUE
-  PURPLE
+
+  @@schema("ecommerce")
+}
+
+enum Role {
+  USER
+  ADMIN
 
   @@schema("ecommerce")
 }

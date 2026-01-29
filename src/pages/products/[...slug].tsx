@@ -6,7 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Navigation, ProductsList } from '@/components';
 import { Pagination } from '@/components/ui';
 import { PrimaryLayout } from '@/layouts';
-import { CollectionType, ProductColor, ProductSize } from '@prisma/client';
+import { CollectionType, ProductColor } from '@prisma/client';
 import { api } from '@/utils/api';
 
 export const getStaticProps: GetStaticProps = async context => {
@@ -34,7 +34,6 @@ const Products: NextPageWithLayout = () => {
     page = 1,
     price,
     desc,
-    sizes,
     colors,
   } = router.query as {
     slug: string[] | undefined;
@@ -42,7 +41,6 @@ const Products: NextPageWithLayout = () => {
     page: number | undefined;
     price: string | undefined;
     desc: string | undefined;
-    sizes: string | string[] | undefined;
     colors: string | string[] | undefined;
   };
 
@@ -51,7 +49,6 @@ const Products: NextPageWithLayout = () => {
       types: slug && (slug[0].toUpperCase() as CollectionType),
       slug: slug && slug[1],
       desc,
-      sizes: [sizes].flat(1).filter(Boolean) as ProductSize[],
       colors: [colors].flat(1).filter(Boolean) as ProductColor[],
       page: page && Number(page),
       rate: rate && Number(rate),
@@ -64,7 +61,7 @@ const Products: NextPageWithLayout = () => {
           : 1000000
         : undefined,
     }),
-    [colors, page, price, rate, sizes, slug, desc]
+    [colors, page, price, rate, slug, desc]
   );
 
   const { data, isLoading, isPreviousData } =

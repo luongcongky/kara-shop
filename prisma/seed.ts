@@ -117,6 +117,7 @@ async function main() {
         const { images, ...productData } = prod;
         
         const types = parsePostgresArray(productData.types);
+        const colors = parsePostgresArray(productData.colors);
 
         await prisma.product.upsert({
           where: { id: productData.id },
@@ -134,6 +135,7 @@ async function main() {
               })),
             } : undefined,
             types: types,
+            colors: colors,
             createdAt: new Date(productData.createdAt),
             updatedAt: new Date(productData.updatedAt),
           },
@@ -151,6 +153,7 @@ async function main() {
               })),
             } : undefined,
             types: types,
+            colors: colors,
             createdAt: new Date(productData.createdAt),
             updatedAt: new Date(productData.updatedAt),
           }
