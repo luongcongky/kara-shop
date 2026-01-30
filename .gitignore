@@ -31,6 +31,8 @@ yarn-error.log*
 
 # database dumps (may contain sensitive data)
 prisma/data/*.json
+# Keep schema structure for reference
+!prisma/data/schema-structure.sql
 
 # vercel
 .vercel
