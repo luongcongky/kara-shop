@@ -25,7 +25,7 @@ export const Search = ({ onSearch }: Props) => {
 
   return (
     <form
-      className="relative flex h-10 max-w-[200px] content-between items-center"
+      className="relative flex h-10 w-full max-w-[400px] content-between items-center"
       onSubmit={handleSubmit}
     >
       <input

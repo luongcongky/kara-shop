@@ -1,0 +1,20 @@
+{
+  "title": "About Us",
+  "heroBadge": "Welcome to KARRA",
+  "introTitle": "Artistry in Every Handcrafted Piece",
+  "introDesc": "From day one, KARRA has relentlessly pursued the mission of delivering everyday essentials with top-tier quality and the most refined design.",
+  "valuesTitle": "Core Values",
+  "values": {
+    "qualityTitle": "Quality First",
+    "qualityDesc": "Every product undergoes a rigorous inspection process before reaching your hands.",
+    "designTitle": "Refined Design",
+    "designDesc": "We believe beauty lies in simplicity and high functionality.",
+    "communityTitle": "Community Driven",
+    "communityDesc": "KARRA is committed to supporting local artisans and protecting the environment."
+  },
+  "stats": {
+    "products": "Products",
+    "customers": "Customers",
+    "years": "Years of Experience"
+  }
+}

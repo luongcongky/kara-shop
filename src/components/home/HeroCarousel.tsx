@@ -89,20 +89,27 @@ export const HeroCarousel = () => {
         {products.map((product) => (
           <SwiperSlide key={product.id}>
             <div className={`relative h-full w-full overflow-hidden ${product.color}`}>
-              {/* Decorative background element for premium feel */}
-              <div className="absolute -right-20 -top-20 h-96 w-96 rounded-full bg-white/5 blur-3xl" />
-              <div className="absolute -left-20 -bottom-20 h-96 w-96 rounded-full bg-black/5 blur-3xl" />
+              {/* Texture Overlay */}
+              <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+              
+              {/* Spotlight Effect */}
+              <div className="absolute inset-x-0 top-0 h-full bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.1),transparent_70%)] pointer-events-none" />
 
-              <div className="mx-auto flex h-full max-w-7xl flex-col items-center px-4 md:flex-row md:px-12 lg:px-20">
+              {/* Decorative background elements */}
+              <div className={`absolute -right-20 -top-20 h-96 w-96 rounded-full blur-3xl ${product.textColor === 'text-white' ? 'bg-white/10' : 'bg-orange-500/10'}`} />
+              <div className={`absolute -left-20 -bottom-20 h-96 w-96 rounded-full blur-3xl ${product.textColor === 'text-white' ? 'bg-black/20' : 'bg-orange-500/5'}`} />
+
+              <div className="mx-auto flex h-full max-w-7xl flex-col items-center px-4 md:flex-row md:px-12 lg:px-20 relative z-10">
                 <div className="z-10 flex flex-1 flex-col items-center justify-center text-center md:items-start md:text-left">
                   <span 
-                    className={`mb-6 inline-block rounded-full px-5 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] ${product.textColor} border-2 border-current/20 backdrop-blur-sm shadow-xl`}
+                    className={`mb-6 inline-block rounded-full px-5 py-2 text-[10px] font-bold uppercase tracking-widest ${product.textColor === 'text-white' ? 'bg-white/10 border-white/20' : 'bg-black/5 border-black/10'} border backdrop-blur-md shadow-xl`}
                     data-aos="fade-up"
                   >
-                    {product.discount}
+                    <span className="mr-2 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-orange-500" />
+                    {product.discount || 'New Arrival'}
                   </span>
                   <h2 
-                    className={`mb-4 text-4xl font-black leading-[0.95] tracking-tighter md:text-6xl lg:text-6xl ${product.textColor}`}
+                    className={`mb-4 text-4xl font-bold leading-[0.95] tracking-tight md:text-6xl lg:text-6xl ${product.textColor}`}
                     data-aos="fade-up"
                     data-aos-delay="100"
                   >
@@ -117,7 +124,7 @@ export const HeroCarousel = () => {
                   </p>
                   <Link
                     href={`/product/${product.productId}/slug`}
-                    className={`${product.buttonColor} group relative flex items-center overflow-hidden rounded-full px-12 py-5 text-xs font-black uppercase tracking-[0.2em] text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] active:scale-95`}
+                    className={`${product.buttonColor} group relative flex items-center overflow-hidden rounded-full px-12 py-5 text-xs font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] active:scale-95`}
                     data-aos="fade-up"
                     data-aos-delay="300"
                   >

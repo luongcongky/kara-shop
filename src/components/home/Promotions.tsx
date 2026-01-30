@@ -1,97 +1,93 @@
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useTranslation } from 'next-i18next';
-import { getCloudinaryUrl } from '@/utils/cloudinary';
-import { api } from '@/utils/api';
+import { FiArrowRight } from 'react-icons/fi';
+
+const PROMO_DATA = [
+  {
+    title: 'Bảo hành 24 tháng',
+    subtitle: 'An tâm tuyệt đối',
+    desc: 'Chính sách bảo hành mở rộng cho tất cả dòng máy Mirrorless.',
+    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=800&auto=format&fit=crop',
+    link: '/warranty',
+    badge: 'Chính hãng',
+    color: 'from-blue-600 to-indigo-700',
+  },
+  {
+    title: 'Trả góp 0% lãi suất',
+    subtitle: 'Sở hữu ngay',
+    desc: 'Hỗ trợ trả góp qua thẻ tín dụng và công ty tài chính.',
+    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=800&auto=format&fit=crop',
+    link: '/installments',
+    badge: 'Tiết kiệm',
+    color: 'from-orange-500 to-red-600',
+  },
+  {
+    title: 'Vệ sinh máy miễn phí',
+    subtitle: 'Dịch vụ chuyên nghiệp',
+    desc: 'Tặng gói vệ sinh cảm biến và ống kính trọn đời.',
+    image: 'https://images.unsplash.com/photo-1616423641454-ec9009eb050a?q=80&w=800&auto=format&fit=crop',
+    link: '/services',
+    badge: 'Quà tặng',
+    color: 'from-emerald-600 to-teal-700',
+  },
+];
 
 export const Promotions = () => {
-  const { t } = useTranslation('home');
-  const { data: banners, isLoading } = api.banner.getAll.useQuery({ type: 'PROMOTION' });
-
-  if (isLoading) {
-    return (
-      <section className="bg-white py-20">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="grid h-96 place-items-center rounded-[2.5rem] bg-zinc-50/50">
-             <div className="h-10 w-10 animate-spin rounded-full border-4 border-orange-500 border-t-transparent shadow-lg" />
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  // If no dynamic banners, could optionally return null or fall back
-  if (!banners || banners.length === 0) return null;
 
   return (
-    <section className="bg-white py-20">
+    <section className="bg-zinc-900 py-24">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="mb-12 text-center md:text-left" data-aos="fade-up">
-          <span className="mb-3 block text-sm font-black uppercase tracking-[0.3em] text-orange-500">
-            {t('promotions.promotions')}
-          </span>
-          <h2 className="text-3xl font-extrabold tracking-tighter text-zinc-900 md:text-4xl">
-             {t('promotions.title')}
-          </h2>
+        <div className="mb-12 text-center" data-aos="fade-up">
+          <span className="mb-3 block text-[11px] font-bold uppercase tracking-wider text-orange-500">Dịch vụ đặc biệt</span>
+          <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl">Ưu đãi độc quyền tại KARA</h2>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-4 md:grid-rows-2">
-          {banners.map((banner, index) => {
-            const isBig = index === 0;
-            const isMedium = index === 1;
-            const isSmall = index > 1;
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+          {PROMO_DATA.map((promo, index) => (
+            <Link 
+              key={index} 
+              href={promo.link}
+              className={`group relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br ${promo.color} p-8 text-white shadow-2xl transition-all hover:-translate-y-2 hover:shadow-orange-500/10`}
+              data-aos="fade-up"
+              data-aos-delay={index * 150}
+            >
+              {/* Background Highlight */}
+              <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-3xl group-hover:bg-white/20 transition-colors" />
 
-            return (
-              <Link 
-                key={banner.id}
-                href={banner.linkUrl ?? `/product/${banner.productId}/slug`} 
-                className={`group relative overflow-hidden rounded-[2.5rem] shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${
-                  isBig ? 'col-span-2 row-span-2 shadow-orange-500/10' : 
-                  isMedium ? 'col-span-2' : 'col-span-1'
-                } ${banner.bgColor}`}
-                data-aos="fade-up"
-                data-aos-delay={index * 100}
-              >
-                {/* Overlay Gradient */}
-                <div className={`absolute inset-0 z-10 opacity-60 transition-opacity group-hover:opacity-40 ${
-                  isBig ? 'bg-gradient-to-t from-black/80 via-transparent to-transparent' : 
-                  isMedium ? 'bg-gradient-to-r from-black/30 via-transparent to-transparent' : ''
-                }`} />
-
-                <Image 
-                  src={banner.imageUrl.startsWith('http') ? banner.imageUrl : getCloudinaryUrl(banner.imageUrl)} 
-                  alt={banner.title} 
-                  width={isBig || isMedium ? 600 : 300} 
-                  height={isBig ? 600 : 300} 
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-
-                {/* Content */}
-                <div className={`absolute z-20 ${
-                  isBig ? 'bottom-10 left-10' : 
-                  isMedium ? 'inset-y-0 left-10 flex flex-col justify-center' :
-                  'inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity'
-                }`}>
-                   {isSmall ? (
-                     <div className="rounded-full bg-white/20 backdrop-blur-md p-5 text-white shadow-2xl scale-75 group-hover:scale-100 transition-transform">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-6 h-6">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                        </svg>
-                     </div>
-                   ) : (
-                     <div className="max-w-[250px]">
-                        <span className={`mb-3 inline-block px-3 py-1 text-[10px] font-black uppercase tracking-widest ${banner.textColor === 'text-white' ? 'bg-white text-black' : 'bg-black text-white'}`}>
-                          {banner.subtitle}
-                        </span>
-                        <h3 className={`text-xl lg:text-2xl font-extrabold uppercase leading-tight tracking-tighter ${banner.textColor}`}>
-                          {banner.title}
-                        </h3>
-                     </div>
-                   )}
+              <div className="relative z-10 flex h-full flex-col">
+                <div className="mb-4">
+                  <span className="rounded-full bg-white/20 px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest backdrop-blur-md">
+                    {promo.badge}
+                  </span>
                 </div>
-              </Link>
-            );
-          })}
+                
+                <div className="mb-6">
+                  <h4 className="mb-1 text-xs font-bold uppercase tracking-widest text-white/70">{promo.subtitle}</h4>
+                  <h3 className="text-3xl font-bold leading-tight">{promo.title}</h3>
+                </div>
+
+                <p className="mb-8 flex-1 text-sm font-medium text-white/80 line-clamp-2">
+                  {promo.desc}
+                </p>
+
+                <div className="relative h-48 w-full overflow-hidden rounded-2xl bg-black/20 shadow-inner">
+                  <Image 
+                    src={promo.image} 
+                    alt={promo.title}
+                    fill
+                    className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-4 left-4">
+                    <div className="flex items-center gap-2 text-xs font-bold">
+                       Xem chi tiết <FiArrowRight className="transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </section>

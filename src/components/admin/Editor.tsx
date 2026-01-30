@@ -7,12 +7,22 @@ import { Table } from '@tiptap/extension-table';
 import { TableRow } from '@tiptap/extension-table-row';
 import { TableCell } from '@tiptap/extension-table-cell';
 import { TableHeader } from '@tiptap/extension-table-header';
+import Strike from '@tiptap/extension-strike';
+import Superscript from '@tiptap/extension-superscript';
+import Subscript from '@tiptap/extension-subscript';
+import TaskList from '@tiptap/extension-task-list';
+import TaskItem from '@tiptap/extension-task-item';
+import CharacterCount from '@tiptap/extension-character-count';
+import Placeholder from '@tiptap/extension-placeholder';
+import EmojiPicker, { EmojiClickData, Theme } from 'emoji-picker-react';
 import { 
   FiBold, FiItalic, FiUnderline, FiList, FiLink, FiImage, 
   FiYoutube, FiTable, FiPlusSquare, FiMinusSquare, FiTrash2,
   FiAlignLeft, FiAlignCenter, FiAlignRight, FiAlignJustify,
-  FiDroplet, FiEdit3
+  FiDroplet, FiEdit3, 
+  FiRotateCcw, FiCheckSquare, FiSmile
 } from 'react-icons/fi';
+import { MdFormatIndentIncrease, MdFormatIndentDecrease } from 'react-icons/md';
 import { Editor as TiptapEditor, Extension } from '@tiptap/react';
 import { TextStyle } from '@tiptap/extension-text-style';
 import Color from '@tiptap/extension-color';
@@ -70,12 +80,79 @@ const FontSize = Extension.create({
   },
 });
 
+// Custom Indent Extension
+const Indent = Extension.create({
+  name: 'indent',
+  addOptions() {
+    return {
+      types: ['paragraph', 'heading', 'blockquote', 'listItem'],
+      indentLevels: [0, 40, 80, 120, 160, 200],
+      defaultIndentLevel: 0,
+    };
+  },
+  addGlobalAttributes() {
+    return [
+      {
+        types: this.options.types,
+        attributes: {
+          indent: {
+            default: this.options.defaultIndentLevel,
+            parseHTML: element => parseInt(element.style.marginLeft, 10) || 0,
+            renderHTML: attributes => {
+              if (!attributes.indent) return {};
+              return { style: `margin-left: ${attributes.indent}px` };
+            },
+          },
+        },
+      },
+    ];
+  },
+  addCommands() {
+    return {
+      indent: () => ({ tr, state, dispatch }) => {
+        const { selection } = state;
+        tr = tr.setSelection(selection);
+        state.doc.nodesBetween(selection.from, selection.to, (node, pos) => {
+          if (this.options.types.includes(node.type.name)) {
+            const currentIndent = node.attrs.indent || 0;
+            const nextIndent = this.options.indentLevels.find((level: number) => level > currentIndent) || this.options.indentLevels[this.options.indentLevels.length - 1];
+            if (nextIndent !== currentIndent) {
+              tr.setNodeMarkup(pos, undefined, { ...node.attrs, indent: nextIndent });
+            }
+          }
+        });
+        if (dispatch) dispatch(tr);
+        return true;
+      },
+      outdent: () => ({ tr, state, dispatch }) => {
+        const { selection } = state;
+        tr = tr.setSelection(selection);
+        state.doc.nodesBetween(selection.from, selection.to, (node, pos) => {
+          if (this.options.types.includes(node.type.name)) {
+            const currentIndent = node.attrs.indent || 0;
+            const prevIndent = [...this.options.indentLevels].reverse().find((level: number) => level < currentIndent) ?? 0;
+            if (prevIndent !== currentIndent) {
+              tr.setNodeMarkup(pos, undefined, { ...node.attrs, indent: prevIndent });
+            }
+          }
+        });
+        if (dispatch) dispatch(tr);
+        return true;
+      },
+    };
+  },
+});
+
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     fontSize: {
       setFontSize: (size: string) => ReturnType;
       unsetFontSize: () => ReturnType;
-    }
+    };
+    indent: {
+      indent: () => ReturnType;
+      outdent: () => ReturnType;
+    };
   }
 }
 
@@ -86,8 +163,52 @@ interface EditorProps {
   productId?: string | number;
 }
 
+const FONT_SIZES = ['12px', '14px', '16px', '18px', '20px', '24px', '32px', '48px'];
+const FONT_FAMILIES = ['Inter'];
+const COLORS = [
+  '#000000', '#4B5563', '#9CA3AF', '#EF4444', '#F59E0B', 
+  '#10B981', '#3B82F6', '#6366F1', '#8B5CF6', '#EC4899',
+  '#FFFFFF', '#D1D5DB', '#6B7280', '#1F2937', '#DC2626',
+  '#D97706', '#059669', '#2563EB', '#4F46E5', '#7C3AED'
+];
+const LINE_HEIGHTS = [
+  { label: 'Mặc định', value: 'normal' },
+  { label: '1.0', value: '1.0' },
+  { label: '1.15', value: '1.15' },
+  { label: '1.5', value: '1.5' },
+  { label: '2.0', value: '2.0' },
+  { label: '2.5', value: '2.5' },
+  { label: '3.0', value: '3.0' },
+];
+
+const Button = ({ onClick, isActive, children, title, className = '' }: { 
+  onClick: () => void, 
+  isActive?: boolean, 
+  children: React.ReactNode, 
+  title: string,
+  className?: string
+}) => (
+  <button
+    type="button"
+    onClick={onClick}
+    title={title}
+    className={`p-2 rounded-lg transition-colors ${
+      isActive ? 'bg-violet-600 text-white' : 'bg-white text-gray-600 hover:bg-violet-50 hover:text-violet-600'
+    } border border-transparent ${className}`}
+  >
+    {children}
+  </button>
+);
+
 const MenuBar = ({ editor, productId }: { editor: TiptapEditor | null; productId?: string | number }) => {
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
   if (!editor) return null;
+
+  const onEmojiClick = (emojiData: EmojiClickData) => {
+    editor.chain().focus().insertContent(emojiData.emoji).run();
+    setShowEmojiPicker(false);
+  };
 
   const addImage = () => {
     if (window.cloudinary) {
@@ -135,46 +256,8 @@ const MenuBar = ({ editor, productId }: { editor: TiptapEditor | null; productId
     editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
   };
 
-  const FONT_SIZES = ['12px', '14px', '16px', '18px', '20px', '24px', '32px', '48px'];
-  const FONT_FAMILIES = ['Roboto', 'Arial', 'Times New Roman', 'Courier New'];
-  const COLORS = [
-    '#000000', '#4B5563', '#9CA3AF', '#EF4444', '#F59E0B', 
-    '#10B981', '#3B82F6', '#6366F1', '#8B5CF6', '#EC4899',
-    '#FFFFFF', '#D1D5DB', '#6B7280', '#1F2937', '#DC2626',
-    '#D97706', '#059669', '#2563EB', '#4F46E5', '#7C3AED'
-  ];
-  const LINE_HEIGHTS = [
-    { label: 'Mặc định', value: 'normal' },
-    { label: '1.0', value: '1.0' },
-    { label: '1.15', value: '1.15' },
-    { label: '1.5', value: '1.5' },
-    { label: '2.0', value: '2.0' },
-    { label: '2.5', value: '2.5' },
-    { label: '3.0', value: '3.0' },
-  ];
-
-  const Button = ({ onClick, isActive, children, title, className = '' }: { 
-    onClick: () => void, 
-    isActive?: boolean, 
-    children: React.ReactNode, 
-    title: string,
-    className?: string
-  }) => (
-    <button
-      type="button"
-      onClick={onClick}
-      title={title}
-      className={`p-2 rounded-lg transition-colors ${
-        isActive ? 'bg-violet-600 text-white' : 'bg-white text-gray-600 hover:bg-violet-50 hover:text-violet-600'
-      } border border-transparent ${className}`}
-    >
-      {children}
-    </button>
-  );
-
-  // Derived state from editor
-  const currentFont = editor.getAttributes('textStyle').fontFamily || 'Roboto';
-  const currentSize = editor.getAttributes('textStyle').fontSize || '16px';
+  const currentFont = editor.getAttributes('textStyle').fontFamily || 'Inter';
+  const currentSize = editor.getAttributes('textStyle').fontSize || '12px';
   const currentLineHeight = editor.getAttributes('paragraph').lineHeight || editor.getAttributes('heading').lineHeight || 'normal';
 
   return (
@@ -227,6 +310,58 @@ const MenuBar = ({ editor, productId }: { editor: TiptapEditor | null; productId
         >
           <FiUnderline size={18} />
         </Button>
+        <Button
+          onClick={() => editor.chain().focus().toggleStrike().run()}
+          isActive={editor.isActive('strike')}
+          title="Gạch ngang"
+        >
+          <span className="font-serif line-through decoration-2">S</span>
+        </Button>
+        <Button
+          onClick={() => editor.chain().focus().toggleSubscript().run()}
+          isActive={editor.isActive('subscript')}
+          title="Chỉ số dưới"
+        >
+          <span className="font-serif">X<sub className="text-[10px] ml-0.5">2</sub></span>
+        </Button>
+        <Button
+          onClick={() => editor.chain().focus().toggleSuperscript().run()}
+          isActive={editor.isActive('superscript')}
+          title="Chỉ số trên"
+        >
+          <span className="font-serif">X<sup className="text-[10px] ml-0.5">2</sup></span>
+        </Button>
+        <Button
+          onClick={() => editor.chain().focus().unsetAllMarks().clearNodes().run()}
+          title="Xóa định dạng"
+        >
+          <FiRotateCcw size={18} />
+        </Button>
+        
+        {/* Emoji Picker */}
+        <div className="relative">
+          <Button 
+            onClick={() => setShowEmojiPicker(!showEmojiPicker)} 
+            isActive={showEmojiPicker}
+            title="Biểu tượng cảm xúc"
+          >
+            <FiSmile size={18} />
+          </Button>
+          {showEmojiPicker && (
+            <div className="absolute top-full left-0 z-[100] mt-2 shadow-2xl">
+              <div className="fixed inset-0" onClick={() => setShowEmojiPicker(false)} />
+              <div className="relative">
+                <EmojiPicker 
+                  onEmojiClick={onEmojiClick} 
+                  autoFocusSearch={false}
+                  theme={Theme.LIGHT}
+                  width={350}
+                  height={450}
+                />
+              </div>
+            </div>
+          )}
+        </div>
         
         {/* Color Picker with expanded area */}
         <div className="relative group/color">
@@ -288,6 +423,19 @@ const MenuBar = ({ editor, productId }: { editor: TiptapEditor | null; productId
           <FiAlignJustify size={18} />
         </Button>
 
+        <Button
+          onClick={() => editor.chain().focus().outdent().run()}
+          title="Giảm lề"
+        >
+          <MdFormatIndentDecrease size={20} />
+        </Button>
+        <Button
+          onClick={() => editor.chain().focus().indent().run()}
+          title="Tăng lề"
+        >
+          <MdFormatIndentIncrease size={20} />
+        </Button>
+
         {/* Line Height Dropdown */}
         <div className="relative group/lineheight ml-1">
           <select
@@ -322,18 +470,11 @@ const MenuBar = ({ editor, productId }: { editor: TiptapEditor | null; productId
           <FiList size={18} />
         </Button>
         <Button
-          onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-          isActive={editor.isActive('heading', { level: 2 })}
-          title="Tiêu đề H2"
+          onClick={() => editor.chain().focus().toggleTaskList().run()}
+          isActive={editor.isActive('taskList')}
+          title="Danh sách công việc"
         >
-          <span className="font-bold text-sm">H2</span>
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-          isActive={editor.isActive('heading', { level: 3 })}
-          title="Tiêu đề H3"
-        >
-          <span className="font-bold text-sm">H3</span>
+          <FiCheckSquare size={18} />
         </Button>
       </div>
 
@@ -382,7 +523,7 @@ const MenuBar = ({ editor, productId }: { editor: TiptapEditor | null; productId
   );
 };
 
-const Editor = ({ content, onChange, productId }: EditorProps) => {
+const Editor = ({ content, onChange, productId, placeholder }: EditorProps) => {
   const deleteImageMutation = api.cloudinary.deleteImage.useMutation();
   const lastImagesRef = useRef<Set<string>>(new Set());
   const [, forceUpdate] = useState(0);
@@ -432,8 +573,17 @@ const Editor = ({ content, onChange, productId }: EditorProps) => {
       forceUpdate(prev => prev + 1);
     },
     extensions: [
-      StarterKit,
+      StarterKit.configure({
+        strike: false,
+      }),
       Underline,
+      Strike,
+      TextStyle,
+      Color,
+      FontFamily,
+      FontSize,
+      Highlight.configure({ multicolor: true }),
+      Indent,
       Link.configure({
         openOnClick: false,
       }),
@@ -451,14 +601,19 @@ const Editor = ({ content, onChange, productId }: EditorProps) => {
       TableRow,
       TableHeader,
       TableCell,
-      TextStyle,
-      Color,
-      FontFamily,
       TextAlign.configure({
         types: ['heading', 'paragraph', 'image'],
       }),
-      Highlight.configure({ multicolor: true }),
-      FontSize,
+      Superscript,
+      Subscript,
+      TaskList,
+      TaskItem.configure({
+        nested: true,
+      }),
+      CharacterCount,
+      Placeholder.configure({
+        placeholder: placeholder || 'Nhập nội dung bài viết...',
+      }),
     ],
     content: content,
     onUpdate: ({ editor }) => {
@@ -520,7 +675,7 @@ const Editor = ({ content, onChange, productId }: EditorProps) => {
         return false;
       },
       attributes: {
-        class: 'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl m-5 focus:outline-none min-h-[300px] max-w-none',
+        class: 'prose prose-zinc max-w-none focus:outline-none min-h-[600px] w-full',
       },
     },
   });
@@ -542,7 +697,32 @@ const Editor = ({ content, onChange, productId }: EditorProps) => {
         <EditorContent editor={editor} />
       </div>
 
+
       <style jsx global>{`
+        .ProseMirror p.is-editor-empty:first-child::before {
+          content: attr(data-placeholder);
+          float: left;
+          color: #adb5bd;
+          pointer-events: none;
+          height: 0;
+        }
+        ul[data-type="taskList"] {
+          list-style: none;
+          padding: 0;
+        }
+        ul[data-type="taskList"] li {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 0.5em;
+        }
+        ul[data-type="taskList"] li > label {
+          flex: 0 0 auto;
+          user-select: none;
+        }
+        ul[data-type="taskList"] li > div {
+          flex: 1 1 auto;
+        }
         .ProseMirror table {
           border-collapse: collapse;
           table-layout: fixed;
@@ -587,9 +767,24 @@ const Editor = ({ content, onChange, productId }: EditorProps) => {
         .ProseMirror > * + * {
           margin-top: 0.5em; /* Reduced spacing between blocks */
         }
+        .ProseMirror.prose {
+          font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+          font-size: 12px;
+          --tw-prose-body: currentColor;
+          --tw-prose-headings: currentColor;
+          --tw-prose-bold: currentColor;
+          --tw-prose-bullets: currentColor;
+          --tw-prose-counters: currentColor;
+          --tw-prose-quotes: currentColor;
+          --tw-prose-captions: currentColor;
+          --tw-prose-hr: currentColor;
+        }
+        .ProseMirror strong, .ProseMirror b {
+          font-weight: 700 !important;
+        }
         .ProseMirror p {
-          margin-bottom: 0.5em; /* Specific paragraph spacing */
-          line-height: normal; /* Default line height */
+          margin-bottom: 0.5em;
+          line-height: normal;
         }
         .ProseMirror img {
           display: block;

@@ -1,5 +1,5 @@
 -- Database Schema Export
--- Generated: 2026-01-29T17:08:06.194Z
+-- Generated: 2026-01-30T10:32:38.990Z
 -- Schema: ecommerce
 
 CREATE SCHEMA IF NOT EXISTS "ecommerce";
@@ -13,14 +13,14 @@ CREATE TABLE IF NOT EXISTS "ecommerce"."Account" (
   "providerAccountId" text NOT NULL,
   "refresh_token" text,
   "access_token" text,
-  "oauth_token" text,
-  "oauth_token_secret" text,
   "expires_at" integer,
   "refresh_token_expires_in" integer,
   "token_type" text,
   "scope" text,
   "id_token" text,
-  "session_state" text
+  "session_state" text,
+  "oauth_token" text,
+  "oauth_token_secret" text
 );
 
 -- Indexes for Account
@@ -54,16 +54,35 @@ CREATE TABLE IF NOT EXISTS "ecommerce"."Collection" (
   "id" integer DEFAULT nextval('ecommerce."Collection_id_seq"'::regclass) NOT NULL,
   "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
   "updatedAt" timestamp without time zone NOT NULL,
-  "name" character varying(255) NOT NULL,
   "slug" text NOT NULL,
-  "useYn" boolean DEFAULT true NOT NULL,
+  "name" character varying(255) NOT NULL,
+  "parentId" integer,
   "types" ARRAY,
-  "parentId" integer
+  "useYn" boolean DEFAULT true NOT NULL
 );
 
 -- Indexes for Collection
 CREATE UNIQUE INDEX "Collection_pkey" ON ecommerce."Collection" USING btree (id);
 CREATE UNIQUE INDEX "Collection_slug_key" ON ecommerce."Collection" USING btree (slug);
+
+-- Table: Context
+CREATE TABLE IF NOT EXISTS "ecommerce"."Context" (
+  "id" integer DEFAULT nextval('ecommerce."Context_id_seq"'::regclass) NOT NULL,
+  "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  "updatedAt" timestamp without time zone NOT NULL,
+  "title" character varying(255) NOT NULL,
+  "slug" character varying(255) NOT NULL,
+  "type" USER-DEFINED NOT NULL,
+  "content" text NOT NULL,
+  "metadata" jsonb,
+  "status" character varying(20) DEFAULT 'draft'::character varying NOT NULL,
+  "authorId" text,
+  "thumbnail" text
+);
+
+-- Indexes for Context
+CREATE UNIQUE INDEX "Context_pkey" ON ecommerce."Context" USING btree (id);
+CREATE UNIQUE INDEX "Context_slug_key" ON ecommerce."Context" USING btree (slug);
 
 -- Table: FlashSale
 CREATE TABLE IF NOT EXISTS "ecommerce"."FlashSale" (
@@ -87,12 +106,12 @@ CREATE TABLE IF NOT EXISTS "ecommerce"."Product" (
   "id" integer DEFAULT nextval('ecommerce."Product_id_seq"'::regclass) NOT NULL,
   "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
   "updatedAt" timestamp without time zone NOT NULL,
-  "name" character varying(255) NOT NULL,
   "description" text NOT NULL,
+  "published" boolean DEFAULT false NOT NULL,
   "price" double precision NOT NULL,
   "rate" double precision NOT NULL,
-  "published" boolean DEFAULT false NOT NULL,
   "colors" ARRAY,
+  "name" character varying(255) NOT NULL,
   "types" ARRAY,
   "originalPrice" double precision
 );
@@ -198,14 +217,30 @@ CREATE TABLE IF NOT EXISTS "ecommerce"."VerificationToken" (
 CREATE UNIQUE INDEX "VerificationToken_token_key" ON ecommerce."VerificationToken" USING btree (token);
 CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON ecommerce."VerificationToken" USING btree (identifier, token);
 
+-- Table: _prisma_migrations
+CREATE TABLE IF NOT EXISTS "ecommerce"."_prisma_migrations" (
+  "id" character varying(36) NOT NULL,
+  "checksum" character varying(64) NOT NULL,
+  "finished_at" timestamp with time zone,
+  "migration_name" character varying(255) NOT NULL,
+  "logs" text,
+  "rolled_back_at" timestamp with time zone,
+  "started_at" timestamp with time zone DEFAULT now() NOT NULL,
+  "applied_steps_count" integer DEFAULT 0 NOT NULL
+);
+
+-- Indexes for _prisma_migrations
+CREATE UNIQUE INDEX _prisma_migrations_pkey ON ecommerce._prisma_migrations USING btree (id);
+
 -- Foreign Key Constraints
 ALTER TABLE "ecommerce"."Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "ecommerce"."User" ("id");
 ALTER TABLE "ecommerce"."Banner" ADD CONSTRAINT "Banner_productId_fkey" FOREIGN KEY ("productId") REFERENCES "ecommerce"."Product" ("id");
 ALTER TABLE "ecommerce"."Collection" ADD CONSTRAINT "Collection_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "ecommerce"."Collection" ("id");
+ALTER TABLE "ecommerce"."Context" ADD CONSTRAINT "Context_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "ecommerce"."User" ("id");
 ALTER TABLE "ecommerce"."FlashSale" ADD CONSTRAINT "FlashSale_productId_fkey" FOREIGN KEY ("productId") REFERENCES "ecommerce"."Product" ("id");
 ALTER TABLE "ecommerce"."ProductAttribute" ADD CONSTRAINT "ProductAttribute_productId_fkey" FOREIGN KEY ("productId") REFERENCES "ecommerce"."Product" ("id");
-ALTER TABLE "ecommerce"."ProductCollection" ADD CONSTRAINT "ProductCollection_productId_fkey" FOREIGN KEY ("productId") REFERENCES "ecommerce"."Product" ("id");
 ALTER TABLE "ecommerce"."ProductCollection" ADD CONSTRAINT "ProductCollection_collectionId_fkey" FOREIGN KEY ("collectionId") REFERENCES "ecommerce"."Collection" ("id");
+ALTER TABLE "ecommerce"."ProductCollection" ADD CONSTRAINT "ProductCollection_productId_fkey" FOREIGN KEY ("productId") REFERENCES "ecommerce"."Product" ("id");
 ALTER TABLE "ecommerce"."ProductImage" ADD CONSTRAINT "ProductImage_productId_fkey" FOREIGN KEY ("productId") REFERENCES "ecommerce"."Product" ("id");
 ALTER TABLE "ecommerce"."ProductInclusion" ADD CONSTRAINT "ProductInclusion_productId_fkey" FOREIGN KEY ("productId") REFERENCES "ecommerce"."Product" ("id");
 ALTER TABLE "ecommerce"."ProductReview" ADD CONSTRAINT "ProductReview_productId_fkey" FOREIGN KEY ("productId") REFERENCES "ecommerce"."Product" ("id");

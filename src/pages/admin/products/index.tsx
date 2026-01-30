@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { api } from '@/utils/api';
 import Link from 'next/link';
-import { FiEdit, FiTrash2, FiPlus } from 'react-icons/fi';
+import { FiEdit, FiTrash2, FiPlus, FiCopy } from 'react-icons/fi';
 
 import { isAdmin } from '@/utils/session';
 
@@ -38,6 +38,16 @@ const ProductManagement: NextPageWithLayout = () => {
     },
   });
 
+  const duplicateProduct = api.product.duplicate.useMutation({
+    onSuccess: () => {
+      alert('Đã nhân bản sản phẩm thành công');
+      void utils.product.adminAll.invalidate();
+    },
+    onError: (error) => {
+      alert('Lỗi: ' + error.message);
+    },
+  });
+
   useEffect(() => {
     if (status === 'unauthenticated') {
       void router.push('/signin');
@@ -49,6 +59,12 @@ const ProductManagement: NextPageWithLayout = () => {
   const handleDelete = (id: number, name: string) => {
     if (confirm(`Bạn có chắc chắn muốn xóa sản phẩm "${name}"?`)) {
       deleteProduct.mutate({ id });
+    }
+  };
+
+  const handleDuplicate = (id: number, name: string) => {
+    if (confirm(`Bạn có muốn nhân bản sản phẩm "${name}" không?`)) {
+      duplicateProduct.mutate({ id });
     }
   };
 
@@ -116,6 +132,13 @@ const ProductManagement: NextPageWithLayout = () => {
                 </td>
                 <td className="px-6 py-4 text-right">
                   <div className="flex justify-end gap-3">
+                    <button
+                      onClick={() => handleDuplicate(product.id, product.name)}
+                      className="text-violet-600 hover:text-violet-800"
+                      title="Nhân bản"
+                    >
+                      <FiCopy size={18} />
+                    </button>
                     <Link
                       href={`/admin/products/${product.id}`}
                       className="text-blue-600 hover:text-blue-800"

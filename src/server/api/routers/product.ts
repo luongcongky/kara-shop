@@ -308,6 +308,70 @@ export const productRouter = createTRPCRouter({
         },
       });
     }),
+  duplicate: adminProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input, ctx }) => {
+      const { id } = input;
+      const product = await ctx.prisma.product.findUnique({
+        where: { id },
+        include: {
+          images: true,
+          attributes: true,
+          inclusions: true,
+          collections: true,
+        },
+      });
+
+      if (!product) {
+        throw new Error('Sản phẩm không tồn tại');
+      }
+
+      const {
+        images,
+        attributes,
+        inclusions,
+        collections,
+        name,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        id: _id,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        createdAt: _ca,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        updatedAt: _ua,
+        ...data
+      } = product;
+
+      return ctx.prisma.product.create({
+        data: {
+          ...data,
+          name: `Copy of ${name}`,
+          published: false,
+          images: {
+            create: images.map((img) => ({
+              imageURL: img.imageURL,
+              imageBlur: img.imageBlur,
+            })),
+          },
+          attributes: {
+            create: attributes.map((attr) => ({
+              attributeName: attr.attributeName,
+              attributeValue: attr.attributeValue,
+              groupName: attr.groupName,
+            })),
+          },
+          inclusions: {
+            create: inclusions.map((inc) => ({
+              itemName: inc.itemName,
+            })),
+          },
+          collections: {
+            create: collections.map((c) => ({
+              collectionId: c.collectionId,
+            })),
+          },
+        },
+      });
+    }),
   delete: adminProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {

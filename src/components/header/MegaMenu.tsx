@@ -42,7 +42,7 @@ export const MegaMenu = ({
             <Link
               href="/"
               onClick={onCloseMenu}
-              className="text-sm font-bold uppercase leading-4 tracking-widest text-neutral-800 hover:underline"
+              className="text-sm font-bold uppercase leading-4 tracking-wider text-neutral-800 hover:underline"
             >
               New & Trending
             </Link>
@@ -76,7 +76,7 @@ export const MegaMenu = ({
                 <Link
                   href={`/products/${typeInLowerCase}/${collection.slug}`}
                   onClick={onCloseMenu}
-                  className="text-sm font-bold uppercase leading-4 tracking-widest text-neutral-800 hover:underline"
+                  className="text-sm font-bold uppercase leading-4 tracking-wider text-neutral-800 hover:underline"
                 >
                   {collection.name}
                 </Link>

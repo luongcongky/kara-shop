@@ -2,7 +2,7 @@ import { ProductColor } from './ProductColor';
 import { ProductPrice } from './ProductPrice';
 import { ProductRate } from './ProductRate';
 // import { ProductSize } from './ProductSize';
-import { ProductDescription } from './ProductDescription';
+// import { ProductDescription } from './ProductDescription';
 
 // const sortOptions = [
 //   { name: 'Most Popular', href: '#' },
@@ -15,7 +15,7 @@ import { ProductDescription } from './ProductDescription';
 export const Navigation = () => {
   return (
     <div className="flex flex-col gap-2 rounded-lg bg-white p-2">
-      <ProductDescription />
+      {/* <ProductDescription /> */}
       {/* <ProductSize /> */}
       <ProductRate />
       <ProductPrice />

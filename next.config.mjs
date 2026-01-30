@@ -38,6 +38,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'cdn.vjshop.vn',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
     ],
   },
   // output: 'standalone',

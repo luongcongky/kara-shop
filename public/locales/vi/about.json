@@ -1,0 +1,20 @@
+{
+  "title": "Về chúng tôi",
+  "heroBadge": "Chào mừng đến với KARRA",
+  "introTitle": "Nghệ thuật trong từng sản phẩm thủ công",
+  "introDesc": "Kể từ những ngày đầu, KARRA đã không ngừng theo đuổi sứ mệnh mang đến những thiết yếu hàng ngày với chất lượng đỉnh cao và thiết kế tinh tế nhất.",
+  "valuesTitle": "Giá trị cốt lõi",
+  "values": {
+    "qualityTitle": "Chất lượng là trên hết",
+    "qualityDesc": "Mỗi sản phẩm đều trải qua quy trình kiểm tra nghiêm ngặt trước khi đến tay bạn.",
+    "designTitle": "Thiết kế tinh tế",
+    "designDesc": "Chúng tôi tin rằng vẻ đẹp nằm ở sự tối giản và tính ứng dụng cao.",
+    "communityTitle": "Vì cộng đồng",
+    "communityDesc": "KARRA cam kết hỗ trợ các nghệ nhân địa phương và bảo vệ môi trường."
+  },
+  "stats": {
+    "products": "Sản phẩm",
+    "customers": "Khách hàng",
+    "years": "Năm kinh nghiệm"
+  }
+}

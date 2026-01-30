@@ -35,13 +35,13 @@ model Product {
   name          String              @db.VarChar(255)
   types         CollectionType[]
   originalPrice Float?
-  banners       Banner[]
-  flashSales    FlashSale[]
   attributes    ProductAttribute[]
   collections   ProductCollection[]
   images        ProductImage[]
   inclusions    ProductInclusion[]
   reviews       ProductReview[]
+  banners       Banner[]
+  flashSales    FlashSale[]
 
   @@schema("ecommerce")
 }
@@ -51,13 +51,13 @@ model FlashSale {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   productId  Int
+  product    Product  @relation(fields: [productId], references: [id])
   salePrice  Float
   totalSlots Int
   soldSlots  Int      @default(0)
   endTime    DateTime
   active     Boolean  @default(true)
   badge      String?
-  product    Product  @relation(fields: [productId], references: [id])
 
   @@schema("ecommerce")
 }
@@ -74,7 +74,7 @@ model Banner {
   bgColor     String   @default("bg-white")
   textColor   String   @default("text-black")
   buttonColor String   @default("bg-orange-500")
-  type        String   @default("HERO")
+  type        String   @default("HERO") // HERO, PROMOTION, etc.
   order       Int      @default(0)
   active      Boolean  @default(true)
   productId   Int?
@@ -132,10 +132,10 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?
-  role          Role      @default(USER)
   accounts      Account[]
-  contexts      Context[]
   sessions      Session[]
+  role          Role      @default(USER)
+  contexts      Context[]
 
   @@schema("ecommerce")
 }
@@ -196,23 +196,6 @@ model ProductCollection {
   @@schema("ecommerce")
 }
 
-model Context {
-  id        Int         @id @default(autoincrement())
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  title     String      @db.VarChar(255)
-  slug      String      @unique @db.VarChar(255)
-  type      ContextType
-  content   String
-  metadata  Json?
-  status    String      @default("draft") @db.VarChar(20)
-  authorId  String?
-  thumbnail String?     @db.Text
-  author    User?       @relation(fields: [authorId], references: [id])
-
-  @@schema("ecommerce")
-}
-
 enum CollectionType {
   CAMERA
   LENS
@@ -243,6 +226,23 @@ enum ContextType {
   TECHNICAL
   STATIC_PAGE
   JOB
+
+  @@schema("ecommerce")
+}
+
+model Context {
+  id        Int         @id @default(autoincrement())
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  title     String      @db.VarChar(255)
+  slug      String      @unique @db.VarChar(255)
+  type      ContextType
+  content   String      @db.Text
+  thumbnail String?     @db.Text
+  metadata  Json?
+  status    String      @default("draft") @db.VarChar(20)
+  authorId  String?
+  author    User?       @relation(fields: [authorId], references: [id])
 
   @@schema("ecommerce")
 }

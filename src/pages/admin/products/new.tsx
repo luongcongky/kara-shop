@@ -212,6 +212,9 @@ const NewProduct: NextPageWithLayout = () => {
         sources: ['local', 'url', 'camera'],
         multiple: true,
         folder: isEdit ? `kara-shop/products/${id}` : 'kara-shop/products/temp',
+        cropping: true,
+        croppingAspectRatio: 1,
+        showSkipCropButton: false,
       },
       (error: unknown, result: { event: string; info: { secure_url: string } }) => {
         if (!error && result && result.event === 'success') {

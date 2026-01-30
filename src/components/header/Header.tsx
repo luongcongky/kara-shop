@@ -24,7 +24,7 @@ export const navLinks: NavLink[] = [
   // { name: 'women', href: '/products/women', collapsible: true },
   { name: 'camera', href: '/products/camera', collapsible: true },
   { name: 'lens', href: '/products/lens', collapsible: true },
-  { name: 'sale', href: '/sale' },
+  { name: 'sale', href: '/promotions' },
   { name: 'blog', href: '/blog' },
   { name: 'contacts', href: '/contacts' },
 ];
@@ -83,7 +83,7 @@ export const Header = ({ collections }: { collections: Collections }) => {
               </li>
             ))}
           </ul>
-          <ul className="ml-auto items-center md:flex">
+          <ul className="ml-auto flex flex-1 items-center justify-end md:flex max-w-[800px]">
             <Search onSearch={value => console.log(value)} />
             {sideNavLinks
               .filter(([url]) => !session || url !== '/signin')
@@ -137,18 +137,32 @@ export const Header = ({ collections }: { collections: Collections }) => {
                         )}
                       </Menu.Item>
                       {session.user?.role === 'ADMIN' && (
-                        <Menu.Item>
-                          {({ active }) => (
-                            <Link
-                              href="/admin/products"
-                              className={`${
-                                active ? 'bg-gray-100' : ''
-                              } block px-4 py-2 text-sm text-gray-700`}
-                            >
-                              Quản lý sản phẩm
-                            </Link>
-                          )}
-                        </Menu.Item>
+                        <>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                href="/admin/products"
+                                className={`${
+                                  active ? 'bg-gray-100' : ''
+                                } block px-4 py-2 text-sm text-gray-700`}
+                              >
+                                Quản lý sản phẩm
+                              </Link>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                href="/admin/context"
+                                className={`${
+                                  active ? 'bg-gray-100' : ''
+                                } block px-4 py-2 text-sm text-gray-700`}
+                              >
+                                Quản lý bài viết
+                              </Link>
+                            )}
+                          </Menu.Item>
+                        </>
                       )}
                       <Menu.Item>
                         {({ active }) => (

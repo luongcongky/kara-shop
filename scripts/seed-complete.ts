@@ -88,8 +88,27 @@ async function main() {
       }
 
       try {
-        // Get column names from first row
-        const columns = Object.keys(rows[0] as Record<string, unknown>);
+        // Get existing columns for this table from database
+        const schemaResult = await pool.query(`
+          SELECT column_name 
+          FROM information_schema.columns 
+          WHERE table_schema = 'ecommerce' AND table_name = $1
+        `, [tableName]);
+        
+        const existingColumns = schemaResult.rows.map(r => r.column_name);
+        
+        // Filter rows to only include existing columns
+        const dumpColumns = Object.keys(rows[0] as Record<string, unknown>);
+        const columns = dumpColumns.filter(c => existingColumns.includes(c));
+        
+        if (columns.length === 0) {
+          console.log(`   ○ ${tableName}: No matching columns to import`);
+          continue;
+        }
+
+        if (columns.length < dumpColumns.length) {
+          console.log(`   ⚠ ${tableName}: Skipping ${dumpColumns.length - columns.length} columns not present in schema (${dumpColumns.filter(c => !existingColumns.includes(c)).join(', ')})`);
+        }
         
         // Build INSERT query
         const columnList = columns.map(c => `"${c}"`).join(', ');

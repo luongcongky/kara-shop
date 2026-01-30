@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale = 'en', qu
 
 const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
   const [selectedImage, setSelectedImage] = useState(0);
-  const [activeTab, setActiveTab] = useState<'info' | 'specs'>('info');
+  const [activeTab, setActiveTab] = useState<'info' | 'specs' | 'reviews'>('info');
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -158,19 +158,19 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
                             </div>
                         )}
                         <div className="flex items-baseline gap-1">
-                            <span className="text-4xl font-black text-red-600 tracking-tight">
+                            <span className="text-4xl font-bold text-red-600 tracking-tight">
                                 {formatCurrency(product.price).replace('₫', '')}
                             </span>
-                            <span className="text-2xl font-black text-red-600 underline">đ</span>
+                            <span className="text-2xl font-bold text-red-600 underline decoration-red-600/30">đ</span>
                         </div>
                     </div>
 
                     {/* Order Buttons */}
                     <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <button className="flex w-full items-center justify-center gap-3 rounded-xl bg-[#d92d20] px-4 py-4 font-bold tracking-wide text-white transition-all hover:bg-red-700 hover:shadow-lg active:scale-95 uppercase text-sm">
+                        <button className="flex w-full items-center justify-center gap-3 rounded-xl bg-[#d92d20] px-4 py-4 font-bold text-white transition-all hover:bg-red-700 hover:shadow-lg active:scale-95 text-sm">
                             <FiShoppingCart className="text-xl" /> MUA NGAY
                         </button>
-                        <button className="flex w-full items-center justify-center gap-3 rounded-xl border-2 border-blue-600 bg-[#f0f7ff] px-4 py-4 font-bold tracking-wide text-blue-700 transition-all hover:bg-blue-100 active:scale-95 uppercase text-sm">
+                        <button className="flex w-full items-center justify-center gap-3 rounded-xl border border-blue-600 bg-[#f0f7ff] px-4 py-4 font-bold text-blue-700 transition-all hover:bg-blue-100 active:scale-95 text-sm">
                             <FiPhone className="text-xl" /> LIÊN HỆ GIÁ ĐẠI LÝ
                         </button>
                     </div>
@@ -183,13 +183,13 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
                              <FiCheckCircle className="text-2xl" />
                          </div>
                          <div>
-                             <span className="block text-xs font-black text-blue-500 uppercase tracking-widest mb-0.5">Cam kết</span>
+                             <span className="block text-[10px] font-bold text-blue-500 uppercase tracking-wider mb-0.5">Cam kết</span>
                              <span className="text-base font-bold text-blue-900 leading-none">Bảo hành chính hãng 24 tháng</span>
                          </div>
                     </div>
                     {accessories.length > 0 && (
                         <div>
-                            <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-widest mb-4">🎁 Trong hộp gồm:</h4>
+                            <h4 className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-4">🎁 Trong hộp gồm:</h4>
                             <ul className="grid grid-cols-1 gap-3">
                                  {accessories.map((item, i) => (
                                      <li key={i} className="flex items-center gap-2 text-sm font-bold text-gray-600">
@@ -228,15 +228,26 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
                     Thông số kỹ thuật
                     {activeTab === 'specs' && <span className="absolute bottom-0 left-0 w-full h-1 bg-red-600 rounded-t-full" />}
                 </button>
+                <button 
+                    onClick={() => setActiveTab('reviews')}
+                    className={clsx(
+                        "pb-4 text-lg font-bold transition-all relative",
+                        activeTab === 'reviews' ? "text-red-600" : "text-gray-400 hover:text-gray-600"
+                    )}
+                >
+                    Kinh nghiệm từ khách hàng
+                    {activeTab === 'reviews' && <span className="absolute bottom-0 left-0 w-full h-1 bg-red-600 rounded-t-full" />}
+                </button>
             </div>
 
             {/* Tab Content */}
             <div className="bg-white rounded-3xl border border-gray-100 p-8 md:p-12 shadow-sm min-h-[400px]">
-                {activeTab === 'info' ? (
+                {activeTab === 'info' && (
                     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                         <div className="prose prose-lg prose-blue max-w-none text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: product.description }} />
                     </div>
-                ) : (
+                )}
+                {activeTab === 'specs' && (
                     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                         <div className="flex flex-col gap-8">
                             {sortedGroupEntries.map(([group, attributes], idx) => {
@@ -250,7 +261,7 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
                                         >
                                             <div className="flex items-center gap-4">
                                                 <div className="h-6 w-1 rounded-full bg-red-600" />
-                                                <h4 className="text-lg font-black text-zinc-900 tracking-tight uppercase">{group}</h4>
+                                                <h4 className="text-lg font-bold text-zinc-900 tracking-tight">{group}</h4>
                                             </div>
                                             <div className={clsx(
                                                 "transform transition-transform duration-300",
@@ -284,32 +295,36 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
                         </div>
                     </div>
                 )}
+                {activeTab === 'reviews' && (
+                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                             {reviews.length > 0 ? reviews.map((review, i) => (
+                                 <div key={i} className="flex gap-6 p-6 rounded-2xl bg-zinc-50 border border-zinc-100 shadow-sm transition-all hover:shadow-md">
+                                     <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white shadow-inner border-2 border-zinc-100 font-bold text-xl text-red-600">
+                                         {review.userName?.charAt(0).toUpperCase()}
+                                     </div>
+                                     <div className="flex-1">
+                                         <div className="flex items-center justify-between mb-2">
+                                            <h4 className="font-bold text-gray-900 text-lg">{review.userName}</h4>
+                                            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider bg-white px-2 py-1 rounded-md border">{new Date(review.createdAt).toLocaleDateString()}</span>
+                                         </div>
+                                         <div className="mb-4 flex text-yellow-500">
+                                             {[...Array(5)].map((_, s) => <FiStar key={s} fill={s < review.rating ? "currentColor" : "none"} stroke="currentColor" className="w-4 h-4" />)}
+                                         </div>
+                                         <p className="text-gray-700 leading-relaxed italic">&quot;{review.comment}&quot;</p>
+                                     </div>
+                                 </div>
+                             )) : (
+                                <div className="col-span-1 md:col-span-2 py-16 text-center bg-zinc-50 rounded-2xl border-2 border-dashed border-zinc-200">
+                                    <p className="text-zinc-400 italic font-bold">Hãy là người đầu tiên chia sẻ cảm nhận về sản phẩm này.</p>
+                                </div>
+                             )}
+                         </div>
+                    </div>
+                )}
             </div>
         </div>
 
-        {/* Reviews Section */}
-        <div className="mt-20 rounded-3xl border border-gray-100 bg-white p-10 shadow-sm">
-             <h2 className="mb-10 text-3xl font-bold text-zinc-900 border-b pb-6 tracking-tight">Kinh nghiệm từ khách hàng</h2>
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                 {reviews.length > 0 ? reviews.map((review, i) => (
-                     <div key={i} className="flex gap-6 p-6 rounded-2xl bg-zinc-50 border border-zinc-100 shadow-sm transition-all hover:shadow-md">
-                         <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white shadow-inner border-2 border-zinc-100 font-black text-xl text-red-600">
-                             {review.userName?.charAt(0).toUpperCase()}
-                         </div>
-                         <div className="flex-1">
-                             <div className="flex items-center justify-between mb-2">
-                                <h4 className="font-bold text-gray-900 text-lg">{review.userName}</h4>
-                                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest bg-white px-2 py-1 rounded-md border">{new Date(review.createdAt).toLocaleDateString()}</span>
-                             </div>
-                             <div className="mb-4 flex text-yellow-500">
-                                 {[...Array(5)].map((_, s) => <FiStar key={s} fill={s < review.rating ? "currentColor" : "none"} stroke="currentColor" className="w-4 h-4" />)}
-                             </div>
-                             <p className="text-gray-700 leading-relaxed italic">&quot;{review.comment}&quot;</p>
-                         </div>
-                     </div>
-                 )) : <div className="col-span-2 py-16 text-center bg-zinc-50 rounded-2xl border-2 border-dashed border-zinc-200"><p className="text-zinc-400 italic font-bold">Hãy là người đầu tiên chia sẻ cảm nhận về sản phẩm này.</p></div>}
-             </div>
-        </div>
     </div>
   );
 };
