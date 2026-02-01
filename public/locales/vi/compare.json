@@ -1,0 +1,36 @@
+{
+  "title": "So sánh sản phẩm",
+  "meta_title": "So sánh sản phẩm - KARA Shop",
+  "empty_state": {
+    "title": "Chưa có sản phẩm nào để so sánh",
+    "description": "Hãy thêm sản phẩm vào danh sách so sánh để thấy sự khác biệt.",
+    "continue_shopping": "Tiếp tục mua sắm"
+  },
+  "controls": {
+    "show_differences_only": "Chỉ hiện điểm khác biệt",
+    "clear_all": "Xóa tất cả",
+    "compare_now": "So sánh ngay"
+  },
+  "table": {
+    "general_info": "Thông tin chung",
+    "rating": "Đánh giá",
+    "colors": "Màu sắc",
+    "description": "Mô tả",
+    "default_spec_group": "Thông số kỹ thuật"
+  },
+  "actions": {
+    "remove": "Xóa",
+    "add_to_cart": "Thêm vào giỏ",
+    "added_to_cart": "Đã thêm vào giỏ hàng",
+    "added_to_compare": "Đã thêm vào so sánh"
+  },
+  "bar": {
+    "compare_count": "So sánh ({{count}}/4)",
+    "empty_slot": "Trống"
+  },
+  "errors": {
+    "cannot_compare_different_categories": "Không thể so sánh '{{cat1}}' với '{{cat2}}'. Hãy xóa danh sách cũ trước.",
+    "already_in_list": "Sản phẩm đã có trong danh sách so sánh",
+    "limit_reached": "Chỉ được so sánh tối đa 4 sản phẩm"
+  }
+}

@@ -12,6 +12,8 @@ import { Collections } from '@/types';
 import { BottomNavigation } from '@/components';
 import { useSession, signOut } from 'next-auth/react';
 import { CollectionType } from '@prisma/client';
+import { useCart } from '@/context/CartContext';
+import { useWishlist } from '@/context/WishlistContext';
 
 export interface NavLink {
   name: 'camera' | 'lens' | 'sale' | 'blog' | 'contacts';
@@ -39,6 +41,9 @@ export const Header = ({ collections }: { collections: Collections }) => {
   const { t } = useTranslation('header');
 
   const { data: session } = useSession();
+  const { totalItems } = useCart();
+  const { wishlistItems } = useWishlist();
+  const totalWishlistItems = wishlistItems.length;
   console.log('Session Data:', session);
 
   const [hoveredNavLink, setHoveredNavLink] = useState<NavLink | null>();
@@ -89,10 +94,22 @@ export const Header = ({ collections }: { collections: Collections }) => {
               .filter(([url]) => !session || url !== '/signin')
               .map(([url, Icon]) => (
                 <Link key={url} href={url} className="ml-5 hidden md:block">
-                  <Icon
-                    className="text-neutral-700 transition-colors hover:text-violet-700"
-                    size="20px"
-                  />
+                  <div className="relative">
+                    <Icon
+                      className="text-neutral-700 transition-colors hover:text-violet-700"
+                      size="20px"
+                    />
+                    {url === '/cart' && totalItems > 0 && (
+                      <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white">
+                        {totalItems}
+                      </span>
+                    )}
+                    {url === '/wishlist' && totalWishlistItems > 0 && (
+                      <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white">
+                        {totalWishlistItems}
+                      </span>
+                    )}
+                  </div>
                 </Link>
               ))}
             {session && (
@@ -133,6 +150,18 @@ export const Header = ({ collections }: { collections: Collections }) => {
                             } block px-4 py-2 text-sm text-gray-700`}
                           >
                             My Profile
+                          </Link>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link
+                            href={session.user?.role === 'ADMIN' ? '/admin/orders' : '/orders'}
+                            className={`${
+                              active ? 'bg-gray-100' : ''
+                            } block px-4 py-2 text-sm text-gray-700`}
+                          >
+                            Quản lý đơn hàng
                           </Link>
                         )}
                       </Menu.Item>

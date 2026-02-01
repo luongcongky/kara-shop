@@ -2,9 +2,12 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useMemo, useRef, useEffect } from 'react';
-import { BsStarFill, BsChevronLeft, BsChevronRight, BsHeart, BsSearch, BsHandbag } from 'react-icons/bs';
+import { BsStarFill, BsChevronLeft, BsChevronRight, BsHeart, BsHeartFill, BsHandbag } from 'react-icons/bs';
+import { CompareButton } from '@/components/compare/CompareButton';
 import { Product } from '@/types';
 import { numberWithCommas } from '@/utils';
+import { useCart } from '@/context/CartContext';
+import { useWishlist } from '@/context/WishlistContext';
 
 const shimmer = `relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1.5s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/70 before:to-transparent`;
 
@@ -45,7 +48,11 @@ export const ProductItem = ({
   images,
   collections,
   currentSlug,
+  ...product
 }: Product & { currentSlug?: string }) => {
+  const { addItem } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
+  const isFavorited = isInWishlist(id);
   const [currentImage, setCurrentImage] = useState(images[0]?.imageURL || '/camera-placeholder.png');
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
 
@@ -145,23 +152,38 @@ export const ProductItem = ({
           {/* Quick Action Icons */}
           <div className="absolute right-2 top-2 z-30 flex flex-col gap-2 translate-x-12 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 lg:right-4 lg:top-4">
             <button
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-zinc-800 shadow-md transition-all duration-200 hover:bg-orange-500 hover:text-white"
+              className={clsx(
+                "flex h-10 w-10 items-center justify-center rounded-full shadow-md transition-all duration-200",
+                isFavorited 
+                  ? "bg-red-500 text-white hover:bg-red-600" 
+                  : "bg-white text-zinc-800 hover:bg-orange-500 hover:text-white"
+              )}
               title="Yêu thích"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleWishlist(id);
+              }}
             >
-              <BsHeart size={18} />
-            </button>
-            <button
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-zinc-800 shadow-md transition-all duration-200 hover:bg-orange-500 hover:text-white"
-              title="Xem nhanh"
-            >
-              <BsSearch size={18} />
+              {isFavorited ? <BsHeartFill size={18} /> : <BsHeart size={18} />}
             </button>
             <button
               className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-zinc-800 shadow-md transition-all duration-200 hover:bg-orange-500 hover:text-white"
               title="Thêm vào giỏ"
+              onClick={() => addItem({ id, name, price, originalPrice, rate, images, collections, ...product } as Product)}
             >
               <BsHandbag size={18} />
             </button>
+            <CompareButton 
+              product={{
+                id,
+                name,
+                price,
+                imageURL: images[0]?.imageURL || '',
+                category: product.types?.[0] || collections[0]?.collection.types?.[0] || 'Sản phẩm', // Use type from product or collection
+                slug: currentSlug
+              }}
+            />
           </div>
 
           {originalPrice && originalPrice > price && (

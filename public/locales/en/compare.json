@@ -1,0 +1,36 @@
+{
+  "title": "Compare Products",
+  "meta_title": "Compare Products - KARA Shop",
+  "empty_state": {
+    "title": "No products to compare",
+    "description": "Add products to the comparison list to see the differences.",
+    "continue_shopping": "Continue shopping"
+  },
+  "controls": {
+    "show_differences_only": "Show differences only",
+    "clear_all": "Clear all",
+    "compare_now": "Compare now"
+  },
+  "table": {
+    "general_info": "General Info",
+    "rating": "Rating",
+    "colors": "Colors",
+    "description": "Description",
+    "default_spec_group": "Specifications"
+  },
+  "actions": {
+    "remove": "Remove",
+    "add_to_cart": "Add to Cart",
+    "added_to_cart": "Added to cart",
+    "added_to_compare": "Added to comparison list"
+  },
+  "bar": {
+    "compare_count": "Compare ({{count}}/4)",
+    "empty_slot": "Empty"
+  },
+  "errors": {
+    "cannot_compare_different_categories": "Cannot compare '{{cat1}}' with '{{cat2}}'. Please clear the existing list first.",
+    "already_in_list": "Product is already in the comparison list",
+    "limit_reached": "Comparison limit reached (max 4 products)"
+  }
+}

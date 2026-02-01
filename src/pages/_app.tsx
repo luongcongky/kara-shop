@@ -25,6 +25,11 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
+import { CartProvider } from '@/context/CartContext';
+import { WishlistProvider } from '@/context/WishlistContext';
+import { CompareProvider } from '@/context/CompareContext';
+import { Toaster } from 'react-hot-toast';
+
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? (page => page);
 
@@ -37,21 +42,28 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <SessionProvider session={pageProps.session}>
-      <main className={`${inter.variable} font-sans`}>
-        <DefaultSeo {...SEO} />
-        {getLayout(
-          <>
-            <NextNProgress
-              color="#8b5cf6"
-              height={3}
-              options={{ showSpinner: false }}
-            />
-            <Component {...pageProps} />;
-          </>
-        )}
-        <Analytics />
-      </main>
-      <ReactQueryDevtools />
+      <CartProvider>
+        <WishlistProvider>
+          <CompareProvider>
+            <main className={`${inter.variable} font-sans`}>
+              <DefaultSeo {...SEO} />
+              {getLayout(
+                <>
+                  <NextNProgress
+                    color="#8b5cf6"
+                    height={3}
+                    options={{ showSpinner: false }}
+                  />
+                  <Component {...pageProps} />;
+                </>
+              )}
+              <Analytics />
+            </main>
+            <Toaster position="bottom-right" />
+            <ReactQueryDevtools />
+          </CompareProvider>
+        </WishlistProvider>
+      </CartProvider>
     </SessionProvider>
   );
 }

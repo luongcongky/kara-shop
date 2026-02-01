@@ -9,3 +9,4 @@ export * from './home/FeaturedProductGrid';
 export * from './bottom-navigation/BottomNavigation';
 export * from './product/Navigation';
 export * from './product/ProductList';
+export * from './common/StickyContact';

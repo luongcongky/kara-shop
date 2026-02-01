@@ -26,7 +26,7 @@ const PROMO_DATA = [
     title: 'Vệ sinh máy miễn phí',
     subtitle: 'Dịch vụ chuyên nghiệp',
     desc: 'Tặng gói vệ sinh cảm biến và ống kính trọn đời.',
-    image: 'https://images.unsplash.com/photo-1616423641454-ec9009eb050a?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1564466021183-59691557262a?q=80&w=800&auto=format&fit=crop',
     link: '/services',
     badge: 'Quà tặng',
     color: 'from-emerald-600 to-teal-700',

@@ -416,4 +416,21 @@ export const productRouter = createTRPCRouter({
         },
       });
     }),
+
+  getProductsByIds: publicProcedure
+    .input(z.object({ ids: z.array(z.number()) }))
+    .query(async ({ input, ctx }) => {
+      const { ids } = input;
+      if (ids.length === 0) return [];
+      
+      return ctx.prisma.product.findMany({
+        where: {
+          id: { in: ids },
+        },
+        select: {
+            ...defaultProductSelect,
+            attributes: true,
+        },
+      });
+    }),
 });

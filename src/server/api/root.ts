@@ -7,6 +7,9 @@ import { flashSaleRouter } from './routers/flash-sale';
 import { cloudinaryRouter } from './routers/cloudinary';
 
 import { contextRouter } from './routers/context';
+import { cartRouter } from './routers/cart';
+import { wishlistRouter } from './routers/wishlist';
+import { orderRouter } from './routers/order';
 
 /**
  * This is the primary router for your server.
@@ -21,6 +24,9 @@ export const appRouter = createTRPCRouter({
   flashSale: flashSaleRouter,
   cloudinary: cloudinaryRouter,
   context: contextRouter,
+  cart: cartRouter,
+  wishlist: wishlistRouter,
+  order: orderRouter,
 });
 
 // export type definition of API

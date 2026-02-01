@@ -80,6 +80,7 @@ const EditContext: NextPageWithLayout = () => {
     onSuccess: () => {
       alert('Cập nhật bài viết thành công');
       void utils.context.getAll.invalidate();
+      void utils.context.getById.invalidate({ id: contextId });
       void router.push('/admin/context');
     },
     onError: (error) => {

@@ -1,5 +1,5 @@
 -- Database Schema Export
--- Generated: 2026-01-30T10:32:38.990Z
+-- Generated: 2026-02-01T02:26:19.779Z
 -- Schema: ecommerce
 
 CREATE SCHEMA IF NOT EXISTS "ecommerce";
@@ -48,6 +48,20 @@ CREATE TABLE IF NOT EXISTS "ecommerce"."Banner" (
 
 -- Indexes for Banner
 CREATE UNIQUE INDEX "Banner_pkey" ON ecommerce."Banner" USING btree (id);
+
+-- Table: CartItem
+CREATE TABLE IF NOT EXISTS "ecommerce"."CartItem" (
+  "id" text NOT NULL,
+  "userId" text NOT NULL,
+  "productId" integer NOT NULL,
+  "quantity" integer DEFAULT 1 NOT NULL,
+  "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  "updatedAt" timestamp without time zone NOT NULL
+);
+
+-- Indexes for CartItem
+CREATE UNIQUE INDEX "CartItem_pkey" ON ecommerce."CartItem" USING btree (id);
+CREATE UNIQUE INDEX "CartItem_userId_productId_key" ON ecommerce."CartItem" USING btree ("userId", "productId");
 
 -- Table: Collection
 CREATE TABLE IF NOT EXISTS "ecommerce"."Collection" (
@@ -100,6 +114,35 @@ CREATE TABLE IF NOT EXISTS "ecommerce"."FlashSale" (
 
 -- Indexes for FlashSale
 CREATE UNIQUE INDEX "FlashSale_pkey" ON ecommerce."FlashSale" USING btree (id);
+
+-- Table: Order
+CREATE TABLE IF NOT EXISTS "ecommerce"."Order" (
+  "id" text NOT NULL,
+  "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  "updatedAt" timestamp without time zone NOT NULL,
+  "userId" text NOT NULL,
+  "status" USER-DEFINED DEFAULT 'PENDING'::ecommerce."OrderStatus" NOT NULL,
+  "totalAmount" double precision NOT NULL,
+  "paymentMethod" USER-DEFINED NOT NULL,
+  "shippingName" text NOT NULL,
+  "shippingPhone" text NOT NULL,
+  "shippingAddress" text NOT NULL
+);
+
+-- Indexes for Order
+CREATE UNIQUE INDEX "Order_pkey" ON ecommerce."Order" USING btree (id);
+
+-- Table: OrderItem
+CREATE TABLE IF NOT EXISTS "ecommerce"."OrderItem" (
+  "id" text NOT NULL,
+  "orderId" text NOT NULL,
+  "productId" integer NOT NULL,
+  "quantity" integer NOT NULL,
+  "price" double precision NOT NULL
+);
+
+-- Indexes for OrderItem
+CREATE UNIQUE INDEX "OrderItem_pkey" ON ecommerce."OrderItem" USING btree (id);
 
 -- Table: Product
 CREATE TABLE IF NOT EXISTS "ecommerce"."Product" (
@@ -217,6 +260,18 @@ CREATE TABLE IF NOT EXISTS "ecommerce"."VerificationToken" (
 CREATE UNIQUE INDEX "VerificationToken_token_key" ON ecommerce."VerificationToken" USING btree (token);
 CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON ecommerce."VerificationToken" USING btree (identifier, token);
 
+-- Table: WishlistItem
+CREATE TABLE IF NOT EXISTS "ecommerce"."WishlistItem" (
+  "id" text NOT NULL,
+  "userId" text NOT NULL,
+  "productId" integer NOT NULL,
+  "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+-- Indexes for WishlistItem
+CREATE UNIQUE INDEX "WishlistItem_pkey" ON ecommerce."WishlistItem" USING btree (id);
+CREATE UNIQUE INDEX "WishlistItem_userId_productId_key" ON ecommerce."WishlistItem" USING btree ("userId", "productId");
+
 -- Table: _prisma_migrations
 CREATE TABLE IF NOT EXISTS "ecommerce"."_prisma_migrations" (
   "id" character varying(36) NOT NULL,
@@ -235,14 +290,21 @@ CREATE UNIQUE INDEX _prisma_migrations_pkey ON ecommerce._prisma_migrations USIN
 -- Foreign Key Constraints
 ALTER TABLE "ecommerce"."Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "ecommerce"."User" ("id");
 ALTER TABLE "ecommerce"."Banner" ADD CONSTRAINT "Banner_productId_fkey" FOREIGN KEY ("productId") REFERENCES "ecommerce"."Product" ("id");
+ALTER TABLE "ecommerce"."CartItem" ADD CONSTRAINT "CartItem_userId_fkey" FOREIGN KEY ("userId") REFERENCES "ecommerce"."User" ("id");
+ALTER TABLE "ecommerce"."CartItem" ADD CONSTRAINT "CartItem_productId_fkey" FOREIGN KEY ("productId") REFERENCES "ecommerce"."Product" ("id");
 ALTER TABLE "ecommerce"."Collection" ADD CONSTRAINT "Collection_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "ecommerce"."Collection" ("id");
 ALTER TABLE "ecommerce"."Context" ADD CONSTRAINT "Context_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "ecommerce"."User" ("id");
 ALTER TABLE "ecommerce"."FlashSale" ADD CONSTRAINT "FlashSale_productId_fkey" FOREIGN KEY ("productId") REFERENCES "ecommerce"."Product" ("id");
+ALTER TABLE "ecommerce"."Order" ADD CONSTRAINT "Order_userId_fkey" FOREIGN KEY ("userId") REFERENCES "ecommerce"."User" ("id");
+ALTER TABLE "ecommerce"."OrderItem" ADD CONSTRAINT "OrderItem_productId_fkey" FOREIGN KEY ("productId") REFERENCES "ecommerce"."Product" ("id");
+ALTER TABLE "ecommerce"."OrderItem" ADD CONSTRAINT "OrderItem_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "ecommerce"."Order" ("id");
 ALTER TABLE "ecommerce"."ProductAttribute" ADD CONSTRAINT "ProductAttribute_productId_fkey" FOREIGN KEY ("productId") REFERENCES "ecommerce"."Product" ("id");
-ALTER TABLE "ecommerce"."ProductCollection" ADD CONSTRAINT "ProductCollection_collectionId_fkey" FOREIGN KEY ("collectionId") REFERENCES "ecommerce"."Collection" ("id");
 ALTER TABLE "ecommerce"."ProductCollection" ADD CONSTRAINT "ProductCollection_productId_fkey" FOREIGN KEY ("productId") REFERENCES "ecommerce"."Product" ("id");
+ALTER TABLE "ecommerce"."ProductCollection" ADD CONSTRAINT "ProductCollection_collectionId_fkey" FOREIGN KEY ("collectionId") REFERENCES "ecommerce"."Collection" ("id");
 ALTER TABLE "ecommerce"."ProductImage" ADD CONSTRAINT "ProductImage_productId_fkey" FOREIGN KEY ("productId") REFERENCES "ecommerce"."Product" ("id");
 ALTER TABLE "ecommerce"."ProductInclusion" ADD CONSTRAINT "ProductInclusion_productId_fkey" FOREIGN KEY ("productId") REFERENCES "ecommerce"."Product" ("id");
 ALTER TABLE "ecommerce"."ProductReview" ADD CONSTRAINT "ProductReview_productId_fkey" FOREIGN KEY ("productId") REFERENCES "ecommerce"."Product" ("id");
 ALTER TABLE "ecommerce"."Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "ecommerce"."User" ("id");
+ALTER TABLE "ecommerce"."WishlistItem" ADD CONSTRAINT "WishlistItem_userId_fkey" FOREIGN KEY ("userId") REFERENCES "ecommerce"."User" ("id");
+ALTER TABLE "ecommerce"."WishlistItem" ADD CONSTRAINT "WishlistItem_productId_fkey" FOREIGN KEY ("productId") REFERENCES "ecommerce"."Product" ("id");
 

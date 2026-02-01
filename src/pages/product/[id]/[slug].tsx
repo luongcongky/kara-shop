@@ -5,9 +5,11 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { PrimaryLayout } from '@/layouts';
 import Image from 'next/image';
 import { useState, useRef } from 'react';
-import { FiShoppingCart, FiPhone, FiCheckCircle, FiStar, FiChevronLeft, FiChevronRight, FiCheck } from 'react-icons/fi';
+import { FiShoppingCart, FiPhone, FiCheckCircle, FiStar, FiChevronLeft, FiChevronRight, FiCheck, FiMinus, FiPlus } from 'react-icons/fi';
 import clsx from 'clsx';
 import { api } from '@/utils/api';
+import { useCart } from '@/context/CartContext';
+import { Product } from '@/types';
 
 export const getServerSideProps: GetServerSideProps = async ({ locale = 'en', query }) => {
   return {
@@ -22,7 +24,9 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [activeTab, setActiveTab] = useState<'info' | 'specs' | 'reviews'>('info');
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
+  const [quantity, setQuantity] = useState(1);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const { addItem } = useCart();
 
   const { data: product, isLoading } = api.product.getById.useQuery({ id });
 
@@ -165,11 +169,38 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
                         </div>
                     </div>
 
-                    {/* Order Buttons */}
-                    <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <button className="flex w-full items-center justify-center gap-3 rounded-xl bg-[#d92d20] px-4 py-4 font-bold text-white transition-all hover:bg-red-700 hover:shadow-lg active:scale-95 text-sm">
-                            <FiShoppingCart className="text-xl" /> MUA NGAY
-                        </button>
+                    {/* Quantity Selector and Order Buttons */}
+                    <div className="mt-8 flex flex-col gap-6">
+                        <div className="flex items-center gap-6">
+                            <span className="text-sm font-bold text-gray-500 uppercase tracking-wider">Số lượng:</span>
+                            <div className="flex items-center border border-gray-200 rounded-xl bg-gray-50 p-1">
+                                <button 
+                                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-gray-600 shadow-sm transition-all hover:bg-gray-100 active:scale-95"
+                                >
+                                    <FiMinus />
+                                </button>
+                                <span className="w-12 text-center font-bold text-zinc-900">{quantity}</span>
+                                <button 
+                                    onClick={() => setQuantity(quantity + 1)}
+                                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-gray-600 shadow-sm transition-all hover:bg-gray-100 active:scale-95"
+                                >
+                                    <FiPlus />
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <button 
+                                onClick={() => addItem(product as unknown as Product, quantity)}
+                                className="flex w-full items-center justify-center gap-3 rounded-xl bg-[#d92d20] px-4 py-4 font-bold text-white transition-all hover:bg-red-700 hover:shadow-lg active:scale-95 text-sm"
+                            >
+                                <FiShoppingCart className="text-xl" /> THÊM VÀO GIỎ
+                            </button>
+                            <button className="flex w-full items-center justify-center gap-3 rounded-xl border border-[#d92d20] bg-white px-4 py-4 font-bold text-[#d92d20] transition-all hover:bg-red-50 active:scale-95 text-sm">
+                                MUA NGAY
+                            </button>
+                        </div>
                         <button className="flex w-full items-center justify-center gap-3 rounded-xl border border-blue-600 bg-[#f0f7ff] px-4 py-4 font-bold text-blue-700 transition-all hover:bg-blue-100 active:scale-95 text-sm">
                             <FiPhone className="text-xl" /> LIÊN HỆ GIÁ ĐẠI LÝ
                         </button>
