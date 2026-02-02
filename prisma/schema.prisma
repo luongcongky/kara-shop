@@ -324,3 +324,20 @@ enum PaymentMethod {
 
   @@schema("ecommerce")
 }
+
+model Promotion {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  title       String
+  subtitle    String
+  description String
+  imageUrl    String
+  linkUrl     String
+  badge       String
+  color       String   @default("from-blue-600 to-indigo-700")
+  order       Int      @default(0)
+  active      Boolean  @default(true)
+
+  @@schema("ecommerce")
+}

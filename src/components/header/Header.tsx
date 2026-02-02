@@ -54,7 +54,7 @@ export const Header = ({ collections }: { collections: Collections }) => {
   return (
     <header>
       <TopBar />
-      <div className="relative h-14 bg-white shadow-md shadow-gray-200">
+      <div className="relative h-14 bg-white shadow-md shadow-gray-200 z-[60]">
         <div className="mx-auto flex h-full items-center px-4 xl:container">
           <div className="mr-5 flex shrink-0 items-center">
             <Link href="/">
@@ -176,6 +176,18 @@ export const Header = ({ collections }: { collections: Collections }) => {
                                 } block px-4 py-2 text-sm text-gray-700`}
                               >
                                 Quản lý sản phẩm
+                              </Link>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                href="/admin/homepage"
+                                className={`${
+                                  active ? 'bg-gray-100' : ''
+                                } block px-4 py-2 text-sm text-gray-700`}
+                              >
+                                Quản lý trang Home
                               </Link>
                             )}
                           </Menu.Item>

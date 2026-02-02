@@ -28,6 +28,7 @@
     "db:introspect": "tsx scripts/introspect-schema.ts",
     "db:seed-complete": "tsx scripts/seed-complete.ts",
     "db:sync": "tsx scripts/sync-to-supabase.ts",
+    "db:sync-from-supabase": "tsx scripts/sync-from-supabase.ts",
     "db:verify": "tsx scripts/verify-sync.ts",
     "seed:custom": "tsx prisma/seed-camera-lens-collections.ts",
     "db-reset": "prisma migrate reset",

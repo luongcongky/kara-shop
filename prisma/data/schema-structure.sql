@@ -1,5 +1,5 @@
 -- Database Schema Export
--- Generated: 2026-02-01T02:26:19.779Z
+-- Generated: 2026-02-02T05:06:29.247Z
 -- Schema: ecommerce
 
 CREATE SCHEMA IF NOT EXISTS "ecommerce";
@@ -221,6 +221,25 @@ CREATE TABLE IF NOT EXISTS "ecommerce"."ProductReview" (
 
 -- Indexes for ProductReview
 CREATE UNIQUE INDEX "ProductReview_pkey" ON ecommerce."ProductReview" USING btree (id);
+
+-- Table: Promotion
+CREATE TABLE IF NOT EXISTS "ecommerce"."Promotion" (
+  "id" integer DEFAULT nextval('ecommerce."Promotion_id_seq"'::regclass) NOT NULL,
+  "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  "updatedAt" timestamp without time zone NOT NULL,
+  "title" text NOT NULL,
+  "subtitle" text NOT NULL,
+  "description" text NOT NULL,
+  "imageUrl" text NOT NULL,
+  "linkUrl" text NOT NULL,
+  "badge" text NOT NULL,
+  "color" text DEFAULT 'from-blue-600 to-indigo-700'::text NOT NULL,
+  "order" integer DEFAULT 0 NOT NULL,
+  "active" boolean DEFAULT true NOT NULL
+);
+
+-- Indexes for Promotion
+CREATE UNIQUE INDEX "Promotion_pkey" ON ecommerce."Promotion" USING btree (id);
 
 -- Table: Session
 CREATE TABLE IF NOT EXISTS "ecommerce"."Session" (

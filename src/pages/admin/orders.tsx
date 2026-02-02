@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import type { NextPageWithLayout } from '../_app';
 import { PrimaryLayout } from '@/layouts';
 import type { GetStaticProps } from 'next';
@@ -97,8 +98,19 @@ const AdminOrdersPage: NextPageWithLayout = () => {
   return (
     <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Quản lý đơn hàng</h1>
-          <p className="text-gray-600">Xem và quản lý tất cả đơn hàng của khách hàng</p>
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">Quản lý đơn hàng</h1>
+              <p className="text-gray-600">Xem và quản lý tất cả đơn hàng của khách hàng</p>
+            </div>
+            <Link
+              href="/admin/homepage"
+              className="flex items-center gap-2 rounded-lg bg-orange-500 px-4 py-2 text-sm font-bold text-white transition-all hover:bg-orange-600 hover:shadow-lg"
+            >
+              <FiPackage />
+              <span>Quản lý Homepage</span>
+            </Link>
+          </div>
         </div>
 
         {/* Filters */}
