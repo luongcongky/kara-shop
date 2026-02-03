@@ -291,6 +291,7 @@ model Order {
   shippingName    String
   shippingPhone   String
   shippingAddress String
+  payOSOrderCode  Float?        @unique // Using Float to support large integers if needed, though PayOS limits are high. JS numbers are doubles.
   items           OrderItem[]
 
   @@schema("ecommerce")
@@ -321,6 +322,7 @@ enum OrderStatus {
 enum PaymentMethod {
   COD
   MOMO
+  PAYOS
 
   @@schema("ecommerce")
 }

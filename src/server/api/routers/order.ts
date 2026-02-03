@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { createTRPCRouter, protectedProcedure, adminProcedure } from '../trpc';
 import { TRPCError } from '@trpc/server';
 import crypto from 'crypto';
+import payOS from '@/utils/payos';
 
 export const orderRouter = createTRPCRouter({
   // Get all orders (Admin only)
@@ -117,7 +118,7 @@ export const orderRouter = createTRPCRouter({
         shippingName: z.string().min(1),
         shippingPhone: z.string().min(1),
         shippingAddress: z.string().min(1),
-        paymentMethod: z.enum(['COD', 'MOMO']),
+        paymentMethod: z.enum(['COD', 'MOMO', 'PAYOS']),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -260,6 +261,50 @@ export const orderRouter = createTRPCRouter({
                  message: 'Failed to connect to Momo',
              });
         }
+      
+      // 5. Handle PayOS
+      if (paymentMethod === 'PAYOS') {
+        try {
+          // PayOS requires a unique integer orderCode. 
+          // We generate a unique number and save it to the database for matching.
+          const orderCode = Number(String(Date.now()).slice(-6) + Math.floor(Math.random() * 1000));
+          
+          const domain = process.env.NEXTAUTH_URL || 'http://localhost:3000';
+          
+          // Update Order with the generated code
+          await ctx.prisma.order.update({
+            where: { id: order.id },
+            data: { payOSOrderCode: orderCode }
+          });
+          
+          const paymentData = {
+            orderCode: orderCode,
+            amount: totalAmount,
+            description: `DH${orderCode}`, // Short description as requested
+            items: cartItems.map(item => ({
+                name: item.product.name,
+                quantity: item.quantity,
+                price: item.product.price
+            })),
+            cancelUrl: `${domain}/cart`, 
+            returnUrl: `${domain}/order/success?orderId=${order.id}`,
+          };
+          
+          const paymentLinkData = await payOS.paymentRequests.create(paymentData);
+          
+          return {
+            orderId: order.id,
+            payUrl: paymentLinkData.checkoutUrl,
+          };
+          
+        } catch (error) {
+             console.error("PayOS Creation Error:", error);
+             throw new TRPCError({
+                 code: 'INTERNAL_SERVER_ERROR',
+                 message: 'Failed to create PayOS payment link',
+             });
+        }
+      }
       }
 
       // COD

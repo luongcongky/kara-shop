@@ -30,7 +30,7 @@ const CartPage: NextPageWithLayout = () => {
   const [shippingName, setShippingName] = React.useState('');
   const [shippingPhone, setShippingPhone] = React.useState('');
   const [shippingAddress, setShippingAddress] = React.useState('');
-  const [paymentMethod, setPaymentMethod] = React.useState<'COD' | 'MOMO'>('COD');
+  const [paymentMethod, setPaymentMethod] = React.useState<'COD' | 'MOMO' | 'PAYOS'>('COD');
   const [isCheckingOut, setIsCheckingOut] = React.useState(false);
 
   // Pre-fill user data if available
@@ -277,6 +277,24 @@ const CartPage: NextPageWithLayout = () => {
                      </div>
                      <div className="h-8 w-8 bg-pink-600 rounded-lg flex items-center justify-center text-white font-bold text-xs shadow-sm">
                         M
+                     </div>
+                  </label>
+
+                  <label className={`flex items-center gap-4 rounded-xl border p-4 cursor-pointer transition-all ${paymentMethod === 'PAYOS' ? 'border-blue-600 bg-blue-50/50 ring-1 ring-blue-600' : 'border-gray-200 hover:border-gray-300'}`}>
+                     <input 
+                       type="radio" 
+                       name="paymentMethod" 
+                       value="PAYOS" 
+                       checked={paymentMethod === 'PAYOS'}
+                       onChange={() => setPaymentMethod('PAYOS')}
+                       className="h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-600"
+                     />
+                     <div className="flex-1">
+                        <span className="block font-bold text-zinc-900">Thanh toán qua Timo / payOS</span>
+                        <span className="text-xs text-gray-500">Chuyển khoản QR code nhanh chóng ({'>'} 2.000đ)</span>
+                     </div>
+                     <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xs shadow-sm">
+                        P
                      </div>
                   </label>
                </div>
