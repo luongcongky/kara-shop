@@ -10,17 +10,20 @@ interface PrimaryLayoutProps extends React.PropsWithChildren {
 
 export const PrimaryLayout = ({ seo, children }: PrimaryLayoutProps) => {
   const { data } = api.collection.all.useQuery();
+  const { data: systemConfig } = api.systemConfig.getAll.useQuery();
+
+  const logoUrl = systemConfig?.find((item: { key: string; value: string }) => item.key === 'SYSTEM_LOGO')?.value;
 
   return (
     <>
       <NextSeo noindex={true} nofollow={true} {...seo} />
       <div className="min-h-screen">
-        <Header collections={data} />
+        <Header collections={data} logoUrl={logoUrl} />
         {children}
       </div>
       <StickyContact />
       <CompareBar />
-      <Footer />
+      <Footer logoUrl={logoUrl} />
     </>
   );
 };

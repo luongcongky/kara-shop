@@ -5,8 +5,8 @@ import type { NextPageWithLayout } from '../_app';
 import { PrimaryLayout } from '@/layouts';
 // import { api } from '@/utils/api'; // api was unused
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { FiSave, FiEdit2 } from 'react-icons/fi';
-// import Link from 'next/link';
+import { FiSave, FiEdit2, FiSettings } from 'react-icons/fi';
+import Link from 'next/link';
 import { BannerEditor } from '@/components/admin/BannerEditor';
 import { FlashSaleEditor } from '@/components/admin/FlashSaleEditor';
 import { PromotionEditor } from '@/components/admin/PromotionEditor';
@@ -96,6 +96,13 @@ const AdminHomepage: NextPageWithLayout = () => {
               <FiSave className="text-lg" />
               <span>Lưu tất cả thay đổi</span>
             </button>
+            <Link
+              href="/admin/settings"
+              className="flex items-center gap-2 rounded-lg bg-zinc-600 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-zinc-700 hover:shadow-lg"
+            >
+              <FiSettings className="text-lg" />
+              <span>Cấu hình</span>
+            </Link>
           </div>
         </div>
         </div>

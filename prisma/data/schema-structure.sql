@@ -1,5 +1,5 @@
 -- Database Schema Export
--- Generated: 2026-02-02T05:06:29.247Z
+-- Generated: 2026-02-03T04:28:23.716Z
 -- Schema: ecommerce
 
 CREATE SCHEMA IF NOT EXISTS "ecommerce";
@@ -252,6 +252,20 @@ CREATE TABLE IF NOT EXISTS "ecommerce"."Session" (
 -- Indexes for Session
 CREATE UNIQUE INDEX "Session_pkey" ON ecommerce."Session" USING btree (id);
 CREATE UNIQUE INDEX "Session_sessionToken_key" ON ecommerce."Session" USING btree ("sessionToken");
+
+-- Table: SystemConfig
+CREATE TABLE IF NOT EXISTS "ecommerce"."SystemConfig" (
+  "id" integer DEFAULT nextval('ecommerce."SystemConfig_id_seq"'::regclass) NOT NULL,
+  "key" text NOT NULL,
+  "value" text NOT NULL,
+  "type" text DEFAULT 'text'::text NOT NULL,
+  "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  "updatedAt" timestamp without time zone NOT NULL
+);
+
+-- Indexes for SystemConfig
+CREATE UNIQUE INDEX "SystemConfig_pkey" ON ecommerce."SystemConfig" USING btree (id);
+CREATE UNIQUE INDEX "SystemConfig_key_key" ON ecommerce."SystemConfig" USING btree (key);
 
 -- Table: User
 CREATE TABLE IF NOT EXISTS "ecommerce"."User" (

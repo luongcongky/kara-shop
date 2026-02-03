@@ -37,7 +37,7 @@ export const sideNavLinks: [string, IconType][] = [
   ['/signin', FiUser],
 ];
 
-export const Header = ({ collections }: { collections: Collections }) => {
+export const Header = ({ collections, logoUrl }: { collections: Collections; logoUrl?: string }) => {
   const { t } = useTranslation('header');
 
   const { data: session } = useSession();
@@ -60,11 +60,12 @@ export const Header = ({ collections }: { collections: Collections }) => {
             <Link href="/">
               <Image
                 priority
-                src="/logo.png"
+                src={logoUrl || "/logo.png"}
                 alt="logo"
                 width={100}
                 height={35}
                 quality={100}
+                className="object-contain"
               />
             </Link>
           </div>

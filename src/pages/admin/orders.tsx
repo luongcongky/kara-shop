@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { api } from '@/utils/api';
 import { numberWithCommas } from '@/utils';
-import { FiPackage, FiUser, FiCalendar, FiDollarSign, FiChevronDown } from 'react-icons/fi';
+import { FiPackage, FiUser, FiCalendar, FiDollarSign, FiChevronDown, FiSettings } from 'react-icons/fi';
 import { isAdmin } from '@/utils/session';
 
 export const getStaticProps: GetStaticProps = async ({ locale = 'en' }) => {
@@ -109,6 +109,13 @@ const AdminOrdersPage: NextPageWithLayout = () => {
             >
               <FiPackage />
               <span>Quản lý Homepage</span>
+            </Link>
+            <Link
+              href="/admin/settings"
+              className="flex items-center gap-2 rounded-lg bg-zinc-600 px-4 py-2 text-sm font-bold text-white transition-all hover:bg-zinc-700 hover:shadow-lg"
+            >
+              <FiSettings />
+              <span>Cấu hình</span>
             </Link>
           </div>
         </div>

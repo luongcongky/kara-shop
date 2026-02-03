@@ -34,7 +34,7 @@ export const Commitments = () => {
   ];
 
   return (
-    <section className="bg-white py-12">
+    <section className="bg-white py-8">
       <div className="mx-auto max-w-7xl px-4">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {items.map((item, index) => (

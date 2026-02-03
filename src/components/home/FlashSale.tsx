@@ -61,10 +61,10 @@ export const FlashSale = () => {
   if (!flashSales || flashSales.length === 0) return null;
 
   return (
-    <section className="bg-zinc-50 py-16">
+    <section className="bg-zinc-50 py-10">
       <div className="mx-auto max-w-7xl px-4">
         {/* Header */}
-        <div className="mb-10 flex flex-col items-center justify-between border-b border-zinc-200 pb-8 md:flex-row">
+        <div className="mb-6 flex flex-col items-center justify-between border-b border-zinc-200 pb-8 md:flex-row">
           <div className="mb-4 flex items-center md:mb-0">
             <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-orange-500 text-white shadow-lg shadow-orange-500/30">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6 animate-bounce">

@@ -56,9 +56,9 @@ export const Promotions = () => {
   }
 
   return (
-    <section className="bg-zinc-900 py-24">
+    <section className="bg-zinc-900 py-12">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="mb-12 text-center" data-aos="fade-up">
+        <div className="mb-8 text-center" data-aos="fade-up">
           <span className="mb-3 block text-[11px] font-bold uppercase tracking-wider text-orange-500">Dịch vụ đặc biệt</span>
           <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl">Ưu đãi độc quyền tại KARA</h2>
         </div>

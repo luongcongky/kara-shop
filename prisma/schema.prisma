@@ -341,3 +341,14 @@ model Promotion {
 
   @@schema("ecommerce")
 }
+
+model SystemConfig {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  value     String   @db.Text
+  type      String   @default("text")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@schema("ecommerce")
+}

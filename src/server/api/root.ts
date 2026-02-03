@@ -11,6 +11,7 @@ import { cartRouter } from './routers/cart';
 import { wishlistRouter } from './routers/wishlist';
 import { orderRouter } from './routers/order';
 import { promotionRouter } from './routers/promotion';
+import { systemConfigRouter } from './routers/system-config';
 
 /**
  * This is the primary router for your server.
@@ -29,6 +30,7 @@ export const appRouter = createTRPCRouter({
   wishlist: wishlistRouter,
   order: orderRouter,
   promotion: promotionRouter,
+  systemConfig: systemConfigRouter,
 });
 
 // export type definition of API

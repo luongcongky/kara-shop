@@ -18,7 +18,7 @@ const socialMedias: [IconType, string][] = [
   [BsLinkedin, 'https://linkedin.com'],
 ];
 
-export const Footer = () => {
+export const Footer = ({ logoUrl }: { logoUrl?: string }) => {
   const { t } = useTranslation('footer');
 
   const footerLinks = [
@@ -57,11 +57,12 @@ export const Footer = () => {
             <Link href="/">
               <Image
                 priority
-                src="/logo.png"
+                src={logoUrl || "/logo.png"}
                 alt="kara shop logo"
                 width={100}
                 height={35}
                 quality={100}
+                className="object-contain"
               />
             </Link>
             <p className="py-4 text-sm font-normal text-neutral-500">
