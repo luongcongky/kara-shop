@@ -1,5 +1,5 @@
 -- Database Schema Export
--- Generated: 2026-02-03T04:28:23.716Z
+-- Generated: 2026-02-05T09:50:27.934Z
 -- Schema: ecommerce
 
 CREATE SCHEMA IF NOT EXISTS "ecommerce";
@@ -126,11 +126,13 @@ CREATE TABLE IF NOT EXISTS "ecommerce"."Order" (
   "paymentMethod" USER-DEFINED NOT NULL,
   "shippingName" text NOT NULL,
   "shippingPhone" text NOT NULL,
-  "shippingAddress" text NOT NULL
+  "shippingAddress" text NOT NULL,
+  "payOSOrderCode" double precision
 );
 
 -- Indexes for Order
 CREATE UNIQUE INDEX "Order_pkey" ON ecommerce."Order" USING btree (id);
+CREATE UNIQUE INDEX "Order_payOSOrderCode_key" ON ecommerce."Order" USING btree ("payOSOrderCode");
 
 -- Table: OrderItem
 CREATE TABLE IF NOT EXISTS "ecommerce"."OrderItem" (
