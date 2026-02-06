@@ -5,6 +5,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { PrimaryLayout } from '@/layouts';
 import Image from 'next/image';
 import { useState, useRef } from 'react';
+import { useRouter } from 'next/router';
 import { FiShoppingCart, FiPhone, FiCheckCircle, FiStar, FiChevronLeft, FiChevronRight, FiCheck, FiMinus, FiPlus } from 'react-icons/fi';
 import clsx from 'clsx';
 import { api } from '@/utils/api';
@@ -26,6 +27,7 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
   const [quantity, setQuantity] = useState(1);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
   const { addItem } = useCart();
 
   const { data: product, isLoading } = api.product.getById.useQuery({ id });
@@ -197,7 +199,13 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
                             >
                                 <FiShoppingCart className="text-xl" /> THÊM VÀO GIỎ
                             </button>
-                            <button className="flex w-full items-center justify-center gap-3 rounded-xl border border-[#d92d20] bg-white px-4 py-4 font-bold text-[#d92d20] transition-all hover:bg-red-50 active:scale-95 text-sm">
+                            <button 
+                                onClick={() => {
+                                    addItem(product as unknown as Product, quantity);
+                                    router.push('/cart');
+                                }}
+                                className="flex w-full items-center justify-center gap-3 rounded-xl border border-[#d92d20] bg-white px-4 py-4 font-bold text-[#d92d20] transition-all hover:bg-red-50 active:scale-95 text-sm"
+                            >
                                 MUA NGAY
                             </button>
                         </div>

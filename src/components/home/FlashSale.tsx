@@ -96,7 +96,7 @@ export const FlashSale = () => {
               
               {/* Badge */}
               {fs.badge && (
-                <div className="absolute left-0 top-6 z-10">
+                <div className="absolute left-0 top-6 z-20">
                   <div className="bg-zinc-900 px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-white rounded-r-full shadow-lg border-l-4 border-orange-500">
                     {t(`common.${fs.badge}`)}
                   </div>

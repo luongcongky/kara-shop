@@ -15,7 +15,7 @@ import { Commitments } from '@/components';
 export const getStaticProps: GetStaticProps = async ({ locale = 'vi' }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'header', 'footer'])),
+      ...(await serverSideTranslations(locale, ['common', 'header', 'footer', 'home'])),
     },
   };
 };

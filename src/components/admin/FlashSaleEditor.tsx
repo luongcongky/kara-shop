@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import { FiEdit2, FiTrash2, FiPlus, FiX } from 'react-icons/fi';
 import Countdown from 'react-countdown';
@@ -52,6 +53,7 @@ const CountdownRenderer = ({ hours, minutes, seconds, completed }: CountdownProp
 export const FlashSaleEditor = ({ editMode, onDataChange }: FlashSaleEditorProps) => {
   const [showModal, setShowModal] = useState(false);
   const [editingFlashSale, setEditingFlashSale] = useState<FlashSaleFormData | null>(null);
+  const { t } = useTranslation('home');
 
   const { data: flashSales, isLoading, refetch } = api.flashSale.getAll.useQuery();
   const { data: products } = api.product.adminAll.useQuery();
@@ -236,9 +238,9 @@ export const FlashSaleEditor = ({ editMode, onDataChange }: FlashSaleEditorProps
                 <div className="absolute inset-0 bg-gradient-to-br from-zinc-50/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
 
                 {fs.badge && (
-                  <div className="absolute left-0 top-6 z-10">
+                  <div className="absolute left-0 top-6 z-20">
                     <div className="bg-zinc-900 px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-white rounded-r-full shadow-lg border-l-4 border-orange-500">
-                      {fs.badge}
+                      {t(`common.${fs.badge}`)}
                     </div>
                   </div>
                 )}

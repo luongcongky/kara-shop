@@ -14,6 +14,7 @@ import { useSession, signOut } from 'next-auth/react';
 import { CollectionType } from '@prisma/client';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
+import { useRouter } from 'next/router';
 
 export interface NavLink {
   name: 'camera' | 'lens' | 'sale' | 'blog' | 'contacts';
@@ -39,6 +40,7 @@ export const sideNavLinks: [string, IconType][] = [
 
 export const Header = ({ collections, logoUrl }: { collections: Collections; logoUrl?: string }) => {
   const { t } = useTranslation('header');
+  const router = useRouter();
 
   const { data: session } = useSession();
   const { totalItems } = useCart();
@@ -90,7 +92,7 @@ export const Header = ({ collections, logoUrl }: { collections: Collections; log
             ))}
           </ul>
           <ul className="ml-auto flex flex-1 items-center justify-end md:flex max-w-[800px]">
-            <Search onSearch={value => console.log(value)} />
+            <Search onSearch={value => router.push(`/search?q=${encodeURIComponent(value)}`)} />
             {sideNavLinks
               .filter(([url]) => !session || url !== '/signin')
               .map(([url, Icon]) => (

@@ -1,5 +1,5 @@
 -- Database Schema Export
--- Generated: 2026-02-05T09:50:27.934Z
+-- Generated: 2026-02-06T02:02:55.666Z
 -- Schema: ecommerce
 
 CREATE SCHEMA IF NOT EXISTS "ecommerce";

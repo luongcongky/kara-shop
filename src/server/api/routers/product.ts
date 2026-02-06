@@ -43,17 +43,19 @@ export const productRouter = createTRPCRouter({
         price: z.string().optional(), // Changed to string to accept $, $$, $$$
         desc: z.string().optional(),
         colors: z.nativeEnum(ProductColor).array().optional(),
+        search: z.string().optional(),
       })
     )
     .query(async ({ input, ctx }) => {
       const {
-        types = 'CAMERA',
+        types,
         slug,
         page = 1,
         rate = 0,
         price,
         desc,
         colors = [],
+        search,
       } = input;
 
       const take = 12;
@@ -75,8 +77,9 @@ export const productRouter = createTRPCRouter({
         gte = 60000000;
       }
 
+      const isTopArrivals = ['top-arrivals', 'new-and-trending-root'].includes(slug || '');
+      
       const where: Prisma.ProductWhereInput = {
-        types: { hasSome: [types] },
         published: true,
         rate: rate ? { gte: rate } : undefined,
         price: { gte, lte },
@@ -86,7 +89,23 @@ export const productRouter = createTRPCRouter({
         colors: colors.length > 0 ? { hasSome: colors } : undefined,
       };
 
-      if (slug) {
+      if (search) {
+        where.OR = [
+          { name: { contains: search, mode: 'insensitive' } },
+          { description: { contains: search, mode: 'insensitive' } },
+        ];
+      }
+
+      if (types) {
+        where.types = isTopArrivals && types === 'LENS'
+          ? { hasSome: [CollectionType.LENS, CollectionType.OTHERS] }
+          : { hasSome: [types] };
+      } else if (!search) {
+        // Default to CAMERA if neither types nor search is provided (backward compatibility)
+        where.types = { hasSome: [CollectionType.CAMERA] };
+      }
+
+      if (slug && !isTopArrivals) {
         const isParent = await ctx.prisma.collection.findFirst({
           where: {
             slug,
@@ -103,20 +122,25 @@ export const productRouter = createTRPCRouter({
         };
       }
 
+      let orderBy: Prisma.ProductOrderByWithRelationInput = { id: 'asc' };
+      if (isTopArrivals) {
+        orderBy = { createdAt: 'desc' };
+      }
+
       const [products, totalCount] = await ctx.prisma.$transaction([
         ctx.prisma.product.findMany({
           select: defaultProductSelect,
           where,
-          orderBy: { id: 'asc' },
-          take,
-          skip,
+          orderBy,
+          take: isTopArrivals ? 8 : take,
+          skip: isTopArrivals ? 0 : skip,
         }),
         ctx.prisma.product.count({ where }),
       ]);
 
       return {
         products,
-        totalCount,
+        totalCount: isTopArrivals ? Math.min(totalCount, 8) : totalCount,
       };
     }),
   getById: publicProcedure

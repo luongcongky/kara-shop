@@ -40,7 +40,7 @@ export const MegaMenu = ({
         <div className="flex flex-1">
           <div className="ml-4 py-8">
             <Link
-              href="/"
+              href={`/products/${typeInLowerCase}/new-and-trending-root`}
               onClick={onCloseMenu}
               className="text-sm font-bold uppercase leading-4 tracking-wider text-neutral-800 hover:underline"
             >

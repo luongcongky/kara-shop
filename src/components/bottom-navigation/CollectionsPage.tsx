@@ -20,7 +20,7 @@ export const CollectionsPage = ({
   const { t } = useTranslation();
 
   return (
-    <div className="fixed bottom-0 left-0 top-0 z-50 h-full w-full overflow-y-auto bg-white px-5 pt-5">
+    <div className="fixed bottom-0 left-0 top-0 z-[100] h-full w-full overflow-y-auto bg-white px-5 pt-5">
       <div className="flex justify-between">
         <h2 className="text-xl font-medium">{t('common:collections')}</h2>
         <FiX

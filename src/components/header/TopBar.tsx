@@ -1,13 +1,15 @@
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useRef, useState } from 'react';
+// import { useRouter } from 'next/router';
+// import { useRef, useState } from 'react';
+// import { useRef } from 'react';
 import type { IconType } from 'react-icons';
-import { FiChevronDown, FiPhone } from 'react-icons/fi';
-import { useClickAway } from 'react-use';
-import { LocaleSelector } from './LocaleSelector';
-import { getCloudinaryUrl } from '@/utils/cloudinary';
+// import { FiChevronDown, FiPhone } from 'react-icons/fi';
+import { FiPhone } from 'react-icons/fi';
+// import { useClickAway } from 'react-use';
+// import { LocaleSelector } from './LocaleSelector';
+// import { getCloudinaryUrl } from '@/utils/cloudinary';
 
 interface TopbarItemProps {
   label: string;
@@ -28,12 +30,12 @@ const TopbarItem = ({ label, url, Icon }: TopbarItemProps) => (
 );
 
 export const TopBar = () => {
-  const [isLocaleSelectorOpen, setIsLocaleSelectorOpen] = useState(false);
-  const router = useRouter();
+  // const [isLocaleSelectorOpen, setIsLocaleSelectorOpen] = useState(false);
+  // const router = useRouter();
   const { t } = useTranslation('header');
-  const ref = useRef<HTMLDivElement>(null);
+  // const ref = useRef<HTMLDivElement>(null);
 
-  useClickAway(ref, () => setIsLocaleSelectorOpen(false));
+  // useClickAway(ref, () => setIsLocaleSelectorOpen(false));
 
   const topbarItems: TopbarItemProps[] = [
     // { label: t('topbar.careers'), url: 'careers' },
@@ -55,7 +57,7 @@ export const TopBar = () => {
           {topbarItems.map(item => (
             <TopbarItem key={item.label} {...item} />
           ))}
-          <div
+{/* <div
             className="relative z-50 ml-2.5 flex cursor-pointer items-center"
             ref={ref}
             onClick={() => setIsLocaleSelectorOpen(prev => !prev)}
@@ -71,7 +73,7 @@ export const TopBar = () => {
             <span>{router.locale?.toUpperCase()}</span>
             <FiChevronDown color="#fff"></FiChevronDown>
             <LocaleSelector isOpen={isLocaleSelectorOpen} />
-          </div>
+          </div> */}
         </ul>
       </div>
     </div>
