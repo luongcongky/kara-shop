@@ -61,6 +61,9 @@ export const HeroCarousel = () => {
     );
   }
 
+  const { data: systemNameConfig } = api.systemConfig.getByKey.useQuery({ key: 'SYSTEM_NAME' });
+  const brand = systemNameConfig?.value || 'Kara Shop';
+
   const products = banners && banners.length > 0 
     ? banners.map(b => ({
         id: b.id, // Use Banner ID instead of Product ID to ensure uniqueness
@@ -120,7 +123,7 @@ export const HeroCarousel = () => {
                     data-aos="fade-up"
                     data-aos-delay="200"
                   >
-                    {product.subtitle}
+                    {product.subtitle || t('hero.description', { brand })}
                   </p>
                   {product.productId > 0 && (
                     <Link

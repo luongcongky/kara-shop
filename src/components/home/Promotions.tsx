@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
 import { FiArrowRight } from 'react-icons/fi';
 import { api } from '@/utils/api';
 
@@ -39,7 +40,10 @@ const FALLBACK_PROMO_DATA = [
 ];
 
 export const Promotions = () => {
+  const { t } = useTranslation('home');
   const { data: promotions, isLoading } = api.promotion.getAll.useQuery();
+  const { data: systemNameConfig } = api.systemConfig.getByKey.useQuery({ key: 'SYSTEM_NAME' });
+  const brand = systemNameConfig?.value || 'Kara Shop';
 
   const displayPromotions = promotions && promotions.length > 0 ? promotions : FALLBACK_PROMO_DATA;
 
@@ -60,7 +64,7 @@ export const Promotions = () => {
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-8 text-center" data-aos="fade-up">
           <span className="mb-3 block text-[11px] font-bold uppercase tracking-wider text-orange-500">Dịch vụ đặc biệt</span>
-          <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl">Ưu đãi độc quyền tại KARA</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl">{t('promotions.title', { brand })}</h2>
         </div>
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">

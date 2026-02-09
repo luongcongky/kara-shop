@@ -40,7 +40,7 @@ const Home: NextPageWithLayout = () => {
 
 Home.getLayout = function getLayout(page: ReactElement) {
   return (
-    <PrimaryLayout seo={{ title: 'Kara Shop | High-End Cameras & Electronics', canonical: '/' }}>
+    <PrimaryLayout seo={{ title: 'High-End Cameras & Electronics', canonical: '/' }}>
       {page}
     </PrimaryLayout>
   );

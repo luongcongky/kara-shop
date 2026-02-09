@@ -1,5 +1,5 @@
 {
-  "kara": "Thương hiệu thủ công nhỏ cung cấp bộ sưu tập các sản phẩm thiết yếu hàng ngày chất lượng cao được tuyển chọn kỹ lưỡng.",
+  "kara": "Hãng thiết kế thủ công nhỏ chuyên cung cấp các sản phẩm thiết yếu hàng ngày chất lượng cao được tuyển chọn kỹ lưỡng mang thương hiệu {{brand}}.",
   "company": "Công ty",
   "companyLinks": {
     "about": "Về chúng tôi",
@@ -19,7 +19,7 @@
     "whatsapp": "Whatsapp",
     "support": "Hỗ trợ 24"
   },
-  "copyright": "Bản quyền © 2022 KARA Shop",
+  "copyright": "Bản quyền © 2022 {{brand}}",
   "createdBy": "Được tạo bởi",
   "reserved": "Đã đăng ký bản quyền"
 }

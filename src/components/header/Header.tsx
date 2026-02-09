@@ -38,7 +38,7 @@ export const sideNavLinks: [string, IconType][] = [
   ['/signin', FiUser],
 ];
 
-export const Header = ({ collections, logoUrl }: { collections: Collections; logoUrl?: string }) => {
+export const Header = ({ collections, logoUrl, brandName }: { collections: Collections; logoUrl?: string; brandName?: string }) => {
   const { t } = useTranslation('header');
   const router = useRouter();
 
@@ -63,7 +63,7 @@ export const Header = ({ collections, logoUrl }: { collections: Collections; log
               <Image
                 priority
                 src={logoUrl || "/logo.png"}
-                alt="logo"
+                alt={`${brandName || 'Kara Shop'} logo`}
                 width={100}
                 height={35}
                 quality={100}

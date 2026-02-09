@@ -1,5 +1,5 @@
 {
-  "kara": "Small, artisan label that offers a thoughtfully curated collection of high quality everyday essentials made.",
+  "kara": "Small, artisan label under the {{brand}} brand that offers a thoughtfully curated collection of high quality everyday essentials.",
   "company": "Company",
   "companyLinks": {
     "about": "About",
@@ -19,7 +19,7 @@
     "whatsapp": "Whatsapp",
     "support": "Support 24"
   },
-  "copyright": "Copyright © 2022 KARA Shop",
+  "copyright": "Copyright © 2022 {{brand}}",
   "createdBy": "Created By",
   "reserved": "All Right Reserved"
 }

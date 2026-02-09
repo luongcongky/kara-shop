@@ -13,17 +13,23 @@ export const PrimaryLayout = ({ seo, children }: PrimaryLayoutProps) => {
   const { data: systemConfig } = api.systemConfig.getAll.useQuery();
 
   const logoUrl = systemConfig?.find((item: { key: string; value: string }) => item.key === 'SYSTEM_LOGO')?.value;
+  const brandName = systemConfig?.find((item: { key: string; value: string }) => item.key === 'SYSTEM_NAME')?.value || 'Kara Shop';
+
+  const dynamicSeo = {
+    ...seo,
+    title: seo.title?.includes('|') ? seo.title : `${seo.title} | ${brandName}`,
+  };
 
   return (
     <>
-      <NextSeo noindex={true} nofollow={true} {...seo} />
+      <NextSeo noindex={true} nofollow={true} {...dynamicSeo} />
       <div className="min-h-screen">
-        <Header collections={data} logoUrl={logoUrl} />
+        <Header collections={data} logoUrl={logoUrl} brandName={brandName} />
         {children}
       </div>
       <StickyContact />
       <CompareBar />
-      <Footer logoUrl={logoUrl} />
+      <Footer logoUrl={logoUrl} brandName={brandName} />
     </>
   );
 };

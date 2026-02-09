@@ -3,14 +3,14 @@
     "discount": "Giảm giá 70%",
     "title": "Máy <1>XỊN</1> - Giá <2>GỐC</2>",
     "description": [
-      "Là đại lý cấp 1 không qua trung gian, KARA cam kết mang lại giá trị thật cho cộng đồng nhiếp ảnh.",
+      "Là đại lý cấp 1 không qua trung gian, {{brand}} cam kết mang lại giá trị thật cho cộng đồng nhiếp ảnh.",
       "Sản phẩm chính hãng, nguyên seal, bảo hành toàn cầu với mức giá không thể đối đầu."
     ],
     "shop": "Bắt đầu mua sắm"
   },
   "promotions": {
     "promotions": "Khuyến mãi",
-    "title": "Ưu đãi đặc biệt từ KARA"
+    "title": "Ưu đãi đặc biệt từ {{brand}}"
   },
   "flashSale": {
     "title": "Deal Chớp Nhoáng",

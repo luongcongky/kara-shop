@@ -3,14 +3,14 @@
     "discount": "Sale 70%",
     "title": "Camera <1>REAL</1> - Price <2>ORIGINAL</2>",
     "description": [
-      "As a tier 1 dealer without intermediaries, KARA is committed to bringing true value to the photography community.",
+      "As a tier 1 dealer without intermediaries, {{brand}} is committed to bringing true value to the photography community.",
       "Genuine products, sealed, global warranty with unbeatable prices."
     ],
     "shop": "Start Shopping"
   },
   "promotions": {
     "promotions": "Promotions",
-    "title": "Special Offers from KARA"
+    "title": "Special Offers from {{brand}}"
   },
   "flashSale": {
     "title": "Flash Sale",

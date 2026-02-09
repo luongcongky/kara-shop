@@ -18,8 +18,9 @@ const socialMedias: [IconType, string][] = [
   [BsLinkedin, 'https://linkedin.com'],
 ];
 
-export const Footer = ({ logoUrl }: { logoUrl?: string }) => {
+export const Footer = ({ logoUrl, brandName }: { logoUrl?: string; brandName?: string }) => {
   const { t } = useTranslation('footer');
+  const brand = brandName || 'Kara Shop';
 
   const footerLinks = [
     {
@@ -58,7 +59,7 @@ export const Footer = ({ logoUrl }: { logoUrl?: string }) => {
               <Image
                 priority
                 src={logoUrl || "/logo.png"}
-                alt="kara shop logo"
+                alt={`${brand} logo`}
                 width={100}
                 height={35}
                 quality={100}
@@ -66,7 +67,7 @@ export const Footer = ({ logoUrl }: { logoUrl?: string }) => {
               />
             </Link>
             <p className="py-4 text-sm font-normal text-neutral-500">
-              {t('kara')}
+              {t('kara', { brand })}
             </p>
             <div className="my-5 flex justify-center md:justify-start">
               {socialMedias.map(([Icon, href]) => (
@@ -106,7 +107,7 @@ export const Footer = ({ logoUrl }: { logoUrl?: string }) => {
       <div className="bg-neutral-100">
         <div className="mx-auto max-w-7xl px-2 py-3">
           <div className="flex flex-col items-center justify-between gap-3 text-xs font-medium text-neutral-700 md:flex-row">
-            <p>{t('copyright')}</p>
+            <p>{t('copyright', { brand })}</p>
             <Link href="https://github.com/mehrabmp/kara-shop" target="_blank">
               <BsGithub size="1.25rem" />
             </Link>
