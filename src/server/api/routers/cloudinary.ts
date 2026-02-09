@@ -63,4 +63,28 @@ export const cloudinaryRouter = createTRPCRouter({
         throw new Error('Failed to delete image from Cloudinary');
       }
     }),
+  deleteFolder: adminProcedure
+    .input(z.object({ folderPath: z.string() }))
+    .mutation(async ({ input }) => {
+      try {
+        const { folderPath } = input;
+        console.log(`[Cloudinary] Cleaning up resources in folder: ${folderPath}`);
+        
+        // 1. Delete all resources in the folder (including images and their versions)
+        await cloudinary.api.delete_resources_by_prefix(`${folderPath}/`);
+        
+        // 2. Add a small delay to allow Cloudinary to process deletions
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        
+        // 3. Delete the empty folder
+        const result = await cloudinary.api.delete_folder(folderPath);
+        console.log(`[Cloudinary] Folder delete result for ${folderPath}:`, result);
+        
+        return { success: result.deleted?.includes(folderPath) };
+      } catch (error) {
+        console.error('[Cloudinary] Failed to delete folder:', error);
+        // We don't throw error here to avoid blocking UI if folder doesn't exist or isn't empty
+        return { success: false, error: (error as Error).message };
+      }
+    }),
 });

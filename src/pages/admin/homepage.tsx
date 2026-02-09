@@ -11,6 +11,7 @@ import { BannerEditor } from '@/components/admin/BannerEditor';
 import { FlashSaleEditor } from '@/components/admin/FlashSaleEditor';
 import { PromotionEditor } from '@/components/admin/PromotionEditor';
 import { Commitments } from '@/components';
+import Script from 'next/script';
 
 export const getStaticProps: GetStaticProps = async ({ locale = 'vi' }) => {
   return {
@@ -36,6 +37,7 @@ const AdminHomepage: NextPageWithLayout = () => {
 
   return (
     <div className="min-h-screen bg-zinc-50">
+      <Script src="https://widget.cloudinary.com/v2.0/global/all.js" strategy="afterInteractive" />
       {/* Admin Header */}
       <div className="sticky top-0 z-50 bg-white shadow-md">
         <div className="mx-auto max-w-7xl px-4 py-4">

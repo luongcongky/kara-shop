@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import { FiEdit2, FiTrash2, FiPlus, FiX } from 'react-icons/fi';
+import { FiEdit2, FiTrash2, FiPlus, FiX, FiUpload, FiExternalLink } from 'react-icons/fi';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
 import { api } from '@/utils/api';
@@ -43,6 +43,8 @@ export const BannerEditor = ({ editMode, onDataChange }: BannerEditorProps) => {
   const [editingBanner, setEditingBanner] = useState<BannerFormData | null>(null);
   const [localBanners, setLocalBanners] = useState<BannerSource[]>([]);
 
+  const { data: products } = api.product.adminAll.useQuery();
+
   const { data: banners, isLoading, refetch } = api.banner.getAllAdmin.useQuery(
     { type: 'HERO' },
     {
@@ -76,6 +78,9 @@ export const BannerEditor = ({ editMode, onDataChange }: BannerEditorProps) => {
       onDataChange();
     },
   });
+  
+  const deleteCloudinaryImage = api.cloudinary.deleteImage.useMutation();
+  const deleteCloudinaryFolder = api.cloudinary.deleteFolder.useMutation();
 
   const handleEdit = (banner: BannerSource) => {
     setEditingBanner({
@@ -105,10 +110,63 @@ export const BannerEditor = ({ editMode, onDataChange }: BannerEditorProps) => {
     setShowModal(true);
   };
 
-  const handleDelete = (id: number) => {
+  const handleDelete = async (id: number) => {
     if (confirm('Bạn có chắc muốn xóa banner này?')) {
+      const bannerToDelete = localBanners.find(b => b.id === id);
+      if (bannerToDelete) {
+        // Delete image first and wait
+        if (bannerToDelete.imageUrl.includes('cloudinary.com')) {
+          try {
+            await deleteCloudinaryImage.mutateAsync({ imageUrl: bannerToDelete.imageUrl });
+          } catch (err) {
+            console.error("Failed to delete image:", err);
+          }
+        }
+        
+        // Then delete the folder
+        const folderPath = `kara-shop/system/banners/${bannerToDelete.title.trim()}`;
+        if (bannerToDelete.title.trim()) {
+          try {
+            await deleteCloudinaryFolder.mutateAsync({ folderPath });
+          } catch (err) {
+            console.error("Failed to delete folder:", err);
+          }
+        }
+      }
       deleteMutation.mutate({ id });
     }
+  };
+
+  const handleUpload = () => {
+    if (!window.cloudinary || !editingBanner) return;
+
+    const folder = editingBanner.title.trim() 
+      ? `kara-shop/system/banners/${editingBanner.title.trim()}`
+      : 'kara-shop/system/banners/new';
+
+    window.cloudinary.openUploadWidget(
+      {
+        cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+        uploadPreset: 'kara-shop',
+        sources: ['local', 'url', 'camera'],
+        multiple: false,
+        folder: folder,
+        clientAllowedFormats: ["png", "gif", "jpeg", "webp"],
+      },
+      async (error: Error | null, result: { event: string; info: { secure_url: string } }) => {
+        if (!error && result && result.event === 'success') {
+          const oldImageUrl = editingBanner.imageUrl;
+          const newImageUrl = result.info.secure_url;
+
+          setEditingBanner(prev => prev ? { ...prev, imageUrl: newImageUrl } : null);
+
+          // Delete old image from Cloudinary if it's a Cloudinary URL
+          if (oldImageUrl && oldImageUrl.includes('cloudinary.com') && oldImageUrl !== newImageUrl) {
+            deleteCloudinaryImage.mutate({ imageUrl: oldImageUrl });
+          }
+        }
+      }
+    );
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -190,8 +248,8 @@ export const BannerEditor = ({ editMode, onDataChange }: BannerEditorProps) => {
 
                 <div className="mx-auto flex h-full max-w-7xl flex-col items-center px-4 md:flex-row md:px-12 lg:px-20 relative z-10">
                   <div className="z-10 flex flex-1 flex-col items-center justify-center text-center md:items-start md:text-left">
-                    <span className={`mb-6 inline-block rounded-full px-5 py-2 text-[10px] font-bold uppercase tracking-widest ${banner.textColor === 'text-white' ? 'bg-white/10 border-white/20' : 'bg-black/5 border-black/10'} border backdrop-blur-md shadow-xl`}>
-                      <span className="mr-2 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-orange-500" />
+                    <span className="mb-6 inline-block rounded-full bg-gradient-to-r from-orange-600 to-orange-400 px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-white shadow-[0_10px_20px_-5px_rgba(249,115,22,0.4)] transition-all hover:scale-105">
+                      <span className="mr-2 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
                       {banner.discount || 'New Arrival'}
                     </span>
                     <h2 className={`mb-4 text-4xl font-bold leading-[0.95] tracking-tight md:text-6xl lg:text-6xl ${banner.textColor}`}>
@@ -297,16 +355,64 @@ export const BannerEditor = ({ editMode, onDataChange }: BannerEditorProps) => {
                 <label className="block text-sm font-bold text-zinc-700 mb-2">
                   URL Hình ảnh
                 </label>
-                <input
-                  type="text"
-                  value={editingBanner.imageUrl}
-                  onChange={(e) =>
-                    setEditingBanner({ ...editingBanner, imageUrl: e.target.value })
-                  }
-                  className="w-full rounded-lg border border-zinc-300 px-4 py-2 focus:border-orange-500 focus:outline-none"
-                  placeholder="https://... hoặc /camera_sample.png"
-                  required
-                />
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={editingBanner.imageUrl}
+                    onChange={(e) =>
+                      setEditingBanner({ ...editingBanner, imageUrl: e.target.value })
+                    }
+                    className="flex-1 rounded-lg border border-zinc-300 px-4 py-2 focus:border-orange-500 focus:outline-none"
+                    placeholder="https://... hoặc /camera_sample.png"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={handleUpload}
+                    className="flex items-center gap-2 rounded-lg bg-zinc-800 px-4 py-2 text-sm font-bold text-white hover:bg-zinc-900 transition-all"
+                  >
+                    <FiUpload />
+                    <span className="hidden sm:inline">Tải ảnh lên</span>
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-bold text-zinc-700 mb-2">
+                  Sản phẩm liên kết (Product ID)
+                </label>
+                <div className="flex gap-2">
+                  <div className="relative flex-1">
+                    <select
+                      value={editingBanner.productId || ''}
+                      onChange={(e) =>
+                        setEditingBanner({ ...editingBanner, productId: e.target.value ? Number(e.target.value) : undefined })
+                      }
+                      className="w-full rounded-lg border border-zinc-300 px-4 py-2 focus:border-orange-500 focus:outline-none bg-white appearance-none"
+                    >
+                      <option value="">-- Không liên kết sản phẩm --</option>
+                      {products?.map((product) => (
+                        <option key={product.id} value={product.id}>
+                          #{product.id} - {product.name}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-zinc-700">
+                      <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                  </div>
+                  {editingBanner.productId && (
+                    <button
+                      type="button"
+                      onClick={() => window.open(`/product/${editingBanner.productId}/slug`, '_blank')}
+                      className="flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-sm font-bold text-white hover:bg-blue-600 transition-all"
+                      title="Xem chi tiết sản phẩm"
+                    >
+                      <FiExternalLink />
+                      <span>Go</span>
+                    </button>
+                  )}
+                </div>
               </div>
 
               <div className="grid grid-cols-3 gap-4">

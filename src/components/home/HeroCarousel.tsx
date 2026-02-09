@@ -102,10 +102,10 @@ export const HeroCarousel = () => {
               <div className="mx-auto flex h-full max-w-7xl flex-col items-center px-4 md:flex-row md:px-12 lg:px-20 relative z-10">
                 <div className="z-10 flex flex-1 flex-col items-center justify-center text-center md:items-start md:text-left">
                   <span 
-                    className={`mb-6 inline-block rounded-full px-5 py-2 text-[10px] font-bold uppercase tracking-widest ${product.textColor === 'text-white' ? 'bg-white/10 border-white/20' : 'bg-black/5 border-black/10'} border backdrop-blur-md shadow-xl`}
+                    className="mb-6 inline-block rounded-full bg-gradient-to-r from-orange-600 to-orange-400 px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-white shadow-[0_10px_20px_-5px_rgba(249,115,22,0.4)] transition-all hover:scale-105"
                     data-aos="fade-up"
                   >
-                    <span className="mr-2 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-orange-500" />
+                    <span className="mr-2 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
                     {product.discount || 'New Arrival'}
                   </span>
                   <h2 
@@ -122,16 +122,18 @@ export const HeroCarousel = () => {
                   >
                     {product.subtitle}
                   </p>
-                  <Link
-                    href={`/product/${product.productId}/slug`}
-                    className={`${product.buttonColor} group relative flex items-center overflow-hidden rounded-full px-12 py-5 text-xs font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] active:scale-95`}
-                    data-aos="fade-up"
-                    data-aos-delay="300"
-                  >
-                    <div className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0" />
-                    <FiShoppingCart className="mr-3 text-xl transition-transform duration-300 group-hover:rotate-12" />
-                    <span className="relative">{t('common.shopNow')}</span>
-                  </Link>
+                  {product.productId > 0 && (
+                    <Link
+                      href={`/product/${product.productId}/slug`}
+                      className={`${product.buttonColor} group relative flex items-center overflow-hidden rounded-full px-12 py-5 text-xs font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] active:scale-95`}
+                      data-aos="fade-up"
+                      data-aos-delay="300"
+                    >
+                      <div className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0" />
+                      <FiShoppingCart className="mr-3 text-xl transition-transform duration-300 group-hover:rotate-12" />
+                      <span className="relative">{t('common.shopNow')}</span>
+                    </Link>
+                  )}
                 </div>
 
                 <div className="relative flex flex-1 items-center justify-center p-8 md:p-12 lg:p-16">

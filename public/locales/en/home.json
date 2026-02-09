@@ -22,6 +22,12 @@
     "newArrival": "New Arrival",
     "bestSeller": "Best Seller",
     "dealerPrice": "Dealer Price",
-    "journalistPrivilege": "Journalist Privilege"
+    "journalistPrivilege": "Journalist Privilege",
+    "hot": "HOT",
+    "sale": "SALE",
+    "new": "NEW",
+    "HOT": "HOT",
+    "SALE": "SALE",
+    "NEW": "NEW"
   }
 }

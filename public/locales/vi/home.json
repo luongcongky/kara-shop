@@ -22,6 +22,12 @@
     "newArrival": "Hàng mới về",
     "bestSeller": "Bán chạy nhất",
     "dealerPrice": "Giá Đại lý",
-    "journalistPrivilege": "Độc quyền nhà báo"
+    "journalistPrivilege": "Độc quyền nhà báo",
+    "hot": "HOT",
+    "sale": "GIẢM GIÁ",
+    "new": "MỚI",
+    "HOT": "HOT",
+    "SALE": "GIẢM GIÁ",
+    "NEW": "MỚI"
   }
 }
