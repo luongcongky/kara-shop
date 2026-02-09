@@ -52,6 +52,8 @@ const FALLBACK_PRODUCTS = [
 export const HeroCarousel = () => {
   const { t } = useTranslation('home');
   const { data: banners, isLoading } = api.banner.getAll.useQuery({ type: 'HERO' });
+  const { data: systemNameConfig } = api.systemConfig.getByKey.useQuery({ key: 'SYSTEM_NAME' });
+  const brand = systemNameConfig?.value || 'Kara Shop';
 
   if (isLoading) {
     return (
@@ -60,9 +62,6 @@ export const HeroCarousel = () => {
       </div>
     );
   }
-
-  const { data: systemNameConfig } = api.systemConfig.getByKey.useQuery({ key: 'SYSTEM_NAME' });
-  const brand = systemNameConfig?.value || 'Kara Shop';
 
   const products = banners && banners.length > 0 
     ? banners.map(b => ({
