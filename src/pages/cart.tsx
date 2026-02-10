@@ -131,7 +131,7 @@ const CartPage: NextPageWithLayout = () => {
                              {item.product?.name}
                           </Link>
                           <p className="text-sm font-medium text-gray-500 line-clamp-1">
-                             {item.product?.collections[0]?.collection.name}
+                             {item.product?.collections?.[0]?.collection?.name || 'Sản phẩm'}
                           </p>
                           <div className="mt-3 text-lg font-bold text-red-600">
                              {numberWithCommas(Math.floor(item.product?.price || 0))}đ

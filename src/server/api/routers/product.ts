@@ -97,8 +97,12 @@ export const productRouter = createTRPCRouter({
       }
 
       if (types) {
-        where.types = isTopArrivals && types === 'LENS'
-          ? { hasSome: [CollectionType.LENS, CollectionType.OTHERS] }
+        // Allow OTHERS type (accessories) when browsing a specific sub-collection slug
+        // or for the special Top Arrivals LENS case.
+        const shouldIncludeOthers = (isTopArrivals && types === CollectionType.LENS) || (slug && !isTopArrivals);
+        
+        where.types = shouldIncludeOthers
+          ? { hasSome: [types, CollectionType.OTHERS] }
           : { hasSome: [types] };
       } else if (!search) {
         // Default to CAMERA if neither types nor search is provided (backward compatibility)

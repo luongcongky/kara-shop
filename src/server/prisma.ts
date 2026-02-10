@@ -5,10 +5,15 @@
 import { PrismaClient } from '@prisma/client';
 import { env } from '@/env/server.mjs';
 
+// Extend PrismaClient to include custom properties
+interface ExtendedPrismaClient extends PrismaClient {
+  _queryListenerAttached?: boolean;
+}
+
 declare global {
   // allow global `var` declarations
   // eslint-disable-next-line no-var
-  var prisma: PrismaClient | undefined;
+  var prisma: ExtendedPrismaClient | undefined;
 }
 
 import { Pool } from 'pg';
@@ -19,22 +24,23 @@ const connectionString = env.DATABASE_URL;
 const pool = new Pool({ connectionString });
 const adapter = new PrismaPg(pool);
 
+const isDev = env.NODE_ENV === 'development';
+
 export const prisma =
   global.prisma ||
   new PrismaClient({
     adapter,
-    log:
-      env.NODE_ENV === 'development'
-        ? [
-            { emit: 'event', level: 'query' },
-            { emit: 'stdout', level: 'error' },
-            { emit: 'stdout', level: 'warn' },
-          ]
-        : ['error'],
+    log: isDev
+      ? [
+          { emit: 'event', level: 'query' },
+          { emit: 'stdout', level: 'error' },
+          { emit: 'stdout', level: 'warn' },
+        ]
+      : ['error'],
   });
 
-if (env.NODE_ENV === 'development') {
-  // @ts-expect-error - $on method exists but types may not be fully exposed
+if (isDev && !(prisma as ExtendedPrismaClient)._queryListenerAttached) {
+  (prisma as ExtendedPrismaClient)._queryListenerAttached = true;
   prisma.$on('query', (e: { query: string; params: string; duration: number }) => {
     console.log('Query: ' + e.query);
     console.log('Params: ' + e.params);

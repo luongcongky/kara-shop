@@ -29,7 +29,7 @@ export const navLinks: NavLink[] = [
   { name: 'lens', href: '/products/lens', collapsible: true },
   { name: 'sale', href: '/promotions' },
   { name: 'blog', href: '/blog' },
-  { name: 'contacts', href: '/contacts' },
+  { name: 'contacts', href: '/info/contact-us' },
 ];
 
 export const sideNavLinks: [string, IconType][] = [

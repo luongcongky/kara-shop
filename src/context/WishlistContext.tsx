@@ -22,6 +22,8 @@ export const WishlistProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   // Fetch wishlist from DB if logged in
   const { isLoading: isFetchingDB } = api.wishlist.getWishlist.useQuery(undefined, {
     enabled: !!session,
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    refetchOnWindowFocus: false,
     onSuccess: (data) => {
       setWishlistItems(data.map((item) => item.productId));
     },

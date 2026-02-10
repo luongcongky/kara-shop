@@ -63,7 +63,7 @@ export const FeaturedProductGrid = () => {
                 >
                   <div className="relative mb-4 h-48 w-full overflow-hidden rounded-2xl bg-zinc-50 p-6">
                     <Image 
-                      src={product.images[0]?.imageURL ? (product.images[0].imageURL.startsWith('http') ? product.images[0].imageURL : getCloudinaryUrl(product.images[0].imageURL)) : '/placeholder.png'}
+                      src={product.images[0]?.imageURL ? (product.images[0].imageURL.startsWith('http') ? product.images[0].imageURL : getCloudinaryUrl(product.images[0].imageURL)) : '/camera-placeholder.png'}
                       alt={product.name}
                       fill
                       className="object-contain transition-transform duration-500 group-hover:scale-110"

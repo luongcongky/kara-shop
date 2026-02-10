@@ -109,7 +109,7 @@ export const FlashSale = () => {
                 <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 h-20 w-32 bg-orange-500/10 blur-[40px] rounded-full group-hover:bg-orange-500/20 transition-colors" />
 
                 <Image
-                  src={fs.product.images[0]?.imageURL ? (fs.product.images[0].imageURL.startsWith('http') ? fs.product.images[0].imageURL : getCloudinaryUrl(fs.product.images[0].imageURL)) : '/placeholder.png'}
+                  src={fs.product.images[0]?.imageURL ? (fs.product.images[0].imageURL.startsWith('http') ? fs.product.images[0].imageURL : getCloudinaryUrl(fs.product.images[0].imageURL)) : '/camera-placeholder.png'}
                   alt={fs.product.name}
                   width={200}
                   height={200}

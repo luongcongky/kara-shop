@@ -9,8 +9,18 @@ interface PrimaryLayoutProps extends React.PropsWithChildren {
 }
 
 export const PrimaryLayout = ({ seo, children }: PrimaryLayoutProps) => {
-  const { data } = api.collection.all.useQuery();
-  const { data: systemConfig } = api.systemConfig.getAll.useQuery();
+  const { data } = api.collection.all.useQuery(undefined, {
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+  });
+  const { data: systemConfig } = api.systemConfig.getAll.useQuery(undefined, {
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+  });
 
   const logoUrl = systemConfig?.find((item: { key: string; value: string }) => item.key === 'SYSTEM_LOGO')?.value;
   const brandName = systemConfig?.find((item: { key: string; value: string }) => item.key === 'SYSTEM_NAME')?.value || 'Kara Shop';

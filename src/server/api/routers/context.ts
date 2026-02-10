@@ -179,4 +179,16 @@ export const contextRouter = createTRPCRouter({
         },
       });
     }),
+
+  getLatestByType: publicProcedure
+    .input(z.object({ type: z.nativeEnum(ContextType) }))
+    .query(async ({ input, ctx }) => {
+      return ctx.prisma.context.findFirst({
+        where: {
+          type: input.type,
+          status: 'published',
+        },
+        orderBy: { updatedAt: 'desc' },
+      });
+    }),
 });

@@ -9,11 +9,6 @@ export const wishlistRouter = createTRPCRouter({
         product: {
           include: {
             images: true,
-            collections: {
-              include: {
-                collection: true,
-              },
-            },
           },
         },
       },
@@ -85,11 +80,6 @@ export const wishlistRouter = createTRPCRouter({
           product: {
             include: {
               images: true,
-              collections: {
-                include: {
-                  collection: true,
-                },
-              },
             },
           },
         },

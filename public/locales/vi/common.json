@@ -15,5 +15,8 @@
     "price_high": "Giá trên 60 triệu",
     "desc": "MÔ TẢ SẢN PHẨM"
   },
-  "search_results_for": "Kết quả tìm kiếm cho"
+  "search_results_for": "Kết quả tìm kiếm cho",
+  "no_content_title": "Thông tin đang được cập nhật",
+  "no_content_desc": "Chúng tôi đang chuẩn bị nội dung tốt nhất để giới thiệu với bạn. Vui lòng quay lại sau nhé!",
+  "back_to_home": "Quay lại trang chủ"
 }

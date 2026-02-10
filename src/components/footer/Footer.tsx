@@ -26,26 +26,26 @@ export const Footer = ({ logoUrl, brandName }: { logoUrl?: string; brandName?: s
     {
       label: t('company'),
       links: [
-        [t('companyLinks.about'), '/about'],
-        [t('companyLinks.termOfUse'), '/term-of-use'],
-        [t('companyLinks.privacyPolicy'), '/privacy-policy'],
-        [t('companyLinks.howItWorks'), '/how-works'],
-        [t('companyLinks.contactUs'), '/contact-us'],
+        [t('companyLinks.about'), '/info/about-me'],
+        [t('companyLinks.termOfUse'), '/info/terms-of-use'],
+        [t('companyLinks.privacyPolicy'), '/info/privacy-policy'],
+        [t('companyLinks.howItWorks'), '/info/how-it-works'],
+        [t('companyLinks.contactUs'), '/info/contact-us'],
       ],
     },
     {
       label: t('support'),
       links: [
-        [t('supportLinks.supportCareer'), '/support'],
-        [t('supportLinks.service'), '/24-service'],
-        [t('supportLinks.quickChat'), '/quick-chat'],
+        [t('supportLinks.supportCareer'), '/info/career'],
+        [t('supportLinks.service'), '/info/24h-service'],
+        [t('supportLinks.quickChat'), '/info/quick-chat'],
       ],
     },
     {
       label: t('contact'),
       links: [
         [t('contactLinks.whatsapp'), '/whatsapp'],
-        [t('contactLinks.support'), '/24-service'],
+        [t('contactLinks.support'), '/info/24h-service'],
       ],
     },
   ];

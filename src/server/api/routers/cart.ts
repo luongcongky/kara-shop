@@ -9,11 +9,6 @@ export const cartRouter = createTRPCRouter({
         product: {
           include: {
             images: true,
-            collections: {
-              include: {
-                collection: true,
-              },
-            },
           },
         },
       },
@@ -151,11 +146,6 @@ export const cartRouter = createTRPCRouter({
           product: {
             include: {
               images: true,
-              collections: {
-                include: {
-                  collection: true,
-                },
-              },
             },
           },
         },

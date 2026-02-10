@@ -82,6 +82,7 @@ export const MegaMenu = ({
                 </Link>
                 <ul className="pt-2">
                   {collection.children
+                    .filter((subCollection) => subCollection._count?.products > 0) // Hide empty collections
                     .filter((subCollection) => subCollection.types.includes(type))
                     .map((subCollection) => (
                       <li key={subCollection.id}>

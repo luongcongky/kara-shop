@@ -8,6 +8,11 @@ export const defaultCollectionSelect =
     slug: true,
     types: true,
     parentId: true,
+    _count: {
+      select: {
+        products: true,
+      },
+    },
     children: {
       where: {
         useYn: true,
@@ -17,6 +22,11 @@ export const defaultCollectionSelect =
         name: true,
         slug: true,
         types: true,
+        _count: {
+          select: {
+            products: true,
+          },
+        },
       },
     },
   });

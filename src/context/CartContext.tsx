@@ -32,6 +32,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const utils = api.useContext();
   const { data: dbCart, isLoading: isDbLoading } = api.cart.getCart.useQuery(undefined, {
     enabled: status === 'authenticated',
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    refetchOnWindowFocus: false,
   });
 
   const syncCartMutation = api.cart.syncCart.useMutation({
