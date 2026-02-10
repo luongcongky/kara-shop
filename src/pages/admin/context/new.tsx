@@ -3,6 +3,7 @@ import { PrimaryLayout } from '@/layouts';
 import Image from 'next/image';
 import type { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -25,6 +26,7 @@ export const getStaticProps: GetStaticProps = async ({ locale = 'en' }) => {
 };
 
 const NewContext: NextPageWithLayout = () => {
+  const { t } = useTranslation('admin');
   const { data: session, status } = useSession();
   const router = useRouter();
   const utils = api.useUtils();
@@ -207,7 +209,7 @@ const NewContext: NextPageWithLayout = () => {
               >
                 {Object.values(ContextType).map((type) => (
                   <option key={type} value={type}>
-                    {type}
+                    {t(`type.${type}`)}
                   </option>
                 ))}
               </select>

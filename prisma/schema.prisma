@@ -249,6 +249,12 @@ enum ContextType {
   TECHNICAL
   STATIC_PAGE
   JOB
+  TERMS_OF_USE
+  PRIVACY_POLICY
+  HOW_IT_WORKS
+  CONTACT_US
+  SERVICE_24H
+  QUICK_CHAT
 
   @@schema("ecommerce")
 }

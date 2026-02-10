@@ -1,0 +1,16 @@
+{
+  "type": {
+    "PROMOTION": "Promotion",
+    "ABOUT_ME": "About Us",
+    "BLOG": "Blog Post",
+    "TECHNICAL": "Technical",
+    "STATIC_PAGE": "Static Page",
+    "JOB": "Job / Career",
+    "TERMS_OF_USE": "Terms of Use",
+    "PRIVACY_POLICY": "Privacy Policy",
+    "HOW_IT_WORKS": "How It Works",
+    "CONTACT_US": "Contact Us",
+    "SERVICE_24H": "24h Service",
+    "QUICK_CHAT": "Quick Chat"
+  }
+}

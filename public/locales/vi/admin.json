@@ -1,0 +1,16 @@
+{
+  "type": {
+    "PROMOTION": "Khuyến mãi",
+    "ABOUT_ME": "Về chúng tôi",
+    "BLOG": "Bài viết Blog",
+    "TECHNICAL": "Thông số kỹ thuật",
+    "STATIC_PAGE": "Trang tĩnh",
+    "JOB": "Hỗ trợ nghề nghiệp",
+    "TERMS_OF_USE": "Điều khoản sử dụng",
+    "PRIVACY_POLICY": "Chính sách bảo mật",
+    "HOW_IT_WORKS": "Cách hoạt động",
+    "CONTACT_US": "Liên hệ chúng tôi",
+    "SERVICE_24H": "Dịch vụ 24h",
+    "QUICK_CHAT": "Trò chuyện nhanh"
+  }
+}
