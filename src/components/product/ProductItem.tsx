@@ -227,12 +227,12 @@ export const ProductItem = ({
           ))}
         </div>
 
-        <div>
+        <Link href={productLink} className="hover:text-orange-500 transition-colors duration-200">
           <h2 className="text-base font-medium">{name}</h2>
           <h3 className="text-xs font-normal capitalize text-neutral-400">
             {displayName}
           </h3>
-        </div>
+        </Link>
 
         <div className="flex flex-col gap-1">
           <div className="flex items-center justify-between">

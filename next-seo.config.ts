@@ -1,16 +1,16 @@
 import { DefaultSeoProps } from 'next-seo';
 
 const config: DefaultSeoProps = {
-  defaultTitle: 'KARA Shop',
-  titleTemplate: '%s | KARA Shop',
+  defaultTitle: 'Shop',
+  titleTemplate: '%s | Shop',
   description:
-    'KARA Shop - Chuyên cung cấp máy ảnh và ống kính chính hãng, giá tốt nhất thị trường',
-  canonical: 'https://kara-shop-tungjournalist.vercel.app/',
+    'Shop - Chuyên cung cấp máy ảnh và ống kính chính hãng, giá tốt nhất thị trường',
+  canonical: 'https://kara-shop.vercel.app/',
   openGraph: {
     type: 'website',
     locale: 'en_IE',
-    url: 'https://kara-shop-tungjournalist.vercel.app/',
-    siteName: 'KARA Shop',
+    url: 'https://kara-shop.vercel.app/',
+    siteName: 'Shop',
   },
   twitter: {
     handle: '@handle',

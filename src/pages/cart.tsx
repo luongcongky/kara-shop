@@ -87,7 +87,7 @@ const CartPage: NextPageWithLayout = () => {
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <Head>
-        <title>Giỏ hàng | KARA Shop</title>
+        <title>Giỏ hàng | TUNG Shop</title>
       </Head>
 
       <div className="flex items-center gap-4 mb-10">
@@ -111,7 +111,7 @@ const CartPage: NextPageWithLayout = () => {
       ) : (
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           {/* Items List */}
-          <div className="lg:col-span-8 space-y-8">
+          <div className="lg:col-span-7 space-y-8">
             <div className="rounded-3xl border border-gray-100 bg-white shadow-sm overflow-hidden">
                <div className="divide-y divide-gray-100">
                  {items.map((item) => (
@@ -176,33 +176,42 @@ const CartPage: NextPageWithLayout = () => {
               </h3>
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                  <div>
-                    <label className="mb-2 block text-sm font-bold text-gray-700">Họ và tên</label>
+                    <label className="mb-2 block text-sm font-bold text-gray-700">
+                      Họ và tên <span className="text-red-500">*</span>
+                    </label>
                     <input 
                       type="text" 
                       value={shippingName}
                       onChange={(e) => setShippingName(e.target.value)}
                       className="w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium focus:border-violet-500 focus:bg-white focus:ring-violet-500"
                       placeholder="Nhập họ tên người nhận"
+                      required
                     />
                  </div>
                  <div>
-                    <label className="mb-2 block text-sm font-bold text-gray-700">Số điện thoại</label>
+                    <label className="mb-2 block text-sm font-bold text-gray-700">
+                      Số điện thoại <span className="text-red-500">*</span>
+                    </label>
                     <input 
-                      type="text" 
+                      type="tel" 
                       value={shippingPhone}
                       onChange={(e) => setShippingPhone(e.target.value)}
                       className="w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium focus:border-violet-500 focus:bg-white focus:ring-violet-500"
                       placeholder="Nhập số điện thoại"
+                      required
                     />
                  </div>
                  <div className="md:col-span-2">
-                    <label className="mb-2 block text-sm font-bold text-gray-700">Địa chỉ nhận hàng</label>
+                    <label className="mb-2 block text-sm font-bold text-gray-700">
+                      Địa chỉ nhận hàng <span className="text-red-500">*</span>
+                    </label>
                     <textarea 
                       value={shippingAddress}
                       onChange={(e) => setShippingAddress(e.target.value)}
                       rows={3}
                       className="w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium focus:border-violet-500 focus:bg-white focus:ring-violet-500"
                       placeholder="Nhập địa chỉ chi tiết (Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành phố)"
+                      required
                     />
                  </div>
               </div>
@@ -216,7 +225,7 @@ const CartPage: NextPageWithLayout = () => {
           </div>
 
           {/* Summary Sidebar */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-5">
             <div className="sticky top-24 rounded-3xl border border-gray-100 bg-white p-8 shadow-md">
                <h3 className="text-xl font-bold text-zinc-900 mb-8 tracking-tight">Tổng cộng</h3>
                
@@ -262,6 +271,7 @@ const CartPage: NextPageWithLayout = () => {
                      </div>
                   </label>
 
+                  {/* 
                   <label className={`flex items-center gap-4 rounded-xl border p-4 cursor-pointer transition-all ${paymentMethod === 'MOMO' ? 'border-pink-600 bg-pink-50/50 ring-1 ring-pink-600' : 'border-gray-200 hover:border-gray-300'}`}>
                      <input 
                        type="radio" 
@@ -278,22 +288,29 @@ const CartPage: NextPageWithLayout = () => {
                      <div className="h-8 w-8 bg-pink-600 rounded-lg flex items-center justify-center text-white font-bold text-xs shadow-sm">
                         M
                      </div>
-                  </label>
+                  </label> 
+                  */}
 
-                  <label className={`flex items-center gap-4 rounded-xl border p-4 cursor-pointer transition-all ${paymentMethod === 'PAYOS' ? 'border-blue-600 bg-blue-50/50 ring-1 ring-blue-600' : 'border-gray-200 hover:border-gray-300'}`}>
+                  {/* Disabled PayOS */}
+                  <label className="flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 p-4 opacity-70 cursor-not-allowed transition-all hover:bg-gray-50">
                      <input 
                        type="radio" 
                        name="paymentMethod" 
                        value="PAYOS" 
-                       checked={paymentMethod === 'PAYOS'}
-                       onChange={() => setPaymentMethod('PAYOS')}
-                       className="h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-600"
+                       checked={false}
+                       disabled
+                       className="h-5 w-5 text-gray-400 border-gray-300 focus:ring-gray-400 bg-gray-100"
                      />
                      <div className="flex-1">
-                        <span className="block font-bold text-zinc-900">Thanh toán qua Timo / payOS</span>
-                        <span className="text-xs text-gray-500">Chuyển khoản QR code nhanh chóng ({'>'} 2.000đ)</span>
+                        <div className="flex items-center gap-2">
+                            <span className="block font-bold text-zinc-500">Thanh toán chuyển khoản</span>
+                            <span className="inline-block rounded-md bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-600 border border-amber-200 uppercase tracking-wide">
+                                Sắp ra mắt
+                            </span>
+                        </div>
+                        <span className="text-xs text-gray-400">Chuyển khoản QR code nhanh chóng</span>
                      </div>
-                     <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xs shadow-sm">
+                     <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xs shadow-sm grayscale opacity-50">
                         P
                      </div>
                   </label>
@@ -340,7 +357,7 @@ const CartPage: NextPageWithLayout = () => {
 
 CartPage.getLayout = function getLayout(page: ReactElement) {
   return (
-    <PrimaryLayout seo={{ title: 'Giỏ hàng', description: 'Giỏ hàng của bạn tại KARA Shop' }}>
+    <PrimaryLayout seo={{ title: 'Giỏ hàng', description: 'Giỏ hàng của bạn tại TUNG Shop' }}>
       {page}
     </PrimaryLayout>
   );

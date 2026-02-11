@@ -69,7 +69,9 @@ export const FeaturedProductGrid = () => {
                       className="object-contain transition-transform duration-500 group-hover:scale-110"
                     />
                   </div>
-                  <h4 className="mb-2 line-clamp-1 text-sm font-bold text-zinc-900 group-hover:text-orange-600 transition-colors">{product.name}</h4>
+                  <Link href={`/product/${product.id}/slug`}>
+                    <h4 className="mb-2 line-clamp-1 text-sm font-bold text-zinc-900 group-hover:text-orange-600 transition-colors uppercase">{product.name}</h4>
+                  </Link>
                   <div className="flex items-center justify-between">
                     <span className="text-base font-bold text-red-600">{numberWithCommas(Math.floor(product.price))}đ</span>
                     <button className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-900 text-white transition-all hover:bg-orange-500 active:scale-90">

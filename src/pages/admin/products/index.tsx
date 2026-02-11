@@ -3,11 +3,13 @@ import { PrimaryLayout } from '@/layouts';
 import type { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { api } from '@/utils/api';
 import Link from 'next/link';
-import { FiEdit, FiTrash2, FiPlus, FiCopy } from 'react-icons/fi';
+import { FiEdit, FiTrash2, FiPlus, FiCopy, FiSearch } from 'react-icons/fi';
+import { CollectionType } from '@prisma/client';
+import { useDebounce } from '@/hooks';
 
 import { isAdmin } from '@/utils/session';
 
@@ -24,9 +26,22 @@ const ProductManagement: NextPageWithLayout = () => {
   const router = useRouter();
   const utils = api.useContext();
 
-  const { data: products, isLoading } = api.product.adminAll.useQuery(undefined, {
-    enabled: isAdmin(session),
-  });
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedType, setSelectedType] = useState<CollectionType | ''>('');
+  const [publishedFilter, setPublishedFilter] = useState<'all' | 'true' | 'false'>('all');
+
+  const debouncedSearch = useDebounce(searchTerm, 500);
+
+  const { data: products, isLoading } = api.product.adminAll.useQuery(
+    {
+      search: debouncedSearch || undefined,
+      type: selectedType || undefined,
+      published: publishedFilter === 'all' ? undefined : publishedFilter === 'true',
+    },
+    {
+      enabled: isAdmin(session),
+    }
+  );
 
   const deleteProduct = api.product.delete.useMutation({
     onSuccess: () => {
@@ -86,6 +101,50 @@ const ProductManagement: NextPageWithLayout = () => {
         >
           <FiPlus /> Thêm sản phẩm
         </Link>
+      </div>
+
+      <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-4">
+        <div className="relative">
+          <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Tìm kiếm sản phẩm..."
+            className="w-full rounded-lg border border-gray-300 py-2 pl-10 pr-4 focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+        <select
+          className="rounded-lg border border-gray-300 px-4 py-2 focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
+          value={selectedType}
+          onChange={(e) => setSelectedType(e.target.value as CollectionType | '')}
+        >
+          <option value="">Tất cả danh mục</option>
+          {Object.values(CollectionType).map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
+        <select
+          className="rounded-lg border border-gray-300 px-4 py-2 focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
+          value={publishedFilter}
+          onChange={(e) => setPublishedFilter(e.target.value as 'all' | 'true' | 'false')}
+        >
+          <option value="all">Tất cả trạng thái</option>
+          <option value="true">Published</option>
+          <option value="false">Rỗng</option>
+        </select>
+        <button
+          onClick={() => {
+            setSearchTerm('');
+            setSelectedType('');
+            setPublishedFilter('all');
+          }}
+          className="rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-600 transition-colors hover:bg-gray-200"
+        >
+          Xóa bộ lọc
+        </button>
       </div>
 
       <div className="overflow-x-auto rounded-lg bg-white shadow-md">

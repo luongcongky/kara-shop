@@ -63,7 +63,7 @@ export const Header = ({ collections, logoUrl, brandName }: { collections: Colle
               <Image
                 priority
                 src={logoUrl || "/logo.png"}
-                alt={`${brandName || 'Kara Shop'} logo`}
+                alt={`${brandName || 'Shop'} logo`}
                 width={100}
                 height={35}
                 quality={100}

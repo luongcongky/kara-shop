@@ -35,7 +35,7 @@ const SearchPage: NextPageWithLayout = () => {
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <Head>
-        <title>{q ? `${t('search')}: ${q}` : t('search')} | KARA Shop</title>
+        <title>{q ? `${t('search')}: ${q}` : t('search')} | TUNG Shop</title>
       </Head>
 
       <div className="mb-10">
@@ -79,7 +79,7 @@ SearchPage.getLayout = function getLayout(page: ReactElement) {
     <PrimaryLayout 
       seo={{ 
         title: 'Tìm kiếm sản phẩm', 
-        description: 'Tìm kiếm sản phẩm tại KARA Shop' 
+        description: 'Tìm kiếm sản phẩm tại TUNG Shop' 
       }}
     >
       {page}

@@ -177,15 +177,32 @@ export const productRouter = createTRPCRouter({
         },
       });
     }),
-  adminAll: adminProcedure.query(async ({ ctx }) => {
-    return ctx.prisma.product.findMany({
-      select: {
-        ...defaultProductSelect,
-        images: true,
-      },
-      orderBy: { id: 'desc' },
-    });
-  }),
+  adminAll: adminProcedure
+    .input(
+      z.object({
+        search: z.string().optional(),
+        type: z.nativeEnum(CollectionType).optional(),
+        published: z.boolean().optional(),
+      }).optional()
+    )
+    .query(async ({ input, ctx }) => {
+      const { search, type, published } = input ?? {};
+
+      const where: Prisma.ProductWhereInput = {
+        name: search ? { contains: search, mode: 'insensitive' } : undefined,
+        types: type ? { hasSome: [type] } : undefined,
+        published: published !== undefined ? published : undefined,
+      };
+
+      return ctx.prisma.product.findMany({
+        where,
+        select: {
+          ...defaultProductSelect,
+          images: true,
+        },
+        orderBy: { id: 'desc' },
+      });
+    }),
   create: adminProcedure
     .input(
       z.object({

@@ -28,6 +28,7 @@ const AdminSettingsPage = () => {
     HOTLINE: '',
     SOCIAL_ZALO: '',
     SOCIAL_FACEBOOK: '',
+    NOTIFICATION_EMAIL: '',
   });
 
   const { data: existingConfig, isLoading, refetch } = api.systemConfig.getAll.useQuery();
@@ -177,7 +178,7 @@ const AdminSettingsPage = () => {
                 type="text"
                 value={config.SYSTEM_NAME}
                 onChange={(e) => setConfig(prev => ({ ...prev, SYSTEM_NAME: e.target.value }))}
-                placeholder="Ví dụ: KARA Shop"
+                placeholder="Ví dụ: My Shop"
                 className="w-full rounded-xl border border-gray-300 px-4 py-3 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
               />
               <p className="mt-2 text-xs text-gray-500">* Tên này sẽ hiển thị ở tiêu đề trang và chân trang.</p>
@@ -232,6 +233,21 @@ const AdminSettingsPage = () => {
                 className="w-full rounded-xl border border-gray-300 px-4 py-3 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
               />
               <p className="mt-2 text-xs text-gray-500">* Dùng để tạo link chat Messenger (m.me/id).</p>
+            </div>
+
+            {/* Notification Email */}
+            <div className="md:col-span-2">
+              <label className="mb-3 flex items-center gap-2 text-sm font-bold text-gray-700">
+                <FiSettings className="text-violet-600" /> Email nhận thông báo đơn hàng
+              </label>
+              <input
+                type="email"
+                value={config.NOTIFICATION_EMAIL}
+                onChange={(e) => setConfig(prev => ({ ...prev, NOTIFICATION_EMAIL: e.target.value }))}
+                placeholder="admin@example.com"
+                className="w-full rounded-xl border border-gray-300 px-4 py-3 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
+              />
+              <p className="mt-2 text-xs text-gray-500">* Hệ thống sẽ gửi thông báo đến email này khi có đơn hàng mới hoặc đơn hàng bị hủy.</p>
             </div>
 
           </div>

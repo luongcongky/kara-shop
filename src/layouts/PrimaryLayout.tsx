@@ -23,11 +23,11 @@ export const PrimaryLayout = ({ seo, children }: PrimaryLayoutProps) => {
   });
 
   const logoUrl = systemConfig?.find((item: { key: string; value: string }) => item.key === 'SYSTEM_LOGO')?.value;
-  const brandName = systemConfig?.find((item: { key: string; value: string }) => item.key === 'SYSTEM_NAME')?.value || 'Kara Shop';
+  const brandName = systemConfig?.find((item: { key: string; value: string }) => item.key === 'SYSTEM_NAME')?.value || 'Shop';
 
   const dynamicSeo = {
     ...seo,
-    title: seo.title?.includes('|') ? seo.title : `${seo.title} | ${brandName}`,
+    title: seo.title?.includes(brandName) ? seo.title : `${seo.title} | ${brandName}`,
   };
 
   return (

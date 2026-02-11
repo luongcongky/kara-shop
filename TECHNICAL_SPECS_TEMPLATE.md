@@ -1,6 +1,6 @@
 # Camera Technical Specifications Template
 
-This template defines the standard set of attributes (attributeName) for camera products in the Kara Shop system. Use these names consistently to ensure uniform display across the product detail pages.
+This template defines the standard set of attributes (attributeName) for camera products in the TUNG Shop system. Use these names consistently to ensure uniform display across the product detail pages.
 
 ## 1. Physical Specifications (Thông số vật lý)
 - **Loại pin**: (e.g., NP-FZ100 Lithium-Ion)

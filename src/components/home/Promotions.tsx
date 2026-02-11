@@ -43,7 +43,7 @@ export const Promotions = () => {
   const { t } = useTranslation('home');
   const { data: promotions, isLoading } = api.promotion.getAll.useQuery();
   const { data: systemNameConfig } = api.systemConfig.getByKey.useQuery({ key: 'SYSTEM_NAME' });
-  const brand = systemNameConfig?.value || 'Kara Shop';
+  const brand = systemNameConfig?.value || 'Shop';
 
   const displayPromotions = promotions && promotions.length > 0 ? promotions : FALLBACK_PROMO_DATA;
 

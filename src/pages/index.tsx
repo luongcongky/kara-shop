@@ -32,7 +32,7 @@ const Home: NextPageWithLayout = () => {
         <FlashSale />
       </div>
 
-      {/* 5. Professional Services: Ưu đãi từ KARA */}
+      {/* 5. Professional Services: Ưu đãi từ hệ thống */}
       <Promotions />
     </div>
   );

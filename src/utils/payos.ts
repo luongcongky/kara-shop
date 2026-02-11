@@ -7,3 +7,5 @@ const payOS = new PayOS({
 });
 
 export default payOS;
+export { PayOS };
+

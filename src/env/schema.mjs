@@ -21,6 +21,11 @@ export const serverSchema = z.object({
   GOOGLE_CLIENT_SECRET: z.string(),
   CLOUDINARY_API_KEY: z.string(),
   CLOUDINARY_API_SECRET: z.string(),
+  
+  // Email Configuration
+  EMAIL_USER: z.string().optional(),
+  EMAIL_PASS: z.string().optional(),
+  EMAIL_FROM: z.string().optional(),
 });
 
 /**

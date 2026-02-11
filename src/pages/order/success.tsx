@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
@@ -7,6 +6,16 @@ import { PrimaryLayout } from '@/layouts';
 import { ReactElement } from 'react';
 import { FiCheckCircle, FiShoppingBag, FiHome } from 'react-icons/fi';
 import { NextPageWithLayout } from '../_app';
+import { GetStaticProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
+export const getStaticProps: GetStaticProps = async ({ locale = 'en' }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common', 'header', 'footer'])),
+    },
+  };
+};
 
 const OrderSuccessPage: NextPageWithLayout = () => {
   const router = useRouter();
@@ -16,7 +25,7 @@ const OrderSuccessPage: NextPageWithLayout = () => {
   return (
     <div className="flex min-h-[70vh] items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
       <Head>
-        <title>Đặt hàng thành công | KARA Shop</title>
+        <title>Đặt hàng thành công</title>
       </Head>
 
       <div className="mx-auto w-full max-w-md text-center">
@@ -27,7 +36,7 @@ const OrderSuccessPage: NextPageWithLayout = () => {
                 </div>
                 <h1 className="mb-2 text-3xl font-bold tracking-tight text-zinc-900">Đặt hàng thành công!</h1>
                 <p className="mb-8 text-gray-500">
-                  Cảm ơn bạn đã mua sắm tại KARA Shop. <br />
+                  Cảm ơn bạn đã mua sắm tại TUNG Shop. <br />
                   Mã đơn hàng của bạn là: <span className="font-bold text-zinc-900">#{orderId}</span>
                 </p>
                 <div className="space-y-3">

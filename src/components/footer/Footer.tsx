@@ -20,7 +20,7 @@ const socialMedias: [IconType, string][] = [
 
 export const Footer = ({ logoUrl, brandName }: { logoUrl?: string; brandName?: string }) => {
   const { t } = useTranslation('footer');
-  const brand = brandName || 'Kara Shop';
+  const brand = brandName || 'Shop';
 
   const footerLinks = [
     {

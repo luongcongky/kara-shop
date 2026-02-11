@@ -3,6 +3,7 @@ import { createTRPCRouter, protectedProcedure, adminProcedure } from '../trpc';
 import { TRPCError } from '@trpc/server';
 import crypto from 'crypto';
 import payOS from '@/utils/payos';
+import { sendAdminOrderNotification, sendAdminOrderCancellationNotification } from '../../mailer';
 
 export const orderRouter = createTRPCRouter({
   // Get all orders (Admin only)
@@ -65,35 +66,79 @@ export const orderRouter = createTRPCRouter({
     }),
 
   // Get my orders (Customer)
-  getMyOrders: protectedProcedure.query(async ({ ctx }) => {
-    const userId = ctx.session.user.id;
+  getMyOrders: protectedProcedure
+    .input(
+      z.object({
+        status: z.enum(['PENDING', 'PAID', 'SHIPPED', 'DELIVERED', 'CANCELLED']).optional(),
+        search: z.string().optional(),
+        limit: z.number().min(1).max(50).default(20),
+        offset: z.number().min(0).default(0),
+      }).optional()
+    )
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.session.user.id;
+      const { status, search, limit = 20, offset = 0 } = input || {};
 
-    return ctx.prisma.order.findMany({
-      where: { userId },
-      include: {
-        items: {
+      // Build where clause
+      const where: {
+        userId: string;
+        status?: string;
+        OR?: Array<{
+          id?: { contains: string; mode: 'insensitive' };
+          items?: { some: { product: { name: { contains: string; mode: 'insensitive' } } } };
+        }>;
+      } = { userId };
+      
+      if (status) {
+        where.status = status;
+      }
+
+      if (search) {
+        where.OR = [
+          { id: { contains: search, mode: 'insensitive' } },
+          { items: { some: { product: { name: { contains: search, mode: 'insensitive' } } } } },
+        ];
+      }
+
+      const [orders, total] = await Promise.all([
+        ctx.prisma.order.findMany({
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          where: where as any,
           include: {
-            product: {
-              select: {
-                id: true,
-                name: true,
-                price: true,
-                images: {
-                  take: 1,
+            items: {
+              include: {
+                product: {
                   select: {
-                    imageURL: true,
+                    id: true,
+                    name: true,
+                    price: true,
+                    images: {
+                      take: 1,
+                      select: {
+                        imageURL: true,
+                      },
+                    },
                   },
                 },
               },
             },
           },
-        },
-      },
-      orderBy: {
-        createdAt: 'desc',
-      },
-    });
-  }),
+          orderBy: {
+            createdAt: 'desc',
+          },
+          take: limit,
+          skip: offset,
+        }),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ctx.prisma.order.count({ where: where as any }),
+      ]);
+
+      return {
+        orders,
+        total,
+        hasMore: offset + limit < total,
+      };
+    }),
 
   // Update order status (Admin only)
   updateOrderStatus: adminProcedure
@@ -106,10 +151,91 @@ export const orderRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const { orderId, status } = input;
 
-      return ctx.prisma.order.update({
+      const updatedOrder = await ctx.prisma.order.update({
         where: { id: orderId },
         data: { status },
       });
+
+      if (status === 'CANCELLED') {
+        const [notificationEmail, systemName] = await Promise.all([
+          ctx.prisma.systemConfig.findUnique({ where: { key: 'NOTIFICATION_EMAIL' } }),
+          ctx.prisma.systemConfig.findUnique({ where: { key: 'SYSTEM_NAME' } }),
+        ]);
+
+        if (notificationEmail?.value) {
+          void sendAdminOrderCancellationNotification(
+            notificationEmail.value,
+            {
+              id: updatedOrder.id,
+              shippingName: updatedOrder.shippingName,
+              totalAmount: updatedOrder.totalAmount,
+              reason: 'Hủy bởi Quản trị viên',
+            },
+            systemName?.value
+          );
+        }
+      }
+
+      return updatedOrder;
+    }),
+
+  // Cancel order (Customer - only PENDING orders)
+  cancelOrder: protectedProcedure
+    .input(z.object({ orderId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const { orderId } = input;
+      const userId = ctx.session.user.id;
+
+      // Find the order and verify ownership
+      const order = await ctx.prisma.order.findUnique({
+        where: { id: orderId },
+      });
+
+      if (!order) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'Order not found',
+        });
+      }
+
+      if (order.userId !== userId) {
+        throw new TRPCError({
+          code: 'FORBIDDEN',
+          message: 'You can only cancel your own orders',
+        });
+      }
+
+      if (order.status !== 'PENDING') {
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message: 'Only pending orders can be cancelled',
+        });
+      }
+
+      const cancelledOrder = await ctx.prisma.order.update({
+        where: { id: orderId },
+        data: { status: 'CANCELLED' },
+      });
+
+      const [notificationEmail, systemName] = await Promise.all([
+        ctx.prisma.systemConfig.findUnique({ where: { key: 'NOTIFICATION_EMAIL' } }),
+        ctx.prisma.systemConfig.findUnique({ where: { key: 'SYSTEM_NAME' } }),
+      ]);
+
+      if (notificationEmail?.value) {
+        void sendAdminOrderCancellationNotification(
+          notificationEmail.value,
+          {
+            id: cancelledOrder.id,
+            shippingName: cancelledOrder.shippingName,
+            totalAmount: cancelledOrder.totalAmount,
+            reason: 'Hủy bởi Khách hàng',
+          },
+          systemName?.value
+        );
+      }
+
+      return cancelledOrder;
     }),
 
   create: protectedProcedure
@@ -173,6 +299,30 @@ export const orderRouter = createTRPCRouter({
 
         return newOrder;
       });
+
+      // Send notifications
+      const [notificationEmail, systemName] = await Promise.all([
+        ctx.prisma.systemConfig.findUnique({ where: { key: 'NOTIFICATION_EMAIL' } }),
+        ctx.prisma.systemConfig.findUnique({ where: { key: 'SYSTEM_NAME' } }),
+      ]);
+
+      if (notificationEmail?.value) {
+        void sendAdminOrderNotification(
+          notificationEmail.value,
+          {
+            id: order.id,
+            totalAmount: order.totalAmount,
+            shippingName: order.shippingName,
+            shippingPhone: order.shippingPhone,
+            items: cartItems.map((item) => ({
+              product: { name: item.product.name },
+              quantity: item.quantity,
+              price: item.product.price,
+            })),
+          },
+          systemName?.value
+        );
+      }
 
       // 4. Handle Payment
       if (paymentMethod === 'MOMO') {
@@ -261,12 +411,14 @@ export const orderRouter = createTRPCRouter({
                  message: 'Failed to connect to Momo',
              });
         }
-      
+      }
+
       // 5. Handle PayOS
       if (paymentMethod === 'PAYOS') {
         try {
           // PayOS requires a unique integer orderCode. 
           // We generate a unique number and save it to the database for matching.
+          // Ensure it's within PayOS limits (usually 32-bit int safe range)
           const orderCode = Number(String(Date.now()).slice(-6) + Math.floor(Math.random() * 1000));
           
           const domain = process.env.NEXTAUTH_URL || 'http://localhost:3000';
@@ -277,17 +429,23 @@ export const orderRouter = createTRPCRouter({
             data: { payOSOrderCode: orderCode }
           });
           
+          // Limit description to 25 chars due to PayOS bank transfer content limits
+          const description = `DH${orderCode}`; 
+
           const paymentData = {
             orderCode: orderCode,
             amount: totalAmount,
-            description: `DH${orderCode}`, // Short description as requested
+            description: description,
             items: cartItems.map(item => ({
-                name: item.product.name,
+                name: item.product.name.substring(0, 50), // Limit name length
                 quantity: item.quantity,
                 price: item.product.price
             })),
-            cancelUrl: `${domain}/cart`, 
+            cancelUrl: `${domain}/cart?cancel=true`, 
             returnUrl: `${domain}/order/success?orderId=${order.id}`,
+            // buyerName: shippingName,
+            // buyerPhone: shippingPhone,
+            // buyerAddress: shippingAddress,
           };
           
           const paymentLinkData = await payOS.paymentRequests.create(paymentData);
@@ -297,20 +455,22 @@ export const orderRouter = createTRPCRouter({
             payUrl: paymentLinkData.checkoutUrl,
           };
           
-        } catch (error) {
+        } catch (error: unknown) {
              console.error("PayOS Creation Error:", error);
+             // Log full error for debugging
+             if (error instanceof Error) console.error(error.stack);
+             
              throw new TRPCError({
                  code: 'INTERNAL_SERVER_ERROR',
-                 message: 'Failed to create PayOS payment link',
+                 message: 'Failed to create PayOS payment link. Please try again later.',
              });
         }
       }
-      }
 
-      // COD
+      // If paymentMethod is COD or not handled by MOMO/PAYOS, return order details
       return {
         orderId: order.id,
-        payUrl: `/order/success?orderId=${order.id}`,
+        payUrl: null, // No external payment URL for COD
       };
     }),
 });

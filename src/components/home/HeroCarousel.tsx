@@ -53,7 +53,7 @@ export const HeroCarousel = () => {
   const { t } = useTranslation('home');
   const { data: banners, isLoading } = api.banner.getAll.useQuery({ type: 'HERO' });
   const { data: systemNameConfig } = api.systemConfig.getByKey.useQuery({ key: 'SYSTEM_NAME' });
-  const brand = systemNameConfig?.value || 'Kara Shop';
+  const brand = systemNameConfig?.value || 'Shop';
 
   if (isLoading) {
     return (
