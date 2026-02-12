@@ -52,14 +52,7 @@ const Products: NextPageWithLayout = () => {
       colors: [colors].flat(1).filter(Boolean) as ProductColor[],
       page: page && Number(page),
       rate: rate && Number(rate),
-      gte: price ? (price === '$' ? 0 : price === '$$' ? 10 : 100) : undefined,
-      lte: price
-        ? price === '$'
-          ? 10
-          : price === '$$'
-          ? 100
-          : 1000000
-        : undefined,
+      price,
     }),
     [colors, page, price, rate, slug, desc]
   );
