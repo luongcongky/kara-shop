@@ -4,7 +4,7 @@ import {
   Prisma,
   ProductColor,
 } from '@prisma/client';
-import { publicProcedure, createTRPCRouter, adminProcedure } from '../trpc';
+import { publicProcedure, createTRPCRouter, adminProcedure, protectedProcedure } from '../trpc';
 import { defaultCollectionSelect } from './collection';
 
 const defaultProductSelect = Prisma.validator<Prisma.ProductSelect>()({
@@ -477,5 +477,48 @@ export const productRouter = createTRPCRouter({
             attributes: true,
         },
       });
+    }),
+
+  createReview: protectedProcedure
+    .input(z.object({
+      rating: z.number().min(1).max(5),
+      comment: z.string().min(1, "Vui lòng nhập nội dung đánh giá"),
+      productId: z.number(),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      const { rating, comment, productId } = input;
+      const userName = ctx.session.user.name || "Khách hàng";
+      
+      const product = await ctx.prisma.product.findUnique({
+        where: { id: productId },
+        include: { reviews: true }
+      });
+
+      if (!product) {
+        throw new Error('Sản phẩm không tồn tại');
+      }
+
+      // Create the review
+      const review = await ctx.prisma.productReview.create({
+        data: {
+          userName,
+          rating,
+          comment,
+          productId,
+        },
+      });
+
+      // Update product rating average
+      const allReviews = [...product.reviews, review];
+      const avgRate = allReviews.reduce((acc, curr) => acc + curr.rating, 0) / allReviews.length;
+
+      await ctx.prisma.product.update({
+        where: { id: productId },
+        data: {
+          rate: avgRate,
+        },
+      });
+
+      return review;
     }),
 });

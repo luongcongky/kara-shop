@@ -1,5 +1,8 @@
 import type { NextPageWithLayout } from '../../_app';
 import { PrimaryLayout } from '@/layouts';
+import NextImage from 'next/image';
+import { Popover, Transition } from '@headlessui/react';
+import { Fragment } from 'react';
 import type { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useSession } from 'next-auth/react';
@@ -7,7 +10,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { api } from '@/utils/api';
 import Link from 'next/link';
-import { FiEdit, FiTrash2, FiPlus, FiCopy, FiSearch } from 'react-icons/fi';
+import { FiEdit, FiTrash2, FiPlus, FiCopy, FiSearch, FiChevronDown } from 'react-icons/fi';
 import { CollectionType } from '@prisma/client';
 import { useDebounce } from '@/hooks';
 
@@ -56,6 +59,15 @@ const ProductManagement: NextPageWithLayout = () => {
   const duplicateProduct = api.product.duplicate.useMutation({
     onSuccess: () => {
       alert('Đã nhân bản sản phẩm thành công');
+      void utils.product.adminAll.invalidate();
+    },
+    onError: (error) => {
+      alert('Lỗi: ' + error.message);
+    },
+  });
+
+  const updateProduct = api.product.update.useMutation({
+    onSuccess: () => {
       void utils.product.adminAll.invalidate();
     },
     onError: (error) => {
@@ -152,10 +164,11 @@ const ProductManagement: NextPageWithLayout = () => {
           <thead className="bg-gray-50 text-xs uppercase text-gray-700">
             <tr>
               <th className="px-6 py-3">ID</th>
+              <th className="px-6 py-3">Hình ảnh</th>
               <th className="px-6 py-3">Tên sản phẩm</th>
+              <th className="px-6 py-3">Danh mục</th>
               <th className="px-6 py-3">Giá</th>
               <th className="px-6 py-3">Giá gốc</th>
-              <th className="px-6 py-3">Đánh giá</th>
               <th className="px-6 py-3">Trạng thái</th>
               <th className="px-6 py-3 text-right">Hành động</th>
             </tr>
@@ -164,30 +177,127 @@ const ProductManagement: NextPageWithLayout = () => {
             {products?.map((product) => (
               <tr key={product.id} className="hover:bg-gray-50">
                 <td className="px-6 py-4 font-medium text-gray-900">{product.id}</td>
-                <td className="px-6 py-4">{product.name}</td>
                 <td className="px-6 py-4">
+                  <div className="relative h-12 w-12 overflow-hidden rounded-md border border-gray-100 bg-white">
+                    {product.images && product.images[0] ? (
+                      <NextImage
+                        src={product.images[0].imageURL}
+                        alt={product.name}
+                        fill
+                        className="object-contain p-1"
+                        unoptimized
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center bg-gray-50 text-[10px] text-gray-400">
+                        No img
+                      </div>
+                    )}
+                  </div>
+                </td>
+                <td className="px-6 py-4 font-semibold text-gray-900">{product.name}</td>
+                <td className="px-6 py-4">
+                  <Popover className="relative">
+                    {({ open }) => (
+                      <>
+                        <Popover.Button
+                          className={`
+                            group inline-flex items-center gap-1 rounded bg-violet-50 px-2 py-1 text-[10px] font-bold text-violet-700 transition-colors hover:bg-violet-100 focus:outline-none
+                            ${open ? 'bg-violet-100' : ''}
+                          `}
+                        >
+                          <span>{product.types.length > 0 ? `${product.types.length} Danh mục` : 'Chọn danh mục'}</span>
+                          <FiChevronDown className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+                        </Popover.Button>
+
+                        <Transition
+                          as={Fragment}
+                          enter="transition ease-out duration-200"
+                          enterFrom="opacity-0 translate-y-1"
+                          enterTo="opacity-100 translate-y-0"
+                          leave="transition ease-in duration-150"
+                          leaveFrom="opacity-100 translate-y-0"
+                          leaveTo="opacity-0 translate-y-1"
+                        >
+                          <Popover.Panel className="absolute left-0 z-50 mt-2 w-56 origin-top-left rounded-xl bg-white p-3 shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <div className="space-y-2">
+                              <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-gray-400">Chọn danh mục</p>
+                              <div className="max-h-60 overflow-y-auto pr-1">
+                                {Object.values(CollectionType).map((type) => {
+                                  const isSelected = product.types.includes(type);
+                                  return (
+                                    <label
+                                      key={type}
+                                      className="flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-gray-50"
+                                    >
+                                      <input
+                                        type="checkbox"
+                                        className="h-4 w-4 rounded border-gray-300 text-violet-600 focus:ring-violet-500"
+                                        checked={isSelected}
+                                        onChange={() => {
+                                          const newTypes = isSelected
+                                            ? product.types.filter((t) => t !== type)
+                                            : [...product.types, type];
+                                          updateProduct.mutate({
+                                            id: product.id,
+                                            types: newTypes,
+                                          });
+                                        }}
+                                      />
+                                      <span className="text-sm text-gray-700">{type}</span>
+                                    </label>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          </Popover.Panel>
+                        </Transition>
+                      </>
+                    )}
+                  </Popover>
+                  <div className="mt-1 flex flex-wrap gap-1">
+                    {product.types.slice(0, 2).map((type) => (
+                      <span key={type} className="rounded bg-gray-50 px-1.5 py-0.5 text-[8px] font-medium text-gray-500">
+                        {type}
+                      </span>
+                    ))}
+                    {product.types.length > 2 && (
+                      <span className="rounded bg-gray-50 px-1.5 py-0.5 text-[8px] font-medium text-gray-500">
+                        +{product.types.length - 2}
+                      </span>
+                    )}
+                  </div>
+                </td>
+                <td className="px-6 py-4 font-medium text-zinc-900">
                   {new Intl.NumberFormat('vi-VN', {
                     style: 'currency',
                     currency: 'VND',
                   }).format(product.price)}
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 text-gray-400">
                   {product.originalPrice ? new Intl.NumberFormat('vi-VN', {
                     style: 'currency',
                     currency: 'VND',
                   }).format(product.originalPrice) : '-'}
                 </td>
-                <td className="px-6 py-4">{product.rate} ⭐</td>
                 <td className="px-6 py-4">
-                  {product.published ? (
-                    <span className="rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
-                      Published
+                  <label className="relative inline-flex cursor-pointer items-center">
+                    <input
+                      type="checkbox"
+                      className="peer sr-only"
+                      checked={product.published}
+                      onChange={(e) => {
+                        updateProduct.mutate({
+                          id: product.id,
+                          published: e.target.checked,
+                        });
+                      }}
+                      disabled={updateProduct.isLoading}
+                    />
+                    <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-green-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300"></div>
+                    <span className="ml-3 text-sm font-medium text-gray-900">
+                      {product.published ? 'Published' : 'Rỗng'}
                     </span>
-                  ) : (
-                    <span className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">
-                      Rỗng
-                    </span>
-                  )}
+                  </label>
                 </td>
                 <td className="px-6 py-4 text-right">
                   <div className="flex justify-end gap-3">

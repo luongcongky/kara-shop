@@ -11,6 +11,7 @@ import clsx from 'clsx';
 import { api } from '@/utils/api';
 import { useCart } from '@/context/CartContext';
 import { Product } from '@/types';
+import { useSession, signIn } from 'next-auth/react';
 
 export const getServerSideProps: GetServerSideProps = async ({ locale = 'en', query }) => {
   return {
@@ -26,9 +27,14 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
   const [activeTab, setActiveTab] = useState<'info' | 'specs' | 'reviews'>('info');
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
   const [quantity, setQuantity] = useState(1);
+  const [selectedRating, setSelectedRating] = useState(5);
+  const [hoverRating, setHoverRating] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const { addItem } = useCart();
+  const utils = api.useContext();
+  const { data: session } = useSession();
+  const createReviewMutation = api.product.createReview.useMutation();
 
   const { data: product, isLoading } = api.product.getById.useQuery({ id });
 
@@ -209,9 +215,14 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
                                 MUA NGAY
                             </button>
                         </div>
-                        <button className="flex w-full items-center justify-center gap-3 rounded-xl border border-blue-600 bg-[#f0f7ff] px-4 py-4 font-bold text-blue-700 transition-all hover:bg-blue-100 active:scale-95 text-sm">
-                            <FiPhone className="text-xl" /> LIÊN HỆ GIÁ ĐẠI LÝ
-                        </button>
+                        <div className="flex justify-center">
+                            <button 
+                                onClick={() => router.push(`https://zalo.me/0902828961`)}
+                                className="text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors py-2 flex items-center gap-2"
+                            >
+                                <FiPhone /> LIÊN HỆ GIÁ ĐẠI LÝ
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -336,6 +347,91 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
                 )}
                 {activeTab === 'reviews' && (
                     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                         {/* Feedback Form */}
+                         {session ? (
+                             <div className="mb-12 p-8 rounded-3xl bg-zinc-50 border border-zinc-100 shadow-sm">
+                                 <h3 className="text-xl font-bold text-zinc-900 mb-6">Chia sẻ trải nghiệm của bạn</h3>
+                                 <form onSubmit={async (e) => {
+                                     e.preventDefault();
+                                     const formData = new FormData(e.currentTarget);
+                                     const rating = Number(formData.get('rating'));
+                                     const comment = formData.get('comment') as string;
+                                     
+                                     if (!comment) {
+                                         alert("Vui lòng nhập lời nhận xét");
+                                         return;
+                                     }
+
+                                     try {
+                                         await createReviewMutation.mutateAsync({
+                                             rating,
+                                             comment,
+                                             productId: product.id
+                                         });
+                                         (e.target as HTMLFormElement).reset();
+                                         setHoverRating(0);
+                                         setSelectedRating(5);
+                                         alert("Cảm ơn bạn đã gửi đánh giá!");
+                                         utils.product.getById.invalidate({ id: product.id });
+                                     } catch (error) {
+                                         alert("Có lỗi xảy ra, vui lòng thử lại sau.");
+                                     }
+                                 }} className="space-y-6">
+                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                         <div>
+                                             <label className="block text-sm font-bold text-zinc-700 mb-2">Đánh giá của bạn</label>
+                                             <div className="flex gap-2">
+                                                 {[1, 2, 3, 4, 5].map((star) => (
+                                                     <button
+                                                         key={star}
+                                                         type="button"
+                                                         className="text-2xl transition-all hover:scale-110 active:scale-90"
+                                                         onMouseEnter={() => setHoverRating(star)}
+                                                         onMouseLeave={() => setHoverRating(0)}
+                                                         onClick={() => setSelectedRating(star)}
+                                                     >
+                                                         <FiStar 
+                                                             fill={(hoverRating || selectedRating) >= star ? "currentColor" : "none"} 
+                                                             className={(hoverRating || selectedRating) >= star ? "text-yellow-400" : "text-zinc-300"}
+                                                         />
+                                                     </button>
+                                                 ))}
+                                                 <input type="hidden" name="rating" value={selectedRating} />
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div>
+                                         <label className="block text-sm font-bold text-zinc-700 mb-2">Lời nhận xét</label>
+                                         <textarea 
+                                             name="comment"
+                                             rows={4}
+                                             placeholder="Bạn cảm thấy sản phẩm này như thế nào?"
+                                             className="w-full rounded-xl border-gray-200 bg-white px-4 py-3 text-zinc-900 focus:border-red-500 focus:ring-red-500 shadow-sm transition-all"
+                                             required
+                                         ></textarea>
+                                     </div>
+                                     <button 
+                                         type="submit"
+                                         disabled={createReviewMutation.isLoading}
+                                         className="flex items-center justify-center gap-2 rounded-xl bg-red-600 px-8 py-3 font-bold text-white transition-all hover:bg-red-700 active:scale-95 disabled:opacity-50"
+                                     >
+                                         {createReviewMutation.isLoading ? "Đang gửi..." : "Gửi đánh giá ngay"}
+                                     </button>
+                                 </form>
+                             </div>
+                         ) : (
+                             <div className="mb-12 p-12 text-center rounded-3xl bg-zinc-50 border-2 border-dashed border-zinc-200">
+                                 <h3 className="text-xl font-bold text-zinc-900 mb-4">Bạn chưa đăng nhập?</h3>
+                                 <p className="text-zinc-500 mb-8 font-medium italic">Vui lòng đăng nhập để có thể chia sẻ trải nghiệm về sản phẩm này.</p>
+                                 <button 
+                                     onClick={() => signIn()}
+                                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-8 py-3 font-bold text-white transition-all hover:bg-red-700 active:scale-95"
+                                 >
+                                     ĐĂNG NHẬP NGAY
+                                 </button>
+                             </div>
+                         )}
+
                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                              {reviews.length > 0 ? reviews.map((review, i) => (
                                  <div key={i} className="flex gap-6 p-6 rounded-2xl bg-zinc-50 border border-zinc-100 shadow-sm transition-all hover:shadow-md">
@@ -345,7 +441,7 @@ const ProductDetail: NextPageWithLayout<{ id: number }> = ({ id }) => {
                                      <div className="flex-1">
                                          <div className="flex items-center justify-between mb-2">
                                             <h4 className="font-bold text-gray-900 text-lg">{review.userName}</h4>
-                                            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider bg-white px-2 py-1 rounded-md border">{new Date(review.createdAt).toLocaleDateString()}</span>
+                                            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider bg-white px-2 py-1 rounded-md border">{new Date(review.createdAt).toLocaleDateString("vi-VN")}</span>
                                          </div>
                                          <div className="mb-4 flex text-yellow-500">
                                              {[...Array(5)].map((_, s) => <FiStar key={s} fill={s < review.rating ? "currentColor" : "none"} stroke="currentColor" className="w-4 h-4" />)}
