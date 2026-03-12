@@ -24,13 +24,13 @@ const Home: NextPageWithLayout = () => {
       {/* 1. Slider/Hero: Sản phẩm mới nhất */}
       <HeroCarousel />
 
-      {/* 2. Icon Bar: 4 cam kết vàng */}
-      <Commitments />
-
       {/* 3. Flash Deal: Các Deal chớp nhoáng với Visual Anchor */}
       <div className="bg-zinc-100/50">
         <FlashSale />
       </div>
+
+      {/* 2. Icon Bar: 4 cam kết vàng */}
+      <Commitments />
 
       {/* 5. Professional Services: Ưu đãi từ hệ thống */}
       <Promotions />

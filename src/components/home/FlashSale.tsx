@@ -64,33 +64,33 @@ export const FlashSale = () => {
     <section className="bg-zinc-50 py-10">
       <div className="mx-auto max-w-7xl px-4">
         {/* Header */}
-        <div className="mb-6 flex flex-col items-center justify-between border-b border-zinc-200 pb-8 md:flex-row">
-          <div className="mb-4 flex items-center md:mb-0">
-            <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-orange-500 text-white shadow-lg shadow-orange-500/30">
+        <div className="mb-10 flex flex-col items-center justify-between gap-6 border-b border-zinc-200 pb-10 md:flex-row md:max-w-5xl mx-auto">
+          <div className="flex items-center">
+            <div className="mr-4 flex h-10 w-10 items-center justify-center rounded-full bg-orange-500 text-white shadow-lg shadow-orange-500/30">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6 animate-bounce">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
               </svg>
             </div>
-            <div>
-              <h2 className="text-2xl font-bold text-zinc-900 md:text-3xl italic">
+            <div className="flex flex-col">
+              <h2 className="text-xl font-bold text-zinc-900 md:text-2xl italic leading-tight">
                 {t('flashSale.title')}
               </h2>
-              <p className="text-[10px] font-semibold text-orange-600 uppercase tracking-wider leading-none">
+              <p className="text-[9px] font-semibold text-orange-600 uppercase tracking-widest opacity-80">
                  Limit Time Offer
               </p>
             </div>
           </div>
           
-          <div className="flex items-center gap-4 bg-white p-3 rounded-2xl shadow-sm border border-zinc-100">
-            <span className="text-sm font-bold text-zinc-500 uppercase">{t('flashSale.endsIn')}</span>
+          <div className="flex items-center gap-4 bg-white p-3 px-5 rounded-2xl shadow-sm border border-zinc-100">
+            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-tight">{t('flashSale.endsIn')}</span>
             <Countdown date={targetDate} renderer={CountdownRenderer} />
           </div>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+        {/* Grid: 2 columns on mobile, 5 columns on desktop */}
+        <div className="grid grid-cols-2 gap-2 sm:gap-4 md:grid-cols-5">
           {flashSales.map((fs) => (
-            <div key={fs.id} className="group relative overflow-hidden rounded-[2.5rem] bg-white p-6 transition-all hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] hover:-translate-y-2 border border-zinc-100">
+            <div key={fs.id} className="group relative overflow-hidden rounded-2xl sm:rounded-[2rem] bg-white p-2 sm:p-4 transition-all hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] hover:-translate-y-1 border border-zinc-100">
               {/* Anchor Background */}
               <div className="absolute inset-0 bg-gradient-to-br from-zinc-50/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
               
@@ -104,7 +104,7 @@ export const FlashSale = () => {
               )}
 
               {/* Image */}
-              <div className="relative z-10 mb-6 flex h-48 w-full items-center justify-center overflow-hidden rounded-2xl bg-zinc-50/50 p-4 transition-transform group-hover:scale-105 duration-700">
+              <div className="relative z-10 mb-2 sm:mb-4 flex h-28 sm:h-36 w-full items-center justify-center overflow-hidden rounded-lg sm:rounded-xl bg-zinc-50/50 p-2 sm:p-3 transition-transform group-hover:scale-105 duration-700">
                  {/* Item Reflection Effect */}
                 <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 h-20 w-32 bg-orange-500/10 blur-[40px] rounded-full group-hover:bg-orange-500/20 transition-colors" />
 
@@ -126,12 +126,12 @@ export const FlashSale = () => {
 
               {/* Info */}
               <div className="relative z-10 space-y-4">
-                <h3 className="line-clamp-1 text-lg font-bold text-zinc-900 transition-colors group-hover:text-orange-600">
+                <h3 className="line-clamp-1 text-[11px] sm:text-sm font-bold text-zinc-900 transition-colors group-hover:text-orange-600">
                   {fs.product.name}
                 </h3>
                 
                 <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-bold text-zinc-900">{numberWithCommas(fs.salePrice)} đ</span>
+                  <span className="text-sm sm:text-lg font-bold text-zinc-900">{numberWithCommas(fs.salePrice)} đ</span>
                   <span className="text-xs font-semibold text-zinc-400 line-through decoration-orange-500/30">{numberWithCommas(fs.product.price)} đ</span>
                 </div>
 
@@ -142,7 +142,7 @@ export const FlashSale = () => {
                        <span className="flex h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse" />
                        {t('flashSale.onlyLeft', { count: fs.totalSlots - fs.soldSlots })}
                     </div>
-                    <span className="text-orange-600 italic">Hurry Up!</span>
+                    <span className="text-orange-600 italic hidden sm:inline">Hurry Up!</span>
                   </div>
                   <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-100 shadow-inner">
                     <div 
@@ -156,7 +156,7 @@ export const FlashSale = () => {
 
                 <Link
                   href={`/product/${fs.productId}/slug`}
-                  className="mt-4 flex w-full items-center justify-center rounded-xl bg-zinc-900 py-4 text-xs font-bold text-white transition-all hover:bg-orange-500 hover:shadow-lg hover:shadow-orange-500/30"
+                  className="mt-2 sm:mt-4 flex w-full items-center justify-center rounded-lg sm:rounded-xl bg-zinc-900 py-2 sm:py-3 text-[9px] sm:text-[10px] font-bold text-white transition-all hover:bg-orange-500 hover:shadow-lg hover:shadow-orange-500/30"
                 >
                   {t('common.shopNow')}
                 </Link>

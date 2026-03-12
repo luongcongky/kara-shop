@@ -57,7 +57,7 @@ export const HeroCarousel = () => {
 
   if (isLoading) {
     return (
-      <div className="flex h-[600px] w-full items-center justify-center bg-zinc-50">
+      <div className="flex h-[400px] w-full items-center justify-center bg-zinc-50">
         <div className="h-12 w-12 animate-spin rounded-full border-4 border-orange-500 border-t-transparent"></div>
       </div>
     );
@@ -78,7 +78,7 @@ export const HeroCarousel = () => {
     : FALLBACK_PRODUCTS;
 
   return (
-    <section className="relative h-[600px] w-full overflow-hidden bg-white">
+    <section className="relative h-[400px] w-full overflow-hidden bg-white">
       <Swiper
         modules={[Autoplay, Pagination, EffectFade]}
         effect="fade"
@@ -104,21 +104,21 @@ export const HeroCarousel = () => {
               <div className="mx-auto flex h-full max-w-7xl flex-col items-center px-4 md:flex-row md:px-12 lg:px-20 relative z-10">
                 <div className="z-10 flex flex-1 flex-col items-center justify-center text-center md:items-start md:text-left">
                   <span 
-                    className="mb-6 inline-block rounded-full bg-gradient-to-r from-orange-600 to-orange-400 px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-white shadow-[0_10px_20px_-5px_rgba(249,115,22,0.4)] transition-all hover:scale-105"
+                    className="mb-4 inline-block rounded-full bg-gradient-to-r from-orange-600 to-orange-400 px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-white shadow-[0_10px_20px_-5px_rgba(249,115,22,0.4)] transition-all hover:scale-105"
                     data-aos="fade-up"
                   >
                     <span className="mr-2 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
                     {product.discount || 'New Arrival'}
                   </span>
                   <h2 
-                    className={`mb-4 text-4xl font-bold leading-[0.95] tracking-tight md:text-6xl lg:text-6xl ${product.textColor}`}
+                    className={`mb-1 text-2xl font-bold leading-[0.95] tracking-tight md:text-4xl ${product.textColor}`}
                     data-aos="fade-up"
                     data-aos-delay="100"
                   >
                     {product.name}
                   </h2>
                   <p 
-                    className={`mb-10 max-w-lg text-lg font-medium opacity-70 md:text-xl lg:text-2xl ${product.textColor}`}
+                    className={`mb-4 max-w-lg text-sm font-medium opacity-70 md:text-base ${product.textColor}`}
                     data-aos="fade-up"
                     data-aos-delay="200"
                   >
@@ -127,7 +127,7 @@ export const HeroCarousel = () => {
                   {product.productId > 0 && (
                     <Link
                       href={`/product/${product.productId}/slug`}
-                      className={`${product.buttonColor} group relative flex items-center overflow-hidden rounded-full px-12 py-5 text-xs font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] active:scale-95`}
+                      className={`${product.buttonColor} group relative flex items-center overflow-hidden rounded-full px-6 py-2.5 text-[10px] font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] active:scale-95`}
                       data-aos="fade-up"
                       data-aos-delay="300"
                     >
@@ -138,7 +138,7 @@ export const HeroCarousel = () => {
                   )}
                 </div>
 
-                <div className="relative flex flex-1 items-center justify-center p-8 md:p-12 lg:p-16">
+                <div className="relative flex flex-1 items-center justify-center p-4 md:p-8">
                   {/* Image Glow Effect */}
                   <div className={`absolute h-[60%] w-[60%] rounded-full opacity-20 blur-[100px] ${product.textColor === 'text-white' ? 'bg-white' : 'bg-orange-500'}`} />
                   
@@ -152,7 +152,7 @@ export const HeroCarousel = () => {
                       alt={product.name}
                       width={800}
                       height={800}
-                      className="z-20 h-auto w-full max-w-[550px] object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] transition-transform duration-700 hover:scale-105"
+                      className="z-20 h-auto w-full max-w-[400px] object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] transition-transform duration-700 hover:scale-105"
                       priority
                     />
                   </div>
