@@ -50,10 +50,10 @@ export const TopBar = () => {
   ];
 
   return (
-    <div className="bg-[#232323] text-[10px] text-gray-300 md:text-xs">
-      <div className="mx-auto flex flex-col items-center px-4 py-1 xl:container md:flex-row md:py-2.5">
-        <p className="pb-2 md:pb-0">{t('topbar.discount')}</p>
-        <ul className="flex flex-wrap justify-center md:ml-auto">
+    <div className="bg-[#232323] text-[9px] text-gray-300 sm:text-[10px] md:text-xs">
+      <div className="mx-auto flex flex-row items-center justify-between px-4 py-2 xl:container md:py-2.5">
+        <p className="whitespace-nowrap pr-4">{t('topbar.discount')}</p>
+        <ul className="flex items-center whitespace-nowrap md:ml-auto">
           {topbarItems.map(item => (
             <TopbarItem key={item.label} {...item} />
           ))}

@@ -196,7 +196,7 @@ export const BannerEditor = ({ editMode, onDataChange }: BannerEditorProps) => {
 
   return (
     <>
-      <section className="relative h-[600px] w-full overflow-hidden bg-white">
+      <section className="relative h-[400px] md:h-[600px] w-full overflow-hidden bg-white">
         {editMode && (
           <div className="absolute right-4 top-4 z-50">
             <button
@@ -248,26 +248,26 @@ export const BannerEditor = ({ editMode, onDataChange }: BannerEditorProps) => {
 
                 <div className="mx-auto flex h-full max-w-7xl flex-col items-center px-4 md:flex-row md:px-12 lg:px-20 relative z-10">
                   <div className="z-10 flex flex-1 flex-col items-center justify-center text-center md:items-start md:text-left">
-                    <span className="mb-6 inline-block rounded-full bg-gradient-to-r from-orange-600 to-orange-400 px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-white shadow-[0_10px_20px_-5px_rgba(249,115,22,0.4)] transition-all hover:scale-105">
+                    <span className="mb-4 md:mb-6 inline-block rounded-full bg-gradient-to-r from-orange-600 to-orange-400 px-4 md:px-5 py-1.5 md:py-2 text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-white shadow-[0_10px_20px_-5px_rgba(249,115,22,0.4)] transition-all hover:scale-105">
                       <span className="mr-2 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
                       {banner.discount || 'New Arrival'}
                     </span>
-                    <h2 className={`mb-4 text-4xl font-bold leading-[0.95] tracking-tight md:text-6xl lg:text-6xl ${banner.textColor}`}>
+                    <h2 className={`mb-3 md:mb-4 text-2xl font-bold leading-[0.95] tracking-tight md:text-6xl lg:text-6xl ${banner.textColor}`}>
                       {banner.title}
                     </h2>
-                    <p className={`mb-10 max-w-lg text-lg font-medium opacity-70 md:text-xl lg:text-2xl ${banner.textColor}`}>
+                    <p className={`mb-6 md:mb-10 max-w-lg text-sm font-medium opacity-70 md:text-xl lg:text-2xl ${banner.textColor}`}>
                       {banner.subtitle}
                     </p>
                   </div>
 
-                  <div className="relative flex flex-1 items-center justify-center p-8 md:p-12 lg:p-16">
+                  <div className="relative flex flex-1 items-center justify-center p-4 md:p-12 lg:p-16">
                     <div className={`absolute h-[60%] w-[60%] rounded-full opacity-20 blur-[100px] ${banner.textColor === 'text-white' ? 'bg-white' : 'bg-orange-500'}`} />
                     <Image
                       src={banner.imageUrl.startsWith('http') ? banner.imageUrl : getCloudinaryUrl(banner.imageUrl)}
                       alt={banner.title}
                       width={800}
                       height={800}
-                      className="z-20 h-auto w-full max-w-[550px] object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)]"
+                      className="z-20 h-auto w-full max-w-[280px] md:max-w-[550px] object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)]"
                       priority
                     />
                   </div>

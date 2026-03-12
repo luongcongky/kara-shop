@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -7,6 +6,8 @@ import { FiHome, FiUser, FiHeart, FiShoppingBag, FiGrid } from 'react-icons/fi';
 import { Collections } from '@/types';
 import { NavLink } from '@/components';
 import { CollectionsPage } from './CollectionsPage';
+import { AccountMenuPage } from './AccountMenuPage';
+import { useSession } from 'next-auth/react';
 
 interface Props {
   navLinks: NavLink[];
@@ -22,6 +23,7 @@ interface BottomTab {
 export const BottomNavigation = ({ navLinks, collections }: Props) => {
   const router = useRouter();
   const { t } = useTranslation();
+  const { data: session } = useSession();
 
   const [currentTab, setCurrentTab] = useState('');
 
@@ -30,8 +32,23 @@ export const BottomNavigation = ({ navLinks, collections }: Props) => {
     { title: t('common:collections'), url: '/#collections', Icon: FiGrid },
     { title: t('common:cart'), url: '/cart', Icon: FiShoppingBag },
     { title: t('common:wishlist'), url: '/wishlist', Icon: FiHeart },
-    { title: t('common:profile'), url: '/signin', Icon: FiUser },
+    { title: t('common:profile'), url: session ? '/#account' : '/signin', Icon: FiUser },
   ];
+
+  const handleTabClick = (url: string) => {
+    if (url === '/#collections') {
+      setCurrentTab('/#collections');
+      return;
+    }
+    if (url === '/#account' && session) {
+      setCurrentTab('/#account');
+      return;
+    }
+    
+    // Normal navigation
+    setCurrentTab('');
+    router.push(url);
+  };
 
   return (
     <>
@@ -39,16 +56,15 @@ export const BottomNavigation = ({ navLinks, collections }: Props) => {
         <ul className="flex h-full">
           {bottomTabs.map((tab, index) => (
             <li key={index} className="flex-1">
-              <Link
-                href={tab.url}
+              <button
+                onClick={() => handleTabClick(tab.url)}
                 className={`flex h-full w-full flex-col items-center justify-center text-xs font-medium text-neutral-700 hover:text-violet-700 ${
-                  router.pathname === tab.url && 'text-violet-700'
+                  (router.pathname === tab.url || currentTab === tab.url) && 'text-violet-700'
                 }`}
-                onClick={() => setCurrentTab(tab.url)}
               >
                 <tab.Icon size={'1.2rem'} />
                 <span className="mt-1">{tab.title}</span>
-              </Link>
+              </button>
             </li>
           ))}
         </ul>
@@ -57,6 +73,11 @@ export const BottomNavigation = ({ navLinks, collections }: Props) => {
         <CollectionsPage
           navLinks={navLinks}
           collections={collections}
+          onPageClose={() => setCurrentTab('')}
+        />
+      )}
+      {currentTab === '/#account' && session && (
+        <AccountMenuPage
           onPageClose={() => setCurrentTab('')}
         />
       )}

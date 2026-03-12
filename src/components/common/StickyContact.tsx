@@ -30,15 +30,15 @@ const ContactItem = ({ icon, title, subtitle, href, colorClass, bgGradient }: Co
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative flex w-48 items-center gap-3 rounded-2xl bg-white p-3 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+      className="group relative flex w-auto md:w-48 items-center gap-3 rounded-full md:rounded-2xl bg-white p-2 md:p-3 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
     >
       <div
-        className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white ${colorClass}`}
+        className={`flex h-10 w-10 md:h-12 md:w-12 shrink-0 items-center justify-center rounded-full text-white ${colorClass}`}
         style={{ background: bgGradient }}
       >
         {icon}
       </div>
-      <div className="flex flex-col">
+      <div className="hidden md:flex flex-col">
         <span className="text-sm font-bold text-gray-800 group-hover:text-amber-600">
           {title}
         </span>
@@ -91,7 +91,7 @@ export const StickyContact = () => {
           title="Chat Zalo"
           subtitle="(8h-23h)"
           href={`https://zalo.me/${config.zalo}`}
-          icon={<ZaloIcon className="h-12 w-12" />}
+          icon={<ZaloIcon className="h-10 w-10 md:h-12 md:w-12" />}
           colorClass="!bg-transparent !p-0" 
         />
       )}

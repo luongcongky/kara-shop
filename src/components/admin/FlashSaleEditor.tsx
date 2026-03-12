@@ -57,6 +57,8 @@ export const FlashSaleEditor = ({ editMode, onDataChange }: FlashSaleEditorProps
 
   const { data: flashSales, isLoading, refetch } = api.flashSale.getAll.useQuery();
   const { data: products } = api.product.adminAll.useQuery();
+  const { data: systemNameConfig } = api.systemConfig.getByKey.useQuery({ key: 'SYSTEM_NAME' });
+  const brand = systemNameConfig?.value;
 
   const createMutation = api.flashSale.create.useMutation({
     onSuccess: () => {
@@ -177,29 +179,29 @@ export const FlashSaleEditor = ({ editMode, onDataChange }: FlashSaleEditorProps
 
   return (
     <>
-      <section className="bg-zinc-50 py-16">
+      <section className="bg-zinc-50 py-10 md:py-16">
         <div className="mx-auto max-w-7xl px-4">
           {/* Header */}
-          <div className="mb-10 flex flex-col items-center justify-between border-b border-zinc-200 pb-8 md:flex-row">
+          <div className="mb-8 flex flex-col items-center justify-between border-b border-zinc-200 pb-6 md:mb-10 md:flex-row md:pb-8">
             <div className="mb-4 flex items-center md:mb-0">
-              <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-orange-500 text-white shadow-lg shadow-orange-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6 animate-bounce">
+              <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-orange-500 text-white shadow-lg shadow-orange-500/30 md:mr-4 md:h-12 md:w-12">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6 animate-bounce">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
                 </svg>
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-zinc-900 md:text-3xl italic">
-                  Flash Sale
+                <h2 className="text-xl font-bold text-zinc-900 md:text-3xl italic">
+                  Flash Sale {brand ? `tại ${brand}` : ''}
                 </h2>
-                <p className="text-[10px] font-semibold text-orange-600 uppercase tracking-wider leading-none">
+                <p className="text-[9px] md:text-[10px] font-semibold text-orange-600 uppercase tracking-wider leading-none">
                   Limit Time Offer
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-4 bg-white p-3 rounded-2xl shadow-sm border border-zinc-100">
-                <span className="text-sm font-bold text-zinc-500 uppercase">Kết thúc trong</span>
+            <div className="flex items-center gap-3 md:gap-4">
+              <div className="flex items-center gap-2 md:gap-4 bg-white p-2.5 md:p-3 rounded-2xl shadow-sm border border-zinc-100">
+                <span className="text-[10px] md:text-sm font-bold text-zinc-500 uppercase">Kết thúc trong</span>
                 <Countdown date={targetDate} renderer={CountdownRenderer} />
               </div>
               {editMode && (
@@ -216,9 +218,11 @@ export const FlashSaleEditor = ({ editMode, onDataChange }: FlashSaleEditorProps
 
           {/* Grid */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            {flashSales.map((fs) => (
-              <div key={fs.id} className="group relative overflow-hidden rounded-[2.5rem] bg-white p-6 transition-all hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] hover:-translate-y-2 border border-zinc-100">
-                {editMode && (
+            {flashSales.map((fs) => {
+              const isExpired = new Date(fs.endTime) < new Date();
+              return (
+                <div key={fs.id} className={`group relative overflow-hidden rounded-[2.5rem] p-6 transition-all hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] hover:-translate-y-2 border ${isExpired ? 'bg-zinc-50 border-red-200' : 'bg-white border-zinc-100'}`}>
+                  {editMode && (
                   <div className="absolute right-4 top-4 z-50 flex gap-2">
                     <button
                       onClick={() => handleEdit(fs)}
@@ -237,7 +241,7 @@ export const FlashSaleEditor = ({ editMode, onDataChange }: FlashSaleEditorProps
 
                 <div className="absolute inset-0 bg-gradient-to-br from-zinc-50/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
 
-                {fs.badge && (
+                {fs.badge && !isExpired && (
                   <div className="absolute left-0 top-6 z-20">
                     <div className="bg-zinc-900 px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-white rounded-r-full shadow-lg border-l-4 border-orange-500">
                       {t(`common.${fs.badge}`)}
@@ -245,7 +249,15 @@ export const FlashSaleEditor = ({ editMode, onDataChange }: FlashSaleEditorProps
                   </div>
                 )}
 
-                <div className="relative z-10 mb-6 flex h-48 w-full items-center justify-center overflow-hidden rounded-2xl bg-zinc-50/50 p-4 transition-transform group-hover:scale-105 duration-700">
+                {isExpired && (
+                  <div className="absolute left-0 top-6 z-20">
+                    <div className="bg-red-600 px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-white rounded-r-full shadow-lg border-l-4 border-red-800 animate-pulse">
+                      Hết hạn
+                    </div>
+                  </div>
+                )}
+
+                <div className={`relative z-10 mb-6 flex h-48 w-full items-center justify-center overflow-hidden rounded-2xl bg-zinc-50/50 p-4 transition-transform group-hover:scale-105 duration-700 ${isExpired ? 'grayscale opacity-50' : ''}`}>
                   <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 h-20 w-32 bg-orange-500/10 blur-[40px] rounded-full group-hover:bg-orange-500/20 transition-colors" />
 
                   <Image
@@ -257,7 +269,7 @@ export const FlashSaleEditor = ({ editMode, onDataChange }: FlashSaleEditorProps
                   />
 
                   <div className="absolute right-0 top-0 h-16 w-16 overflow-hidden">
-                    <div className="absolute right-[-17px] top-[14px] w-[70px] rotate-45 bg-orange-500 py-1 text-center text-[10px] font-bold text-white shadow-md uppercase">
+                    <div className={`absolute right-[-17px] top-[14px] w-[70px] rotate-45 py-1 text-center text-[10px] font-bold text-white shadow-md uppercase ${isExpired ? 'bg-zinc-400' : 'bg-orange-500'}`}>
                       -{Math.round(((fs.product.price - fs.salePrice) / fs.product.price) * 100)}%
                     </div>
                   </div>
@@ -290,9 +302,10 @@ export const FlashSaleEditor = ({ editMode, onDataChange }: FlashSaleEditorProps
                       </div>
                     </div>
                   </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

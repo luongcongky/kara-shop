@@ -25,6 +25,8 @@ export const PromotionEditor = ({ editMode, onDataChange }: PromotionEditorProps
 
   const { data: promotions, isLoading, refetch } = api.promotion.getAllAdmin.useQuery();
   const { data: contexts } = api.context.getAll.useQuery({});
+  const { data: systemNameConfig } = api.systemConfig.getByKey.useQuery({ key: 'SYSTEM_NAME' });
+  const brand = systemNameConfig?.value;
 
   const createMutation = api.promotion.create.useMutation({
     onSuccess: () => {
@@ -116,13 +118,13 @@ export const PromotionEditor = ({ editMode, onDataChange }: PromotionEditorProps
     <>
       <section className="bg-zinc-900 py-24">
         <div className="mx-auto max-w-7xl px-4">
-          <div className="mb-12 flex items-center justify-between">
+          <div className="mb-8 md:mb-12 flex items-center justify-between">
             <div className="text-center flex-1">
-              <span className="mb-3 block text-[11px] font-bold uppercase tracking-wider text-orange-500">
+              <span className="mb-2 md:mb-3 block text-[9px] md:text-[11px] font-bold uppercase tracking-wider text-orange-500">
                 Dịch vụ đặc biệt
               </span>
-              <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl">
-                Ưu đãi độc quyền tại KARA
+              <h2 className="text-xl font-bold tracking-tight text-white md:text-5xl">
+                Ưu đãi độc quyền {brand ? `tại ${brand}` : 'tại Kara'}
               </h2>
             </div>
             {editMode && (
@@ -140,7 +142,7 @@ export const PromotionEditor = ({ editMode, onDataChange }: PromotionEditorProps
             {displayPromotions.map((promo) => (
               <div
                 key={promo.id}
-                className={`group relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br ${promo.color} p-8 text-white shadow-2xl transition-all hover:-translate-y-2 hover:shadow-orange-500/10`}
+                className={`group relative overflow-hidden rounded-3xl md:rounded-[2.5rem] bg-gradient-to-br ${promo.color} p-5 md:p-8 text-white shadow-2xl transition-all hover:-translate-y-2 hover:shadow-orange-500/10`}
               >
                 {editMode && (
                   <div className="absolute right-4 top-4 z-50 flex gap-2">
@@ -162,24 +164,24 @@ export const PromotionEditor = ({ editMode, onDataChange }: PromotionEditorProps
                 <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-3xl group-hover:bg-white/20 transition-colors" />
 
                 <div className="relative z-10 flex h-full flex-col">
-                  <div className="mb-4">
-                    <span className="rounded-full bg-white/20 px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest backdrop-blur-md">
+                  <div className="mb-3 md:mb-4">
+                    <span className="rounded-full bg-white/20 px-3 md:px-4 py-1 md:py-1.5 text-[8px] md:text-[10px] font-bold uppercase tracking-widest backdrop-blur-md">
                       {promo.badge}
                     </span>
                   </div>
 
-                  <div className="mb-6">
-                    <h4 className="mb-1 text-xs font-bold uppercase tracking-widest text-white/70">
+                  <div className="mb-4 md:mb-6">
+                    <h4 className="mb-1 text-[10px] md:text-xs font-bold uppercase tracking-widest text-white/70">
                       {promo.subtitle}
                     </h4>
-                    <h3 className="text-3xl font-bold leading-tight">{promo.title}</h3>
+                    <h3 className="text-xl md:text-3xl font-bold leading-tight">{promo.title}</h3>
                   </div>
 
-                  <p className="mb-8 flex-1 text-sm font-medium text-white/80 line-clamp-2">
+                  <p className="mb-6 md:mb-8 flex-1 text-[11px] md:text-sm font-medium text-white/80 line-clamp-2">
                     {promo.description}
                   </p>
 
-                  <div className="relative h-48 w-full overflow-hidden rounded-2xl bg-black/20 shadow-inner">
+                  <div className="relative h-32 md:h-48 w-full overflow-hidden rounded-2xl bg-black/20 shadow-inner">
                     <Image
                       src={promo.imageUrl}
                       alt={promo.title}

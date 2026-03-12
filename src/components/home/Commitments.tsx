@@ -34,9 +34,10 @@ export const Commitments = () => {
   ];
 
   return (
-    <section className="bg-white py-8">
+    <section className="bg-white py-6 md:py-8 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+        {/* Desktop Grid */}
+        <div className="hidden grid-cols-1 gap-8 md:grid md:grid-cols-2 lg:grid-cols-4">
           {items.map((item, index) => (
             <div 
               key={index}
@@ -53,6 +54,30 @@ export const Commitments = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Mobile Marquee Slider */}
+        <div className="relative flex md:hidden overflow-hidden">
+          <div className="animate-marquee flex gap-4">
+            {[...items, ...items].map((item, index) => (
+              <div 
+                key={index}
+                className="flex w-[260px] shrink-0 items-center gap-4 rounded-2xl border border-zinc-100 bg-zinc-50/50 p-4"
+              >
+                <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${item.bg} ${item.color} shadow-sm`}>
+                  <item.icon size={22} />
+                </div>
+                <div>
+                  <h3 className="text-[11px] font-bold text-zinc-900 line-clamp-1">{item.title}</h3>
+                  <p className="text-[10px] font-medium text-zinc-500 line-clamp-1">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Faded edges for better transition */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-white to-transparent z-10" />
         </div>
       </div>
     </section>

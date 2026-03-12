@@ -57,7 +57,7 @@ export const HeroCarousel = () => {
 
   if (isLoading) {
     return (
-      <div className="flex h-[400px] w-full items-center justify-center bg-zinc-50">
+      <div className="flex h-[300px] w-full items-center justify-center bg-zinc-50 md:h-[400px]">
         <div className="h-12 w-12 animate-spin rounded-full border-4 border-orange-500 border-t-transparent"></div>
       </div>
     );
@@ -78,7 +78,7 @@ export const HeroCarousel = () => {
     : FALLBACK_PRODUCTS;
 
   return (
-    <section className="relative h-[400px] w-full overflow-hidden bg-white">
+    <section className="relative h-[300px] w-full overflow-hidden bg-white md:h-[400px]">
       <Swiper
         modules={[Autoplay, Pagination, EffectFade]}
         effect="fade"
@@ -101,24 +101,24 @@ export const HeroCarousel = () => {
               <div className={`absolute -right-20 -top-20 h-96 w-96 rounded-full blur-3xl ${product.textColor === 'text-white' ? 'bg-white/10' : 'bg-orange-500/10'}`} />
               <div className={`absolute -left-20 -bottom-20 h-96 w-96 rounded-full blur-3xl ${product.textColor === 'text-white' ? 'bg-black/20' : 'bg-orange-500/5'}`} />
 
-              <div className="mx-auto flex h-full max-w-7xl flex-col items-center px-4 md:flex-row md:px-12 lg:px-20 relative z-10">
-                <div className="z-10 flex flex-1 flex-col items-center justify-center text-center md:items-start md:text-left">
+              <div className="mx-auto flex h-full max-w-7xl flex-row items-center px-4 md:px-12 lg:px-20 relative z-10 md:pt-0">
+                <div className="z-10 flex flex-1 flex-col items-start justify-center text-left md:mb-0">
                   <span 
-                    className="mb-4 inline-block rounded-full bg-gradient-to-r from-orange-600 to-orange-400 px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-white shadow-[0_10px_20px_-5px_rgba(249,115,22,0.4)] transition-all hover:scale-105"
+                    className="mb-2 md:mb-4 inline-block rounded-full bg-gradient-to-r from-orange-600 to-orange-400 px-2.5 py-0.5 md:px-4 md:py-1.5 text-[7px] md:text-[10px] font-bold uppercase tracking-widest text-white shadow-[0_10px_20px_-5px_rgba(249,115,22,0.4)] transition-all hover:scale-105"
                     data-aos="fade-up"
                   >
                     <span className="mr-2 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
                     {product.discount || 'New Arrival'}
                   </span>
                   <h2 
-                    className={`mb-1 text-2xl font-bold leading-[0.95] tracking-tight md:text-4xl ${product.textColor}`}
+                    className={`mb-0.5 text-[15.5px] font-bold leading-tight tracking-tight md:text-4xl md:mb-1 ${product.textColor}`}
                     data-aos="fade-up"
                     data-aos-delay="100"
                   >
                     {product.name}
                   </h2>
                   <p 
-                    className={`mb-4 max-w-lg text-sm font-medium opacity-70 md:text-base ${product.textColor}`}
+                    className={`mb-3 max-w-lg text-[8px] font-medium opacity-70 md:text-base md:mb-4 ${product.textColor}`}
                     data-aos="fade-up"
                     data-aos-delay="200"
                   >
@@ -127,18 +127,18 @@ export const HeroCarousel = () => {
                   {product.productId > 0 && (
                     <Link
                       href={`/product/${product.productId}/slug`}
-                      className={`${product.buttonColor} group relative flex items-center overflow-hidden rounded-full px-6 py-2.5 text-[10px] font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] active:scale-95`}
+                      className={`${product.buttonColor} group relative flex items-center overflow-hidden rounded-full px-3.5 py-1 md:px-6 md:py-2.5 text-[8px] md:text-[10px] font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] active:scale-95`}
                       data-aos="fade-up"
                       data-aos-delay="300"
                     >
                       <div className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0" />
-                      <FiShoppingCart className="mr-3 text-xl transition-transform duration-300 group-hover:rotate-12" />
+                      <FiShoppingCart className="mr-1.5 md:mr-3 text-xs md:text-xl transition-transform duration-300 group-hover:rotate-12" />
                       <span className="relative">{t('common.shopNow')}</span>
                     </Link>
                   )}
                 </div>
 
-                <div className="relative flex flex-1 items-center justify-center p-4 md:p-8">
+                <div className="relative flex flex-[1.2] items-center justify-center p-0 md:p-8">
                   {/* Image Glow Effect */}
                   <div className={`absolute h-[60%] w-[60%] rounded-full opacity-20 blur-[100px] ${product.textColor === 'text-white' ? 'bg-white' : 'bg-orange-500'}`} />
                   
@@ -152,7 +152,7 @@ export const HeroCarousel = () => {
                       alt={product.name}
                       width={800}
                       height={800}
-                      className="z-20 h-auto w-full max-w-[400px] object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] transition-transform duration-700 hover:scale-105"
+                      className="z-20 h-auto w-full max-w-[194px] md:max-w-[400px] object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.3)] md:drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] transition-transform duration-700 hover:scale-105"
                       priority
                     />
                   </div>

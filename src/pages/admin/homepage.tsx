@@ -39,74 +39,76 @@ const AdminHomepage: NextPageWithLayout = () => {
     <div className="min-h-screen bg-zinc-50">
       <Script src="https://widget.cloudinary.com/v2.0/global/all.js" strategy="afterInteractive" />
       {/* Admin Header */}
-      <div className="sticky top-0 z-50 bg-white shadow-md">
-        <div className="mx-auto max-w-7xl px-4 py-4">
-        <div className="mx-auto max-w-7xl px-4 py-4">
+      <div className="sticky top-0 z-50 bg-white shadow-md border-b border-zinc-200">
+        <div className="mx-auto max-w-7xl px-4 py-3 md:py-4">
           <div className="flex items-center justify-between">
             {/* Edit Mode Toggles */}
-            <div className="flex gap-3">
+            <div className="grid grid-cols-2 gap-2 md:flex md:gap-3">
               <button
                 onClick={() =>
                   setEditMode((prev) => ({ ...prev, banner: !prev.banner }))
                 }
-                className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold transition-all ${
+                className={`flex items-center justify-center gap-2 rounded-full px-3 py-2 text-[10px] md:px-4 md:text-xs font-bold transition-all ${
                   editMode.banner
                     ? 'bg-orange-500 text-white shadow-lg'
                     : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
                 }`}
               >
                 <FiEdit2 />
-                <span>Chỉnh sửa Banner</span>
+                <span className="truncate">Banner</span>
               </button>
               <button
                 onClick={() =>
                   setEditMode((prev) => ({ ...prev, flashSale: !prev.flashSale }))
                 }
-                className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold transition-all ${
+                className={`flex items-center justify-center gap-2 rounded-full px-3 py-2 text-[10px] md:px-4 md:text-xs font-bold transition-all ${
                   editMode.flashSale
                     ? 'bg-orange-500 text-white shadow-lg'
                     : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
                 }`}
               >
                 <FiEdit2 />
-                <span>Chỉnh sửa Flash Sale</span>
+                <span className="truncate">Flash Sale</span>
               </button>
               <button
                 onClick={() =>
                   setEditMode((prev) => ({ ...prev, promotion: !prev.promotion }))
                 }
-                className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold transition-all ${
+                className={`flex items-center justify-center gap-2 rounded-full px-3 py-2 text-[10px] md:px-4 md:text-xs font-bold transition-all ${
                   editMode.promotion
                     ? 'bg-orange-500 text-white shadow-lg'
                     : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
                 }`}
               >
                 <FiEdit2 />
-                <span>Chỉnh sửa Ưu đãi</span>
+                <span className="truncate">Ưu đãi</span>
               </button>
             </div>
 
-            <button
-              onClick={handleSaveAll}
-              disabled={!hasChanges}
-              className={`flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-bold text-white transition-all ${
-                hasChanges
-                  ? 'bg-orange-500 hover:bg-orange-600 hover:shadow-lg'
-                  : 'bg-zinc-300 cursor-not-allowed'
-              }`}
-            >
-              <FiSave className="text-lg" />
-              <span>Lưu tất cả thay đổi</span>
-            </button>
-            <Link
-              href="/admin/settings"
-              className="flex items-center gap-2 rounded-lg bg-zinc-600 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-zinc-700 hover:shadow-lg"
-            >
-              <FiSettings className="text-lg" />
-              <span>Cấu hình</span>
-            </Link>
+            <div className="flex gap-2">
+              <button
+                onClick={handleSaveAll}
+                disabled={!hasChanges}
+                className={`flex items-center justify-center gap-2 rounded-lg p-2 md:px-6 md:py-3 text-xs md:text-sm font-bold text-white transition-all ${
+                  hasChanges
+                    ? 'bg-orange-500 hover:bg-orange-600 hover:shadow-lg'
+                    : 'bg-zinc-300 cursor-not-allowed'
+                }`}
+                title="Lưu tất cả"
+              >
+                <FiSave className="text-base md:text-lg" />
+                <span className="hidden md:inline">Lưu tất cả</span>
+              </button>
+              <Link
+                href="/admin/settings"
+                className="flex items-center justify-center gap-2 rounded-lg bg-zinc-600 p-2 md:px-4 md:py-3 text-xs md:text-sm font-bold text-white transition-all hover:bg-zinc-700 hover:shadow-lg"
+                title="Cấu hình"
+              >
+                <FiSettings className="text-base md:text-lg" />
+                <span className="hidden md:inline">Cấu hình</span>
+              </Link>
+            </div>
           </div>
-        </div>
         </div>
       </div>
 
