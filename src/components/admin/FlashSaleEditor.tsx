@@ -282,7 +282,7 @@ export const FlashSaleEditor = ({ editMode, onDataChange }: FlashSaleEditorProps
 
                   <div className="flex items-baseline gap-2">
                     <span className="text-2xl font-bold text-zinc-900">{numberWithCommas(fs.salePrice)} đ</span>
-                    <span className="text-xs font-semibold text-zinc-400 line-through decoration-orange-500/30">{numberWithCommas(fs.product.price)} đ</span>
+                    <span className="text-[22px] font-semibold text-zinc-400 line-through decoration-orange-500/30">{numberWithCommas(fs.product.price)} đ</span>
                   </div>
 
                   <div className="space-y-2">

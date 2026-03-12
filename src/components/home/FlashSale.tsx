@@ -130,7 +130,7 @@ export const FlashSale = () => {
                 
                 <div className="flex items-baseline gap-2">
                   <span className="text-sm sm:text-lg font-bold text-zinc-900">{numberWithCommas(fs.salePrice)} đ</span>
-                  <span className="text-xs font-semibold text-zinc-400 line-through decoration-orange-500/30">{numberWithCommas(fs.product.price)} đ</span>
+                  <span className="text-xs sm:text-base font-semibold text-zinc-400 line-through decoration-orange-500/30">{numberWithCommas(fs.product.price)} đ</span>
                 </div>
 
                 {/* Progress Bar */}
