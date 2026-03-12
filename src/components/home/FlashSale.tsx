@@ -64,7 +64,7 @@ export const FlashSale = () => {
     <section className="bg-zinc-50 py-4 md:py-10">
       <div className="mx-auto max-w-7xl px-4">
         {/* Header */}
-        <div className="mb-4 flex flex-row items-center justify-between gap-2 border-b border-zinc-200 pb-4 md:mb-10 md:gap-4 md:pb-10 mx-auto">
+        <div className="mb-4 flex flex-row items-center justify-between gap-2 border-b border-zinc-200 pb-4 md:mb-6 md:gap-4 md:pb-6 mx-auto">
           <div className="flex items-center">
             <div className="mr-2 flex h-8 w-8 items-center justify-center rounded-full bg-orange-500 text-white shadow-lg shadow-orange-500/30 md:mr-4 md:h-10 md:w-10">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="h-4 w-4 animate-bounce md:h-6 md:w-6">
@@ -87,10 +87,10 @@ export const FlashSale = () => {
           </div>
         </div>
 
-        {/* Grid: 2 columns on mobile, 5 columns on desktop */}
-        <div className="grid grid-cols-2 gap-2 sm:gap-4 md:grid-cols-5">
+        {/* Flex scroll on mobile, Grid on desktop */}
+        <div className="flex gap-2 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-4 md:grid md:grid-cols-5 md:gap-4 md:overflow-visible md:pb-0">
           {flashSales.map((fs) => (
-            <div key={fs.id} className="group relative overflow-hidden rounded-2xl sm:rounded-[2rem] bg-white p-2 sm:p-4 transition-all hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] hover:-translate-y-1 border border-zinc-100">
+            <div key={fs.id} className="group relative w-[calc(50%-4px)] shrink-0 snap-start overflow-hidden rounded-2xl bg-white p-2 transition-all hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] hover:-translate-y-1 border border-zinc-100 sm:w-[calc(50%-8px)] md:w-auto md:shrink md:rounded-[2rem] md:p-4">
               {/* Anchor Background */}
               <div className="absolute inset-0 bg-gradient-to-br from-zinc-50/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
               

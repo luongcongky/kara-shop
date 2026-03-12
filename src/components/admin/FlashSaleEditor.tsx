@@ -182,7 +182,7 @@ export const FlashSaleEditor = ({ editMode, onDataChange }: FlashSaleEditorProps
       <section className="bg-zinc-50 py-10 md:py-16">
         <div className="mx-auto max-w-7xl px-4">
           {/* Header */}
-          <div className="mb-8 flex flex-col items-center justify-between border-b border-zinc-200 pb-6 md:mb-10 md:flex-row md:pb-8">
+          <div className="mb-6 flex flex-col items-center justify-between border-b border-zinc-200 pb-4 md:mb-6 md:flex-row md:pb-6">
             <div className="mb-4 flex items-center md:mb-0">
               <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-orange-500 text-white shadow-lg shadow-orange-500/30 md:mr-4 md:h-12 md:w-12">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6 animate-bounce">
@@ -216,12 +216,12 @@ export const FlashSaleEditor = ({ editMode, onDataChange }: FlashSaleEditorProps
             </div>
           </div>
 
-          {/* Grid */}
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+          {/* Flex scroll on mobile, Grid on desktop */}
+          <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-6 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:pb-0">
             {flashSales.map((fs) => {
               const isExpired = new Date(fs.endTime) < new Date();
               return (
-                <div key={fs.id} className={`group relative overflow-hidden rounded-[2.5rem] p-6 transition-all hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] hover:-translate-y-2 border ${isExpired ? 'bg-zinc-50 border-red-200' : 'bg-white border-zinc-100'}`}>
+                <div key={fs.id} className={`group relative w-[calc(85%-16px)] shrink-0 snap-start overflow-hidden rounded-[2.5rem] p-6 transition-all hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] hover:-translate-y-2 border sm:w-[calc(50%-24px)] md:w-auto md:shrink ${isExpired ? 'bg-zinc-50 border-red-200' : 'bg-white border-zinc-100'}`}>
                   {editMode && (
                   <div className="absolute right-4 top-4 z-50 flex gap-2">
                     <button
