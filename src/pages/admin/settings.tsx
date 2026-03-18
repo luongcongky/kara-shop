@@ -8,7 +8,7 @@ import Script from 'next/script';
 import { PrimaryLayout } from '@/layouts';
 import { api } from '@/utils/api';
 import { isAdmin } from '@/utils/session';
-import { FiSave, FiUpload, FiTrash2, FiSettings, FiPhone, FiFacebook } from 'react-icons/fi';
+import { FiSave, FiUpload, FiTrash2, FiSettings, FiPhone, FiFacebook, FiYoutube, FiMessageCircle } from 'react-icons/fi';
 
 export const getStaticProps: GetStaticProps = async ({ locale = 'vi' }) => {
   return {
@@ -27,7 +27,9 @@ const AdminSettingsPage = () => {
     SYSTEM_NAME: '',
     HOTLINE: '',
     SOCIAL_ZALO: '',
-    SOCIAL_FACEBOOK: '',
+    SOCIAL_FACEBOOK_PAGE: '',
+    SOCIAL_FACEBOOK_MESSENGER: '',
+    SOCIAL_YOUTUBE: '',
     NOTIFICATION_EMAIL: '',
   });
 
@@ -38,7 +40,10 @@ const AdminSettingsPage = () => {
       setConfig((prev) => {
         const newConfig = { ...prev };
         existingConfig.forEach((item: { key: string; value: string }) => {
-          if (Object.keys(newConfig).includes(item.key)) {
+          // Map SOCIAL_FACEBOOK to SOCIAL_FACEBOOK_MESSENGER if it exists for backward compatibility during migration
+          if (item.key === 'SOCIAL_FACEBOOK') {
+            newConfig.SOCIAL_FACEBOOK_MESSENGER = item.value;
+          } else if (Object.keys(newConfig).includes(item.key)) {
             newConfig[item.key as keyof typeof newConfig] = item.value;
           }
         });
@@ -220,19 +225,49 @@ const AdminSettingsPage = () => {
                <p className="mt-2 text-xs text-gray-500">* Dùng để tạo link chat Zalo (zalo.me/sdt).</p>
             </div>
 
-            {/* Facebook */}
-            <div className="md:col-span-2">
+            {/* Facebook Page */}
+            <div>
               <label className="mb-3 flex items-center gap-2 text-sm font-bold text-gray-700">
-                <FiFacebook className="text-blue-600" /> Facebook Page ID / Link
+                <FiFacebook className="text-blue-600" /> Facebook Page Link
               </label>
               <input
                 type="text"
-                value={config.SOCIAL_FACEBOOK}
-                onChange={(e) => setConfig(prev => ({ ...prev, SOCIAL_FACEBOOK: e.target.value }))}
-                placeholder="Ví dụ: 1000..."
+                value={config.SOCIAL_FACEBOOK_PAGE}
+                onChange={(e) => setConfig(prev => ({ ...prev, SOCIAL_FACEBOOK_PAGE: e.target.value }))}
+                placeholder="https://facebook.com/yourpage"
+                className="w-full rounded-xl border border-gray-300 px-4 py-3 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
+              />
+              <p className="mt-2 text-xs text-gray-500">* Link đến trang Fanpage chính thức (hiển thị trên TopBar).</p>
+            </div>
+
+            {/* Facebook Messenger */}
+            <div>
+              <label className="mb-3 flex items-center gap-2 text-sm font-bold text-gray-700">
+                <FiMessageCircle className="text-blue-500" /> Facebook Messenger ID / Link
+              </label>
+              <input
+                type="text"
+                value={config.SOCIAL_FACEBOOK_MESSENGER}
+                onChange={(e) => setConfig(prev => ({ ...prev, SOCIAL_FACEBOOK_MESSENGER: e.target.value }))}
+                placeholder="Ví dụ: yourpageid hoặc link m.me"
                 className="w-full rounded-xl border border-gray-300 px-4 py-3 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
               />
               <p className="mt-2 text-xs text-gray-500">* Dùng để tạo link chat Messenger (m.me/id).</p>
+            </div>
+
+            {/* YouTube */}
+            <div className="md:col-span-2">
+              <label className="mb-3 flex items-center gap-2 text-sm font-bold text-gray-700">
+                <FiYoutube className="text-red-600" /> YouTube Channel Link
+              </label>
+              <input
+                type="text"
+                value={config.SOCIAL_YOUTUBE}
+                onChange={(e) => setConfig(prev => ({ ...prev, SOCIAL_YOUTUBE: e.target.value }))}
+                placeholder="https://youtube.com/@yourchannel"
+                className="w-full rounded-xl border border-gray-300 px-4 py-3 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
+              />
+              <p className="mt-2 text-xs text-gray-500">* Link đến kênh YouTube chính thức (hiển thị trên TopBar).</p>
             </div>
 
             {/* Notification Email */}

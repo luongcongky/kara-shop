@@ -7,7 +7,7 @@ import {
 import { publicProcedure, createTRPCRouter, adminProcedure, protectedProcedure } from '../trpc';
 import { defaultCollectionSelect } from './collection';
 
-const defaultProductSelect = Prisma.validator<Prisma.ProductSelect>()({
+export const defaultProductSelect = Prisma.validator<Prisma.ProductSelect>()({
   id: true,
   name: true,
   description: true,
@@ -476,6 +476,67 @@ export const productRouter = createTRPCRouter({
             ...defaultProductSelect,
             attributes: true,
         },
+      });
+    }),
+
+  getBestSelling: publicProcedure
+    .input(
+      z.object({
+        type: z.nativeEnum(CollectionType),
+        take: z.number().default(20),
+      })
+    )
+    .query(async ({ input, ctx }) => {
+      const { type, take } = input;
+
+      // 1. Try to get best selling products from OrderItems
+      const bestSellers = await ctx.prisma.orderItem.groupBy({
+        by: ['productId'],
+        where: {
+          product: {
+            published: true,
+            types: { has: type },
+          },
+        },
+        _sum: {
+          quantity: true,
+        },
+        orderBy: {
+          _sum: {
+            quantity: 'desc',
+          },
+        },
+        take,
+      });
+
+      if (bestSellers.length > 0) {
+        const productIds = bestSellers.map((bs) => bs.productId);
+        const products = await ctx.prisma.product.findMany({
+          where: {
+            id: { in: productIds },
+          },
+          select: defaultProductSelect,
+        });
+
+        // Re-sort to match the bestSellers order
+        const sortedProducts = productIds
+          .map((id) => products.find((p) => p.id === id))
+          .filter((p): p is NonNullable<typeof p> => !!p);
+
+        return sortedProducts;
+      }
+
+      // 2. Fallback: If no orders exist, return latest arrivals
+      return ctx.prisma.product.findMany({
+        where: {
+          published: true,
+          types: { has: type },
+        },
+        select: defaultProductSelect,
+        orderBy: {
+          createdAt: 'desc',
+        },
+        take,
       });
     }),
 

@@ -194,7 +194,7 @@ export const ProductItem = ({
         </div>
       </div>
 
-      <div className="flex flex-col gap-3 px-1 py-4">
+      <div className="flex flex-col gap-1.5 px-1 py-2 sm:py-4 sm:gap-3">
         {/* Thumbnail Selector */}
         <div 
           ref={thumbnailContainerRef}

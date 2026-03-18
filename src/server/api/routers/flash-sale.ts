@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { createTRPCRouter, publicProcedure, protectedProcedure } from '../trpc';
+import { defaultProductSelect } from './product';
 
 export const flashSaleRouter = createTRPCRouter({
   getActive: publicProcedure.query(async ({ ctx }) => {
@@ -15,20 +16,11 @@ export const flashSaleRouter = createTRPCRouter({
             gt: new Date(),
           },
         },
-        include: {
-          product: {
-            select: {
-              id: true,
-              name: true,
-              price: true,
-              images: {
-                select: {
-                  imageURL: true,
-                },
-              },
-            },
-          },
-        },
+include: {
+  product: {
+    select: defaultProductSelect,
+  },
+},
         orderBy: {
           createdAt: 'desc',
         },
@@ -41,20 +33,11 @@ export const flashSaleRouter = createTRPCRouter({
 
   getAll: protectedProcedure.query(async ({ ctx }) => {
     return ctx.prisma.flashSale.findMany({
-      include: {
-        product: {
-          select: {
-            id: true,
-            name: true,
-            price: true,
-            images: {
-              select: {
-                imageURL: true,
-              },
-            },
-          },
-        },
-      },
+include: {
+  product: {
+    select: defaultProductSelect,
+  },
+},
       orderBy: {
         createdAt: 'desc',
       },

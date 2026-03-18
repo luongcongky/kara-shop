@@ -12,6 +12,7 @@ import { wishlistRouter } from './routers/wishlist';
 import { orderRouter } from './routers/order';
 import { promotionRouter } from './routers/promotion';
 import { systemConfigRouter } from './routers/system-config';
+import { youtubeRouter } from './routers/youtube';
 
 /**
  * This is the primary router for your server.
@@ -31,6 +32,7 @@ export const appRouter = createTRPCRouter({
   order: orderRouter,
   promotion: promotionRouter,
   systemConfig: systemConfigRouter,
+  youtube: youtubeRouter,
 });
 
 // export type definition of API

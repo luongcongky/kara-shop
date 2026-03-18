@@ -21,8 +21,9 @@ export function getCloudinaryUrl(localPath: string): string {
  * @param url Cloudinary URL
  * @param width Width to resize to
  * @param quality Quality (default: auto)
+ * @param removeBg Whether to remove the background (requires Cloudinary AI add-on)
  */
-export function optimizeCloudinary(url: string, width?: number, quality = 'auto'): string {
+export function optimizeCloudinary(url: string, width?: number, quality = 'auto', removeBg = false): string {
     if (!url.includes('res.cloudinary.com')) return url;
     
     // Simple transformation insertion
@@ -32,6 +33,7 @@ export function optimizeCloudinary(url: string, width?: number, quality = 'auto'
 
     const params = [`f_auto`, `q_${quality}`];
     if (width) params.push(`w_${width}`);
+    if (removeBg) params.push(`e_bgremoval`);
 
     return `${parts[0]}/upload/${params.join(',')}/${parts[1]}`;
 }

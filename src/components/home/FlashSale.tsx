@@ -3,9 +3,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Countdown from 'react-countdown';
 import { useTranslation } from 'next-i18next';
+import { FiShoppingCart } from 'react-icons/fi';
+import { toast } from 'react-hot-toast';
+import { useCart } from '@/context/CartContext';
 import { getCloudinaryUrl } from '@/utils/cloudinary';
 import { numberWithCommas } from '@/utils';
 import { api } from '@/utils/api';
+import { Product } from '@/types';
 
 interface CountdownProps {
   hours: number;
@@ -37,7 +41,15 @@ const CountdownRenderer = ({ hours, minutes, seconds, completed }: CountdownProp
 
 export const FlashSale = () => {
   const { t } = useTranslation('home');
+  const { addItem } = useCart();
   const { data: flashSales, isLoading } = api.flashSale.getActive.useQuery();
+
+  const handleAddToCart = (e: React.MouseEvent, product: Product) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addItem(product as Product);
+    toast.success(t('common.addedToCart') || 'Đã thêm vào giỏ hàng!');
+  };
 
   const targetDate = React.useMemo(() => {
     if (flashSales && flashSales.length > 0 && flashSales[0]?.endTime) {
@@ -88,7 +100,7 @@ export const FlashSale = () => {
         </div>
 
         {/* Flex scroll on mobile, Grid on desktop */}
-        <div className="flex gap-2 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-4 md:grid md:grid-cols-5 md:gap-4 md:overflow-visible md:pb-0">
+        <div className="flex gap-2 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-4 md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 md:gap-4 md:overflow-visible md:pb-0">
           {flashSales.map((fs) => (
             <div key={fs.id} className="group relative w-[calc(50%-4px)] shrink-0 snap-start overflow-hidden rounded-2xl bg-white p-2 transition-all hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] hover:-translate-y-1 border border-zinc-100 sm:w-[calc(50%-8px)] md:w-auto md:shrink md:rounded-[2rem] md:p-4">
               {/* Anchor Background */}
@@ -102,15 +114,15 @@ export const FlashSale = () => {
                 </div>
 
               {/* Image */}
-              <div className="relative z-10 mb-2 sm:mb-4 flex h-28 sm:h-36 w-full items-center justify-center overflow-hidden rounded-lg sm:rounded-xl bg-zinc-50/50 p-10 sm:p-3 transition-transform group-hover:scale-105 duration-700">
+              <Link href={`/product/${fs.productId}/slug`} className="relative z-10 mb-2 sm:mb-4 flex h-24 sm:h-48 w-full items-center justify-center overflow-hidden rounded-lg sm:rounded-xl bg-zinc-50/50 p-0 sm:p-0 transition-transform group-hover:scale-105 duration-700">
                  {/* Item Reflection Effect */}
                 <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 h-20 w-32 bg-orange-500/10 blur-[40px] rounded-full group-hover:bg-orange-500/20 transition-colors" />
 
                 <Image
                   src={fs.product.images[0]?.imageURL ? (fs.product.images[0].imageURL.startsWith('http') ? fs.product.images[0].imageURL : getCloudinaryUrl(fs.product.images[0].imageURL)) : '/camera-placeholder.png'}
                   alt={fs.product.name}
-                  width={200}
-                  height={200}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 25vw"
                   className="object-contain drop-shadow-2xl transition-transform duration-700 group-hover:-rotate-3"
                 />
                 
@@ -120,7 +132,7 @@ export const FlashSale = () => {
                     -{Math.round(((fs.product.price - fs.salePrice) / fs.product.price) * 100)}%
                   </div>
                 </div>
-              </div>
+              </Link>
 
               {/* Info */}
               <div className="relative z-10 space-y-4">
@@ -128,9 +140,21 @@ export const FlashSale = () => {
                   {fs.product.name}
                 </h3>
                 
-                <div className="flex items-baseline gap-2">
-                  <span className="text-sm sm:text-lg font-bold text-zinc-900">{numberWithCommas(fs.salePrice)} đ</span>
-                  <span className="text-xs sm:text-base font-semibold text-zinc-400 line-through decoration-orange-500/30">{numberWithCommas(fs.product.price)} đ</span>
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex flex-1 items-baseline overflow-hidden">
+                    <span className="basis-[60%] shrink-0 text-[11px] sm:text-lg font-bold text-zinc-900 truncate">
+                      {numberWithCommas(fs.salePrice)} đ
+                    </span>
+                    <span className="basis-[40%] shrink-0 text-[7px] sm:text-[11px] font-semibold text-zinc-400 line-through decoration-orange-500/30 truncate">
+                      {numberWithCommas(fs.product.price)} đ
+                    </span>
+                  </div>
+                  <button 
+                    onClick={(e) => handleAddToCart(e, fs.product)}
+                    className="shrink-0 flex h-7 w-7 items-center justify-center rounded-lg bg-zinc-900 text-white shadow-lg transition-all hover:bg-orange-500 hover:shadow-orange-500/30 active:scale-95 sm:h-10 sm:w-10 sm:rounded-xl"
+                  >
+                    <FiShoppingCart className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
+                  </button>
                 </div>
 
                 {/* Progress Bar */}

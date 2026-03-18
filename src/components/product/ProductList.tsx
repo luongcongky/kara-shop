@@ -10,7 +10,7 @@ interface Props {
 
 export const ProductsList = ({ products, isLoading, currentSlug }: Props) => {
   return (
-    <div className="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+    <div className="grid grid-cols-2 gap-x-2 gap-y-4 sm:grid-cols-2 sm:gap-x-4 sm:gap-y-6 xl:grid-cols-3 2xl:grid-cols-4">
       {isLoading &&
         Array(12)
           .fill('')

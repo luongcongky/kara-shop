@@ -7,9 +7,9 @@ import Link from 'next/link';
 import type { IconType } from 'react-icons';
 // import { FiChevronDown, FiPhone } from 'react-icons/fi';
 import { FiPhone } from 'react-icons/fi';
-// import { useClickAway } from 'react-use';
-// import { LocaleSelector } from './LocaleSelector';
-// import { getCloudinaryUrl } from '@/utils/cloudinary';
+import { BsFacebook, BsYoutube } from 'react-icons/bs';
+import LiveStreamIcon from './LiveStreamIcon';
+import { api } from '@/utils/api';
 
 interface TopbarItemProps {
   label: string;
@@ -38,15 +38,30 @@ export const TopBar = () => {
   // useClickAway(ref, () => setIsLocaleSelectorOpen(false));
 
   const topbarItems: TopbarItemProps[] = [
-    // { label: t('topbar.careers'), url: 'careers' },
-    { label: t('topbar.help'), url: 'help' },
-    // { label: t('topbar.buyer'), url: 'buyer' },
-    // {
-    //   label: t('topbar.download'),
-    //   url: 'https://play.google.com/store/apps',
-    //   Icon: FiGrid,
-    // },
+    { label: t('topbar.help'), url: '/info/how-it-works' },
     { label: t('topbar.phone'), url: 'tel:+0125258192502', Icon: FiPhone },
+  ];
+
+  const { data: configs } = api.systemConfig.getAll.useQuery();
+  const { data: liveStatus } = api.youtube.getLiveStatus.useQuery(undefined, {
+    refetchInterval: 1000 * 60 * 5, // Check every 5 minutes
+  });
+  
+  const getLink = (key: string, defaultValue: string) => {
+    return configs?.find(c => c.key === key)?.value || defaultValue;
+  };
+
+  const socialLinks = [
+    { 
+      Icon: BsFacebook, 
+      url: getLink('SOCIAL_FACEBOOK_PAGE', 'https://facebook.com'), 
+      color: '#1877F2' 
+    },
+    { 
+      Icon: BsYoutube, 
+      url: getLink('SOCIAL_YOUTUBE', 'https://youtube.com'), 
+      color: '#FF0000' 
+    },
   ];
 
   return (
@@ -57,24 +72,24 @@ export const TopBar = () => {
           {topbarItems.map(item => (
             <TopbarItem key={item.label} {...item} />
           ))}
-{/* <div
-            className="relative z-50 ml-2.5 flex cursor-pointer items-center"
-            ref={ref}
-            onClick={() => setIsLocaleSelectorOpen(prev => !prev)}
-          >
-            <div className="relative mr-1.5 h-3.5 w-3.5 md:h-[17px] md:w-[17px]">
-              <Image
-                priority
-                src={getCloudinaryUrl(`/assets/${router.locale}-flag.svg`)}
-                alt={`${router.locale} locale`}
-                fill
-              />
-            </div>
-            <span>{router.locale?.toUpperCase()}</span>
-            <FiChevronDown color="#fff"></FiChevronDown>
-            <LocaleSelector isOpen={isLocaleSelectorOpen} />
-          </div> */}
         </ul>
+        <div className="flex items-center gap-3 border-l border-gray-600 pl-4 ml-4">
+          <LiveStreamIcon 
+            isActive={!!liveStatus?.isActive} 
+            videoId={liveStatus?.videoId || ""} 
+          /> 
+          {socialLinks.map(({ Icon, url, color }) => (
+            <Link
+              key={url}
+              href={url}
+              target="_blank"
+              className="transition-opacity hover:opacity-80"
+              style={{ color }}
+            >
+              <Icon size={16} />
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -28,6 +28,14 @@
     "new": "MỚI",
     "HOT": "HOT",
     "SALE": "GIẢM GIÁ",
-    "NEW": "MỚI"
+    "NEW": "MỚI",
+    "viewAll": "Xem tất cả",
+    "addedToCart": "Đã thêm vào giỏ hàng thành công!"
+  },
+  "bestSelling": {
+    "cameraTitle": "Máy Ảnh Bán Chạy",
+    "lensTitle": "Ống Kính Bán Chạy",
+    "cameraSubtitle": "Bộ sưu tập hàng đầu",
+    "lensSubtitle": "Ống kính cao cấp"
   }
 }

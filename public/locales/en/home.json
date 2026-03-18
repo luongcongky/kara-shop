@@ -28,6 +28,14 @@
     "new": "NEW",
     "HOT": "HOT",
     "SALE": "SALE",
-    "NEW": "NEW"
+    "NEW": "NEW",
+    "viewAll": "View All",
+    "addedToCart": "Added to cart successfully!"
+  },
+  "bestSelling": {
+    "cameraTitle": "Top Selling Cameras",
+    "lensTitle": "Top Selling Lenses",
+    "cameraSubtitle": "Top Collections",
+    "lensSubtitle": "Premium Optics"
   }
 }

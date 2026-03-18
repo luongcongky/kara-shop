@@ -7,5 +7,7 @@
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
   }, // Tell VSCode to use Prettier as default file formatter
-  "typescript.tsdk": "node_modules\\typescript\\lib"
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore"
 }

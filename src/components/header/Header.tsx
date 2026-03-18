@@ -1,17 +1,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { useTranslation } from 'next-i18next';
 import { Transition, Menu } from '@headlessui/react';
 import { IconType } from 'react-icons';
 import { FiUser, FiHeart, FiShoppingBag } from 'react-icons/fi';
 import { Search } from './Search';
 import { TopBar } from './TopBar';
-import { MegaMenu } from './MegaMenu';
 import { Collections } from '@/types';
 import { BottomNavigation } from '@/components';
 import { useSession, signOut } from 'next-auth/react';
-import { CollectionType } from '@prisma/client';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { useRouter } from 'next/router';
@@ -25,8 +23,8 @@ export interface NavLink {
 export const navLinks: NavLink[] = [
   // { name: 'clothes', href: '/products/clothes', collapsible: true },
   // { name: 'women', href: '/products/women', collapsible: true },
-  { name: 'camera', href: '/products/camera', collapsible: true },
-  { name: 'lens', href: '/products/lens', collapsible: true },
+  { name: 'camera', href: '/products/camera', collapsible: false },
+  { name: 'lens', href: '/products/lens', collapsible: false },
   { name: 'sale', href: '/promotions' },
   { name: 'blog', href: '/blog' },
   { name: 'contacts', href: '/info/contact-us' },
@@ -47,11 +45,6 @@ export const Header = ({ collections, logoUrl, brandName }: { collections: Colle
   const { wishlistItems } = useWishlist();
   const totalWishlistItems = wishlistItems.length;
   console.log('Session Data:', session);
-
-  const [hoveredNavLink, setHoveredNavLink] = useState<NavLink | null>();
-
-  const handleShowMenu = (navLink: NavLink) => setHoveredNavLink(navLink);
-  const handleCloseMenu = () => setHoveredNavLink(null);
 
   return (
     <header>
@@ -74,17 +67,12 @@ export const Header = ({ collections, logoUrl, brandName }: { collections: Colle
           <ul className="ml-auto hidden h-full md:flex">
             {navLinks.map((item, index) => (
               <li
-                className={`font-medium text-neutral-700 transition-colors ${
-                  hoveredNavLink === item && 'bg-violet-100 text-violet-700'
-                }`}
+                className="font-medium text-neutral-700 transition-colors hover:bg-violet-100 hover:text-violet-700"
                 key={index}
-                onMouseEnter={() => handleShowMenu(item)}
-                onMouseLeave={handleCloseMenu}
               >
                 <Link
                   href={item.href}
                   className="flex h-full items-center px-5"
-                  onClick={handleCloseMenu}
                 >
                   {t(item.name)}
                 </Link>
@@ -227,22 +215,6 @@ export const Header = ({ collections, logoUrl, brandName }: { collections: Colle
             )}
           </ul>
         </div>
-        <Transition show={Boolean(hoveredNavLink?.collapsible)}>
-          {hoveredNavLink && (
-            <MegaMenu
-              type={
-                hoveredNavLink.name === 'camera'
-                  ? CollectionType.CAMERA
-                  : hoveredNavLink.name === 'lens'
-                  ? CollectionType.LENS
-                  : CollectionType.OTHERS
-              }
-              collections={collections}
-              onShowMenu={() => handleShowMenu(hoveredNavLink)}
-              onCloseMenu={handleCloseMenu}
-            />
-          )}
-        </Transition>
       </div>
       <BottomNavigation navLinks={navLinks} collections={collections} />
     </header>
