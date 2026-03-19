@@ -10,6 +10,11 @@ import { api } from '@/utils/api';
 import { numberWithCommas } from '@/utils';
 import { getCloudinaryUrl } from '@/utils/cloudinary';
 import { Product } from '@/types';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 interface TopSellingProductsProps {
   type: CollectionType;
@@ -77,72 +82,103 @@ export const TopSellingProducts: React.FC<TopSellingProductsProps> = ({ type, ti
           </Link>
         </div>
 
-        {/* Layout: Flex scroll on mobile, Grid on desktop */}
-        <div className="flex gap-2 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-4 md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 md:gap-4 md:overflow-visible md:pb-0">
-          {products.map((product, idx) => (
-            <div 
-              key={product.id}
-              className="group relative w-[calc(50%-4px)] shrink-0 snap-start overflow-hidden rounded-2xl bg-white p-2 transition-all hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] hover:-translate-y-1 border border-zinc-100 sm:w-[calc(50%-8px)] md:w-auto md:shrink md:rounded-[2rem] md:p-4"
-              data-aos="fade-up"
-              data-aos-delay={idx * 50}
-            >
-              {/* Anchor Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-50/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-              
-              {/* Image Wrapper */}
-              <Link href={`/product/${product.id}/slug`} className="relative z-10 mb-2 sm:mb-4 flex h-24 sm:h-48 w-full items-center justify-center overflow-hidden rounded-lg sm:rounded-xl bg-zinc-50/50 p-0 sm:p-0 transition-transform group-hover:scale-105 duration-700">
-                 <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 h-20 w-32 bg-orange-500/10 blur-[40px] rounded-full group-hover:bg-orange-500/20 transition-colors" />
-                
-                <Image 
-                  src={product.images[0]?.imageURL ? (product.images[0].imageURL.startsWith('http') ? product.images[0].imageURL : getCloudinaryUrl(product.images[0].imageURL)) : '/camera-placeholder.png'}
-                  alt={product.name}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-contain drop-shadow-2xl transition-transform duration-700 group-hover:-rotate-3"
-                />
-              </Link>
-
-              {/* Content */}
-              <div className="relative z-10 flex flex-1 flex-col">
-                <Link href={`/product/${product.id}/slug`} className="mb-2">
-                  <h3 className="line-clamp-1 text-[10px] font-bold text-zinc-900 transition-colors group-hover:text-orange-600 sm:text-sm">
-                    {product.name}
-                  </h3>
-                </Link>
-                
-                <div className="mt-auto flex items-center justify-between pt-2 sm:pt-4">
-                  <div className="flex flex-1 items-baseline overflow-hidden">
-                    <span className="basis-[60%] shrink-0 text-[11px] sm:text-lg font-bold text-zinc-900 truncate">
-                      {numberWithCommas(Math.floor(product.price))} đ
-                    </span>
-                    {product.originalPrice && (
-                      <span className="basis-[40%] shrink-0 text-[7px] sm:text-[11px] font-semibold text-zinc-400 line-through decoration-orange-500/30 truncate">
-                        {numberWithCommas(Math.floor(product.originalPrice))} đ
-                      </span>
-                    )}
-                  </div>
-                  
-                  <button 
-                    onClick={(e) => handleAddToCart(e, product)}
-                    className="shrink-0 flex h-7 w-7 items-center justify-center rounded-lg bg-zinc-900 text-white shadow-lg transition-all hover:bg-orange-500 hover:shadow-orange-500/30 active:scale-95 sm:h-10 sm:w-10 sm:rounded-xl"
-                  >
-                    <FiShoppingCart className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-          
-          {/* View More Card - Adjusted to match layout */}
-          <Link 
-            href={`/products/${type.toLowerCase()}`}
-            className="flex w-[calc(50%-4px)] shrink-0 snap-start flex-col items-center justify-center rounded-2xl border-2 border-dashed border-zinc-100 bg-zinc-50/30 transition-all hover:border-orange-500/30 hover:bg-zinc-50 md:w-auto md:rounded-[2rem]"
+        {/* Scroller with Swiper */}
+        <div className="relative group/swiper">
+          <Swiper
+            modules={[Navigation, Autoplay]}
+            navigation={{
+              prevEl: `.prev-${type.toLowerCase()}`,
+              nextEl: `.next-${type.toLowerCase()}`,
+            }}
+            spaceBetween={8}
+            slidesPerView={2.2}
+            breakpoints={{
+              640: { slidesPerView: 2.2, spaceBetween: 12 },
+              768: { slidesPerView: 3, spaceBetween: 16 },
+              1024: { slidesPerView: 4, spaceBetween: 16 },
+            }}
+            className="!pb-10 !px-1"
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-sm border border-zinc-50 text-zinc-400 transition-colors group-hover:text-orange-500 md:h-14 md:w-14">
-              <FiArrowRight size={20} className="md:w-6 md:h-6" />
-            </div>
-            <span className="mt-2 text-[8px] font-bold uppercase tracking-widest text-zinc-400 md:mt-4 md:text-xs">{t('common.viewAll')}</span>
-          </Link>
+            {products.map((product, idx) => (
+              <SwiperSlide key={product.id} className="h-auto">
+                <div 
+                  className="group relative h-full overflow-hidden rounded-2xl bg-white p-2 transition-all hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] hover:-translate-y-1 border border-zinc-100 md:rounded-[2rem] md:p-4"
+                  data-aos="fade-up"
+                  data-aos-delay={idx * 50}
+                >
+                  {/* Anchor Background */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-zinc-50/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                  
+                  {/* Image Wrapper */}
+                  <Link href={`/product/${product.id}/slug`} className="relative z-10 mb-2 sm:mb-4 flex h-24 sm:h-48 w-full items-center justify-center overflow-hidden rounded-lg sm:rounded-xl bg-zinc-50/50 p-0 sm:p-0 transition-transform group-hover:scale-105 duration-700">
+                    <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 h-20 w-32 bg-orange-500/10 blur-[40px] rounded-full group-hover:bg-orange-500/20 transition-colors" />
+                    
+                    <Image 
+                      src={product.images[0]?.imageURL ? (product.images[0].imageURL.startsWith('http') ? product.images[0].imageURL : getCloudinaryUrl(product.images[0].imageURL)) : '/camera-placeholder.png'}
+                      alt={product.name}
+                      fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      className="object-contain drop-shadow-2xl transition-transform duration-700 group-hover:-rotate-3"
+                    />
+                  </Link>
+
+                  {/* Content */}
+                  <div className="relative z-10 flex flex-1 flex-col">
+                    <Link href={`/product/${product.id}/slug`} className="mb-2">
+                      <h3 className="line-clamp-1 text-[10px] font-bold text-zinc-900 transition-colors group-hover:text-orange-600 sm:text-sm">
+                        {product.name}
+                      </h3>
+                    </Link>
+                    
+                    <div className="mt-auto flex items-center justify-between pt-2 sm:pt-4">
+                      <div className="flex flex-1 items-baseline overflow-hidden">
+                        <span className="basis-[60%] shrink-0 text-[11px] sm:text-lg font-bold text-zinc-900 truncate">
+                          {numberWithCommas(Math.floor(product.price))} đ
+                        </span>
+                        {product.originalPrice && (
+                          <span className="basis-[40%] shrink-0 text-[7px] sm:text-[11px] font-semibold text-zinc-400 line-through decoration-orange-500/30 truncate">
+                            {numberWithCommas(Math.floor(product.originalPrice))} đ
+                          </span>
+                        )}
+                      </div>
+                      
+                      <button 
+                        onClick={(e) => handleAddToCart(e, product)}
+                        className="shrink-0 flex h-7 w-7 items-center justify-center rounded-lg bg-zinc-900 text-white shadow-lg transition-all hover:bg-orange-500 hover:shadow-orange-500/30 active:scale-95 sm:h-10 sm:w-10 sm:rounded-xl"
+                      >
+                        <FiShoppingCart className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+            
+            {/* View More Card */}
+            <SwiperSlide className="h-auto">
+              <Link 
+                href={`/products/${type.toLowerCase()}`}
+                className="flex h-full flex-col items-center justify-center rounded-2xl border-2 border-dashed border-zinc-100 bg-zinc-50/30 transition-all hover:border-orange-500/30 hover:bg-zinc-50 md:rounded-[2rem] p-8 min-h-[250px] md:min-h-[350px]"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-sm border border-zinc-50 text-zinc-400 transition-colors group-hover:text-orange-500 md:h-14 md:w-14">
+                  <FiArrowRight size={20} className="md:w-6 md:h-6" />
+                </div>
+                <span className="mt-2 text-[8px] font-bold uppercase tracking-widest text-zinc-400 md:mt-4 md:text-xs">{t('common.viewAll')}</span>
+              </Link>
+            </SwiperSlide>
+          </Swiper>
+
+          {/* Navigation Buttons */}
+          <button className={`prev-${type.toLowerCase()} absolute -left-4 top-1/2 z-30 h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-xl border border-zinc-100 text-zinc-900 opacity-0 transition-all hover:bg-orange-500 hover:text-white group-hover/swiper:opacity-100 disabled:opacity-0 hidden lg:flex`}>
+             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="h-6 w-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+             </svg>
+          </button>
+          <button className={`next-${type.toLowerCase()} absolute -right-4 top-1/2 z-30 h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-xl border border-zinc-100 text-zinc-900 opacity-0 transition-all hover:bg-orange-500 hover:text-white group-hover/swiper:opacity-100 disabled:opacity-0 hidden lg:flex`}>
+             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="h-6 w-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+             </svg>
+          </button>
         </div>
       </div>
     </section>
