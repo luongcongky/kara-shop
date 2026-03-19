@@ -66,14 +66,14 @@ export const TopBar = () => {
 
   return (
     <div className="bg-[#232323] text-[9px] text-gray-300 sm:text-[10px] md:text-xs">
-      <div className="mx-auto flex flex-row items-center justify-between px-4 py-2 xl:container md:py-2.5">
-        <p className="whitespace-nowrap pr-4">{t('topbar.discount')}</p>
-        <ul className="flex items-center whitespace-nowrap md:ml-auto">
+      <div className="mx-auto flex flex-row items-center justify-between px-2 sm:px-4 py-2 xl:container md:py-2.5">
+        <p className="hidden lg:block whitespace-nowrap pr-4">{t('topbar.discount')}</p>
+        <ul className="flex items-center whitespace-nowrap ml-0 md:ml-auto">
           {topbarItems.map(item => (
             <TopbarItem key={item.label} {...item} />
           ))}
         </ul>
-        <div className="flex items-center gap-3 border-l border-gray-600 pl-4 ml-4">
+        <div className="flex items-center gap-1.5 md:gap-3 border-l border-gray-600 pl-2 ml-2 md:pl-4 md:ml-4 flex-shrink-0">
           <LiveStreamIcon 
             isActive={!!liveStatus?.isActive} 
             videoId={liveStatus?.videoId || ""} 

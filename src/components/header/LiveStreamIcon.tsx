@@ -17,6 +17,7 @@ const LiveStreamIcon = ({ isActive, videoId }: LiveStreamIconProps) => {
     } else {
       toast.error('Hiện tại chưa có Live stream. Vui lòng quay lại sau!', {
         icon: '📺',
+        className: 'font-sans',
         style: {
           borderRadius: '10px',
           background: '#333',

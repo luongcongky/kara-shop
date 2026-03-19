@@ -1,6 +1,9 @@
 import { Dialog, Transition } from '@headlessui/react';
+import { Inter } from 'next/font/google';
 import { Fragment } from 'react';
 import { FiX } from 'react-icons/fi';
+
+const inter = Inter({ subsets: ['latin'] });
 
 interface LiveStreamModalProps {
   isOpen: boolean;
@@ -38,7 +41,7 @@ const LiveStreamModal = ({ isOpen, onClose, videoId }: LiveStreamModalProps) => 
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-[95vw] transform overflow-hidden rounded-2xl bg-[#1a1a1a] p-0 text-left align-middle shadow-2xl transition-all border border-neutral-800">
+              <Dialog.Panel className={`${inter.className} w-full max-w-[95vw] transform overflow-hidden rounded-2xl bg-[#1a1a1a] p-0 text-left align-middle shadow-2xl transition-all border border-neutral-800`}>
                 {/* Header */}
                 <div className="flex items-center justify-between border-b border-neutral-800 px-6 py-4 bg-[#111]">
                   <Dialog.Title as="h3" className="text-sm font-bold uppercase tracking-widest text-red-500 flex items-center gap-2">
