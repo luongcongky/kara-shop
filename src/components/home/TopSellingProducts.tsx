@@ -8,7 +8,7 @@ import { toast } from 'react-hot-toast';
 import { useCart } from '@/context/CartContext';
 import { api } from '@/utils/api';
 import { numberWithCommas } from '@/utils';
-import { getCloudinaryUrl } from '@/utils/cloudinary';
+import { getOptimizedCloudinaryUrl } from '@/utils/cloudinary';
 import { Product } from '@/types';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
@@ -114,7 +114,7 @@ export const TopSellingProducts: React.FC<TopSellingProductsProps> = ({ type, ti
                     <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 h-20 w-32 bg-orange-500/10 blur-[40px] rounded-full group-hover:bg-orange-500/20 transition-colors" />
                     
                     <Image 
-                      src={product.images[0]?.imageURL ? (product.images[0].imageURL.startsWith('http') ? product.images[0].imageURL : getCloudinaryUrl(product.images[0].imageURL)) : '/camera-placeholder.png'}
+                      src={product.images[0]?.imageURL ? getOptimizedCloudinaryUrl(product.images[0].imageURL, 400) : '/camera-placeholder.png'}
                       alt={product.name}
                       fill
                       sizes="(max-width: 768px) 50vw, 25vw"

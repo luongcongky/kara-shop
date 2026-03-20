@@ -17,6 +17,19 @@ export function getCloudinaryUrl(localPath: string): string {
 }
 
 /**
+ * Get Cloudinary URL and optimize it in one go
+ * @param localPath Path relative to public folder, e.g. "/assets/banner/hero.jpg"
+ * @param width Optional width
+ * @param quality Optional quality (default: auto)
+ * @returns Optimized Cloudinary URL or original path
+ */
+export function getOptimizedCloudinaryUrl(localPath: string, width?: number, quality = 'auto'): string {
+    const url = getCloudinaryUrl(localPath);
+    if (!url.startsWith('http') || !url.includes('res.cloudinary.com')) return url;
+    return optimizeCloudinary(url, width, quality);
+}
+
+/**
  * Generate optimized Cloudinary URL
  * @param url Cloudinary URL
  * @param width Width to resize to

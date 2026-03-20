@@ -6,6 +6,7 @@ import { BsStarFill, BsChevronLeft, BsChevronRight, BsHeart, BsHeartFill, BsHand
 import { CompareButton } from '@/components/compare/CompareButton';
 import { Product } from '@/types';
 import { numberWithCommas } from '@/utils';
+import { getOptimizedCloudinaryUrl } from '@/utils/cloudinary';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 
@@ -73,8 +74,15 @@ export const ProductItem = ({
 
   const thumbnailContainerRef = useRef<HTMLDivElement>(null);
   const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
+    // Skip scroll on initial mount or when images change from parent
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
     const currentIndex = images.findIndex((img) => img.imageURL === currentImage);
     const activeThumbnail = thumbnailRefs.current[currentIndex];
 
@@ -85,7 +93,13 @@ export const ProductItem = ({
         inline: 'center',
       });
     }
-  }, [currentImage, images]);
+  }, [currentImage, images]); // Include images to satisfy ESLint
+
+  // Reset first render flag when images change (new product data)
+  useEffect(() => {
+    isFirstRender.current = true;
+    setCurrentImage(images[0]?.imageURL || '/camera-placeholder.png');
+  }, [images]);
 
   const productLink = `/product/${id}/slug`;
 
@@ -113,7 +127,7 @@ export const ProductItem = ({
               {images.map(({ imageURL, imageBlur }) => (
                 <Image
                   key={imageURL}
-                  src={failedImages.has(imageURL) ? '/camera-placeholder.png' : imageURL}
+                  src={failedImages.has(imageURL) ? '/camera-placeholder.png' : getOptimizedCloudinaryUrl(imageURL, 400)}
                   alt={`${name} image`}
                   className={clsx('absolute h-full w-full object-contain duration-700', {
                     'opacity-100': currentImage === imageURL,
@@ -123,7 +137,6 @@ export const ProductItem = ({
                   height={350}
                   placeholder="blur"
                   blurDataURL={imageBlur}
-                  unoptimized
                   onError={() => handleImageError(imageURL)}
                 />
               ))}
@@ -213,14 +226,13 @@ export const ProductItem = ({
               onClick={() => setCurrentImage(imageURL)}
             >
               <Image
-                src={failedImages.has(imageURL) ? '/camera-placeholder.png' : imageURL}
+                src={failedImages.has(imageURL) ? '/camera-placeholder.png' : getOptimizedCloudinaryUrl(imageURL, 80)}
                 alt={`${name} image ${index + 1}`}
                 className="object-cover"
                 width={40}
                 height={40}
                 placeholder="blur"
                 blurDataURL={imageBlur}
-                unoptimized
                 onError={() => handleImageError(imageURL)}
               />
             </button>

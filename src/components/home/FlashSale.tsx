@@ -6,7 +6,7 @@ import { useTranslation } from 'next-i18next';
 import { FiShoppingCart } from 'react-icons/fi';
 import { toast } from 'react-hot-toast';
 import { useCart } from '@/context/CartContext';
-import { getCloudinaryUrl } from '@/utils/cloudinary';
+import { getOptimizedCloudinaryUrl } from '@/utils/cloudinary';
 import { numberWithCommas } from '@/utils';
 import { api } from '@/utils/api';
 import { Product } from '@/types';
@@ -48,6 +48,12 @@ export const FlashSale = () => {
   const { t } = useTranslation('home');
   const { addItem } = useCart();
   const { data: flashSales, isLoading } = api.flashSale.getActive.useQuery();
+
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleAddToCart = (e: React.MouseEvent, product: Product) => {
     e.preventDefault();
@@ -100,7 +106,15 @@ export const FlashSale = () => {
           
           <div className="flex items-center gap-2 rounded-2xl border border-zinc-100 bg-white p-1.5 px-2 shadow-sm sm:gap-3 sm:p-3 sm:px-5">
             <span className="text-[8px] font-bold uppercase tracking-tight text-zinc-400 sm:text-[10px]">{t('flashSale.endsIn')}</span>
-            <Countdown date={targetDate} renderer={CountdownRenderer} />
+            {isMounted ? (
+              <Countdown date={targetDate} renderer={CountdownRenderer} />
+            ) : (
+              <div className="flex gap-1 sm:gap-2">
+                <div className="h-8 w-8 sm:h-10 sm:w-10 rounded bg-zinc-100 animate-pulse" />
+                <div className="h-8 w-8 sm:h-10 sm:w-10 rounded bg-zinc-100 animate-pulse" />
+                <div className="h-8 w-8 sm:h-10 sm:w-10 rounded bg-zinc-100 animate-pulse" />
+              </div>
+            )}
           </div>
         </div>
 
@@ -140,7 +154,7 @@ export const FlashSale = () => {
                     <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 h-20 w-32 bg-orange-500/10 blur-[40px] rounded-full group-hover:bg-orange-500/20 transition-colors" />
 
                     <Image
-                      src={fs.product.images[0]?.imageURL ? (fs.product.images[0].imageURL.startsWith('http') ? fs.product.images[0].imageURL : getCloudinaryUrl(fs.product.images[0].imageURL)) : '/camera-placeholder.png'}
+                      src={fs.product.images[0]?.imageURL ? getOptimizedCloudinaryUrl(fs.product.images[0].imageURL, 400) : '/camera-placeholder.png'}
                       alt={fs.product.name}
                       fill
                       sizes="(max-width: 768px) 50vw, 25vw"

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FiShoppingCart } from 'react-icons/fi';
 import { useTranslation } from 'next-i18next';
-import { getCloudinaryUrl } from '@/utils/cloudinary';
+import { getOptimizedCloudinaryUrl } from '@/utils/cloudinary';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
 import { api } from '@/utils/api';
@@ -148,7 +148,7 @@ export const HeroCarousel = () => {
                     data-aos-duration="1200"
                   >
                      <Image
-                      src={product.image.startsWith('http') ? product.image : getCloudinaryUrl(product.image)}
+                      src={getOptimizedCloudinaryUrl(product.image, 1200)}
                       alt={product.name}
                       width={800}
                       height={800}

@@ -46,7 +46,7 @@ const Products: NextPageWithLayout = () => {
 
   const queryInput = useMemo(
     () => ({
-      types: slug && (slug[0].toUpperCase() as CollectionType),
+      types: slug && slug[0] !== 'all' ? (slug[0].toUpperCase() as CollectionType) : undefined,
       slug: slug && slug[1],
       desc,
       colors: [colors].flat(1).filter(Boolean) as ProductColor[],
@@ -70,6 +70,10 @@ const Products: NextPageWithLayout = () => {
       }
     }
   }, [data, page, isPreviousData, queryInput, utils]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [page]);
 
   return (
     <div className="mx-auto items-center p-4 xl:container">
