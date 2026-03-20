@@ -215,6 +215,7 @@ const NewProduct: NextPageWithLayout = () => {
         cropping: true,
         croppingAspectRatio: 1,
         showSkipCropButton: false,
+        background_removal: 'cloudinary_ai',
       },
       (error: unknown, result: { event: string; info: { secure_url: string } }) => {
         if (!error && result && result.event === 'success') {

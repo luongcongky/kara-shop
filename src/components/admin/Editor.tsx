@@ -217,7 +217,7 @@ const MenuBar = ({ editor, productId }: { editor: TiptapEditor | null; productId
           cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
           uploadPreset: 'kara-shop',
           sources: ['local', 'url'],
-          multiple: false,
+          multiple: true,
           clientAllowedFormats: ["png", "gif", "jpeg", "webp"],
           maxFileSize: 2000000,
           folder: productId ? `kara-shop/products/${productId}` : 'kara-shop/editor',
@@ -542,11 +542,11 @@ const Editor = ({ content, onChange, productId, placeholder }: EditorProps) => {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', 'kara-shop');
-    if (productId) {
-      formData.append('folder', `kara-shop/products/${productId}`);
-    } else {
-      formData.append('folder', 'kara-shop/editor');
-    }
+      if (productId) {
+        formData.append('folder', `kara-shop/products/${productId}`);
+      } else {
+        formData.append('folder', 'kara-shop/editor');
+      }
 
     try {
       const response = await fetch(
